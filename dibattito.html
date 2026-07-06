@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il dibattito pubblico sull'energia — Energia a Confronto</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #1B6B72; --teal-dark: #0F4A50; --teal-light: #E8F4F5;
+    --graphite: #2D2D2D; --gray: #6B7280; --gray-light: #F3F4F6;
+    --warm-white: #FAFAF8; --border: #E5E7EB;
+    --yellow: #FEF3C7; --yellow-border: #F59E0B; --yellow-text: #78350F;
+    --orange: #FFEDD5; --orange-border: #F97316; --orange-text: #7C2D12;
+    --green-light: #D1FAE5; --green-text: #065F46;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--warm-white); color: var(--graphite); font-size: 16px; line-height: 1.7; }
+
+  /* BANNER */
+  .legend-banner { background: var(--teal-dark); color: white; font-size: 12px; padding: 7px 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+  .sw-none { background: white; border: 1px solid rgba(255,255,255,0.4); }
+  .sw-yellow { background: #FEF3C7; border: 1px solid #F59E0B; }
+  .sw-orange { background: #FFEDD5; border: 1px solid #F97316; }
+
+  /* NAV */
+  nav { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+  .nav-inner { max-width: 960px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { font-family: var(--font-serif); font-size: 17px; color: var(--teal); text-decoration: none; }
+  .nav-logo em { font-style: italic; }
+  .nav-back { font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; transition: background 0.15s; }
+  .nav-back:hover { background: var(--teal-light); color: var(--teal); }
+
+  /* LAYOUT */
+  .page { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* HERO */
+  .dibattito-hero { padding: 48px 0 40px; border-bottom: 1px solid var(--border); }
+  .breadcrumb { font-size: 12px; color: var(--gray); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .breadcrumb a { color: var(--teal); text-decoration: none; }
+  .page-eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: 10px; }
+  .page-title { font-family: var(--font-serif); font-size: clamp(26px, 4vw, 38px); font-weight: normal; color: var(--graphite); line-height: 1.2; margin-bottom: 14px; }
+  .page-subtitle { font-size: 16px; color: var(--gray); line-height: 1.7; margin-bottom: 24px; }
+
+  /* INDICE */
+  .indice { background: var(--gray-light); border-radius: var(--radius); padding: 24px; margin: 32px 0; }
+  .indice-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); margin-bottom: 14px; }
+  .indice-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .indice-list li { display: flex; align-items: baseline; gap: 10px; }
+  .indice-num { font-size: 11px; font-weight: 700; color: var(--teal); width: 20px; flex-shrink: 0; }
+  .indice-list a { font-size: 14px; color: var(--graphite); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s, color 0.15s; }
+  .indice-list a:hover { color: var(--teal); border-color: var(--teal-light); }
+
+  /* SEZIONI */
+  .sezione { padding: 56px 0; border-bottom: 1px solid var(--border); }
+  .sezione:last-child { border-bottom: none; }
+  .sezione-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .sezione-title { font-family: var(--font-serif); font-size: clamp(22px, 3vw, 30px); font-weight: normal; color: var(--graphite); margin-bottom: 20px; line-height: 1.3; }
+
+  /* BOX IN PAROLE SEMPLICI */
+  .box-semplici { background: var(--teal-light); border-radius: var(--radius); padding: 24px 28px; margin-bottom: 32px; border-left: 4px solid var(--teal); }
+  .box-semplici-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal-dark); margin-bottom: 8px; }
+  .box-semplici p { font-size: 15px; color: var(--teal-dark); line-height: 1.65; margin-bottom: 0; }
+
+  /* BOX IN SINTESI */
+  .box-sintesi { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-top: 32px; box-shadow: var(--shadow); }
+  .box-sintesi-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); margin-bottom: 12px; }
+  .box-sintesi ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .box-sintesi li { display: flex; align-items: baseline; gap: 10px; font-size: 14px; color: var(--graphite); line-height: 1.5; }
+  .box-sintesi li::before { content: "→"; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+
+  /* TESTO */
+  .sezione p { font-size: 15px; line-height: 1.75; color: var(--graphite); margin-bottom: 16px; }
+  .sezione h3 { font-size: 18px; font-weight: 600; color: var(--graphite); margin: 28px 0 10px; }
+  .sezione h4 { font-size: 15px; font-weight: 600; color: var(--teal); margin: 20px 0 8px; }
+  .fonte-link { font-size: 12px; color: var(--teal); text-decoration: none; border-bottom: 1px solid var(--teal-light); }
+  .fonte-link:hover { border-color: var(--teal); }
+
+  /* HIGHLIGHT TOOLTIP */
+  .hl-y { background: var(--yellow); border-bottom: 1.5px solid var(--yellow-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-o { background: var(--orange); border-bottom: 1.5px solid var(--orange-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-note { display: none; margin: 6px 0 8px; padding: 8px 12px; border-radius: 6px; font-size: 13px; line-height: 1.55; }
+  .hl-note.y { background: #FFFBEB; border-left: 3px solid var(--yellow-border); color: var(--yellow-text); }
+  .hl-note.o { background: #FFF7ED; border-left: 3px solid var(--orange-border); color: var(--orange-text); }
+  .hl-note.open { display: block; }
+
+  /* TABELLA CASI STUDIO */
+  .casi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin: 20px 0; }
+  .caso-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .caso-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); margin-bottom: 6px; }
+  .caso-value { font-family: var(--font-serif); font-size: 32px; color: var(--teal-dark); line-height: 1; margin-bottom: 4px; }
+  .caso-sub { font-size: 12px; color: var(--gray); line-height: 1.5; }
+
+  /* BADGE NUOVO */
+  .badge-nuovo { display: inline-block; font-size: 11px; background: var(--yellow); color: var(--yellow-text); padding: 2px 8px; border-radius: 10px; font-weight: 700; margin-bottom: 8px; }
+
+  /* POSIZIONI IN CAMPO */
+  .posizioni-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .posizione-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+  .posizione-card.pro { border-top: 3px solid #10B981; }
+  .posizione-card.contro { border-top: 3px solid #F97316; }
+  .posizione-card.neutro { border-top: 3px solid var(--teal); }
+  .posizione-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+  .posizione-card.pro .posizione-label { color: #065F46; }
+  .posizione-card.contro .posizione-label { color: #92400E; }
+  .posizione-card.neutro .posizione-label { color: var(--teal); }
+  .posizione-card p { font-size: 13px; color: var(--gray); line-height: 1.6; margin: 0; }
+  .posizione-fonte { font-size: 11px; color: var(--gray); margin-top: 8px; font-style: italic; }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .posizioni-grid { grid-template-columns: 1fr; }
+    .casi-grid { grid-template-columns: 1fr 1fr; }
+    .nav-back span { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="legend-banner">
+  <strong style="margin-right:4px;">Affidabilità dati:</strong>
+  <div class="legend-item"><span class="legend-swatch sw-none"></span> Fonte primaria verificata</div>
+  <div class="legend-item"><span class="legend-swatch sw-yellow"></span> Fonte secondaria — tocca per la nota</div>
+  <div class="legend-item"><span class="legend-swatch sw-orange"></span> Nessuna fonte istituzionale — tocca per la nota</div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">Energia <em>a Confronto</em></a>
+    <a href="../index.html#dibattito" class="nav-back">← <span>Torna alla homepage</span></a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="dibattito-hero">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      Il dibattito pubblico
+    </div>
+    <p class="page-eyebrow">Oltre le schede tecnologiche</p>
+    <h1 class="page-title">Il dibattito pubblico sull'energia</h1>
+    <p class="page-subtitle">Temi trasversali spesso discussi in modo confuso o parziale nel dibattito italiano. Dati verificati, posizioni in campo, fonti citate. Non prendiamo posizione — i dati parlano.</p>
+
+    <!-- INDICE -->
+    <div class="indice">
+      <div class="indice-title">In questa pagina</div>
+      <ul class="indice-list">
+        <li><span class="indice-num">01</span><a href="#speculazione">Le rinnovabili: speculazione o affare per tutti?</a></li>
+        <li><span class="indice-num">02</span><a href="#prezzi-zonali">Perché chi vive vicino a un parco eolico paga come tutti gli altri?</a></li>
+        <li><span class="indice-num">03</span><a href="#aree-idonee">Dove si possono fare gli impianti rinnovabili? Cosa dice la legge</a></li>
+        <li><span class="indice-num">04</span><a href="#bolletta">Chi paga cosa in bolletta?</a></li>
+        <li><span class="indice-num">05</span><a href="#intermittenza">Le rinnovabili non bastano perché non producono sempre: è vero?</a></li>
+        <li><span class="indice-num">06</span><a href="#ddl-nucleare">Il DDL nucleare: cosa ha detto chi sa di cosa parla</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SEZIONE 1 — SPECULAZIONE -->
+  <div class="sezione" id="speculazione">
+    <div class="sezione-num">Sezione 01</div>
+    <h2 class="sezione-title">Le rinnovabili: speculazione o affare per tutti?</h2>
+
+    <div class="box-semplici">
+      <div class="box-semplici-label">In parole semplici</div>
+      <p>Chi installa un impianto rinnovabile guadagna — altrimenti non lo farebbe. Ma i dati mostrano che la collettività guadagna di più: per ogni euro che va all'investitore privato, uno o due euro di beneficio vanno alla società. E più grande è l'impianto, più cresce la quota pubblica.</p>
+    </div>
+
+    <p>Nel dibattito pubblico italiano si sente spesso dire che chi installa pannelli solari o turbine eoliche lo fa solo per speculare con i soldi pubblici. L'analisi economica di Pietro Cambi (<a href="https://ecquologia.com/rinnovabili-speculazione-o-benedizione/" class="fonte-link" target="_blank">Ecquologia, 2024</a>) mette alla prova questa narrativa con due casi concreti.</p>
+
+    <div class="casi-grid">
+      <div class="caso-card">
+        <div class="caso-label">Pannello fotovoltaico 500 Wp</div>
+        <div class="caso-value">207 €</div>
+        <div class="caso-sub">valore totale generato/anno</div>
+      </div>
+      <div class="caso-card">
+        <div class="caso-label">Di cui all'investitore</div>
+        <div class="caso-value">60%</div>
+        <div class="caso-sub">~122 €/anno</div>
+      </div>
+      <div class="caso-card">
+        <div class="caso-label">Di cui alla collettività</div>
+        <div class="caso-value">40%</div>
+        <div class="caso-sub">~85 €/anno</div>
+      </div>
+      <div class="caso-card">
+        <div class="caso-label">Parco eolico 3 MW — quota collettività</div>
+        <div class="caso-value">66%</div>
+        <div class="caso-sub">~1,16 mln €/anno su 1,78 mln totali</div>
+      </div>
+    </div>
+
+    <p>La conclusione controintuitiva: all'aumentare della dimensione dell'impianto, la quota pubblica cresce, non diminuisce. Il grande eolico — proprio quello più spesso additato come speculazione — è il meccanismo che trasferisce più valore al sistema-paese.</p>
+
+    <h3>I benefici non quantificati</h3>
+    <p>L'analisi di Cambi identifica anche quattro benefici difficili da quantificare ma reali: l'effetto sul prezzo all'ingrosso dell'elettricità (più rinnovabili = PUN più basso per tutti), il <span class="hl-y" onclick="toggleNote(this)">moltiplicatore keynesiano stimato a 1,7<span class="hl-note y">🟡 Il valore 1,7 è citato da Cambi con riferimento a Blanchard & Leigh (FMI, 2013), ma quel paper tratta il moltiplicatore della spesa pubblica in trappola di liquidità — non la sostituzione di importazioni energetiche. La misattribuzione è stata verificata direttamente sul paper originale. Il concetto generale del moltiplicatore economico è corretto; il numero specifico è da considerarsi indicativo.</span></span>, la resilienza energetica e la sovranità strategica dell'Italia.
+
+    <p><strong>Nota editoriale:</strong> questa sezione non è un invito ad approvare qualsiasi impianto ovunque. I dati mostrano il bilancio economico aggregato, non risolvono le questioni di localizzazione o impatto locale — trattate nella <a href="#aree-idonee" class="fonte-link">Sezione 3</a>.</p>
+
+    <div class="box-sintesi">
+      <div class="box-sintesi-label">In sintesi</div>
+      <ul>
+        <li>L'investitore guadagna, ma la collettività guadagna di più — non di meno</li>
+        <li>Per un parco eolico 3 MW: 66% del valore va alla collettività, 34% all'investitore</li>
+        <li>Più grande l'impianto, maggiore la quota pubblica del beneficio</li>
+        <li>I benefici indiretti (prezzi più bassi, autonomia energetica) non sono inclusi in questi numeri</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SEZIONE 2 — PREZZI ZONALI -->
+  <div class="sezione" id="prezzi-zonali">
+    <div class="sezione-num">Sezione 02</div>
+    <h2 class="sezione-title">Perché chi vive vicino a un parco eolico paga la stessa bolletta di tutti gli altri?</h2>
+
+    <div class="box-semplici">
+      <div class="box-semplici-label">In parole semplici</div>
+      <p>In Italia l'elettricità ha un prezzo unico nazionale — il territorio che ospita un impianto rinnovabile sopporta l'impatto visivo ma non riceve nessuno sconto in bolletta. ARERA ha annunciato che questo cambierà nei prossimi anni, ma il cambiamento è graduale e ha effetti diversi per Nord e Sud.</p>
+    </div>
+
+    <p>L'Italia è divisa in sette zone elettriche (Nord, Centro-Nord, Centro-Sud, Sud, Calabria, Sicilia, Sardegna), ma il prezzo finale dell'elettricità per famiglie e imprese è calcolato come Prezzo Unico Nazionale (PUN) — una media ponderata che livella le differenze tra zone.</p>
+
+    <h3>Il prezzo più alto d'Europa</h3>
+    <p>Nel 2025 il PUN medio italiano è stato di <strong>115,9 €/MWh</strong> — il più alto tra le principali borse europee. Francia: 61,1 €/MWh, Spagna: 65,3 €/MWh. (<a href="https://www.arera.it" class="fonte-link" target="_blank">ARERA, Relazione Annuale 2026</a>)</p>
+    <p>Le aziende italiane hanno pagato l'elettricità il 24,1% in più della media dell'area euro; le famiglie il 13% in più.</p>
+
+    <h3>La novità: i prezzi zonali in arrivo</h3>
+    <p>Il presidente di ARERA Nicola Dell'Acqua ha confermato nella Relazione Annuale 2026 che nei prossimi quattro anni l'Italia si muoverà verso il superamento graduale del PUN e la piena applicazione dei prezzi zonali.</p>
+
+    <div class="posizioni-grid">
+      <div class="posizione-card pro">
+        <div class="posizione-label">Chi chiede di accelerare</div>
+        <p>La Regione Calabria (presidente Occhiuto) ha diffidato ARERA: il Sud produce rinnovabili ma paga come il Nord. I prezzi zonali riconoscerebbero il contributo territoriale alla transizione.</p>
+        <div class="posizione-fonte">Fonte: comunicati Regione Calabria, luglio 2026</div>
+      </div>
+      <div class="posizione-card contro">
+        <div class="posizione-label">Chi teme le conseguenze</div>
+        <p>Il settore industriale del Nord è preoccupato: con i prezzi zonali, le aree con meno produzione rinnovabile potrebbero pagare di più, aumentando il gap di competitività con i concorrenti europei.</p>
+        <div class="posizione-fonte">Fonte: Confindustria, audizioni parlamentari 2026</div>
+      </div>
+    </div>
+
+    <div class="box-sintesi">
+      <div class="box-sintesi-label">In sintesi</div>
+      <ul>
+        <li>Il PUN livella i prezzi: chi ospita rinnovabili non paga meno in bolletta</li>
+        <li>L'Italia ha il prezzo elettrico all'ingrosso più alto d'Europa (115,9 €/MWh nel 2025)</li>
+        <li>I prezzi zonali arriveranno entro 4 anni secondo ARERA</li>
+        <li>Effetti opposti per Sud (potrebbe pagare meno) e Nord (potrebbe pagare di più)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SEZIONE 3 — AREE IDONEE -->
+  <div class="sezione" id="aree-idonee">
+    <div class="sezione-num">Sezione 03</div>
+    <h2 class="sezione-title">Dove si possono fare gli impianti rinnovabili? Cosa dice la legge</h2>
+
+    <div class="box-semplici">
+      <div class="box-semplici-label">In parole semplici</div>
+      <p>Non è vero che si possono mettere pannelli e turbine ovunque, nemmeno nelle aree protette. Esistono aree vietate per legge, aree facilitate e una zona grigia dove decidono le Regioni — molte delle quali non hanno ancora fatto la loro parte.</p>
+    </div>
+
+    <h3>Le tre categorie</h3>
+
+    <h4>Aree non idonee — vietate o fortemente limitate</h4>
+    <p>Zone Natura 2000 (SIC, ZSC, ZPS), aree protette nazionali e regionali, fasce costiere entro 300 metri, laghi entro 300 metri, fiumi entro 150 metri, zone UNESCO e relative buffer zone, alcune aree agricole di pregio (DOC, DOP) secondo normative regionali. (<a href="https://www.normattiva.it" class="fonte-link" target="_blank">D.Lgs. 199/2021</a>, <a href="https://www.mase.gov.it" class="fonte-link" target="_blank">DM MASE 21 giugno 2024</a>)</p>
+
+    <h4>Aree idonee — procedura semplificata</h4>
+    <p>Zone industriali dismesse e brownfield, cave e miniere dismesse, tetti e coperture di edifici, parcheggi e tettoie, aree nelle immediate vicinanze di infrastrutture energetiche esistenti.</p>
+
+    <h4>Zona grigia — decidono le Regioni</h4>
+    <p>Il D.Lgs. 199/2021 fissava luglio 2024 come termine entro cui le Regioni dovevano designare le proprie aree idonee. <span class="hl-y" onclick="toggleNote(this)">Molte Regioni non hanno rispettato il termine o hanno legiferato in modo molto restrittivo<span class="hl-note y">🟡 Stato aggiornato al luglio 2026 basato su fonti giornalistiche (QualEnergia, Staffetta Quotidiana) — non è stato trovato un censimento istituzionale aggiornato Regione per Regione.</span></span>, creando un patchwork normativo frammentato.</p>
+
+    <h3>Il caso dell'agrivoltaico</h3>
+    <p>L'agrivoltaico — pannelli solari installati in modo da permettere la continuazione dell'attività agricola — è esplicitamente promosso dal PNRR e distinto dal fotovoltaico a terra tradizionale. Il DL Agricoltura (Legge 101/2024) ha vietato il fotovoltaico a terra sui terreni agricoli, ma non l'agrivoltaico che rispetta la continuità colturale. <span class="hl-y" onclick="toggleNote(this)">Il TAR Lazio ha sollevato questioni di legittimità costituzionale su questo divieto<span class="hl-note y">🟡 Sentenza TAR Lazio n. 9157 del 13 maggio 2025 — individuata ma lettura integrale non completata. Si attende la decisione della Corte Costituzionale.</span></span>.</p>
+
+    <div class="box-sintesi">
+      <div class="box-sintesi-label">In sintesi</div>
+      <ul>
+        <li>Le aree protette e paesaggistiche sono già vietate per legge — non è necessario tutelarle ulteriormente</li>
+        <li>Le aree già compromesse (industriali, tetti, parcheggi) sono facilitate</li>
+        <li>La zona grigia regionale è il vero nodo: molte Regioni non hanno ancora definito le loro aree idonee</li>
+        <li>L'agrivoltaico è una categoria separata dal fotovoltaico a terra — non è colpita dal DL Agricoltura</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SEZIONE 4 — BOLLETTA -->
+  <div class="sezione" id="bolletta">
+    <div class="sezione-num">Sezione 04</div>
+    <h2 class="sezione-title">Chi paga cosa in bolletta?</h2>
+
+    <div class="box-semplici">
+      <div class="box-semplici-label">In parole semplici</div>
+      <p>La bolletta elettrica non è solo "il costo dell'energia". Contiene quattro componenti diverse, e quella che riguarda l'energia vera e propria è spesso la parte minore. Alcune voci che si pagano non dipendono da quanto si consuma e risalgono a decisioni prese decenni fa.</p>
+    </div>
+
+    <h3>Le quattro componenti</h3>
+
+    <h4>1. Materia energia</h4>
+    <p>Il costo vero dell'elettricità consumata, legato al mercato all'ingrosso (PUN). È la componente più variabile — dipende da quanto è caro il gas in quel momento.</p>
+
+    <h4>2. Servizi di rete</h4>
+    <p>Trasporto e distribuzione dell'elettricità dalle centrali alle case. Gestito da Terna per la rete nazionale ad alta tensione, dai distributori locali per l'ultimo miglio. Regolato da ARERA.</p>
+
+    <h4>3. Oneri generali di sistema</h4>
+    <p>La voce più opaca e discussa. Include: incentivi alle rinnovabili (componente A3 e correlate), costi residui del nucleare italiano, bonus sociali per famiglie in difficoltà, costi di ricerca energetica.</p>
+    <p><strong>Un dato che sorprende:</strong> i costi residui del nucleare italiano — le centrali dismesse dopo i referendum del 1987 e del 2011 — erano ancora pagati dagli utenti fino al 2022. Dal 2023 questi costi sono stati fiscalizzati (pagati dalla fiscalità generale invece che dalla bolletta). (<a href="https://www.arera.it" class="fonte-link" target="_blank">ARERA</a>)</p>
+
+    <h4>4. Imposte</h4>
+    <p>IVA (10% per uso domestico, 22% per usi non domestici) e accise.</p>
+
+    <h3>Quanto pesa ciascuna componente?</h3>
+    <p>Per una famiglia media italiana (Cliente Vulnerabile — rimasto nel Mercato a Maggior Tutela), il costo totale nel I trimestre 2026 era di <strong>27,97 c€/kWh</strong>. La componente "materia energia" pesa circa il <span class="hl-y" onclick="toggleNote(this)">40-50% della bolletta lorda<span class="hl-note y">🟡 Percentuale ricostruita da fonti giornalistiche (QualEnergia) su dati ARERA — ARERA non pubblica direttamente questa ripartizione in forma immediata per il grande pubblico.</span></span>; il resto è rete, oneri e tasse. (<a href="https://www.arera.it" class="fonte-link" target="_blank">ARERA, I trimestre 2026</a>)</p>
+
+    <div class="box-sintesi">
+      <div class="box-sintesi-label">In sintesi</div>
+      <ul>
+        <li>La bolletta non è solo "prezzo dell'energia" — contiene rete, oneri di sistema e tasse</li>
+        <li>Gli oneri di sistema includono incentivi alle rinnovabili ma anche costi nucleari storici (ora fiscalizzati)</li>
+        <li>I costi delle centrali nucleari italiane dismesse sono stati pagati dagli utenti fino al 2022</li>
+        <li>La materia energia pesa circa il 40-50% della bolletta — il resto sono oneri e tasse</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SEZIONE 5 — INTERMITTENZA -->
+  <div class="sezione" id="intermittenza">
+    <div class="sezione-num">Sezione 05</div>
+    <h2 class="sezione-title">Le rinnovabili non bastano perché non producono sempre: è vero?</h2>
+
+    <div class="box-semplici">
+      <div class="box-semplici-label">In parole semplici</div>
+      <p>È vero che il sole non splende di notte e il vento non soffia sempre. Ma questo non significa che le rinnovabili siano insufficienti — significa che il sistema elettrico deve essere organizzato diversamente rispetto a quando si usavano solo le centrali. Le soluzioni esistono già, ma hanno un costo e richiedono tempo.</p>
+    </div>
+
+    <h3>Il problema reale: la curva dell'anatra</h3>
+    <p>Con molto fotovoltaico, a mezzogiorno c'è troppa energia e nelle prime ore serali troppo poca. Il sistema deve coprire questo salto rapidamente. Non è un problema insuperabile, ma richiede flessibilità — e la flessibilità ha un costo.</p>
+
+    <h3>Le soluzioni già disponibili</h3>
+
+    <h4>Accumulo (stoccaggio) dell'energia</h4>
+    <p>Le batterie immagazzinano l'energia in eccesso e la rilasciano quando serve. Il costo delle batterie è sceso <span class="hl-y" onclick="toggleNote(this)">dell'89% tra il 2010 e il 2024<span class="hl-note y">🟡 Dato da BloombergNEF citato da IEA — fonte secondaria verificata parzialmente sul documento IEA.</span></span>. L'Italia ha già circa 7,3 GW di pompaggio idrico — impianti che pompano acqua su quando c'è surplus e la usano per produrre elettricità quando manca. (<a href="https://www.terna.it/it/sistema-elettrico/statistiche" class="fonte-link" target="_blank">Terna 2024</a>)</p>
+
+    <h4>Reti e interconnessioni europee</h4>
+    <p>Più le reti europee sono collegate, più si può compensare l'eccesso di solare italiano con il vento del Nord Europa. Nel 2025 <span class="hl-y" onclick="toggleNote(this)">eolico e solare hanno superato per la prima volta tutti i combustibili fossili nella generazione elettrica europea (30% vs 29%)<span class="hl-note y">🟡 Dato Ember, European Electricity Review 2026 — fonte secondaria ammessa. <a href="https://ember-energy.org" target="_blank">ember-energy.org</a></span></span>. (<a href="https://transparency.entsoe.eu" class="fonte-link" target="_blank">ENTSO-E</a>)</p>
+
+    <h3>I limiti onesti da non minimizzare</h3>
+    <p>Anche nello scenario più ottimistico restano problemi aperti: il calore industriale ad alta temperatura (fonderie, cementifici) è ancora difficile da elettrificare completamente; i trasporti pesanti su lunga distanza (navi, aerei, camion) richiedono soluzioni diverse dall'elettrico diretto; lo stoccaggio stagionale dell'energia (non solo orario) è ancora costoso e poco diffuso.</p>
+
+    <div class="box-sintesi">
+      <div class="box-sintesi-label">In sintesi</div>
+      <ul>
+        <li>L'intermittenza è reale ma gestibile con accumulo, reti intelligenti e mix di fonti diverse</li>
+        <li>Nel 2025 le rinnovabili hanno coperto il 48% del fabbisogno elettrico italiano</li>
+        <li>Il costo delle batterie è sceso dell'89% in 14 anni — la tendenza continua</li>
+        <li>Calore industriale e trasporti pesanti restano le sfide più difficili da risolvere con le rinnovabili</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SEZIONE 6 — DDL NUCLEARE -->
+  <div class="sezione" id="ddl-nucleare">
+    <div class="sezione-num">Sezione 06</div>
+    <h2 class="sezione-title">Il DDL nucleare: cosa ha detto chi sa di cosa parla</h2>
+
+    <div class="box-semplici">
+      <div class="box-semplici-label">In parole semplici</div>
+      <p>Nel 2026 il Parlamento italiano sta discutendo una legge che darebbe al Governo il potere di decidere se e come tornare al nucleare. Non è una legge che decide di costruire centrali — è una delega preparatoria. Esperti, associazioni e istituzioni sono stati ascoltati in Parlamento: questa sezione riporta in modo equilibrato cosa hanno detto.</p>
+    </div>
+
+    <h3>Di cosa si tratta</h3>
+    <p>Il DDL 1924, approvato dalla Camera il <strong>4 giugno 2026</strong> (155 voti favorevoli, 86 contrari, 8 astenuti), è ora al Senato. Non decide di costruire centrali: è una legge delega che prepara il terreno normativo per un eventuale ritorno al nucleare. Le decisioni concrete verrebbero dopo, con decreti attuativi.</p>
+
+    <h3>Le posizioni nelle audizioni parlamentari (luglio 2026)</h3>
+
+    <div class="posizioni-grid">
+      <div class="posizione-card contro">
+        <div class="posizione-label">Prof. Giorgio Parisi — Nobel Fisica 2021</div>
+        <p>Ha citato i dati Lazard 2025: fotovoltaico 35–50 $/MWh vs nucleare 141–220 $/MWh. Ha ricordato i casi NuScale (da 3,6 a 9,3 miliardi poi abbandonato) e SMR Shidao Bay (+200% costi, +16 anni di ritardo). In Europa nel 2025 eolico e solare hanno superato tutti i fossili.</p>
+        <div class="posizione-fonte">Audizione Senato, 8ª Commissione, 1° luglio 2026</div>
+      </div>
+      <div class="posizione-card contro">
+        <div class="posizione-label">Prof.ssa M.A. Cabiddu — Politecnico di Milano</div>
+        <p>Ha sollevato una questione giuridica: la sentenza della Corte Costituzionale 199/2012 sul referendum 2011. Il DDL potrebbe essere incostituzionale senza un reale mutamento delle circostanze di fatto.</p>
+        <div class="posizione-fonte">Audizione Senato, 8ª Commissione, 1° luglio 2026</div>
+      </div>
+      <div class="posizione-card neutro">
+        <div class="posizione-label">Banca d'Italia — QEF n. 947, 2025</div>
+        <p>Nel report "L'atomo fuggente", la Banca d'Italia ha concluso che oggi il nucleare non offre vantaggi evidenti in termini di costi rispetto alle rinnovabili integrate con accumuli. Gli interessi sul capitale durante la costruzione possono pesare dal 17% al 49% dei costi totali.</p>
+        <div class="posizione-fonte"><a href="https://www.bancaditalia.it/pubblicazioni/qef/2025-0947/index.html" class="fonte-link" target="_blank">Banca d'Italia, QEF n. 947, 2025 →</a></div>
+      </div>
+      <div class="posizione-card pro">
+        <div class="posizione-label">Posizioni favorevoli</div>
+        <p><span class="hl-y" onclick="toggleNote(this)">Le posizioni di Confindustria, ENEA, CNR e INFN nelle audizioni del 30 giugno 2026 non sono ancora disponibili in forma di testo integrale verificabile.<span class="hl-note y">🟡 I resoconti stenografici delle audizioni del 30 giugno 2026 non erano ancora pubblicati sul sito del Senato al momento della redazione. Questa sezione verrà aggiornata quando i testi saranno disponibili.</span></span></p>
+        <div class="posizione-fonte">Aggiornamento previsto alla pubblicazione dei resoconti ufficiali</div>
+      </div>
+    </div>
+
+    <p><strong>Nota editoriale:</strong> questa sezione riporta posizioni espresse in sede parlamentare da soggetti identificati. Non è la posizione di "Energia a Confronto". I dati tecnici ed economici sul nucleare sono nella <a href="schede/nucleare-smr-fusione.html" class="fonte-link">scheda dedicata →</a></p>
+
+    <div class="box-sintesi">
+      <div class="box-sintesi-label">In sintesi</div>
+      <ul>
+        <li>Il DDL nucleare è una legge delega preparatoria — non decide di costruire centrali</li>
+        <li>Gli esperti auditi in Parlamento hanno sollevato questioni di costo, tempi e costituzionalità</li>
+        <li>La Banca d'Italia ha pubblicato un'analisi indipendente: il nucleare oggi non è competitivo sui costi</li>
+        <li>Le posizioni favorevoli di Confindustria, ENEA e CNR saranno integrate quando disponibili</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- fine .page -->
+
+<script>
+function toggleNote(el) {
+  const note = el.querySelector('.hl-note');
+  if (!note) return;
+  document.querySelectorAll('.hl-note.open').forEach(n => {
+    if (n !== note) n.classList.remove('open');
+  });
+  note.classList.toggle('open');
+}
+</script>
+</body>
+</html>
