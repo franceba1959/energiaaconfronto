@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energia a Confronto — Fonti energetiche a confronto</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="legend-banner">
+  <strong>Affidabilità dei dati:</strong>
+  <div class="legend-item"><span class="legend-swatch sw-none"></span> Verificato su fonte primaria</div>
+  <div class="legend-item"><span class="legend-swatch sw-yellow"></span> Fonte secondaria</div>
+  <div class="legend-item"><span class="legend-swatch sw-orange"></span> Nessuna fonte istituzionale</div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Energia <em>a Confronto</em></a>
+    <div class="nav-links">
+      <a href="#cifre" class="nav-link">Il sistema italiano</a>
+      <a href="#schede" class="nav-link">Le tecnologie</a>
+      <a href="#dibattito" class="nav-link">Il dibattito</a>
+      <a href="#fonti" class="nav-link">Fonti</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Progetto informativo indipendente</p>
+    <h1 class="hero-title">Il sistema energetico italiano,<br><em>spiegato con i dati</em></h1>
+    <p class="hero-subtitle">Fonti energetiche confrontate su efficienza, economia reale e sostenibilità. Dati verificati, fonti citate, incertezze segnalate. Per cittadini, studenti e decisori pubblici.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">Nessuna pubblicità</div>
+      <div class="hero-meta-item">Nessun finanziamento di settore</div>
+      <div class="hero-meta-item">Fonti primarie istituzionali</div>
+    </div>
+  </div>
+</section>
+
+<section class="section-cifre" id="cifre">
+  <div class="container">
+    <p class="section-label">Il punto di partenza</p>
+    <h2 class="section-title">Il sistema energetico italiano in cifre</h2>
+    <p class="section-desc">Prima di confrontare le tecnologie, è utile capire la situazione di partenza: quanta energia consuma l'Italia, da dove viene e quanto costa.</p>
+
+    <div class="cifre-grid">
+      <div class="cifra-card">
+        <div class="cifra-label">Consumo elettrico nazionale</div>
+        <div class="cifra-number">312</div>
+        <div class="cifra-unit">TWh / anno (2024, Terna)</div>
+        <div class="cifra-note">Solo la quota elettrica. Il consumo energetico totale (calore + trasporti) è ~3 volte più grande — circa 107 Mtep (MASE 2023).</div>
+      </div>
+      <div class="cifra-card">
+        <div class="cifra-label">Prezzo medio elettricità all'ingrosso</div>
+        <div class="cifra-number">115,9</div>
+        <div class="cifra-unit">€/MWh — PUN medio 2025 (ARERA)</div>
+        <div class="cifra-note">Il più alto tra le principali borse europee. Francia: 61 €/MWh, Spagna: 65 €/MWh.</div>
+      </div>
+      <div class="cifra-card">
+        <div class="cifra-label">Quota rinnovabili sulla produzione</div>
+        <div class="cifra-number">48%</div>
+        <div class="cifra-unit">del fabbisogno elettrico 2025 (ARERA)</div>
+        <div class="cifra-note">Nel 2025 eolico e solare hanno superato per la prima volta i fossili in tutta l'UE: 30% vs 29% (Ember 2026).</div>
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-title">Da dove viene l'elettricità italiana — mix di produzione 2024</div>
+        <div class="mix-subtitle">Fonte: GSE, Fuel Mix 2024 (pubblicato 27/06/2025) · Terna, Rapporto Statistico 2024</div>
+      </div>
+      <div class="mix-col-header">
+        <div class="mix-col-label mix-col-src">Fonte</div>
+        <div class="mix-col-label mix-col-bar"></div>
+        <div class="mix-col-label mix-col-pct">Quota</div>
+        <div class="mix-col-label mix-col-twh">TWh</div>
+        <div class="mix-col-label mix-col-lcoe">Costo prod.* ($/MWh)</div>
+      </div>
+      <div class="mix-bars" id="mixBars">
+        <div class="mix-row">
+          <div class="mix-source">🔥 Gas naturale</div>
+          <div class="mix-bar-wrap"><div class="mix-bar bar-gas" data-pct="42.01"></div></div>
+          <div class="mix-pct">42,01%</div>
+          <div class="mix-twh">96,01 TWh</div>
+          <div class="mix-lcoe expensive">141–220</div>
+        </div>
+        <div class="mix-row">
+          <div class="mix-source">💧 Idroelettrico</div>
+          <div class="mix-bar-wrap"><div class="mix-bar bar-idro" data-pct="18.3"></div></div>
+          <div class="mix-pct">~18,30%</div>
+          <div class="mix-twh">~48 TWh</div>
+          <div class="mix-lcoe cheap">20–77</div>
+        </div>
+        <div class="mix-row">
+          <div class="mix-source">☀️ Fotovoltaico</div>
+          <div class="mix-bar-wrap"><div class="mix-bar bar-fv" data-pct="13.7"></div></div>
+          <div class="mix-pct">~13,70%</div>
+          <div class="mix-twh">36,06 TWh</div>
+          <div class="mix-lcoe cheap">29–92</div>
+        </div>
+        <div class="mix-row">
+          <div class="mix-source">💨 Eolico</div>
+          <div class="mix-bar-wrap"><div class="mix-bar bar-eolico" data-pct="8.8"></div></div>
+          <div class="mix-pct">~8,80%</div>
+          <div class="mix-twh">~23 TWh</div>
+          <div class="mix-lcoe cheap">27–73</div>
+        </div>
+        <div class="mix-row">
+          <div class="mix-source">🌿 Biomasse e rifiuti</div>
+          <div class="mix-bar-wrap"><div class="mix-bar bar-biomasse" data-pct="6.5"></div></div>
+          <div class="mix-pct">~6,50%</div>
+          <div class="mix-twh">~17 TWh</div>
+          <div class="mix-lcoe mid">50–120</div>
+        </div>
+        <div class="mix-row">
+          <div class="mix-source">🔌 Import netto</div>
+          <div class="mix-bar-wrap"><div class="mix-bar bar-import" data-pct="5.0"></div></div>
+          <div class="mix-pct">~5,00%</div>
+          <div class="mix-twh">~13 TWh</div>
+          <div class="mix-lcoe na">—</div>
+        </div>
+        <div class="mix-row">
+          <div class="mix-source">🌋 Geotermico</div>
+          <div class="mix-bar-wrap"><div class="mix-bar bar-geo" data-pct="2.3"></div></div>
+          <div class="mix-pct">~2,30%</div>
+          <div class="mix-twh">~6 TWh</div>
+          <div class="mix-lcoe cheap">40–100</div>
+        </div>
+        <div class="mix-row">
+          <div class="mix-source">⚫ Carbone</div>
+          <div class="mix-bar-wrap"><div class="mix-bar bar-carbone" data-pct="1.52"></div></div>
+          <div class="mix-pct">1,52%</div>
+          <div class="mix-twh">3,46 TWh</div>
+          <div class="mix-lcoe expensive">65–166</div>
+        </div>
+        <div class="mix-row">
+          <div class="mix-source">🛢️ Prodotti petroliferi</div>
+          <div class="mix-bar-wrap"><div class="mix-bar bar-altro" data-pct="0.47"></div></div>
+          <div class="mix-pct">0,47%</div>
+          <div class="mix-twh">1,06 TWh</div>
+          <div class="mix-lcoe expensive">&gt;150</div>
+        </div>
+      </div>
+      <!-- Riga totale -->
+      <div class="mix-row" style="margin-top:8px;padding-top:8px;border-top:2px solid var(--border);">
+        <div class="mix-source" style="font-weight:700;font-size:13px;">Totale produzione nazionale</div>
+        <div class="mix-bar-wrap"></div>
+        <div class="mix-pct" style="font-weight:700;">100%</div>
+        <div class="mix-twh" style="font-weight:700;color:var(--graphite);">~264 TWh</div>
+        <div class="mix-lcoe na">—</div>
+      </div>
+      <p style="font-size:11px;color:var(--gray);margin-top:12px;font-style:italic;">
+        I valori con ~ sono calcolati su dati Terna 2024. Gas naturale, carbone e prodotti petroliferi: dati esatti GSE Fuel Mix 2024. Rinnovabili totali verificate: 51,83% / 118,4 TWh (GSE). Il Fuel Mix 2025 è stato pubblicato da GSE ma il dettaglio per fonte non è ancora disponibile in accesso libero.
+      </p>
+      <div style="margin-top:12px;padding:10px 14px;background:#F0FDF4;border-radius:6px;border-left:3px solid #10B981;">
+        <p style="font-size:11px;color:#065F46;line-height:1.7;">
+          <strong>* Costo di produzione (LCOE — Levelized Cost of Energy):</strong>
+          indica quanto costa produrre 1 MWh con quella tecnologia, considerando investimento, manutenzione e combustibile nell'arco della vita dell'impianto.
+          <strong>Non è il prezzo che paghi in bolletta</strong> — il prezzo finale è determinato dal mercato all'ingrosso (PUN), dove prevale il costo della fonte più cara attiva in quel momento (quasi sempre il gas).
+          Risponde alla domanda: "quanto costerebbe produrre la stessa energia con fonti diverse?"
+          Fonte: Lazard LCOE+ 2025 (dati USA). Colori: 🟢 economico · 🟡 medio · 🔴 costoso.
+        </p>
+      </div>
+      <div class="mix-note" style="margin-top:12px;">
+        <span>⚠️</span>
+        <span class="mix-note-text"><strong>Carbone — situazione normativa in evoluzione:</strong> nel 2025 il carbone ha coperto solo l'1,1% della produzione (2,9 TWh), con Brindisi ferma dal 2024 e Civitavecchia senza autorizzazione ambientale dal 1° gennaio 2026. Con il DL Bollette (aprile 2026) il phase-out è stato prorogato dal 2025 al 2038, ma gli impianti continentali non sono oggi operabili senza nuove autorizzazioni. Le uniche centrali attive sono le due sarde (servizio essenziale per la Sardegna). <a href="#dibattito" class="section-link">Leggi l'approfondimento →</a></span>
+      </div>
+      <p style="font-size:12px;color:var(--gray);margin-top:12px;">Valori approssimati. I TWh indicati si riferiscono alla produzione nazionale netta (264 TWh totali) escluso l'import. <a href="contesto.html" class="section-link">Scheda di contesto completa →</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section-schede" id="schede">
+  <div class="container">
+    <p class="section-label">Le fonti energetiche</p>
+    <h2 class="section-title">Le tecnologie a confronto</h2>
+    <p class="section-desc">Clicca su una fonte per vedere il giudizio sintetico e i dati chiave. "Approfondisci" apre la scheda completa con fonti verificate, miti sfatati e innovazioni.</p>
+
+    <div class="schede-grid">
+
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#F59E0B;"></div>
+        <div class="scheda-header"><span class="scheda-icon">☀️</span><span class="scheda-name">Fotovoltaico</span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-green">Costo basso</span><span class="pill pill-green">Alta efficienza</span><span class="pill pill-green">Sostenibile</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">LCOE 2024</div><div class="kpi-value">24–38 $/MWh</div></div>
+            <div class="kpi"><div class="kpi-label">Produzione IT</div><div class="kpi-value">36 TWh</div></div>
+            <div class="kpi"><div class="kpi-label">Quota mix</div><div class="kpi-value">14%</div></div>
+          </div>
+          <p class="scheda-desc">Capacity factor Italia ~11–13%. LCA: 20–48 gCO₂eq/kWh. Il riciclo dei pannelli a fine vita è il nodo aperto principale. Include sottosezione agrivoltaico.</p>
+          <a href="schede/fotovoltaico.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#10B981;"></div>
+        <div class="scheda-header"><span class="scheda-icon">💨</span><span class="scheda-name">Eolico onshore</span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-green">Costo basso</span><span class="pill pill-amber">Efficienza variabile</span><span class="pill pill-green">Sostenibile</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">LCOE 2024</div><div class="kpi-value">33–45 $/MWh</div></div>
+            <div class="kpi"><div class="kpi-label">Produzione IT</div><div class="kpi-value">~23 TWh</div></div>
+            <div class="kpi"><div class="kpi-label">Capacity factor</div><div class="kpi-value">~22%</div></div>
+          </div>
+          <p class="scheda-desc">LCA: 7–16 gCO₂eq/kWh. Lo smaltimento delle pale è il principale punto aperto — le soluzioni industriali esistono ma non sono ancora scalabili.</p>
+          <a href="schede/eolico-onshore.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#0F6E56;"></div>
+        <div class="scheda-header"><span class="scheda-icon">🌋</span><span class="scheda-name">Geotermico</span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-green">Costo basso</span><span class="pill pill-green">Continuo 24/7</span><span class="pill pill-amber">EGS pre-commerciale</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">Produzione IT</div><div class="kpi-value">~6 TWh</div></div>
+            <div class="kpi"><div class="kpi-label">Capacity factor</div><div class="kpi-value">77–88%</div></div>
+            <div class="kpi"><div class="kpi-label">Quota mix</div><div class="kpi-value">~2%</div></div>
+          </div>
+          <p class="scheda-desc">Due famiglie: tradizionale (alta entalpia, limitato alla Toscana) e EGS avanzato (potenzialmente ovunque ma ancora pre-commerciale).</p>
+          <a href="schede/geotermico.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#84CC16;"></div>
+        <div class="scheda-header"><span class="scheda-icon">🌿</span><span class="scheda-name">Biometano</span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-amber">Costo variabile</span><span class="pill pill-green">Flessibile</span><span class="pill pill-amber">La filiera conta</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">Impianti IT</div><div class="kpi-value">2.378</div></div>
+            <div class="kpi"><div class="kpi-label">Potenza</div><div class="kpi-value">1.465 MW</div></div>
+            <div class="kpi"><div class="kpi-label">Produzione</div><div class="kpi-value">7.484 GWh</div></div>
+          </div>
+          <p class="scheda-desc">Da FORSU e effluenti zootecnici: profilo molto virtuoso. Da colture dedicate: più discusso. Include sottosezione biodigestori.</p>
+          <a href="schede/biometano.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#3B82F6;"></div>
+        <div class="scheda-header"><span class="scheda-icon">⚗️</span><span class="scheda-name">Idrogeno verde</span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-red">Costo alto oggi</span><span class="pill pill-amber">Efficienza bassa</span><span class="pill pill-green">Strategico industria</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">Costo oggi</div><div class="kpi-value">3–6 €/kg</div></div>
+            <div class="kpi"><div class="kpi-label">Obiettivo 2030</div><div class="kpi-value">&lt;2 €/kg</div></div>
+            <div class="kpi"><div class="kpi-label">Efficienza</div><div class="kpi-value">60–75%</div></div>
+          </div>
+          <p class="scheda-desc">Prodotto da elettrolisi con rinnovabili. Strategico per decarbonizzare industria pesante e trasporti a lungo raggio dove l'elettrico diretto non arriva.</p>
+          <a href="schede/idrogeno-verde.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#6366F1;"></div>
+        <div class="scheda-header"><span class="scheda-icon">💧</span><span class="scheda-name">Idroelettrico</span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-green">Costo basso</span><span class="pill pill-green">Flessibile</span><span class="pill pill-amber">Espansione limitata</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">Produzione IT</div><div class="kpi-value">~48 TWh</div></div>
+            <div class="kpi"><div class="kpi-label">Quota mix</div><div class="kpi-value">18%</div></div>
+            <div class="kpi"><div class="kpi-label">Pompaggio</div><div class="kpi-value">7,3 GW</div></div>
+          </div>
+          <p class="scheda-desc">Prima rinnovabile storica in Italia. Due famiglie: a flusso/serbatoio (fonte) e pompaggio (storage, non fonte primaria).</p>
+          <a href="schede/idroelettrico.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#06B6D4;"></div>
+        <div class="scheda-header"><span class="scheda-icon">🌊</span><span class="scheda-name">Eolico offshore</span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-amber">Costo medio-alto</span><span class="pill pill-green">Capacity factor alto</span><span class="pill pill-amber">Galleggiante emergente</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">LCOE fisso</div><div class="kpi-value">73–99 $/MWh</div></div>
+            <div class="kpi"><div class="kpi-label">Capacity factor</div><div class="kpi-value">35–50%</div></div>
+            <div class="kpi"><div class="kpi-label">Galleggiante IT</div><div class="kpi-value">0 MW</div></div>
+          </div>
+          <p class="scheda-desc">Fisso: limitato in Mediterraneo per fondali profondi. Galleggiante: strategico per Italia (Sicilia, Sardegna, Calabria) — 270 MW nel mondo al 2025.</p>
+          <a href="schede/eolico-offshore.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#6B7280;"></div>
+        <div class="scheda-header"><span class="scheda-icon">⚛️</span><span class="scheda-name">Nucleare / SMR / Fusione</span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-red">Costo molto alto</span><span class="pill pill-green">Alta affidabilità</span><span class="pill pill-gray">Fusione: 2040+</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">LCOE fissione</div><div class="kpi-value">141–220 $/MWh</div></div>
+            <div class="kpi"><div class="kpi-label">LCA</div><div class="kpi-value">~12 gCO₂/kWh</div></div>
+            <div class="kpi"><div class="kpi-label">ITER primo plasma</div><div class="kpi-value">2039</div></div>
+          </div>
+          <p class="scheda-desc">Tre categorie: fissione tradizionale, SMR pre-commerciali, fusione. Include box opinione personale e analisi Banca d'Italia (QEF n. 947/2025).</p>
+          <a href="schede/nucleare-smr-fusione.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section-dibattito" id="dibattito">
+  <div class="container">
+    <p class="section-label">Oltre le schede</p>
+    <h2 class="section-title">Il dibattito pubblico sull'energia</h2>
+    <p class="section-desc">Temi trasversali spesso discussi in modo confuso o parziale. Dati verificati, posizioni in campo, fonti citate.</p>
+
+    <div class="dibattito-grid">
+      <a href="dibattito.html" class="dibattito-card">
+        <div class="dibattito-num">01</div>
+        <div class="dibattito-title">Le rinnovabili: speculazione o affare per tutti?</div>
+        <div class="dibattito-desc">Abbiamo verificato i dati dell'articolo più condiviso sul tema: cosa regge e cosa no.</div>
+      </a>
+      <a href="dibattito.html" class="dibattito-card">
+        <div class="dibattito-num">02</div>
+        <div class="dibattito-title">Perché chi vive vicino a un parco eolico paga come tutti gli altri?</div>
+        <div class="dibattito-desc">Il PUN, i prezzi zonali e cosa cambierà nei prossimi anni secondo ARERA.</div>
+      </a>
+      <a href="dibattito.html" class="dibattito-card">
+        <div class="dibattito-num">03</div>
+        <div class="dibattito-title">Dove si possono fare gli impianti rinnovabili? Cosa dice la legge</div>
+        <div class="dibattito-desc">Aree vietate, aree idonee, zona grigia regionale e la lettera dei 44 intellettuali.</div>
+      </a>
+      <a href="dibattito.html" class="dibattito-card">
+        <div class="dibattito-num">04</div>
+        <div class="dibattito-title">Chi paga cosa in bolletta?</div>
+        <div class="dibattito-desc">Le quattro voci, gli oneri di sistema e cosa è successo ai costi del nucleare.</div>
+      </a>
+      <a href="dibattito.html" class="dibattito-card">
+        <div class="dibattito-num">05</div>
+        <div class="dibattito-title">Le rinnovabili non bastano perché non producono sempre: è vero?</div>
+        <div class="dibattito-desc">Intermittenza, duck curve, storage e reti: lo stato reale delle soluzioni disponibili.</div>
+      </a>
+      <a href="dibattito.html" class="dibattito-card">
+        <div class="dibattito-num">06</div>
+        <div class="dibattito-title">Il DDL nucleare: cosa ha detto chi sa di cosa parla</div>
+        <div class="dibattito-desc">Le audizioni parlamentari di luglio 2026: Parisi, Cabiddu, Banca d'Italia.</div>
+      </a>
+      <a href="#" class="dibattito-card nuovo">
+        <div class="badge-nuovo">🆕 Luglio 2026</div>
+        <div class="dibattito-num">07</div>
+        <div class="dibattito-title">Il carbone al 2038: decisione reale o politica?</div>
+        <div class="dibattito-desc">Il DL Bollette ha prorogato il phase-out di 13 anni. Ma gli impianti continentali sono fermi e privi di autorizzazione ambientale.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer id="fonti">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Energia <em style="font-style:italic;">a Confronto</em></div>
+      <div class="footer-tagline">Progetto informativo indipendente. Nessuna pubblicità, nessun finanziamento di settore. Tutti i dati citano la fonte primaria.</div>
+    </div>
+    <div class="footer-fonti">
+      <h4>Fonti istituzionali principali</h4>
+      <div class="footer-fonti-list">IEA · IRENA · IPCC · Lazard · JRC · GSE · Terna<br>ARERA · ENEA · ISPRA · NREL · Fraunhofer<br>Banca d'Italia · ENTSO-E · Eurostat</div>
+    </div>
+    <div class="footer-note">Progetto "Energia a Confronto" — Bozza di lavoro luglio 2026. Non definitivo.</div>
+  </div>
+</footer>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
