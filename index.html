@@ -152,9 +152,39 @@
         <div class="mix-twh" style="font-weight:700;color:var(--graphite);">~264 TWh</div>
         <div class="mix-lcoe na">—</div>
       </div>
-      <p style="font-size:11px;color:var(--gray);margin-top:12px;font-style:italic;">
-        I valori con ~ sono calcolati su dati Terna 2024. Gas naturale, carbone e prodotti petroliferi: dati esatti GSE Fuel Mix 2024. Rinnovabili totali verificate: 51,83% / 118,4 TWh (GSE). Il Fuel Mix 2025 è stato pubblicato da GSE ma il dettaglio per fonte non è ancora disponibile in accesso libero.
-      </p>
+      <div style="margin-top:16px;padding:14px 18px;background:var(--gray-light);border-radius:var(--radius);font-size:12px;color:var(--gray);line-height:1.7;">
+        <p style="margin-bottom:10px;"><strong style="color:var(--graphite);">Perché il mix mostra 264 TWh ma il consumo nazionale è 312 TWh?</strong></p>
+        <p style="margin-bottom:8px;">Il mix qui sopra mostra la <strong>produzione nazionale netta</strong> (264 TWh) — solo ciò che le centrali italiane producono, al netto dei consumi delle centrali stesse. Il fabbisogno lordo (312 TWh) è più alto perché include anche l'import e le perdite:</p>
+        <table style="width:100%;border-collapse:collapse;margin:10px 0 12px;font-size:12px;">
+          <tr style="background:white;">
+            <td style="padding:6px 10px;width:28px;color:var(--teal);font-weight:700;font-size:14px;">+</td>
+            <td style="padding:6px 10px;color:var(--graphite);">Produzione nazionale netta</td>
+            <td style="padding:6px 10px;text-align:right;font-weight:700;color:var(--teal-dark);white-space:nowrap;">264 TWh</td>
+          </tr>
+          <tr style="background:var(--gray-light);">
+            <td style="padding:6px 10px;color:var(--teal);font-weight:700;font-size:14px;">+</td>
+            <td style="padding:6px 10px;color:var(--graphite);">Import netto dalla rete europea <span style="color:var(--gray);font-weight:normal;">(Francia, Svizzera, Austria)</span></td>
+            <td style="padding:6px 10px;text-align:right;font-weight:700;color:var(--teal-dark);white-space:nowrap;">~43 TWh</td>
+          </tr>
+          <tr style="background:white;border-top:2px solid var(--teal-light);">
+            <td style="padding:6px 10px;color:var(--teal);font-weight:700;font-size:14px;">=</td>
+            <td style="padding:6px 10px;color:var(--graphite);">Energia disponibile</td>
+            <td style="padding:6px 10px;text-align:right;font-weight:700;color:var(--teal-dark);white-space:nowrap;">~307 TWh</td>
+          </tr>
+          <tr style="background:var(--gray-light);">
+            <td style="padding:6px 10px;color:var(--teal);font-weight:700;font-size:14px;">+</td>
+            <td style="padding:6px 10px;color:var(--graphite);">Perdite di rete e consumi ausiliari centrali</td>
+            <td style="padding:6px 10px;text-align:right;font-weight:700;color:var(--teal-dark);white-space:nowrap;">~5 TWh</td>
+          </tr>
+          <tr style="background:var(--teal-light);border-top:2px solid var(--teal);">
+            <td style="padding:8px 10px;color:var(--teal-dark);font-weight:700;font-size:14px;">=</td>
+            <td style="padding:8px 10px;color:var(--teal-dark);font-weight:700;">Fabbisogno elettrico lordo</td>
+            <td style="padding:8px 10px;text-align:right;font-weight:700;color:var(--teal-dark);white-space:nowrap;">~312 TWh</td>
+          </tr>
+        </table>
+        <p style="margin-bottom:6px;"><strong style="color:var(--graphite);">Perché nel mix l'import è ~13 TWh e non ~43 TWh?</strong> Il GSE nel Fuel Mix distribuisce una parte dell'import tra le fonti di origine (es. idroelettrico svizzero viene contabilizzato come "rinnovabile", non come "import"). Il dato ~13 TWh è la quota di import non attribuibile a nessuna fonte specifica. Il dato ~43 TWh è il flusso fisico totale di elettricità che attraversa i confini italiani (fonte: Terna/ENTSO-E).</p>
+        <p style="margin-top:8px;font-style:italic;">Valori con ~ calcolati su dati Terna 2024. Gas naturale, carbone e prodotti petroliferi: dati esatti GSE Fuel Mix 2024. Rinnovabili totali verificate: 51,83% / 118,4 TWh (GSE).</p>
+      </div>
       <div style="margin-top:12px;padding:10px 14px;background:#F0FDF4;border-radius:6px;border-left:3px solid #10B981;">
         <p style="font-size:11px;color:#065F46;line-height:1.7;">
           <strong>* Costo di produzione (LCOE — Levelized Cost of Energy):</strong>
