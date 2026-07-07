@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il sistema energetico italiano — Energia a Confronto</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #1B6B72; --teal-dark: #0F4A50; --teal-light: #E8F4F5;
+    --graphite: #2D2D2D; --gray: #6B7280; --gray-light: #F3F4F6;
+    --warm-white: #FAFAF8; --border: #E5E7EB;
+    --yellow: #FEF3C7; --yellow-border: #F59E0B; --yellow-text: #78350F;
+    --orange: #FFEDD5; --orange-border: #F97316; --orange-text: #7C2D12;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--warm-white); color: var(--graphite); font-size: 16px; line-height: 1.7; }
+
+  /* BANNER */
+  .legend-banner { background: var(--teal-dark); color: white; font-size: 12px; padding: 7px 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+  .sw-none { background: white; border: 1px solid rgba(255,255,255,0.4); }
+  .sw-yellow { background: #FEF3C7; border: 1px solid #F59E0B; }
+  .sw-orange { background: #FFEDD5; border: 1px solid #F97316; }
+
+  /* NAV */
+  nav { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+  .nav-inner { max-width: 960px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { font-family: var(--font-serif); font-size: 17px; color: var(--teal); text-decoration: none; }
+  .nav-logo em { font-style: italic; }
+  .nav-back { font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; transition: background 0.15s; }
+  .nav-back:hover { background: var(--teal-light); color: var(--teal); }
+
+  /* LAYOUT */
+  .page { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* HERO */
+  .hero { padding: 48px 0 40px; border-bottom: 1px solid var(--border); }
+  .breadcrumb { font-size: 12px; color: var(--gray); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .breadcrumb a { color: var(--teal); text-decoration: none; }
+  .page-eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: 10px; }
+  .page-title { font-family: var(--font-serif); font-size: clamp(26px, 4vw, 38px); font-weight: normal; color: var(--graphite); line-height: 1.2; margin-bottom: 14px; }
+  .page-subtitle { font-size: 16px; color: var(--gray); line-height: 1.7; margin-bottom: 24px; }
+
+  /* INDICE */
+  .indice { background: var(--gray-light); border-radius: var(--radius); padding: 24px; margin: 32px 0; }
+  .indice-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); margin-bottom: 14px; }
+  .indice-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .indice-list li { display: flex; align-items: baseline; gap: 10px; }
+  .indice-num { font-size: 11px; font-weight: 700; color: var(--teal); width: 20px; flex-shrink: 0; }
+  .indice-list a { font-size: 14px; color: var(--graphite); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s, color 0.15s; }
+  .indice-list a:hover { color: var(--teal); border-color: var(--teal-light); }
+
+  /* SEZIONI */
+  .sezione { padding: 48px 0; border-bottom: 1px solid var(--border); }
+  .sezione:last-child { border-bottom: none; }
+  .sezione-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .sezione-title { font-family: var(--font-serif); font-size: clamp(20px, 3vw, 28px); font-weight: normal; color: var(--graphite); margin-bottom: 24px; line-height: 1.3; }
+
+  /* KPI GRANDI */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .kpi-big { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  .kpi-big::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--teal); }
+  .kpi-big-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); font-weight: 600; margin-bottom: 10px; }
+  .kpi-big-value { font-family: var(--font-serif); font-size: 36px; color: var(--teal-dark); line-height: 1; margin-bottom: 4px; }
+  .kpi-big-unit { font-size: 13px; color: var(--gray); margin-bottom: 8px; }
+  .kpi-big-note { font-size: 11px; color: var(--gray); line-height: 1.5; }
+
+  /* TABELLA CONTESTO */
+  .context-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+  .context-table th { background: var(--graphite); color: white; font-size: 12px; font-weight: 600; padding: 10px 14px; text-align: left; }
+  .context-table th:first-child { border-radius: 6px 0 0 0; }
+  .context-table th:last-child { border-radius: 0 6px 0 0; }
+  .context-table td { padding: 12px 14px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .context-table tr:last-child td { border-bottom: none; }
+  .context-table tr:nth-child(even) td { background: var(--gray-light); }
+
+  /* TESTO */
+  .sezione p { font-size: 15px; line-height: 1.75; color: var(--graphite); margin-bottom: 14px; }
+  .sezione h3 { font-size: 18px; font-weight: 600; color: var(--graphite); margin: 28px 0 10px; }
+  .fonte-link { font-size: 12px; color: var(--teal); text-decoration: none; border-bottom: 1px solid var(--teal-light); }
+  .fonte-link:hover { border-color: var(--teal); }
+
+  /* HIGHLIGHT TOOLTIP */
+  .hl-y { background: var(--yellow); border-bottom: 1.5px solid var(--yellow-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-o { background: var(--orange); border-bottom: 1.5px solid var(--orange-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-note { display: none; margin: 6px 0 8px; padding: 8px 12px; border-radius: 6px; font-size: 13px; line-height: 1.55; }
+  .hl-note.y { background: #FFFBEB; border-left: 3px solid var(--yellow-border); color: var(--yellow-text); }
+  .hl-note.o { background: #FFF7ED; border-left: 3px solid var(--orange-border); color: var(--orange-text); }
+  .hl-note.open { display: block; }
+
+  /* BOX ESPLICATIVO */
+  .box-info { background: var(--teal-light); border-left: 4px solid var(--teal); border-radius: var(--radius); padding: 20px 24px; margin: 20px 0; }
+  .box-info-title { font-size: 13px; font-weight: 700; color: var(--teal-dark); margin-bottom: 8px; }
+  .box-info p { font-size: 13px; color: var(--teal-dark); line-height: 1.65; margin-bottom: 8px; }
+  .box-info p:last-child { margin-bottom: 0; }
+
+  /* TABELLA TWH */
+  .twh-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  .twh-table tr { border-bottom: 1px solid var(--border); }
+  .twh-table tr:last-child { border-bottom: none; border-top: 2px solid var(--teal); background: var(--teal-light); }
+  .twh-table td { padding: 8px 12px; }
+  .twh-table td:first-child { color: var(--teal); font-weight: 700; font-size: 16px; width: 28px; }
+  .twh-table td:last-child { text-align: right; font-weight: 700; color: var(--teal-dark); }
+
+  /* GLOSSARIO */
+  .glossario-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 16px; }
+  .glossario-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
+  .glossario-term { font-size: 14px; font-weight: 700; color: var(--teal-dark); margin-bottom: 6px; }
+  .glossario-def { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+  @media (max-width: 640px) {
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .glossario-grid { grid-template-columns: 1fr; }
+    .nav-back span { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="legend-banner">
+  <strong style="margin-right:4px;">Affidabilità dati:</strong>
+  <div class="legend-item"><span class="legend-swatch sw-none"></span> Fonte primaria verificata</div>
+  <div class="legend-item"><span class="legend-swatch sw-yellow"></span> Fonte secondaria — tocca per la nota</div>
+  <div class="legend-item"><span class="legend-swatch sw-orange"></span> Nessuna fonte istituzionale — tocca per la nota</div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Energia <em>a Confronto</em></a>
+    <a href="index.html" class="nav-back">← <span>Torna alla homepage</span></a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="hero">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      Il sistema energetico italiano
+    </div>
+    <p class="page-eyebrow">Il punto di partenza</p>
+    <h1 class="page-title">Il sistema energetico italiano in cifre</h1>
+    <p class="page-subtitle">Prima di confrontare le tecnologie, è utile capire la situazione di partenza: quanta energia consuma l'Italia, da dove viene, quanto costa oggi e quanto potrebbe costare domani.</p>
+
+    <div class="indice">
+      <div class="indice-title">In questa pagina</div>
+      <ul class="indice-list">
+        <li><span class="indice-num">01</span><a href="#consumi">Quanta energia consuma l'Italia</a></li>
+        <li><span class="indice-num">02</span><a href="#mix">Da dove viene l'elettricità italiana</a></li>
+        <li><span class="indice-num">03</span><a href="#costi">Quanto ci costa l'energia oggi</a></li>
+        <li><span class="indice-num">04</span><a href="#scenari">Quanto potrebbe costare domani</a></li>
+        <li><span class="indice-num">05</span><a href="#glossario">Glossario dei termini</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SEZIONE 1 — CONSUMI -->
+  <div class="sezione" id="consumi">
+    <div class="sezione-num">Sezione 01</div>
+    <h2 class="sezione-title">Quanta energia consuma l'Italia</h2>
+
+    <p>Il primo errore comune nel dibattito energetico è parlare solo di elettricità. L'elettricità è importante, ma è solo una parte del consumo energetico totale dell'Italia. Esistono tre livelli distinti:</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-big">
+        <div class="kpi-big-label">Consumo elettrico</div>
+        <div class="kpi-big-value">312</div>
+        <div class="kpi-big-unit">TWh / anno (2024, Terna)</div>
+        <div class="kpi-big-note">Illuminazione, motori, elettrodomestici, industria elettrica. Il dato più citato — ma solo una parte del totale.</div>
+      </div>
+      <div class="kpi-big">
+        <div class="kpi-big-label">Consumo termico</div>
+        <div class="kpi-big-value">~107</div>
+        <div class="kpi-big-unit">Mtep / anno (2023, MASE)</div>
+        <div class="kpi-big-note">Riscaldamento edifici, calore industriale, acqua calda. Spesso ignorato nel dibattito pubblico ma è la quota più grande.</div>
+      </div>
+      <div class="kpi-big">
+        <div class="kpi-big-label">Consumo trasporti</div>
+        <div class="kpi-big-value">~38</div>
+        <div class="kpi-big-unit">Mtep / anno (2023, MASE)</div>
+        <div class="kpi-big-note">Carburanti per auto, camion, aerei, navi. In transizione verso l'elettrico ma ancora dominata dai fossili.</div>
+      </div>
+    </div>
+
+    <div class="box-info">
+      <div class="box-info-title">Perché esistono tre numeri diversi per il "consumo energetico italiano"?</div>
+      <p>Nelle fonti istituzionali trovi valori diversi per lo stesso concetto — non è un errore, misurano cose diverse:</p>
+      <p><strong>~157 Mtep</strong> (ENEA, metodo "partial substitution"): misura l'energia primaria, ampliando le rinnovabili per stimare quanta energia fossile avrebbero sostituito. È il numero più alto.</p>
+      <p><strong>~107,7 Mtep</strong> (MASE, consumo finale): solo l'energia consegnata agli utenti finali, dopo tutte le perdite. È il numero più vicino a "quanto usiamo davvero".</p>
+      <p><strong>~134,8 Mtep</strong> (Eurostat): metodologia intermedia usata per confronti europei standardizzati.</p>
+      <p><strong>Regola pratica:</strong> quando leggi un dato sul "consumo energetico italiano", chiedi sempre quale metodologia usa. Confrontare numeri da metodologie diverse produce conclusioni errate.</p>
+    </div>
+
+    <p>Fonti: <a href="https://www.terna.it/it/sistema-elettrico/statistiche" class="fonte-link" target="_blank">Terna, Rapporto Statistico 2024 →</a> · <a href="https://www.mase.gov.it" class="fonte-link" target="_blank">MASE, Bilancio Energetico Nazionale 2023 →</a> · <a href="https://www.iea.org/countries/italy" class="fonte-link" target="_blank">IEA, Italy Energy Profile →</a></p>
+  </div>
+
+  <!-- SEZIONE 2 — MIX -->
+  <div class="sezione" id="mix">
+    <div class="sezione-num">Sezione 02</div>
+    <h2 class="sezione-title">Da dove viene l'elettricità italiana</h2>
+
+    <p>Il mix elettrico italiano nel 2024, secondo il <a href="https://www.gse.it/servizi-per-te/fonti-rinnovabili/fuel-mix" class="fonte-link" target="_blank">GSE Fuel Mix 2024</a> e i dati <a href="https://www.terna.it/it/sistema-elettrico/statistiche" class="fonte-link" target="_blank">Terna</a>:</p>
+
+    <table class="context-table">
+      <thead>
+        <tr>
+          <th>Fonte</th>
+          <th>Quota</th>
+          <th>TWh</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🔥 Gas naturale</td>
+          <td><strong>42,01%</strong></td>
+          <td>96,01 TWh</td>
+          <td>Dato esatto GSE Fuel Mix 2024</td>
+        </tr>
+        <tr>
+          <td>💧 Idroelettrico</td>
+          <td>~18,30%</td>
+          <td>~48 TWh</td>
+          <td>Prima fonte rinnovabile storica in Italia</td>
+        </tr>
+        <tr>
+          <td>☀️ Fotovoltaico</td>
+          <td>~13,70%</td>
+          <td>36,06 TWh</td>
+          <td>In forte crescita (+37% nel 2025)</td>
+        </tr>
+        <tr>
+          <td>💨 Eolico</td>
+          <td>~8,80%</td>
+          <td>~23 TWh</td>
+          <td>Prevalentemente onshore nel Sud Italia</td>
+        </tr>
+        <tr>
+          <td>🌿 Biomasse e rifiuti</td>
+          <td>~6,50%</td>
+          <td>~17 TWh</td>
+          <td>Include biometano e rifiuti urbani</td>
+        </tr>
+        <tr>
+          <td>🔌 Import netto</td>
+          <td>~5,00%</td>
+          <td>~13 TWh*</td>
+          <td>*Dato GSE — vedi nota sotto</td>
+        </tr>
+        <tr>
+          <td>🌋 Geotermico</td>
+          <td>~2,30%</td>
+          <td>~6 TWh</td>
+          <td>Concentrato in Toscana (Larderello)</td>
+        </tr>
+        <tr>
+          <td>⚫ Carbone</td>
+          <td><strong>1,52%</strong></td>
+          <td><strong>3,46 TWh</strong></td>
+          <td>Dato esatto GSE. Solo Sardegna nel 2025.</td>
+        </tr>
+        <tr>
+          <td>🛢️ Prodotti petroliferi</td>
+          <td><strong>0,47%</strong></td>
+          <td><strong>1,06 TWh</strong></td>
+          <td>Dato esatto GSE Fuel Mix 2024</td>
+        </tr>
+        <tr>
+          <td><strong>Rinnovabili totali</strong></td>
+          <td><strong>51,83%</strong></td>
+          <td><strong>118,4 TWh</strong></td>
+          <td><strong>Dato esatto GSE Fuel Mix 2024</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="box-info">
+      <div class="box-info-title">Perché il consumo è 312 TWh ma la produzione è solo 264 TWh?</div>
+      <p>Il mix qui sopra mostra la produzione nazionale netta (264 TWh). Il fabbisogno lordo (312 TWh) è più alto perché include anche l'import e le perdite:</p>
+      <table class="twh-table">
+        <tr><td>+</td><td>Produzione nazionale netta</td><td>264 TWh</td></tr>
+        <tr><td>+</td><td>Import netto fisico (Francia, Svizzera, Austria)</td><td>~43 TWh</td></tr>
+        <tr><td>=</td><td>Energia disponibile</td><td>~307 TWh</td></tr>
+        <tr><td>+</td><td>Perdite di rete e consumi ausiliari centrali</td><td>~5 TWh</td></tr>
+        <tr><td>=</td><td>Fabbisogno elettrico lordo</td><td>~312 TWh</td></tr>
+      </table>
+      <p><strong>Perché nel mix l'import è ~13 TWh e non ~43 TWh?</strong> Il GSE nel Fuel Mix distribuisce parte dell'import tra le fonti di origine (es. idroelettrico svizzero → "rinnovabile"). Il dato ~13 TWh è la quota non attribuibile a nessuna fonte specifica. Il dato ~43 TWh è il flusso fisico totale (fonte: Terna/ENTSO-E).</p>
+    </div>
+  </div>
+
+  <!-- SEZIONE 3 — COSTI -->
+  <div class="sezione" id="costi">
+    <div class="sezione-num">Sezione 03</div>
+    <h2 class="sezione-title">Quanto ci costa l'energia oggi</h2>
+
+    <div class="kpi-grid">
+      <div class="kpi-big">
+        <div class="kpi-big-label">Prezzo all'ingrosso (PUN 2025)</div>
+        <div class="kpi-big-value">115,9</div>
+        <div class="kpi-big-unit">€/MWh (ARERA, 2026)</div>
+        <div class="kpi-big-note">Il più alto tra le principali borse europee. Francia: 61 €/MWh, Spagna: 65 €/MWh.</div>
+      </div>
+      <div class="kpi-big">
+        <div class="kpi-big-label">Bolletta domestica (I trim. 2026)</div>
+        <div class="kpi-big-value">27,97</div>
+        <div class="kpi-big-unit">c€/kWh — Cliente Vulnerabile, Maggior Tutela</div>
+        <div class="kpi-big-note">Include energia, rete, oneri di sistema e tasse. Consumo riferimento: 2.000 kWh/anno, 3 kW.</div>
+      </div>
+      <div class="kpi-big">
+        <div class="kpi-big-label">Dipendenza energetica dall'estero</div>
+        <div class="kpi-big-value">~75%</div>
+        <div class="kpi-big-unit">del fabbisogno energetico totale</div>
+        <div class="kpi-big-note">L'Italia importa la maggior parte dell'energia che consuma — principalmente gas e petrolio.</div>
+      </div>
+    </div>
+
+    <h3>Le componenti della bolletta elettrica</h3>
+    <table class="context-table">
+      <thead>
+        <tr><th>Componente</th><th>% circa</th><th>Cosa finanzia</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Materia energia</strong></td>
+          <td>~40-50%</td>
+          <td>Il costo reale dell'elettricità consumata, legato al PUN</td>
+        </tr>
+        <tr>
+          <td><strong>Servizi di rete</strong></td>
+          <td>~20-25%</td>
+          <td>Trasporto e distribuzione (Terna + distributori locali)</td>
+        </tr>
+        <tr>
+          <td><strong>Oneri di sistema (ASOS)</strong></td>
+          <td>~20%</td>
+          <td>Incentivi alle rinnovabili (94,75% degli oneri), efficienza energetica</td>
+        </tr>
+        <tr>
+          <td><strong>Oneri residui (ARIM)</strong></td>
+          <td>~1%</td>
+          <td>Ferrovie (4,61%), efficienza energetica (0,64%). Gli oneri nucleari sono stati rimossi dalla bolletta nel 2023.</td>
+        </tr>
+        <tr>
+          <td><strong>Imposte</strong></td>
+          <td>~10%</td>
+          <td>IVA (10% uso domestico) e accise</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--gray);margin-top:8px;">Fonte: <a href="https://www.arera.it" class="fonte-link" target="_blank">ARERA, Relazione Annuale 2026 →</a></p>
+  </div>
+
+  <!-- SEZIONE 4 — SCENARI -->
+  <div class="sezione" id="scenari">
+    <div class="sezione-num">Sezione 04</div>
+    <h2 class="sezione-title">Quanto potrebbe costare domani con le rinnovabili</h2>
+
+    <h3>Quanto della domanda elettrica potrebbero coprire le rinnovabili?</h3>
+    <p>Il Piano Nazionale Integrato per l'Energia e il Clima (PNIEC 2024) fissa l'obiettivo di raggiungere il <strong>79% di rinnovabili</strong> nella generazione elettrica entro il 2030. (<a href="https://www.mase.gov.it" class="fonte-link" target="_blank">MASE, PNIEC 2024 →</a>)</p>
+    <p>Nel 2025 le rinnovabili hanno già coperto il 48% del fabbisogno elettrico italiano — un punto di partenza significativo ma ancora distante dall'obiettivo.</p>
+
+    <h3>A che costo?</h3>
+    <p>Il costo di produzione (LCOE — Levelized Cost of Energy) delle rinnovabili è in calo costante. Secondo <a href="https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2025/Jul/IRENA_TEC_RPGC_in_2024_2025.pdf" class="fonte-link" target="_blank">IRENA, Renewable Power Generation Costs in 2024</a>:</p>
+
+    <table class="context-table">
+      <thead>
+        <tr><th>Fonte</th><th>LCOE 2024 ($/MWh)</th><th>Tendenza</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>☀️ Fotovoltaico utility</td><td>24–38</td><td>📉 In forte calo</td></tr>
+        <tr><td>💨 Eolico onshore</td><td>33–45</td><td>📉 In calo</td></tr>
+        <tr><td>🌊 Eolico offshore fisso</td><td>73–99</td><td>📉 In calo</td></tr>
+        <tr><td>💧 Idroelettrico</td><td>20–77</td><td>➡️ Stabile</td></tr>
+        <tr><td>🔥 Gas naturale (nuovo)</td><td>141–220</td><td>📈 In aumento</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--gray);margin-top:8px;">Fonte: <a href="https://www.lazard.com/research-insights/levelized-cost-of-energyplus/" class="fonte-link" target="_blank">Lazard LCOE+ 2025 →</a> (dati USA, indicativi per confronto)</p>
+
+    <h3>Cosa resta da risolvere anche nello scenario migliore</h3>
+    <p>Anche con una quota rinnovabili molto alta, rimangono sfide strutturali:</p>
+    <p><strong>Intermittenza:</strong> sole e vento non producono sempre — servono accumuli (batterie, pompaggio idrico) e reti più intelligenti. L'Italia ha già ~7,3 GW di pompaggio idrico installato.</p>
+    <p><strong>Calore industriale:</strong> fonderie, cementifici e industria chimica richiedono temperature molto alte, difficili da raggiungere con l'elettricità nel breve termine.</p>
+    <p><strong>Trasporti pesanti:</strong> navi, aerei e camion a lungo raggio richiedono soluzioni diverse dall'elettrico diretto (idrogeno, biometano, SAF per l'aviazione).</p>
+    <p><strong>Accumulo stagionale:</strong> spostare energia dall'estate all'inverno su scala nazionale è ancora tecnologicamente difficile e costoso.</p>
+
+    <div class="box-info" style="background:var(--yellow);border-color:var(--yellow-border);">
+      <div class="box-info-title" style="color:var(--yellow-text);">Dato USA — contesto internazionale</div>
+      <p style="color:var(--yellow-text);">Nel marzo 2025 le rinnovabili hanno superato per la prima volta il 50% della generazione elettrica mensile negli USA. Nel 2025 solare, batterie ed eolico hanno rappresentato il 92% delle nuove capacità installate negli Stati Uniti. (Fonte: <a href="https://www.eia.gov/electricity/monthly/" class="fonte-link" target="_blank">EIA, Electric Power Monthly →</a>) Questi dati non sono direttamente comparabili con l'Italia per struttura della rete e contesto normativo, ma indicano la velocità possibile della transizione a scala nazionale.</p>
+    </div>
+  </div>
+
+  <!-- SEZIONE 5 — GLOSSARIO -->
+  <div class="sezione" id="glossario">
+    <div class="sezione-num">Sezione 05</div>
+    <h2 class="sezione-title">Glossario dei termini usati in questa pagina</h2>
+
+    <div class="glossario-grid">
+      <div class="glossario-card">
+        <div class="glossario-term">TWh (Terawattora)</div>
+        <div class="glossario-def">Un miliardo di kilowattora. È l'unità usata per misurare la produzione o il consumo di grandi quantità di elettricità. Una famiglia media italiana consuma circa 2.700 kWh all'anno — 1 TWh basterebbero per circa 370.000 famiglie per un anno.</div>
+      </div>
+      <div class="glossario-card">
+        <div class="glossario-term">Mtep (Milioni di tonnellate equivalenti di petrolio)</div>
+        <div class="glossario-def">Unità usata per confrontare fonti energetiche diverse (gas, petrolio, elettricità, calore) riportandole a un'unica misura. 1 Mtep = circa 11,63 TWh di elettricità.</div>
+      </div>
+      <div class="glossario-card">
+        <div class="glossario-term">Mix energetico</div>
+        <div class="glossario-def">La combinazione di fonti usate per produrre elettricità in un dato paese o periodo. Il mix italiano 2024 è composto per il 42% da gas, il 52% da rinnovabili e il restante da fossili e import.</div>
+      </div>
+      <div class="glossario-card">
+        <div class="glossario-term">PUN (Prezzo Unico Nazionale)</div>
+        <div class="glossario-def">Il prezzo medio dell'elettricità sul mercato all'ingrosso italiano, calcolato come media ponderata delle sette zone geografiche. È il riferimento per molti contratti di fornitura nel mercato libero.</div>
+      </div>
+      <div class="glossario-card">
+        <div class="glossario-term">Oneri di sistema</div>
+        <div class="glossario-def">Costi che tutti i consumatori pagano in bolletta per finanziare attività di interesse generale: incentivi alle rinnovabili, bonus sociali, efficienza energetica. Rappresentano circa il 22% della bolletta nel 2025.</div>
+      </div>
+      <div class="glossario-card">
+        <div class="glossario-term">LCOE (costo di produzione)</div>
+        <div class="glossario-def">Costo livellato dell'energia — quanto costa produrre un MWh considerando tutti i costi dell'impianto nell'arco della sua vita: costruzione, manutenzione, combustibile, smaltimento. Permette di confrontare tecnologie diverse.</div>
+      </div>
+      <div class="glossario-card">
+        <div class="glossario-term">Fattore di utilizzo</div>
+        <div class="glossario-def">Percentuale del tempo in cui un impianto lavora alla piena potenza nominale. Un impianto con fattore di utilizzo del 22% produce in un anno l'equivalente di 1.930 ore a piena potenza su 8.760 ore totali.</div>
+      </div>
+      <div class="glossario-card">
+        <div class="glossario-term">Accumulo (storage)</div>
+        <div class="glossario-def">Sistema che immagazzina energia quando è in eccesso e la rilascia quando serve. Include batterie elettrochimiche (ore), pompaggio idrico (ore/giorni) e altri sistemi per l'accumulo stagionale (ancora in sviluppo).</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleNote(el) {
+  const note = el.querySelector('.hl-note');
+  if (!note) return;
+  document.querySelectorAll('.hl-note.open').forEach(n => {
+    if (n !== note) n.classList.remove('open');
+  });
+  note.classList.toggle('open');
+}
+</script>
+</body>
+</html>
