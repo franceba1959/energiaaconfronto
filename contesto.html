@@ -109,6 +109,30 @@
   .twh-table td:first-child { color: var(--teal); font-weight: 700; font-size: 16px; width: 28px; }
   .twh-table td:last-child { text-align: right; font-weight: 700; color: var(--teal-dark); }
 
+  /* BARRE MIX */
+  .mix-bars-contesto { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+  .mix-row-c { display: flex; align-items: center; gap: 12px; }
+  .mix-src-c { font-size: 13px; color: var(--graphite); width: 180px; flex-shrink: 0; }
+  .mix-bar-wrap-c { flex: 1; background: var(--gray-light); border-radius: 4px; height: 10px; overflow: hidden; }
+  .mix-bar-c { height: 100%; border-radius: 4px; width: 0; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+  .mix-pct-c { font-size: 12px; font-weight: 700; color: var(--graphite); width: 48px; text-align: right; flex-shrink: 0; }
+  .mix-twh-c { font-size: 11px; color: var(--gray); width: 60px; text-align: right; flex-shrink: 0; }
+  .mix-lcoe-c { font-size: 11px; font-weight: 700; width: 90px; text-align: right; flex-shrink: 0; }
+  .mix-lcoe-c.cheap { color: #065F46; }
+  .mix-lcoe-c.mid { color: #92400E; }
+  .mix-lcoe-c.expensive { color: #991B1B; }
+  .mix-lcoe-c.na { color: var(--gray); font-style: italic; }
+  .mix-col-h { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray); font-weight: 600; }
+  .bar-gas-c { background: #F97316; }
+  .bar-idro-c { background: #3B82F6; }
+  .bar-fv-c { background: #F59E0B; }
+  .bar-eolico-c { background: #10B981; }
+  .bar-biomasse-c { background: #84CC16; }
+  .bar-import-c { background: #8B5CF6; }
+  .bar-geo-c { background: #14B8A6; }
+  .bar-carbone-c { background: #374151; }
+  .bar-petrolio-c { background: #9CA3AF; }
+
   /* GLOSSARIO */
   .glossario-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 16px; }
   .glossario-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
@@ -209,78 +233,93 @@
 
     <p>Il mix elettrico italiano nel 2024, secondo il <a href="https://www.gse.it/servizi-per-te/fonti-rinnovabili/fuel-mix" class="fonte-link" target="_blank">GSE Fuel Mix 2024</a> e i dati <a href="https://www.terna.it/it/sistema-elettrico/statistiche" class="fonte-link" target="_blank">Terna</a>:</p>
 
-    <table class="context-table">
-      <thead>
-        <tr>
-          <th>Fonte</th>
-          <th>Quota</th>
-          <th>TWh</th>
-          <th>Note</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>🔥 Gas naturale</td>
-          <td><strong>42,01%</strong></td>
-          <td>96,01 TWh</td>
-          <td>Dato esatto GSE Fuel Mix 2024</td>
-        </tr>
-        <tr>
-          <td>💧 Idroelettrico</td>
-          <td>~18,30%</td>
-          <td>~48 TWh</td>
-          <td>Prima fonte rinnovabile storica in Italia</td>
-        </tr>
-        <tr>
-          <td>☀️ Fotovoltaico</td>
-          <td>~13,70%</td>
-          <td>36,06 TWh</td>
-          <td>In forte crescita (+37% nel 2025)</td>
-        </tr>
-        <tr>
-          <td>💨 Eolico</td>
-          <td>~8,80%</td>
-          <td>~23 TWh</td>
-          <td>Prevalentemente onshore nel Sud Italia</td>
-        </tr>
-        <tr>
-          <td>🌿 Biomasse e rifiuti</td>
-          <td>~6,50%</td>
-          <td>~17 TWh</td>
-          <td>Include biometano e rifiuti urbani</td>
-        </tr>
-        <tr>
-          <td>🔌 Import netto</td>
-          <td>~5,00%</td>
-          <td>~13 TWh*</td>
-          <td>*Dato GSE — vedi nota sotto</td>
-        </tr>
-        <tr>
-          <td>🌋 Geotermico</td>
-          <td>~2,30%</td>
-          <td>~6 TWh</td>
-          <td>Concentrato in Toscana (Larderello)</td>
-        </tr>
-        <tr>
-          <td>⚫ Carbone</td>
-          <td><strong>1,52%</strong></td>
-          <td><strong>3,46 TWh</strong></td>
-          <td>Dato esatto GSE. Solo Sardegna nel 2025.</td>
-        </tr>
-        <tr>
-          <td>🛢️ Prodotti petroliferi</td>
-          <td><strong>0,47%</strong></td>
-          <td><strong>1,06 TWh</strong></td>
-          <td>Dato esatto GSE Fuel Mix 2024</td>
-        </tr>
-        <tr>
-          <td><strong>Rinnovabili totali</strong></td>
-          <td><strong>51,83%</strong></td>
-          <td><strong>118,4 TWh</strong></td>
-          <td><strong>Dato esatto GSE Fuel Mix 2024</strong></td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- Intestazione colonne -->
+    <div class="mix-col-h">
+      <div style="width:180px;flex-shrink:0;">Fonte</div>
+      <div style="flex:1;"></div>
+      <div style="width:48px;text-align:right;">Quota</div>
+      <div style="width:60px;text-align:right;">TWh</div>
+      <div style="width:90px;text-align:right;">Costo prod.* ($/MWh)</div>
+    </div>
+
+    <div class="mix-bars-contesto" id="mixBarsContesto">
+      <div class="mix-row-c">
+        <div class="mix-src-c">🔥 Gas naturale</div>
+        <div class="mix-bar-wrap-c"><div class="mix-bar-c bar-gas-c" data-pct="42.01"></div></div>
+        <div class="mix-pct-c">42,01%</div>
+        <div class="mix-twh-c">96,01 TWh</div>
+        <div class="mix-lcoe-c expensive">141–220</div>
+      </div>
+      <div class="mix-row-c">
+        <div class="mix-src-c">💧 Idroelettrico</div>
+        <div class="mix-bar-wrap-c"><div class="mix-bar-c bar-idro-c" data-pct="18.3"></div></div>
+        <div class="mix-pct-c">~18,30%</div>
+        <div class="mix-twh-c">~48 TWh</div>
+        <div class="mix-lcoe-c cheap">20–77</div>
+      </div>
+      <div class="mix-row-c">
+        <div class="mix-src-c">☀️ Fotovoltaico</div>
+        <div class="mix-bar-wrap-c"><div class="mix-bar-c bar-fv-c" data-pct="13.7"></div></div>
+        <div class="mix-pct-c">~13,70%</div>
+        <div class="mix-twh-c">36,06 TWh</div>
+        <div class="mix-lcoe-c cheap">24–38</div>
+      </div>
+      <div class="mix-row-c">
+        <div class="mix-src-c">💨 Eolico</div>
+        <div class="mix-bar-wrap-c"><div class="mix-bar-c bar-eolico-c" data-pct="8.8"></div></div>
+        <div class="mix-pct-c">~8,80%</div>
+        <div class="mix-twh-c">~23 TWh</div>
+        <div class="mix-lcoe-c cheap">33–45</div>
+      </div>
+      <div class="mix-row-c">
+        <div class="mix-src-c">🌿 Biomasse e rifiuti</div>
+        <div class="mix-bar-wrap-c"><div class="mix-bar-c bar-biomasse-c" data-pct="6.5"></div></div>
+        <div class="mix-pct-c">~6,50%</div>
+        <div class="mix-twh-c">~17 TWh</div>
+        <div class="mix-lcoe-c mid">50–120</div>
+      </div>
+      <div class="mix-row-c">
+        <div class="mix-src-c">🔌 Import netto</div>
+        <div class="mix-bar-wrap-c"><div class="mix-bar-c bar-import-c" data-pct="5.0"></div></div>
+        <div class="mix-pct-c">~5,00%</div>
+        <div class="mix-twh-c">~13 TWh</div>
+        <div class="mix-lcoe-c na">—</div>
+      </div>
+      <div class="mix-row-c">
+        <div class="mix-src-c">🌋 Geotermico</div>
+        <div class="mix-bar-wrap-c"><div class="mix-bar-c bar-geo-c" data-pct="2.3"></div></div>
+        <div class="mix-pct-c">~2,30%</div>
+        <div class="mix-twh-c">~6 TWh</div>
+        <div class="mix-lcoe-c cheap">40–100</div>
+      </div>
+      <div class="mix-row-c">
+        <div class="mix-src-c">⚫ Carbone</div>
+        <div class="mix-bar-wrap-c"><div class="mix-bar-c bar-carbone-c" data-pct="1.52"></div></div>
+        <div class="mix-pct-c">1,52%</div>
+        <div class="mix-twh-c">3,46 TWh</div>
+        <div class="mix-lcoe-c expensive">65–166</div>
+      </div>
+      <div class="mix-row-c">
+        <div class="mix-src-c">🛢️ Prodotti petroliferi</div>
+        <div class="mix-bar-wrap-c"><div class="mix-bar-c bar-petrolio-c" data-pct="0.47"></div></div>
+        <div class="mix-pct-c">0,47%</div>
+        <div class="mix-twh-c">1,06 TWh</div>
+        <div class="mix-lcoe-c expensive">&gt;150</div>
+      </div>
+      <!-- Riga totale rinnovabili -->
+      <div class="mix-row-c" style="margin-top:8px;padding-top:8px;border-top:2px solid var(--teal-light);">
+        <div class="mix-src-c" style="font-weight:700;color:var(--teal-dark);">🌱 Rinnovabili totali</div>
+        <div class="mix-bar-wrap-c"><div class="mix-bar-c" style="background:var(--teal);width:0" data-pct="51.83"></div></div>
+        <div class="mix-pct-c" style="color:var(--teal-dark);font-weight:700;">51,83%</div>
+        <div class="mix-twh-c" style="color:var(--teal-dark);font-weight:700;">118,4 TWh</div>
+        <div class="mix-lcoe-c na">—</div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--gray);margin-top:8px;font-style:italic;">
+      Gas naturale, carbone e prodotti petroliferi: dati esatti GSE Fuel Mix 2024. 
+      Valori con ~ calcolati su dati Terna 2024. 
+      * Costo di produzione (LCOE) da Lazard 2025: 🟢 economico · 🟡 medio · 🔴 costoso.
+    </p>
 
     <div class="box-info">
       <div class="box-info-title">Perché il consumo è 312 TWh ma la produzione è solo 264 TWh?</div>
@@ -441,6 +480,24 @@
 </div>
 
 <script>
+// Animazione barre mix contesto
+document.addEventListener('DOMContentLoaded', function() {
+  const mixSection = document.getElementById('mixBarsContesto');
+  if (mixSection) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          mixSection.querySelectorAll('.mix-bar-c').forEach(bar => {
+            setTimeout(() => { bar.style.width = bar.dataset.pct + '%'; }, 100);
+          });
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(mixSection);
+  }
+});
+
 function toggleNote(el) {
   const note = el.querySelector('.hl-note');
   if (!note) return;
