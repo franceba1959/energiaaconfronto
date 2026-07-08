@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nucleare a Fissione / SMR / Fusione — Energia a Confronto</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #1B6B72; --teal-dark: #0F4A50; --teal-light: #E8F4F5;
+    --graphite: #2D2D2D; --gray: #6B7280; --gray-light: #F3F4F6;
+    --warm-white: #FAFAF8; --border: #E5E7EB;
+    --yellow: #FEF3C7; --yellow-border: #F59E0B; --yellow-text: #78350F;
+    --orange: #FFEDD5; --orange-border: #F97316; --orange-text: #7C2D12;
+    --green-ok: #D1FAE5; --green-text: #065F46;
+    --amber-ok: #FEF3C7; --amber-text: #92400E;
+    --red-ok: #FEE2E2; --red-text: #991B1B;
+    --accent: #6B7280;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--warm-white); color: var(--graphite); font-size: 16px; line-height: 1.7; }
+
+  .legend-banner { background: var(--teal-dark); color: white; font-size: 12px; padding: 7px 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+  .sw-none { background: white; border: 1px solid rgba(255,255,255,0.4); }
+  .sw-yellow { background: #FEF3C7; border: 1px solid #F59E0B; }
+  .sw-orange { background: #FFEDD5; border: 1px solid #F97316; }
+
+  nav { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { font-family: var(--font-serif); font-size: 17px; color: var(--teal); text-decoration: none; }
+  .nav-logo em { font-style: italic; }
+  .nav-back { font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; transition: background 0.15s; }
+  .nav-back:hover { background: var(--teal-light); color: var(--teal); }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+  .scheda-hero { padding: 48px 0 32px; border-bottom: 1px solid var(--border); }
+  .breadcrumb { font-size: 12px; color: var(--gray); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .breadcrumb a { color: var(--teal); text-decoration: none; }
+  .scheda-icon-title { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .scheda-big-icon { font-size: 44px; }
+  .scheda-title { font-family: var(--font-serif); font-size: clamp(24px, 4vw, 38px); font-weight: normal; color: var(--graphite); line-height: 1.2; }
+  .scheda-subtitle { font-size: 16px; color: var(--gray); margin-bottom: 20px; }
+  .scheda-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+  .pill-green { background: var(--green-ok); color: var(--green-text); }
+  .pill-amber { background: var(--amber-ok); color: var(--amber-text); }
+  .pill-red { background: var(--red-ok); color: var(--red-text); }
+  .pill-gray { background: var(--gray-light); color: var(--gray); border: 1px solid var(--border); }
+  .scheda-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--gray); }
+  .scheda-meta-item::before { content: "·"; color: var(--accent); font-size: 16px; margin-right: 5px; }
+
+  .nav-interna { background: var(--gray-light); border-radius: var(--radius); padding: 16px 20px; margin: 24px 0; display: flex; gap: 12px; flex-wrap: wrap; }
+  .nav-interna a { font-size: 13px; color: var(--teal); text-decoration: none; padding: 4px 12px; border: 1px solid var(--teal-light); border-radius: 20px; transition: background 0.15s; }
+  .nav-interna a:hover { background: var(--teal-light); }
+
+  .blocco { padding: 40px 0; border-bottom: 1px solid var(--border); }
+  .blocco:last-child { border-bottom: none; }
+  .blocco-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .blocco-title { font-family: var(--font-serif); font-size: 24px; font-weight: normal; color: var(--graphite); margin-bottom: 20px; }
+
+  .blocco-1 { background: var(--teal-light); border-radius: var(--radius); padding: 32px; margin: 0 -8px; }
+  .blocco-1 .blocco-num { color: var(--teal-dark); }
+  .blocco-1 .blocco-title { color: var(--teal-dark); }
+
+  .kpi-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 24px 0; }
+  .kpi-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; flex: 1; min-width: 140px; box-shadow: var(--shadow); }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); font-weight: 600; margin-bottom: 6px; }
+  .kpi-value { font-family: var(--font-serif); font-size: 26px; color: var(--teal-dark); line-height: 1; margin-bottom: 2px; }
+  .kpi-sub { font-size: 11px; color: var(--gray); line-height: 1.4; }
+
+  .giudizio-table { width: 100%; border-collapse: collapse; }
+  .giudizio-table tr { border-bottom: 1px solid rgba(27,107,114,0.15); }
+  .giudizio-table tr:last-child { border-bottom: none; }
+  .giudizio-table td { padding: 12px 10px; font-size: 14px; vertical-align: top; }
+  .giudizio-table td:first-child { width: 160px; font-weight: 600; color: var(--teal-dark); white-space: nowrap; font-size: 13px; }
+  .giudizio-table td:nth-child(2) { width: 110px; }
+  .badge-giudizio { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 12px; }
+  .badge-molto-alto { background: var(--red-ok); color: var(--red-text); }
+  .badge-alta { background: var(--green-ok); color: var(--green-text); }
+  .badge-bassa { background: var(--red-ok); color: var(--red-text); }
+  .badge-molto-basse { background: var(--green-ok); color: var(--green-text); }
+  .badge-emergente { background: var(--amber-ok); color: var(--amber-text); }
+  .badge-2040 { background: var(--gray-light); color: var(--gray); border: 1px solid var(--border); }
+
+  .hl-y { background: var(--yellow); border-bottom: 1.5px solid var(--yellow-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-o { background: var(--orange); border-bottom: 1.5px solid var(--orange-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-note { display: none; margin: 6px 0 8px; padding: 8px 12px; border-radius: 6px; font-size: 13px; line-height: 1.55; }
+  .hl-note.y { background: #FFFBEB; border-left: 3px solid var(--yellow-border); color: var(--yellow-text); }
+  .hl-note.o { background: #FFF7ED; border-left: 3px solid var(--orange-border); color: var(--orange-text); }
+  .hl-note.open { display: block; }
+
+  .blocco p { margin-bottom: 14px; font-size: 15px; line-height: 1.75; color: var(--graphite); }
+  .blocco h3 { font-size: 18px; font-weight: 600; color: var(--graphite); margin: 28px 0 10px; }
+  .blocco h4 { font-size: 15px; font-weight: 600; color: var(--teal); margin: 20px 0 8px; }
+
+  .sidice-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .sidice-table th { background: var(--graphite); color: white; font-size: 13px; font-weight: 600; padding: 10px 16px; text-align: left; }
+  .sidice-table th:first-child { border-radius: 6px 0 0 0; }
+  .sidice-table th:last-child { border-radius: 0 6px 0 0; }
+  .sidice-table td { padding: 14px 16px; font-size: 14px; vertical-align: top; line-height: 1.6; border-bottom: 1px solid var(--border); }
+  .sidice-table tr:last-child td { border-bottom: none; }
+  .sidice-table td:first-child { background: #FFF9F0; color: var(--amber-text); font-style: italic; width: 40%; border-right: 1px solid var(--border); }
+  .sidice-table td:last-child { background: white; }
+
+  .fonte-link { font-size: 12px; color: var(--teal); text-decoration: none; border-bottom: 1px solid var(--teal-light); }
+  .fonte-link:hover { border-color: var(--teal); }
+
+  .innovazione-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 8px; }
+  .innovazione-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .inno-horizon { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--teal); margin-bottom: 6px; }
+  .inno-title { font-size: 15px; font-weight: 600; color: var(--graphite); margin-bottom: 8px; line-height: 1.3; }
+  .inno-desc { font-size: 13px; color: var(--gray); line-height: 1.55; }
+
+  /* BOX OPINIONE */
+  .box-opinione { background: #FFF7ED; border: 2px solid #F97316; border-radius: var(--radius); padding: 28px 32px; margin: 40px 0; }
+  .box-opinione-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .box-opinione-badge { background: #F97316; color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.07em; flex-shrink: 0; }
+  .box-opinione-title { font-family: var(--font-serif); font-size: 20px; font-weight: normal; color: #7C2D12; }
+  .box-opinione p { font-size: 14px; color: #7C2D12; line-height: 1.7; margin-bottom: 12px; }
+  .box-opinione h4 { font-size: 15px; font-weight: 700; color: #7C2D12; margin: 18px 0 8px; }
+  .box-opinione .disclaimer { font-size: 12px; color: #92400E; font-style: italic; border-top: 1px solid #FDBA74; padding-top: 12px; margin-top: 16px; }
+
+  .fonti-box { background: var(--gray-light); border-radius: var(--radius); padding: 20px; margin-top: 40px; }
+  .fonti-box h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); margin-bottom: 12px; }
+  .fonte-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+  .fonte-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 6px; }
+  .fonte-item a { color: var(--teal); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .kpi-row { flex-direction: column; }
+    .innovazione-grid { grid-template-columns: 1fr; }
+    .sidice-table, .sidice-table tbody, .sidice-table tr, .sidice-table td { display: block; }
+    .sidice-table td:first-child { width: 100%; border-right: none; border-bottom: 1px solid var(--yellow-border); }
+    .box-opinione { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="legend-banner">
+  <strong style="margin-right:4px;">Affidabilità dati:</strong>
+  <div class="legend-item"><span class="legend-swatch sw-none"></span> Fonte primaria verificata</div>
+  <div class="legend-item"><span class="legend-swatch sw-yellow"></span> Fonte secondaria — tocca per la nota</div>
+  <div class="legend-item"><span class="legend-swatch sw-orange"></span> Nessuna fonte istituzionale — tocca per la nota</div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">Energia <em>a Confronto</em></a>
+    <a href="../index.html#schede" class="nav-back">← <span>Tutte le tecnologie</span></a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="scheda-hero">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a> <span>/</span>
+      <a href="../index.html#schede">Le tecnologie</a> <span>/</span>
+      Nucleare a Fissione / SMR / Fusione
+    </div>
+    <div class="scheda-icon-title">
+      <span class="scheda-big-icon">⚛️</span>
+      <h1 class="scheda-title">Nucleare a Fissione (SMR)<br><span style="font-size:0.7em;color:var(--gray);font-weight:normal;">+ Fusione Nucleare</span></h1>
+    </div>
+    <p class="scheda-subtitle">Tre tecnologie distinte: fissione tradizionale, reattori modulari (SMR) e fusione nucleare. Dati, prospettive e analisi economica della Banca d'Italia.</p>
+    <div class="scheda-pills">
+      <span class="pill pill-red">Costo molto alto — Fissione</span>
+      <span class="pill pill-green">Alta affidabilità</span>
+      <span class="pill pill-amber">SMR pre-commerciale</span>
+      <span class="pill pill-gray">Fusione: 2040+</span>
+    </div>
+    <div class="scheda-meta">
+      <span class="scheda-meta-item">Aggiornato: luglio 2026</span>
+      <span class="scheda-meta-item">Fonti: Lazard · IEA · Banca d'Italia · ITER · Eurofusion</span>
+    </div>
+    <div class="nav-interna">
+      <a href="#fissione">Fissione tradizionale</a>
+      <a href="#smr">SMR</a>
+      <a href="#fusione">Fusione nucleare</a>
+      <a href="#opinione">Box opinione</a>
+    </div>
+  </div>
+
+  <!-- BLOCCO 1 -->
+  <div class="blocco" id="fissione">
+    <div class="blocco-1">
+      <div class="blocco-num">Blocco 1 — In parole semplici</div>
+      <h2 class="blocco-title">Tre tecnologie molto diverse</h2>
+
+      <h4 style="color:var(--teal-dark);margin-top:0;">Fissione tradizionale (centrali a uranio esistenti)</h4>
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Costo di produzione 2025</div>
+          <div class="kpi-value">141–220</div>
+          <div class="kpi-sub">$/MWh per nuovi impianti (Lazard 2025)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Fattore di utilizzo</div>
+          <div class="kpi-value">80–93%</div>
+          <div class="kpi-sub">tra le fonti più affidabili (IEA)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Emissioni ciclo di vita</div>
+          <div class="kpi-value">~12</div>
+          <div class="kpi-sub">gCO₂eq/kWh (UN-ECE 2021)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Tempi costruzione recenti</div>
+          <div class="kpi-value">16–25</div>
+          <div class="kpi-sub">anni (Flamanville, Vogtle, Hinkley)</div>
+        </div>
+      </div>
+
+      <table class="giudizio-table">
+        <tr>
+          <td>💰 Costo — Fissione</td>
+          <td><span class="badge-giudizio badge-molto-alto">MOLTO ALTO</span></td>
+          <td>I nuovi impianti a fissione sono tra le fonti più costose disponibili. Flamanville 3 (Francia) è costato ~13 miliardi invece dei 3,3 previsti. Vogtle 3&4 (USA) ha superato i 35 miliardi. Gli interessi sul capitale immobilizzato durante la costruzione possono pesare dal 17% al 49% del costo totale (Banca d'Italia, 2025).</td>
+        </tr>
+        <tr>
+          <td>⚡ Affidabilità</td>
+          <td><span class="badge-giudizio badge-alta">ALTA</span></td>
+          <td>Il nucleare produce elettricità in modo continuo, indipendente dal sole o dal vento, con fattori di utilizzo tra i più alti di qualsiasi fonte. È particolarmente utile per coprire i picchi di domanda invernale.</td>
+        </tr>
+        <tr>
+          <td>🌿 Emissioni CO₂</td>
+          <td><span class="badge-giudizio badge-molto-basse">MOLTO BASSE</span></td>
+          <td>~12 gCO₂eq/kWh sul ciclo di vita completo — tra le più basse di qualsiasi fonte, paragonabili all'eolico. Il problema non è il CO₂ ma i rifiuti radioattivi e i costi di decommissioning.</td>
+        </tr>
+        <tr>
+          <td>⚛️ SMR — Stato</td>
+          <td><span class="badge-giudizio badge-emergente">PRE-COMMERCIALE</span></td>
+          <td>I reattori modulari di piccola taglia (Small Modular Reactor) promettono costruzione in fabbrica, tempi più brevi e costi ridotti. Ma nessun SMR commerciale è ancora in funzione in Occidente. Il caso NuScale (USA) è stato abbandonato dopo che i costi sono passati da 3,6 a 9,3 miliardi.</td>
+        </tr>
+        <tr>
+          <td>🔮 Fusione — Stato</td>
+          <td><span class="badge-giudizio badge-2040">DOPO IL 2040</span></td>
+          <td>La fusione nucleare — l'energia delle stelle — è in sviluppo da decenni. Il reattore sperimentale ITER dovrebbe raggiungere il primo plasma nel 2039. I primi impianti commerciali non sono attesi prima del 2040–2050.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- BLOCCO 2 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 2</div>
+    <h2 class="blocco-title">Per chi vuole approfondire</h2>
+
+    <h3 id="smr">SMR — Reattori modulari di piccola taglia</h3>
+    <p>Gli SMR (Small Modular Reactor — reattori modulari di piccola taglia) sono reattori nucleari con potenza inferiore a 300 MW elettrici, progettati per essere costruiti in fabbrica e assemblati in sito. La promessa: costruzione più rapida, costi più prevedibili, maggiore flessibilità di localizzazione rispetto alle centrali tradizionali.</p>
+    <p>La realtà al 2026: nessun SMR commerciale è in funzione in Occidente. Il caso più noto di fallimento è NuScale (USA): il progetto è stato abbandonato nel 2023 dopo che i costi stimati sono passati da 3,6 a 9,3 miliardi di dollari. L'SMR di Shidao Bay in Cina ha subito ritardi di oltre 16 anni e aumenti di costo superiori al 200%.</p>
+    <p><span class="hl-y" onclick="toggleNote(this)">In Europa il progetto SMR più avanzato è quello di Rolls-Royce nel Regno Unito<span class="hl-note y">🟡 Stato del progetto verificato su fonti giornalistiche (Financial Times, Reuters) al luglio 2026 — non ancora approvazione regolatoria definitiva. Fonte: <a href="https://www.rolls-royce.com/innovation/small-modular-reactors.aspx" target="_blank">Rolls-Royce SMR →</a></span></span>, con una decisione di investimento finale attesa per il 2026–2027 e un primo impianto non prima del 2035.</p>
+
+    <h3 id="fusione">Fusione nucleare</h3>
+    <p>La fusione nucleare fonde nuclei leggeri (deuterio e trizio) invece di scindere nuclei pesanti (uranio). I vantaggi teorici sono enormi: carburante praticamente illimitato (deuterio dall'acqua marina), nessun rischio di fusione del nocciolo, rifiuti radioattivi molto meno problematici rispetto alla fissione.</p>
+    <p>Lo stato attuale: il reattore sperimentale <strong>ITER</strong> (International Thermonuclear Experimental Reactor), costruito in Francia con il contributo di 35 paesi tra cui l'Italia, dovrebbe raggiungere il primo plasma nel 2039. ITER non produrrà elettricità — è un esperimento scientifico per dimostrare la fattibilità fisica della fusione su scala industriale.</p>
+    <p>Parallelamente, <span class="hl-y" onclick="toggleNote(this)">circa 77 aziende private nel mondo stanno sviluppando reattori a fusione con investimenti privati per circa 13 miliardi di dollari (Fusion Industry Association, 2025)<span class="hl-note y">🟡 Dato da Fusion Industry Association, Global Fusion Industry in 2025 — fonte associativa di settore, non istituzionale. Il numero esatto di aziende e il totale degli investimenti varia tra le diverse edizioni del report.</span></span>. Le più avanzate (Commonwealth Fusion Systems, TAE Technologies, Helion) puntano a dimostrare la fattibilità commerciale entro il 2030–2035.</p>
+    <p><strong>Il contributo italiano alla fusione:</strong> l'Italia partecipa attivamente attraverso ENEA e aziende come <span class="hl-y" onclick="toggleNote(this)">ASG Superconductors di Genova, che produce magneti superconduttori per ITER<span class="hl-note y">🟡 Dato verificato su comunicati ASG Superconductors e Fusion for Energy (F4E), l'agenzia UE che gestisce il contributo europeo a ITER.</span></span>, e CESAR (Centro di Eccellenza per la Ricerca Agraria, spin-off Università di Perugia) che collabora su tecnologie di materiali per l'energia da fusione.</p>
+
+    <h3>L'analisi economico-finanziaria della Banca d'Italia</h3>
+    <p>La Banca d'Italia ha pubblicato nel 2025 un'analisi indipendente sul possibile ritorno al nucleare in Italia: <em>"L'atomo fuggente: analisi di un possibile ritorno al nucleare in Italia"</em> (Questioni di Economia e Finanza n. 947, 2025).</p>
+    <p>La conclusione principale: <strong>oggi il nucleare non offre vantaggi evidenti in termini di costi, tempi o impatto sul sistema elettrico rispetto alle rinnovabili integrate con accumuli e reti intelligenti.</strong></p>
+    <p>Un elemento particolarmente rilevante: gli interessi finanziari sul capitale immobilizzato durante la costruzione possono pesare in modo determinante sul costo finale. Per una centrale completata in 5 anni con tasso di interesse al 5%, gli interessi pesano per il <strong>17%</strong> dei costi diretti. Se i tempi diventano 7 anni e il tasso sale al 10%, il peso degli interessi arriva al <strong>49%</strong>.</p>
+    <p>Sulla bolletta: secondo la Banca d'Italia, il ritorno al nucleare non abbasserebbe sensibilmente i prezzi finali dell'elettricità per il consumatore italiano, ma potrebbe ridurne la volatilità per chi sottoscrive contratti a lungo termine.</p>
+    <p>Esiste anche una memoria della Banca d'Italia trasmessa alla Camera sul DDL delega AC 2669 (febbraio 2026), che approfondisce le implicazioni normative del possibile ritorno al nucleare.</p>
+    <p>Fonti: <a href="https://www.bancaditalia.it/pubblicazioni/qef/2025-0947/index.html" target="_blank" class="fonte-link">Banca d'Italia, QEF n. 947, 2025 →</a> · <a href="https://www.bancaditalia.it/pubblicazioni/memorie/memorie-2026/Memoria-23.02.2026.pdf" target="_blank" class="fonte-link">Memoria alla Camera, febbraio 2026 →</a></p>
+  </div>
+
+  <!-- BLOCCO 3 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 3</div>
+    <h2 class="blocco-title">Si dice / I dati dicono</h2>
+    <table class="sidice-table">
+      <thead><tr><th>Si dice...</th><th>I dati dicono...</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>"Il nucleare abbassa le bollette degli italiani"</td>
+          <td>La Banca d'Italia (QEF n. 947, 2025) distingue tra prezzo medio e volatilità: il ritorno al nucleare probabilmente non ridurrebbe in modo significativo il prezzo medio dell'elettricità per le famiglie italiane, ma potrebbe ridurne la volatilità per chi sottoscrive contratti PPA (Power Purchase Agreement) a lungo termine con i produttori. I due effetti vanno tenuti distinti.</td>
+        </tr>
+        <tr>
+          <td>"Il nucleare è la soluzione più sicura — gli incidenti sono rarissimi"</td>
+          <td>Le centrali nucleari moderne hanno standard di sicurezza molto elevati e il nucleare ha causato meno morti per TWh prodotto di quasi tutte le fonti fossili. Tuttavia gli incidenti di Chernobyl (1986) e Fukushima (2011) hanno avuto impatti ambientali e sociali che vanno oltre le morti dirette. Il problema non è tanto la frequenza degli incidenti quanto la gravità potenziale e la difficoltà di gestione delle conseguenze.</td>
+        </tr>
+        <tr>
+          <td>"Gli SMR risolveranno il problema del costo e dei tempi"</td>
+          <td>È una promessa ancora da dimostrare. Il caso NuScale — il progetto SMR più avanzato in Occidente — è stato abbandonato nel 2023 dopo che i costi stimati sono triplicati. I sostenitori degli SMR sostengono che le economie di scala della produzione in fabbrica si manifesteranno solo dopo i primi impianti. I critici osservano che questa logica è stata applicata anche alle centrali tradizionali senza che i costi scendessero come previsto.</td>
+        </tr>
+        <tr>
+          <td>"La fusione è sempre stata 'a 30 anni dal traguardo' e lo sarà per sempre"</td>
+          <td>Il sarcasmo è comprensibile — la fusione è stata promessa come imminente per decenni. Ma la situazione al 2026 è oggettivamente diversa: ITER è fisicamente costruito, i magneti superconduttori funzionano, e 77 aziende private stanno investendo miliardi. Il progresso tecnico è reale. Rimane incerta la data in cui un impianto commerciale sarà economicamente competitivo — probabilmente non prima del 2040–2050.</td>
+        </tr>
+        <tr>
+          <td>"Il nucleare è necessario per raggiungere la neutralità climatica"</td>
+          <td>È una delle questioni più dibattute tra gli esperti. L'IPCC include il nucleare tra le opzioni di decarbonizzazione. L'IEA nel suo scenario Net Zero 2050 prevede una crescita del nucleare a livello globale. Tuttavia la Banca d'Italia e molti economisti energetici osservano che per l'Italia specifica — con il suo irraggiamento solare e le sue coste — le rinnovabili integrate con accumuli offrono oggi un rapporto costo-beneficio migliore del nucleare di nuova costruzione.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BLOCCO 4 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 4</div>
+    <h2 class="blocco-title">Prospettive future</h2>
+    <div class="innovazione-grid">
+      <div class="innovazione-card">
+        <div class="inno-horizon">2026 — 2035</div>
+        <div class="inno-title">SMR di quarta generazione</div>
+        <div class="inno-desc">Rolls-Royce (UK), NuScale (versione rivista), e diversi produttori asiatici stanno sviluppando SMR commerciali. Il primo impianto europeo non è atteso prima del 2030–2035. Il costo reale sarà noto solo dopo la costruzione del primo impianto.</div>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">2039</div>
+        <div class="inno-title">ITER — primo plasma</div>
+        <div class="inno-desc">Il reattore sperimentale internazionale in costruzione a Cadarache (Francia) dovrebbe raggiungere il primo plasma nel 2039. ITER non produrrà elettricità ma dimostrerà la fattibilità fisica della fusione a scala industriale. Il successore DEMO sarà il primo reattore a produrre elettricità da fusione.</div>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">2030 — 2035</div>
+        <div class="inno-title">Fusione privata — la corsa delle startup</div>
+        <div class="inno-desc">Commonwealth Fusion Systems (MIT), Helion Energy e TAE Technologies puntano a dimostrare la fattibilità commerciale entro il 2030–2035 con approcci alternativi a ITER. Helion ha un accordo con Microsoft per fornire elettricità da fusione entro il 2028 — un obiettivo molto ambizioso e contestato da molti fisici.</div>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">In corso</div>
+        <div class="inno-title">Gestione rifiuti di lunga durata</div>
+        <div class="inno-desc">La Finlandia ha aperto il primo deposito geologico profondo al mondo per i rifiuti radioattivi ad alta attività (Onkalo). La questione dello smaltimento sicuro dei rifiuti nucleari resta aperta in Italia, dove non esiste ancora un deposito nazionale.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOX OPINIONE -->
+  <div class="box-opinione" id="opinione">
+    <div class="box-opinione-header">
+      <span class="box-opinione-badge">📌 Opinione personale</span>
+      <div class="box-opinione-title">La domanda che un investitore razionale farebbe</div>
+    </div>
+
+    <p><em>Questa sezione esprime l'opinione personale dell'editore del sito. È chiaramente separata dai dati oggettivi presentati nei blocchi precedenti. Il lettore è invitato a formarsi la propria opinione sulla base dei dati.</em></p>
+
+    <h4>Il problema del tempo</h4>
+    <p>Se fossi un investitore privato e mi chiedessero di finanziare una centrale nucleare in Italia, la prima domanda che farei è semplice: quando inizia a produrre? La risposta, basata sui dati dei progetti più recenti — Flamanville 3 in Francia (costruzione iniziata nel 2007, primo carico commerciale nel 2024), Vogtle 3&4 negli USA (7 anni di ritardo, costi triplicati), Hinkley Point C nel Regno Unito (atteso 2027, già in ritardo) — è: tra 15 e 25 anni nel migliore dei casi.</p>
+    <p>In quei 15-25 anni, il fotovoltaico e l'eolico continuano a scendere di costo. Le batterie continuano a migliorare. Il sistema elettrico si adatta. La domanda di un investitore razionale diventa: perché immobilizzare capitali enormi per 15-25 anni in un asset che potrebbe essere economicamente obsoleto prima ancora di entrare in funzione?</p>
+
+    <h4>Il contributo della Banca d'Italia</h4>
+    <p>La Banca d'Italia, in un'analisi pubblicata nel 2025 (Questioni di Economia e Finanza n. 947), ha esaminato il possibile ritorno al nucleare in Italia con criteri economico-finanziari. La conclusione è che oggi il nucleare non offre vantaggi evidenti rispetto ad altre soluzioni già disponibili. Un elemento particolarmente rilevante: i costi finanziari (interessi sul capitale immobilizzato durante la costruzione) possono pesare dal 17% al 49% dei costi diretti. Per un investitore privato, questo rende il profilo di rischio-rendimento del nucleare molto difficile da giustificare rispetto alle rinnovabili, che entrano in produzione in mesi. Fonte: <a href="https://www.bancaditalia.it/pubblicazioni/qef/2025-0947/index.html" target="_blank" class="fonte-link" style="color:#92400E;">Banca d'Italia, QEF n. 947, 2025 →</a></p>
+
+    <h4>La mia posizione sulla fusione</h4>
+    <p>Sulla fusione ho un'opinione diversa. La fusione non è "ancora un'altra promessa nucleare" — è una tecnologia fisicamente diversa dalla fissione, con caratteristiche di sicurezza intrinseche che la fissione non ha. Il fatto che 77 aziende private stiano investendo 13 miliardi di dollari — soldi veri, non sussidi pubblici — mi dice che qualcuno di competente crede che la fusione possa diventare economicamente competitiva. Non so quando. Ma se dovesse funzionare entro il 2040-2050, renderebbe molte delle discussioni attuali sulla fissione irrilevanti.</p>
+    <p>Il mio scetticismo sulla fissione in Italia non implica scetticismo sulla fusione. Sono tecnologie diverse, con orizzonti temporali diversi e rischi diversi.</p>
+
+    <p class="disclaimer">⚠️ Questa è l'opinione personale dell'editore di "Energia a Confronto", basata sulla lettura dei dati presentati in questa scheda. Non rappresenta la posizione delle fonti citate. Il lettore è incoraggiato a leggere le fonti primarie e a formarsi un'opinione autonoma.</p>
+  </div>
+
+  <div class="fonti-box">
+    <h3>Fonti principali di questa scheda</h3>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.lazard.com/research-insights/levelized-cost-of-energyplus/" target="_blank">Lazard LCOE+ v17, 2025</a> (costi di produzione per tecnologia)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.bancaditalia.it/pubblicazioni/qef/2025-0947/index.html" target="_blank">Banca d'Italia, QEF n. 947 "L'atomo fuggente", 2025</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.bancaditalia.it/pubblicazioni/memorie/memorie-2026/Memoria-23.02.2026.pdf" target="_blank">Banca d'Italia, Memoria alla Camera sul DDL AC 2669, febbraio 2026</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://unece.org/sed/documents/2021/10/reports/life-cycle-assessment-electricity-generation-options" target="_blank">UN-ECE, Life Cycle Assessment of Electricity Generation Options, 2021</a> (LCA emissioni)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.iea.org/reports/net-zero-by-2050" target="_blank">IEA, Net Zero by 2050</a> (scenari nucleare globale)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.iter.org" target="_blank">ITER Organization</a> (stato del progetto ITER)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.fusionindustryassociation.org" target="_blank">Fusion Industry Association, Global Fusion Industry 2025</a> (aziende private fusione)</span></div>
+  </div>
+</div>
+
+<script>
+function toggleNote(el) {
+  const note = el.querySelector('.hl-note');
+  if (!note) return;
+  document.querySelectorAll('.hl-note.open').forEach(n => { if (n !== note) n.classList.remove('open'); });
+  note.classList.toggle('open');
+}
+</script>
+</body>
+</html>
