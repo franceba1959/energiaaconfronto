@@ -160,3 +160,43 @@
     .mix-source { width: 110px; }
     .mix-twh { display: none; }
   }
+/* === RESPONSIVE MOBILE === */
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+  .nav-links { display: none; }
+  .hero { padding: 40px 0 28px; text-align: center; }
+  .hero-title { font-size: 28px; }
+  .hero-subtitle { font-size: 15px; }
+  .hero-meta { justify-content: center; }
+  .cifre-grid { grid-template-columns: 1fr; gap: 12px; }
+  .cifra-number { font-size: 32px; }
+  /* Mix su mobile: nascondi TWh e Costo prod, tieni solo fonte, barra e % */
+  .mix-twh { display: none !important; }
+  .mix-lcoe { display: none !important; }
+  .mix-col-twh { display: none !important; }
+  .mix-col-lcoe { display: none !important; }
+  .mix-twh-c { display: none !important; }
+  .mix-lcoe-c { display: none !important; }
+  .mix-col-label.mix-col-twh { display: none !important; }
+  .mix-col-label.mix-col-lcoe { display: none !important; }
+  .mix-source { width: 120px; font-size: 12px; }
+  .mix-src-c { width: 120px; font-size: 12px; }
+  .mix-pct { width: 44px; font-size: 12px; }
+  .mix-pct-c { width: 44px; font-size: 12px; }
+  /* Schede — una per riga */
+  .schede-grid { grid-template-columns: 1fr; }
+  .dibattito-grid { grid-template-columns: 1fr; }
+  .scheda-kpi { flex-direction: column; gap: 8px; }
+  /* Footer */
+  .footer-inner { flex-direction: column; gap: 20px; }
+  .section-desc { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .hero-title { font-size: 22px; }
+  .section-title { font-size: 20px; }
+  .cifra-number { font-size: 26px; }
+  .mix-source { width: 100px; font-size: 11px; }
+  .legend-banner { font-size: 11px; gap: 8px; padding: 6px 12px; }
+  .legend-item { font-size: 10px; }
+}
