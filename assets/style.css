@@ -200,3 +200,21 @@
   .legend-banner { font-size: 11px; gap: 8px; padding: 6px 12px; }
   .legend-item { font-size: 10px; }
 }
+
+/* === FIX SPECIFICO MIX MOBILE === */
+@media (max-width: 600px) {
+  .mix-card { padding: 16px 12px; }
+  .mix-col-header { display: none; }
+  .mix-row { flex-wrap: nowrap; gap: 6px; }
+  .mix-source { width: 110px; font-size: 11px; flex-shrink: 0; }
+  .mix-bar-wrap { min-width: 60px; }
+  .mix-pct { width: 40px; font-size: 11px; font-weight: 700; }
+  .mix-twh { display: none !important; }
+  .mix-lcoe { display: none !important; }
+  /* Cifre grandi su mobile */
+  .cifre-grid { grid-template-columns: 1fr 1fr; }
+  .cifra-number { font-size: 28px; }
+  .cifra-card { padding: 16px; }
+  /* Tre KPI in due colonne */
+  .cifre-grid > .cifra-card:last-child { grid-column: 1 / -1; }
+}
