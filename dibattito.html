@@ -161,7 +161,8 @@
         <li><span class="indice-num">04</span><a href="#bolletta">Chi paga cosa in bolletta?</a></li>
         <li><span class="indice-num">05</span><a href="#intermittenza">Le rinnovabili non bastano perché non producono sempre: è vero?</a></li>
         <li><span class="indice-num">06</span><a href="#ddl-nucleare">Il DDL nucleare: cosa ha detto chi sa di cosa parla</a></li>
-        <li><span class="indice-num">07</span><a href="#carbone-2038">Il carbone al 2038: decisione reale o politica? 🆕</a></li>
+        <li><span class="indice-num">07</span><a href="#carbone-2038">Il carbone al 2038: decisione reale o politica?</a></li>
+        <li><span class="indice-num">08</span><a href="#mercato-prezzo">Perché il gas determina il prezzo anche quando c'è il sole? 🆕</a></li>
       </ul>
     </div>
   </div>
@@ -534,6 +535,64 @@
         <li>La Legge 49/2026 fissa un termine massimo al 2038 — non un obbligo di produzione</li>
         <li>Nel 2025 tutta la produzione a carbone italiana (2,9 TWh) è venuta dalla Sardegna, unica area con impianti ancora operativi</li>
         <li>Il dibattito reale non è "carbone sì o no" a livello nazionale, ma come risolvere il problema specifico della Sardegna — con interconnessioni e rinnovabili locali</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SEZIONE 8 — MERCATO E PREZZO -->
+  <div class="sezione" id="mercato-prezzo">
+    <div class="sezione-num">Sezione 08 <span class="badge-nuovo">🆕</span></div>
+    <h2 class="sezione-title">Perché il gas determina il prezzo dell'elettricità anche quando c'è il sole?</h2>
+
+    <div class="box-semplici">
+      <div class="box-semplici-label">In parole semplici</div>
+      <p>Non è un'anomalia o un errore di mercato. È il risultato logico di un meccanismo chiamato prezzo marginale — lo stesso usato in quasi tutta Europa. Capire come funziona chiarisce molte delle discussioni più confuse sulla bolletta, sugli incentivi alle rinnovabili e sul perché la Spagna paga meno di noi.</p>
+    </div>
+
+    <h3>Il meccanismo del prezzo marginale — come funziona il mercato del giorno prima</h3>
+    <p>Ogni giorno entro le 12:00, i produttori di energia presentano le loro offerte sul Mercato del Giorno Prima (MGP), gestito dal GME (Gestore dei Mercati Energetici). Si offre energia ora per ora per il giorno successivo. Il GME ordina tutte le offerte dalla più economica alla più cara — questa si chiama <strong>curva di merito</strong>. Poi riempie la domanda partendo dall'offerta più economica fino a soddisfare tutto il fabbisogno.</p>
+    <p><strong>Il prezzo dell'ultima offerta accettata — quella che chiude il bilancio — diventa il prezzo per tutti.</strong> Non solo per quell'ultimo produttore, ma per tutti i produttori di quell'ora. Questo prezzo è il Prezzo Unico Nazionale (PUN).</p>
+
+    <div style="background:var(--teal-light);border-left:4px solid var(--teal);border-radius:var(--radius);padding:20px 24px;margin:20px 0;">
+      <div style="font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:10px;">Un esempio concreto</div>
+      <p style="font-size:13px;color:var(--teal-dark);line-height:1.7;margin-bottom:8px;">Ore 13:00 di luglio. La domanda è 30 GW. Le offerte in ordine di costo:</p>
+      <p style="font-size:13px;color:var(--teal-dark);line-height:1.7;margin-bottom:4px;">☀️ Fotovoltaico (costo marginale quasi zero): copre 15 GW → accettato</p>
+      <p style="font-size:13px;color:var(--teal-dark);line-height:1.7;margin-bottom:4px;">💨 Eolico: copre 5 GW → accettato</p>
+      <p style="font-size:13px;color:var(--teal-dark);line-height:1.7;margin-bottom:4px;">💧 Idro: copre 5 GW → accettato</p>
+      <p style="font-size:13px;color:var(--teal-dark);line-height:1.7;margin-bottom:4px;">🔥 Gas (150 €/MWh): serve ancora 5 GW → accettato. <strong>Prezzo finale: 150 €/MWh per tutti.</strong></p>
+      <p style="font-size:13px;color:var(--teal-dark);line-height:1.7;margin:0;">Il fotovoltaico che costa quasi nulla riceve 150 €/MWh. Il gas che costa 150 riceve 150 €/MWh. Il sistema è pensato per incentivare la produzione più economica — chi ha costi più bassi guadagna di più — ma chi non sa come funziona vede solo che "la bolletta non scende nonostante il sole".</p>
+    </div>
+
+    <h3>Perché questo non è un errore — e perché potrebbe cambiare</h3>
+    <p>Il prezzo marginale è un meccanismo efficiente per garantire che l'energia più economica venga prodotta per prima. Il problema italiano non è il meccanismo in sé ma la sua interazione con un mix ancora dominato dal gas (42%). Quando quella "ultima offerta" è quasi sempre gas, il prezzo è quasi sempre agganciato al costo del gas.</p>
+    <p>La Spagna nel 2022 ha sperimentato un'eccezione temporanea — il cosiddetto "meccanismo iberico" — che ha messo un tetto al prezzo del gas nel calcolo del mercato elettrico, riducendo artificialmente il PUN. Il risultato: prezzi più bassi per i consumatori, ma costi a carico dello Stato per compensare i produttori a gas. ARERA e la Commissione Europea hanno discusso a lungo se questo approccio fosse replicabile su scala europea.</p>
+    <p>Con più rinnovabili nel mix, il meccanismo del prezzo marginale tende spontaneamente ad abbassare il PUN nelle ore di alta produzione — il cosiddetto "merit order effect". In Italia questo effetto è già visibile: nelle ore di picco solare estivo il PUN può scendere a pochi euro o addirittura andare negativo. Il problema è la sera e l'inverno, quando il fotovoltaico non c'è. Fonte: <a href="https://www.mercatoelettrico.org/it-it/Home/Esiti/Elettricita/MGP" target="_blank" class="fonte-link">GME, dati MGP →</a></p>
+
+    <h3>I contratti per differenza (CfD) — come lo Stato stabilizza il prezzo delle rinnovabili</h3>
+    <p>Il meccanismo del prezzo marginale crea un secondo problema: se il PUN crolla (perché c'è troppo solare), i produttori di rinnovabili guadagnano pochissimo — il che scoraggia gli investimenti. Per risolvere questo, lo Stato usa i <strong>contratti per differenza (CfD)</strong>, lo strumento principale del decreto FER X.</p>
+
+    <div class="posizioni-grid" style="margin:16px 0;">
+      <div class="posizione-card pro">
+        <div class="posizione-label">PUN basso (mercato debole)</div>
+        <p>Il GSE paga al produttore la differenza tra il prezzo di esercizio e il PUN. Il produttore è protetto dai crolli di mercato — può pianificare gli investimenti con certezza.</p>
+        <div class="posizione-fonte">Esempio: PUN a 50 €/MWh, prezzo di esercizio a 80 → GSE paga 30 €/MWh al produttore</div>
+      </div>
+      <div class="posizione-card contro">
+        <div class="posizione-label">PUN alto (mercato forte)</div>
+        <p>Il produttore restituisce al GSE la differenza tra il PUN e il prezzo di esercizio. Il consumatore è protetto dai rialzi eccessivi — i benefici della crisi non vanno solo ai produttori.</p>
+        <div class="posizione-fonte">Esempio: PUN a 200 €/MWh, prezzo di esercizio a 80 → produttore restituisce 120 €/MWh al GSE</div>
+      </div>
+    </div>
+
+    <p>È per questo che negli anni 2022-2023, con il PUN a 200-300 €/MWh per la crisi del gas, i produttori di rinnovabili incentivati con CfD hanno restituito miliardi di euro al GSE — non hanno guadagnato dalla crisi energetica. I prezzi di esercizio del FER X 2026: <strong>80 €/MWh per il fotovoltaico</strong>, <strong>85 €/MWh per l'eolico</strong>. I produttori fanno offerte al ribasso nelle aste GSE. Fonte: <a href="https://www.gse.it" target="_blank" class="fonte-link">GSE, FER X →</a> · <a href="https://www.greenreport.it/news/nuove-energie/62360-rinnovabili-ecco-come-funzioneranno-gli-incentivi-ferx-in-attesa-del-ferz" target="_blank" class="fonte-link">Greenreport, luglio 2026 →</a></p>
+
+    <div class="box-sintesi">
+      <div class="box-sintesi-label">In sintesi</div>
+      <ul>
+        <li>Il prezzo marginale è la regola europea: l'ultima offerta accettata (quasi sempre il gas in Italia) fissa il prezzo per tutti — compresi il solare e l'eolico che costano quasi nulla</li>
+        <li>Con più rinnovabili nel mix il PUN scende spontaneamente nelle ore di produzione — ma il problema è le ore in cui le rinnovabili non ci sono</li>
+        <li>I CfD proteggono i produttori di rinnovabili quando il mercato crolla, e proteggono i consumatori quando il mercato sale — il meccanismo è bidirezionale per legge</li>
+        <li>Gli incentivi alle rinnovabili non sono un regalo unidirezionale: quando il PUN è alto, i produttori incentivati restituiscono la differenza al GSE</li>
       </ul>
     </div>
   </div>
