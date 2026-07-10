@@ -182,7 +182,8 @@
         <li><span class="indice-num">03</span><a href="#costi">Quanto ci costa l'energia oggi</a></li>
         <li><span class="indice-num">04</span><a href="#scenari">Quanto potrebbe costare domani</a></li>
         <li><span class="indice-num">05</span><a href="#pniec">PNIEC e MACSE: obiettivi vs realizzato</a></li>
-        <li><span class="indice-num">06</span><a href="#glossario">Glossario dei termini</a></li>
+        <li><span class="indice-num">06</span><a href="#prezzo">Come si costruisce il prezzo finale del kWh</a></li>
+        <li><span class="indice-num">07</span><a href="#glossario">Glossario dei termini</a></li>
       </ul>
     </div>
   </div>
@@ -531,9 +532,104 @@
     </p>
   </div>
 
-  <!-- SEZIONE 6 — GLOSSARIO -->
-  <div class="sezione" id="glossario">
+  <!-- SEZIONE 6 — COME SI COSTRUISCE IL PREZZO DEL KWH -->
+  <div class="sezione" id="prezzo">
     <div class="sezione-num">Sezione 06</div>
+    <h2 class="sezione-title">Come si costruisce il prezzo finale del kWh</h2>
+
+    <p>Tra il costo di produzione di un pannello solare (24–38 $/MWh, il più basso di qualsiasi fonte) e il prezzo che paghi in bolletta (27,97 c€/kWh = ~279 €/MWh) c'è un fattore 7–10. Questa sezione spiega come si costruisce quel divario, passo per passo.</p>
+
+    <h3>Passo 1 — Il mercato del giorno prima (MGP)</h3>
+    <p>Ogni giorno entro le ore 12:00, produttori di energia e grossisti presentano le loro offerte sul Mercato del Giorno Prima (MGP), gestito dal GME (Gestore dei Mercati Energetici). Si offre energia ora per ora per il giorno successivo: chi produce a 30 €/MWh offre 30, chi produce a 150 offre 150.</p>
+    <p>Il GME ordina tutte le offerte dal più economico al più caro — questa si chiama <strong>curva di merito</strong> (in inglese merit order). Poi "riempie" la domanda partendo dall'offerta più economica fino a soddisfare tutto il fabbisogno dell'ora. <strong>Il prezzo dell'ultima offerta accettata — quella che chiude il bilancio — diventa il prezzo per tutti.</strong></p>
+    <p>Il risultato è il <strong>Prezzo Unico Nazionale (PUN)</strong> — la media ponderata dei prezzi zonali delle 7 zone italiane per quell'ora.</p>
+
+    <div style="background:var(--teal-light);border-left:4px solid var(--teal);border-radius:var(--radius);padding:20px 24px;margin:20px 0;">
+      <div style="font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:10px;">Il paradosso del prezzo marginale — perché il sole non abbassa la bolletta</div>
+      <p style="font-size:13px;color:var(--teal-dark);line-height:1.7;margin-bottom:8px;">Immagina un mezzogiorno di luglio: il fotovoltaico produce abbondantemente a costo quasi zero. Le offerte più economiche (solare, eolico, idro) coprono quasi tutta la domanda. Ma per chiudere il bilancio serve ancora una centrale a gas — la più costosa in lista. <strong>Quella centrale a gas fissa il prezzo per tutti, anche per l'energia solare che costa quasi nulla.</strong></p>
+      <p style="font-size:13px;color:var(--teal-dark);line-height:1.7;margin:0;">Questo è il meccanismo del prezzo marginale: efficiente per incentivare la produzione più economica, ma con il risultato che in Italia — dove il gas copre ancora il 42% del mix — il prezzo all'ingrosso rimane agganciato al costo del gas. Fonte: <a href="https://www.mercatoelettrico.org/it-it/Home/Esiti/Elettricita/MGP" target="_blank" class="fonte-link">GME, mercatoelettrico.org →</a></p>
+    </div>
+
+    <h3>Passo 2 — I contratti per differenza (CfD) e gli incentivi alle rinnovabili</h3>
+    <p>Il meccanismo del prezzo marginale crea un problema per le rinnovabili: se il PUN crolla (perché c'è troppo solare), il fotovoltaico e l'eolico guadagnano pochissimo — il che scoraggia gli investimenti. Per risolvere questo problema, lo Stato usa i <strong>contratti per differenza (CfD)</strong>.</p>
+    <p>Il CfD funziona così: viene fissato un <strong>prezzo di esercizio</strong> (strike price) — ad esempio 80 €/MWh per il fotovoltaico nel 2026. Poi:</p>
+
+    <div style="background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <tr style="background:var(--graphite);color:white;">
+          <th style="padding:10px 14px;">Situazione di mercato</th>
+          <th style="padding:10px 14px;">Chi paga chi</th>
+          <th style="padding:10px 14px;">Effetto</th>
+        </tr>
+        <tr style="background:#D1FAE5;">
+          <td style="padding:10px 14px;">PUN &lt; 80 €/MWh (mercato basso)</td>
+          <td style="padding:10px 14px;">GSE paga al produttore la differenza</td>
+          <td style="padding:10px 14px;color:#065F46;font-weight:600;">Il produttore è protetto dai crolli</td>
+        </tr>
+        <tr style="background:#FEE2E2;">
+          <td style="padding:10px 14px;">PUN &gt; 80 €/MWh (mercato alto)</td>
+          <td style="padding:10px 14px;">Il produttore restituisce al GSE la differenza</td>
+          <td style="padding:10px 14px;color:#991B1B;font-weight:600;">Il consumatore è protetto dai rialzi</td>
+        </tr>
+      </table>
+    </div>
+
+    <p>È per questo che negli anni 2022-2023, con il PUN a 200-300 €/MWh per la crisi del gas, i produttori di rinnovabili incentivati hanno <strong>restituito miliardi di euro al GSE</strong> — non hanno guadagnato dalla crisi energetica. Il meccanismo è bidirezionale per legge. (<a href="https://www.gse.it/servizi-per-te/energia/fer-x" target="_blank" class="fonte-link">Fonte: GSE, decreto FER X →</a>)</p>
+
+    <p>I prezzi di riferimento 2026 per il FER X (il decreto incentivi rinnovabili): <strong>80 €/MWh per il fotovoltaico</strong>, <strong>85 €/MWh per l'eolico</strong>. I produttori fanno offerte al ribasso nelle aste GSE — vince chi chiede meno. (<a href="https://www.greenreport.it/news/nuove-energie/62360-rinnovabili-ecco-come-funzioneranno-gli-incentivi-ferx-in-attesa-del-ferz" target="_blank" class="fonte-link">Fonte: Greenreport, FER X →</a>)</p>
+
+    <h3>Passo 3 — Dal PUN alla bolletta</h3>
+    <p>Il PUN è il prezzo all'ingrosso. Tra quello e la bolletta finale si aggiungono strati successivi:</p>
+
+    <div style="background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <tr style="background:var(--graphite);color:white;">
+          <th style="padding:10px 14px;width:40%;">Componente</th>
+          <th style="padding:10px 14px;width:20%;text-align:right;">Valore indicativo</th>
+          <th style="padding:10px 14px;">Chi la fissa</th>
+        </tr>
+        <tr style="background:white;">
+          <td style="padding:10px 14px;font-weight:600;">PUN (energia all'ingrosso)</td>
+          <td style="padding:10px 14px;text-align:right;">~115,9 €/MWh (2025)</td>
+          <td style="padding:10px 14px;">Mercato (GME)</td>
+        </tr>
+        <tr style="background:var(--gray-light);">
+          <td style="padding:10px 14px;font-weight:600;">+ Commercializzazione al dettaglio</td>
+          <td style="padding:10px 14px;text-align:right;">~5–15 €/MWh</td>
+          <td style="padding:10px 14px;">Fornitore</td>
+        </tr>
+        <tr style="background:white;">
+          <td style="padding:10px 14px;font-weight:600;">+ Servizi di rete (trasporto + distribuzione)</td>
+          <td style="padding:10px 14px;text-align:right;">~60–70 €/MWh</td>
+          <td style="padding:10px 14px;">ARERA (regolato)</td>
+        </tr>
+        <tr style="background:var(--gray-light);">
+          <td style="padding:10px 14px;font-weight:600;">+ Oneri di sistema (incentivi rinnovabili, ecc.)</td>
+          <td style="padding:10px 14px;text-align:right;">~30–35 €/MWh</td>
+          <td style="padding:10px 14px;">ARERA (regolato)</td>
+        </tr>
+        <tr style="background:white;">
+          <td style="padding:10px 14px;font-weight:600;">+ IVA e accise</td>
+          <td style="padding:10px 14px;text-align:right;">~10% + accise</td>
+          <td style="padding:10px 14px;">Fisco</td>
+        </tr>
+        <tr style="background:var(--teal-light);border-top:2px solid var(--teal);">
+          <td style="padding:10px 14px;font-weight:700;color:var(--teal-dark);">= Bolletta finale (I trim. 2026)</td>
+          <td style="padding:10px 14px;text-align:right;font-weight:700;color:var(--teal-dark);">~279 €/MWh</td>
+          <td style="padding:10px 14px;color:var(--teal-dark);">Totale</td>
+        </tr>
+      </table>
+    </div>
+    <p style="font-size:11px;color:var(--gray);font-style:italic;">I valori della tabella sono indicativi per cliente domestico tipo (I trimestre 2026). La ripartizione esatta varia per tipo di contratto e consumo. Fonte: <a href="https://www.arera.it" target="_blank" class="fonte-link">ARERA →</a></p>
+
+    <div style="background:var(--gray-light);border-radius:var(--radius);padding:16px 20px;margin-top:20px;">
+      <p style="font-size:13px;color:var(--graphite);line-height:1.7;margin:0;"><strong>La conclusione contro-intuitiva:</strong> anche se fotovoltaico e eolico avessero costo di produzione zero, la bolletta non scende a zero. La rete di trasporto, la distribuzione locale, gli oneri di sistema e le tasse pesano quasi quanto la materia energia stessa. Abbassare il prezzo dell'energia all'ingrosso aiuta — come dimostra la Spagna con il PUN a 65 €/MWh contro il nostro 115,9 — ma da solo non basta a dimezzare la bolletta.</p>
+    </div>
+  </div>
+
+  <!-- SEZIONE 7 — GLOSSARIO -->
+  <div class="sezione" id="glossario">
+    <div class="sezione-num">Sezione 07</div>
     <h2 class="sezione-title">Glossario dei termini usati in questa pagina</h2>
 
     <div class="glossario-grid">
