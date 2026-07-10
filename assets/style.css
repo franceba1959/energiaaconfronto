@@ -218,3 +218,10 @@
   /* Tre KPI in due colonne */
   .cifre-grid > .cifra-card:last-child { grid-column: 1 / -1; }
 }
+
+/* === CORREGGO: mostra TWh, nasconde solo costo produzione su mobile === */
+@media (max-width: 600px) {
+  .mix-twh { display: block !important; font-size: 11px; width: 52px; text-align: right; color: var(--gray); flex-shrink: 0; }
+  .mix-lcoe { display: none !important; }
+  .mix-col-lcoe { display: none !important; }
+}
