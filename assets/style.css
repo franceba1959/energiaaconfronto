@@ -225,3 +225,14 @@
   .mix-lcoe { display: none !important; }
   .mix-col-lcoe { display: none !important; }
 }
+
+/* === CARD SCHEDE STESSA ALTEZZA === */
+.schede-grid {
+  align-items: start;
+}
+.scheda-row {
+  min-height: 60px;
+}
+.scheda-body {
+  min-height: 180px;
+}
