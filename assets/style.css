@@ -236,3 +236,64 @@
 .scheda-body {
   min-height: 180px;
 }
+
+/* === FIX SCHEDE SINGOLE SU MOBILE === */
+@media (max-width: 600px) {
+  /* KPI in griglia 2x2 invece di colonna singola */
+  .kpi-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .kpi-card {
+    min-width: 0 !important;
+    padding: 12px 14px;
+  }
+  .kpi-value {
+    font-size: 22px !important;
+  }
+  .kpi-label {
+    font-size: 10px;
+  }
+  /* Tabella giudizi — testo terza colonna non tagliato */
+  .giudizio-table td:first-child {
+    width: 80px !important;
+    white-space: normal !important;
+    font-size: 12px;
+  }
+  .giudizio-table td:nth-child(2) {
+    width: 72px !important;
+  }
+  .giudizio-table td:last-child {
+    font-size: 13px;
+  }
+  .giudizio-table td {
+    padding: 10px 6px;
+  }
+  /* Blocco 1 padding ridotto */
+  .blocco-1 {
+    padding: 20px 16px;
+    margin: 0;
+  }
+  /* Titolo scheda */
+  .scheda-title {
+    font-size: 26px !important;
+  }
+  /* Tabella Si dice / I dati dicono */
+  .sidice-table td {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+  /* Innovazioni in griglia 1 colonna */
+  .innovazione-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* Nav interna */
+  .nav-interna {
+    gap: 8px;
+  }
+  .nav-interna a {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}
