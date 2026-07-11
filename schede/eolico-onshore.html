@@ -4,11 +4,132 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eolico Onshore — Energia a Confronto</title>
-<link rel="stylesheet" href="../assets/style.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #1B6B72; --teal-dark: #0F4A50; --teal-light: #E8F4F5;
+    --graphite: #2D2D2D; --gray: #6B7280; --gray-light: #F3F4F6;
+    --warm-white: #FAFAF8; --border: #E5E7EB;
+    --yellow: #FEF3C7; --yellow-border: #F59E0B; --yellow-text: #78350F;
+    --orange: #FFEDD5; --orange-border: #F97316; --orange-text: #7C2D12;
+    --green-ok: #D1FAE5; --green-text: #065F46;
+    --amber-ok: #FEF3C7; --amber-text: #92400E;
+    --red-ok: #FEE2E2; --red-text: #991B1B;
+    --accent: #22D3EE;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --radius: 8px; --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--warm-white); color: var(--graphite); font-size: 16px; line-height: 1.7; }
+  .legend-banner { background: var(--teal-dark); color: white; font-size: 12px; padding: 7px 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+  .sw-none { background: white; border: 1px solid rgba(255,255,255,0.4); }
+  .sw-yellow { background: #FEF3C7; border: 1px solid #F59E0B; }
+  .sw-orange { background: #FFEDD5; border: 1px solid #F97316; }
+  nav { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { font-family: var(--font-serif); font-size: 17px; color: var(--teal); text-decoration: none; }
+  .nav-logo em { font-style: italic; }
+  .nav-back { font-size: 13px; color: var(--gray); text-decoration: none; padding: 6px 12px; border-radius: 6px; }
+  .nav-back:hover { background: var(--teal-light); color: var(--teal); }
+  .page { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+  .scheda-hero { padding: 48px 0 32px; border-bottom: 1px solid var(--border); }
+  .breadcrumb { font-size: 12px; color: var(--gray); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .breadcrumb a { color: var(--teal); text-decoration: none; }
+  .scheda-icon-title { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .scheda-big-icon { font-size: 44px; }
+  .scheda-title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 40px); font-weight: normal; color: var(--graphite); line-height: 1.2; }
+  .scheda-subtitle { font-size: 16px; color: var(--gray); margin-bottom: 20px; }
+  .scheda-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+  .pill-green { background: var(--green-ok); color: var(--green-text); }
+  .pill-amber { background: var(--amber-ok); color: var(--amber-text); }
+  .scheda-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--gray); }
+  .scheda-meta-item::before { content: "·"; color: var(--accent); font-size: 16px; margin-right: 5px; }
+  .blocco { padding: 40px 0; border-bottom: 1px solid var(--border); }
+  .blocco:last-child { border-bottom: none; }
+  .blocco-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .blocco-title { font-family: var(--font-serif); font-size: 24px; font-weight: normal; color: var(--graphite); margin-bottom: 20px; }
+  .blocco-1 { background: var(--teal-light); border-radius: var(--radius); padding: 32px; margin: 0 -8px; }
+  .blocco-1 .blocco-num { color: var(--teal-dark); }
+  .blocco-1 .blocco-title { color: var(--teal-dark); }
+  .kpi-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 20px 0; }
+  .kpi-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; flex: 1; min-width: 140px; box-shadow: var(--shadow); }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); font-weight: 600; margin-bottom: 6px; }
+  .kpi-value { font-family: var(--font-serif); font-size: 28px; color: var(--teal-dark); line-height: 1; margin-bottom: 2px; }
+  .kpi-sub { font-size: 11px; color: var(--gray); line-height: 1.4; }
+  .giudizio-table { width: 100%; border-collapse: collapse; }
+  .giudizio-table tr { border-bottom: 1px solid rgba(27,107,114,0.15); }
+  .giudizio-table tr:last-child { border-bottom: none; }
+  .giudizio-table td { padding: 12px 10px; font-size: 14px; vertical-align: top; }
+  .giudizio-table td:first-child { width: 140px; font-weight: 600; color: var(--teal-dark); font-size: 13px; }
+  .giudizio-table td:nth-child(2) { width: 100px; }
+  .badge-giudizio { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 12px; }
+  .badge-basso { background: var(--green-ok); color: var(--green-text); }
+  .badge-medio { background: var(--amber-ok); color: var(--amber-text); }
+  .badge-alta { background: var(--green-ok); color: var(--green-text); }
+  .hl-y { background: var(--yellow); border-bottom: 1.5px solid var(--yellow-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; display: inline; }
+  .hl-o { background: var(--orange); border-bottom: 1.5px solid var(--orange-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; display: inline; }
+  .hl-note { display: none; margin: 6px 0 8px; padding: 8px 12px; border-radius: 6px; font-size: 13px; line-height: 1.55; }
+  .hl-note.y { background: #FFFBEB; border-left: 3px solid var(--yellow-border); color: var(--yellow-text); }
+  .hl-note.o { background: #FFF7ED; border-left: 3px solid var(--orange-border); color: var(--orange-text); }
+  .hl-note.open { display: block; }
+  .blocco p { margin-bottom: 14px; font-size: 15px; line-height: 1.75; }
+  .blocco h3 { font-size: 18px; font-weight: 600; color: var(--graphite); margin: 28px 0 10px; }
+  .blocco h4 { font-size: 15px; font-weight: 600; color: var(--teal); margin: 20px 0 8px; }
+  .sidice-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .sidice-table th { background: var(--graphite); color: white; font-size: 13px; font-weight: 600; padding: 10px 16px; text-align: left; }
+  .sidice-table th:first-child { border-radius: 6px 0 0 0; }
+  .sidice-table th:last-child { border-radius: 0 6px 0 0; }
+  .sidice-table td { padding: 14px 16px; font-size: 14px; vertical-align: top; line-height: 1.6; border-bottom: 1px solid var(--border); }
+  .sidice-table tr:last-child td { border-bottom: none; }
+  .sidice-table td:first-child { background: #FFF9F0; color: var(--amber-text); font-style: italic; width: 40%; border-right: 1px solid var(--border); }
+  .sidice-table td:last-child { background: white; }
+  .fonte-link { font-size: 12px; color: var(--teal); text-decoration: none; border-bottom: 1px solid var(--teal-light); }
+  .fonte-link:hover { border-color: var(--teal); }
+  .innovazione-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; margin-top: 8px; }
+  .innovazione-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .inno-horizon { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .inno-title { font-size: 15px; font-weight: 600; color: var(--graphite); margin-bottom: 8px; line-height: 1.3; }
+  .inno-desc { font-size: 13px; color: var(--gray); line-height: 1.55; }
+  .fonti-box { background: var(--gray-light); border-radius: var(--radius); padding: 20px; margin-top: 40px; }
+  .fonti-box h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--gray); margin-bottom: 12px; }
+  .fonte-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+  .fonte-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 6px; }
+  .fonte-item a { color: var(--teal); text-decoration: none; }
+
+  /* RESPONSIVE MOBILE */
+  @media (max-width: 600px) {
+    .page { padding: 0 14px 60px; }
+    .scheda-title { font-size: 24px !important; }
+    .kpi-row { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .kpi-card { min-width: 0 !important; padding: 12px 14px; }
+    .kpi-value { font-size: 20px !important; }
+    .kpi-label { font-size: 10px; }
+    .blocco-1 { padding: 20px 14px; margin: 0; }
+    .blocco-title { font-size: 20px; }
+    .giudizio-table td:first-child { width: 80px !important; white-space: normal !important; font-size: 12px; }
+    .giudizio-table td:nth-child(2) { width: 70px !important; }
+    .giudizio-table td:last-child { font-size: 13px; }
+    .giudizio-table td { padding: 10px 6px; }
+    .badge-giudizio { font-size: 10px; padding: 2px 6px; }
+    .sidice-table td { font-size: 13px; padding: 10px 10px; }
+    .sidice-table td:first-child { width: 100%; display: block; border-right: none; border-bottom: 1px solid #F59E0B; }
+    .sidice-table td:last-child { display: block; }
+    .sidice-table tr { display: block; margin-bottom: 12px; border: 1px solid #E5E7EB; border-radius: 6px; overflow: hidden; }
+    .sidice-table thead { display: none; }
+    .innovazione-grid { grid-template-columns: 1fr !important; }
+    .blocco h3 { font-size: 16px; }
+    .blocco p { font-size: 14px; }
+    .fonti-box { padding: 16px; }
+    .legend-banner { font-size: 11px; gap: 8px; padding: 6px 12px; }
+  }
+</style>
 </head>
 <body>
 
-<!-- BANNER LEGENDA -->
 <div class="legend-banner">
   <strong style="margin-right:4px;">Affidabilità dati:</strong>
   <div class="legend-item"><span class="legend-swatch sw-none"></span> Fonte primaria verificata</div>
@@ -16,59 +137,47 @@
   <div class="legend-item"><span class="legend-swatch sw-orange"></span> Nessuna fonte istituzionale — tocca per la nota</div>
 </div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <a href="../index.html" class="nav-logo">Energia <em>a Confronto</em></a>
-    <a href="../index.html#schede" class="nav-back">← <span>Tutte le tecnologie</span></a>
+    <a href="../index.html#schede" class="nav-back">← Tutte le tecnologie</a>
   </div>
 </nav>
 
 <div class="page">
-
-  <!-- HEADER SCHEDA -->
   <div class="scheda-hero">
-    <div class="scheda-breadcrumb">
-      <a href="../index.html">Home</a>
-      <span>/</span>
-      <a href="../index.html#schede">Le tecnologie</a>
-      <span>/</span>
-      Eolico onshore
-    </div>
+    <div class="breadcrumb"><a href="../index.html">Home</a> <span>/</span> <a href="../index.html#schede">Le tecnologie</a> <span>/</span> Eolico onshore</div>
     <div class="scheda-icon-title">
       <span class="scheda-big-icon">💨</span>
       <h1 class="scheda-title">Eolico onshore</h1>
     </div>
-    <p class="scheda-subtitle">Turbine eoliche a terra: efficienza, costi, impatti e innovazioni nel contesto italiano.</p>
+    <p class="scheda-subtitle">Turbine eoliche a terra: costi, efficienza, impatti ambientali, iter autorizzativi e innovazioni nel contesto italiano.</p>
     <div class="scheda-pills">
       <span class="pill pill-green">Costo basso</span>
       <span class="pill pill-amber">Efficienza variabile</span>
       <span class="pill pill-green">Sostenibile</span>
     </div>
     <div class="scheda-meta">
-      <div class="scheda-meta-item">Dati verificati su fonte primaria</div>
-      <div class="scheda-meta-item">Aggiornato: luglio 2026</div>
-      <div class="scheda-meta-item">Fonti: IRENA · GSE · Terna · NREL</div>
+      <span class="scheda-meta-item">Aggiornato: luglio 2026</span>
+      <span class="scheda-meta-item">Fonti: IRENA · GSE · Terna · UN-ECE · WindEurope</span>
     </div>
   </div>
 
-  <!-- BLOCCO 1 — IN PAROLE SEMPLICI -->
+  <!-- BLOCCO 1 -->
   <div class="blocco">
     <div class="blocco-1">
       <div class="blocco-num">Blocco 1</div>
       <h2 class="blocco-title">In parole semplici</h2>
-
-      <!-- KPI -->
       <div class="kpi-row">
         <div class="kpi-card">
-          <div class="kpi-label">Costo di produzione 2024 (globale)</div>
+          <div class="kpi-label">Costo di produzione 2024</div>
           <div class="kpi-value">33–45</div>
-          <div class="kpi-sub">$/MWh (IRENA)</div>
+          <div class="kpi-sub">$/MWh (IRENA, globale)</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Fattore di utilizzo Italia</div>
           <div class="kpi-value">21,9%</div>
-          <div class="kpi-sub">calcolato su dati GSE 2023</div>
+          <div class="kpi-sub">elaborazione su dati GSE 2023</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Emissioni ciclo di vita</div>
@@ -81,157 +190,131 @@
           <div class="kpi-sub">TWh (Terna)</div>
         </div>
       </div>
-
-      <!-- Tabella giudizi -->
       <table class="giudizio-table">
         <tr>
           <td>💰 Costo</td>
           <td><span class="badge-giudizio badge-basso">BASSO</span></td>
-          <td>Tra le fonti più economiche oggi disponibili. Una volta costruita, la turbina produce elettricità quasi gratis — il vento non ha costo. Il costo iniziale di costruzione si ammortizza in 5–8 anni.</td>
+          <td>Tra le fonti più economiche disponibili oggi. Una volta costruita, la turbina produce elettricità quasi gratis — il vento non ha costo. Il costo iniziale si ammortizza tipicamente in 5–8 anni.</td>
         </tr>
         <tr>
           <td>⚡ Efficienza</td>
-          <td><span class="badge-giudizio badge-medio">MEDIA</span></td>
-          <td>Produce elettricità solo quando il vento soffia abbastanza (12–90 km/h). In Italia le turbine girano in media il 22% del tempo a piena potenza. Non è un problema insuperabile, ma richiede bilanciamento di rete.</td>
+          <td><span class="badge-giudizio badge-medio">VARIABILE</span></td>
+          <td>Produce solo quando il vento soffia abbastanza (12–90 km/h). In Italia le turbine girano in media il 22% del tempo a piena potenza. Nei siti più ventosi del Sud il fattore di utilizzo supera il 30%. Non è un problema insuperabile ma richiede bilanciamento di rete.</td>
         </tr>
         <tr>
           <td>🌿 Sostenibilità</td>
           <td><span class="badge-giudizio badge-alta">ALTA</span></td>
-          <td>Emissioni di CO₂ tra le più basse in assoluto: 7–16 gCO₂eq/kWh considerando tutta la vita dell'impianto (produzione, installazione, smaltimento). Il punto aperto principale è lo smaltimento delle pale.</td>
+          <td>Emissioni tra le più basse in assoluto: 7–16 gCO₂eq/kWh sull'intero ciclo di vita. I punti aperti principali sono lo smaltimento delle pale e l'impatto paesaggistico e sulla fauna.</td>
         </tr>
       </table>
     </div>
   </div>
 
-  <!-- BLOCCO 2 — TERMINI TECNICI -->
+  <!-- BLOCCO 2 -->
   <div class="blocco">
     <div class="blocco-num">Blocco 2</div>
     <h2 class="blocco-title">Per chi vuole approfondire</h2>
 
-    <h3>Costo di produzione — quanto costa produrre un kWh</h3>
-    <p>
-      Il costo livellato dell'energia (in inglese LCOE — Levelized Cost of Energy) misura quanto costa produrre un MWh considerando tutti i costi dell'impianto nell'arco della sua vita: costruzione, manutenzione, smantellamento — diviso per tutta l'energia prodotta.
-      Per l'eolico onshore, l'<span class="hl-y" onclick="toggleNote(this)">LCOE globale mediano 2024 è di 33 $/MWh secondo IRENA<span class="hl-note y">🟡 Dato da IRENA Renewable Power Generation Costs 2024 — summary letto, documento integrale non verificato pagina per pagina. <a href="https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2025/Jul/IRENA_TEC_RPGC_in_2024_2025.pdf" target="_blank">Fonte →</a></span></span>,
-      con range 33–45 $/MWh. In Europa i valori sono leggermente più alti per i costi del lavoro.
-    </p>
-    <p class="fonte">Fonte: <a href="https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2025/Jul/IRENA_TEC_RPGC_in_2024_2025.pdf" target="_blank">IRENA, Renewable Power Generation Costs in 2024 →</a></p>
+    <h3>Costo di produzione (LCOE — Levelized Cost of Energy)</h3>
+    <p>Il costo livellato dell'energia misura quanto costa produrre un MWh considerando tutti i costi nell'arco della vita dell'impianto: costruzione, manutenzione, smantellamento — diviso per tutta l'energia prodotta. Per l'eolico onshore, l'<span class="hl-y" onclick="toggleNote(this)">LCOE globale mediano 2024 è di 33 $/MWh secondo IRENA<span class="hl-note y">🟡 Dato da IRENA Renewable Power Generation Costs 2024. <a href="https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2025/Jul/IRENA_TEC_RPGC_in_2024_2025.pdf" target="_blank">Fonte →</a></span></span>, con range 33–45 $/MWh. In Europa i valori sono leggermente più alti per i costi del lavoro e le normative più stringenti.</p>
+    <p><a href="https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2025/Jul/IRENA_TEC_RPGC_in_2024_2025.pdf" target="_blank" class="fonte-link">Fonte: IRENA, Renewable Power Generation Costs in 2024 →</a></p>
 
-    <h3>Fattore di utilizzo — quanto tempo produce davvero</h3>
-    <p>
-      Il fattore di utilizzo (in inglese capacity factor) indica quante ore all'anno un impianto lavora alla piena potenza nominale. Un impianto con fattore di utilizzo del 22% produce in un anno l'equivalente di 22% × 8.760 ore = circa 1.930 ore a piena potenza.
-      In Italia il capacity factor medio dell'eolico onshore nel 2023 è stato del <span class="hl-y" onclick="toggleNote(this)">21,9% — calcolato da Claude su dati GSE 2023<span class="hl-note y">🟡 Valore calcolato dividendo la produzione eolica GSE 2023 per la potenza installata × 8.760 ore. Il documento GSE non dichiara esplicitamente questa percentuale. Alcune fonti secondarie riportano valori fino al 25%, non confermati su documentazione Terna primaria. <a href="https://www.gse.it/dati-e-scenari/rapporti" target="_blank">Fonte dati →</a></span></span>.
-      Per i nuovi impianti con turbine di grande taglia, Terna indica range di <span class="hl-y" onclick="toggleNote(this)">30–48% nei siti più ventosi del Sud Italia<span class="hl-note y">🟡 Range indicato da Terna nel Rapporto Identificazione Capacità Obiettivo — documento individuato ma lettura integrale non completata. <a href="https://www.terna.it/it/sistema-elettrico/statistiche" target="_blank">Fonte →</a></span></span>.
-    </p>
+    <h3>Fattore di utilizzo (Capacity Factor)</h3>
+    <p>Il fattore di utilizzo indica la percentuale del tempo in cui un impianto produce alla piena potenza nominale. In Italia il valore medio 2023 è stato del <span class="hl-y" onclick="toggleNote(this)">21,9% — calcolato su dati GSE 2023<span class="hl-note y">🟡 Valore calcolato dividendo la produzione eolica GSE 2023 per la potenza installata × 8.760 ore. Il GSE non pubblica esplicitamente questo indice. <a href="https://www.gse.it/dati-e-scenari/rapporti" target="_blank">Fonte dati →</a></span></span>. Nei siti più ventosi del Sud Italia e delle isole, le turbine moderne di grande taglia raggiungono <span class="hl-y" onclick="toggleNote(this)">valori di 30–48%<span class="hl-note y">🟡 Range da Terna, Rapporto Identificazione Capacità Obiettivo — documento individuato ma lettura integrale non completata. <a href="https://www.terna.it/it/sistema-elettrico/statistiche" target="_blank">Fonte →</a></span></span>.</p>
 
-    <h3>Emissioni nell'arco della vita — dalla produzione allo smaltimento</h3>
-    <p>
-      L'analisi del ciclo di vita (in inglese LCA — Life Cycle Assessment) misura le emissioni totali di un impianto dalla produzione dei materiali allo smantellamento. Per l'eolico onshore: 7–16 gCO₂eq/kWh.
-      La maggior parte delle emissioni si concentra nella fase di produzione delle turbine (acciaio, cemento per le fondamenta, componenti elettronici), non nell'esercizio.
-    </p>
-    <p class="fonte">Fonte: <a href="https://unece.org/sed/documents/2021/10/reports/life-cycle-assessment-electricity-generation-options" target="_blank">UN-ECE, Life Cycle Assessment of Electricity Generation Options, 2021 →</a></p>
+    <h3>Analisi del ciclo di vita (LCA — Life Cycle Assessment)</h3>
+    <p>L'analisi del ciclo di vita misura le emissioni di CO₂ equivalente dall'estrazione delle materie prime allo smaltimento. Per l'eolico onshore il range è 7–16 gCO₂eq/kWh — tra le fonti più basse in assoluto. La maggior parte delle emissioni si concentra nella produzione delle turbine (acciaio per le torri, cemento per le fondamenta, componenti elettronici), non nell'esercizio.</p>
+    <p><a href="https://unece.org/sed/documents/2021/10/reports/life-cycle-assessment-electricity-generation-options" target="_blank" class="fonte-link">Fonte: UN-ECE, Life Cycle Assessment of Electricity Generation Options, 2021 →</a></p>
+
+    <h3>Impatto paesaggistico e iter autorizzativi in Italia</h3>
+    <p>L'impatto visivo delle turbine è uno dei temi più discussi nei procedimenti autorizzativi italiani. Una turbina moderna ha un'altezza totale (torre + pala) di 150–250 metri ed è visibile per decine di chilometri in pianura o in zone collinari aperte. In Italia le Soprintendenze ai Beni Paesaggistici partecipano obbligatoriamente alla valutazione degli impianti.</p>
+    <p>L'iter autorizzativo italiano per un parco eolico richiede tipicamente il procedimento di Autorizzazione Unica (AU) o Valutazione di Impatto Ambientale (VIA) per impianti sopra una certa soglia di potenza. <span class="hl-y" onclick="toggleNote(this)">I tempi medi di autorizzazione in Italia sono tra i più lunghi d'Europa — 5-7 anni contro 2-3 anni della media UE<span class="hl-note y">🟡 Dato citato da WindEurope e Elettricità Futura nelle loro analisi sui ritardi autorizzativi italiani — non da fonte istituzionale primaria MASE o PNIEC. <a href="https://windeurope.org" target="_blank">Fonte →</a></span></span>. Il decreto legislativo 199/2021 (attuazione della direttiva RED II) ha introdotto misure per semplificare e accelerare le procedure.</p>
+
+    <h3>Le aree idonee — dove si può installare</h3>
+    <p>Il D.Lgs. 199/2021 ha introdotto il concetto di "aree idonee" — zone dove l'installazione di impianti rinnovabili è facilitata — e "aree non idonee" — zone dove è vietata o fortemente limitata. L'identificazione delle aree idonee spetta alle Regioni, con criteri minimi definiti a livello nazionale.</p>
+    <p>Al luglio 2026 non tutte le Regioni hanno completato l'identificazione delle aree idonee — un ritardo che contribuisce all'incertezza degli investitori e ai tempi lunghi di autorizzazione. Il tema è al centro del dibattito tra governo, regioni e settore energetico. Per l'approfondimento sul dibattito pubblico vedi la <a href="../dibattito.html#aree-idonee" class="fonte-link">sezione dedicata →</a></p>
+
+    <h3>Impatto sulla fauna — uccelli e pipistrelli</h3>
+    <p>Le turbine eoliche causano mortalità di uccelli e pipistrelli per collisione con le pale. Il dato esiste e non va minimizzato: negli USA le turbine causano tra <span class="hl-y" onclick="toggleNote(this)">140.000 e 500.000 morti di uccelli all'anno (PLOS One 2020)<span class="hl-note y">🟡 Dato da Loss et al., PLOS One 2013 aggiornato in studi successivi. Il range è ampio per le difficoltà di stima. I numeri USA non sono direttamente trasferibili all'Italia per diversità di specie e densità degli impianti.</span></span>. Nello stesso contesto USA: edifici causano ~600 milioni di morti, veicoli ~200 milioni, linee elettriche ~23 milioni.</p>
+    <p>Le misure di mitigazione includono: posizionamento degli impianti lontano dalle rotte migratorie principali, sistemi di rilevamento radar che fermano le turbine al passaggio di stormi, e software di intelligenza artificiale per il riconoscimento in tempo reale. Per i pipistrelli il problema è più critico — sono sensibili anche al gradiente di pressione dell'aria attorno alle pale, non solo all'impatto fisico.</p>
+
+    <h3>Lo smaltimento delle pale</h3>
+    <p>Le pale eoliche attuali sono in fibra di vetro composita rinforzata, difficile da riciclare con le tecnologie attuali. <span class="hl-y" onclick="toggleNote(this)">WindEurope si è impegnata a non portare pale smesse in discarica entro il 2025 nei paesi membri con legislazione adeguata<span class="hl-note y">🟡 Impegno volontario di WindEurope — non una normativa vigente. Il rispetto dell'impegno dipende dalla legislazione nazionale di ogni paese membro. <a href="https://windeurope.org/about-wind/position-papers/windeurope-blade-recycling-position/" target="_blank">Fonte →</a></span></span> — ma è un impegno volontario, non una normativa. Il progetto NREL PECAN e l'iniziativa RecyclableBlade (Vestas) stanno sviluppando pale interamente riciclabili con nuovi materiali termoindurenti. I primi impianti con pale riciclabili al 100% sono attesi entro il 2026–2027.</p>
   </div>
 
-  <!-- BLOCCO 3 — SI DICE / I DATI DICONO -->
+  <!-- BLOCCO 3 -->
   <div class="blocco">
     <div class="blocco-num">Blocco 3</div>
     <h2 class="blocco-title">Si dice / I dati dicono</h2>
-
     <table class="sidice-table">
-      <thead>
-        <tr>
-          <th>Si dice...</th>
-          <th>I dati dicono...</th>
-        </tr>
-      </thead>
+      <thead><tr><th>Si dice...</th><th>I dati dicono...</th></tr></thead>
       <tbody>
         <tr>
           <td>"Le turbine fanno troppo rumore — si sentono da chilometri"</td>
-          <td>
-            Le turbine moderne producono tra <span class="hl-y" onclick="toggleNote(this)">35 e 45 dB(A) a 350 metri di distanza<span class="hl-note y">🟡 Stima generica di settore secondo State of Green e NedZero — non una misurazione su siti italiani specifici. La normativa tecnica nazionale (DM 1° giugno 2022) definisce i criteri di misurazione del rumore eolico, con limiti che richiamano la legge quadro acustica.</span></span>, equivalente a una conversazione a voce bassa o al rumore di fondo in un ufficio. Le normative italiane impongono distanze minime dagli abitati (variabili per regione). Il tema non è irrilevante per chi vive vicino agli impianti, ma i livelli documentati sono lontani dalla soglia del danno uditivo (85 dB).
-          </td>
+          <td>Le turbine moderne producono tra <span class="hl-y" onclick="toggleNote(this)">35 e 45 dB(A) a 350 metri di distanza<span class="hl-note y">🟡 Stima generica di settore — non una misurazione su siti italiani specifici. La normativa tecnica italiana (DM 1° giugno 2022) definisce i criteri di misurazione del rumore eolico.</span></span>, equivalente a una conversazione a voce bassa. La normativa italiana impone distanze minime dagli abitati variabili per regione. Il tema non è irrilevante per chi vive vicino agli impianti, ma i livelli documentati sono molto lontani dalla soglia del danno uditivo (85 dB).</td>
         </tr>
         <tr>
           <td>"Le turbine eoliche uccidono moltissimi uccelli"</td>
-          <td>
-            Il dato esiste e non va minimizzato. In USA, le turbine causano tra 140.000 e 500.000 morti di uccelli all'anno (PLOS One 2020). Nello stesso contesto: gli edifici causano 600 milioni, i veicoli 200 milioni, le linee elettriche 23 milioni. <span class="hl-y" onclick="toggleNote(this)">Nel contesto USA il confronto relativo risulta favorevole all'eolico rispetto alle altre cause di mortalità aviaria elencate, ma l'estensione di questa conclusione all'Italia non è verificata<span class="hl-note y">🟡 I numeri USA non sono direttamente trasferibili all'Italia — specie presenti, densità degli impianti e contesto ecologico sono diversi. Un confronto ISPRA specifico per l'Italia non è stato trovato.</span></span>.
-          </td>
+          <td>Il dato esiste ma va contestualizzato. Negli USA le turbine causano tra 140.000 e 500.000 morti di uccelli all'anno — contro i 600 milioni causati dagli edifici e i 200 milioni dai veicoli. Il posizionamento degli impianti lontano dalle rotte migratorie e i sistemi di rilevamento radar riducono significativamente l'impatto. I dati italiani specifici non sono stati trovati su fonte istituzionale primaria.</td>
         </tr>
         <tr>
-          <td>"Le pale eoliche non si riciclano — finiranno in discarica"</td>
-          <td>
-            Il problema è reale ma in evoluzione. Le pale attuali sono in fibra di vetro composita, difficile da riciclare. <span class="hl-o" onclick="toggleNote(this)">Il calo dell'85% dei costi dello storage accelererebbe la transizione<span class="hl-note o">🟠 Percentuale non verificata su fonte istituzionale — dato industriale non confermato da IEA o IRENA in questa forma specifica.</span></span>. Il progetto NREL PECAN e l'iniziativa RecyclableBlade (Vestas) stanno sviluppando pale interamente riciclabili. WindEurope si è impegnata a non portare pale smesse in discarica entro il 2025 nei paesi membri con legislazione adeguata — ma questo è un impegno volontario, non una normativa vigente.
-          </td>
+          <td>"Le pale eoliche non si riciclano — finiranno tutte in discarica"</td>
+          <td>Il problema è reale ma in rapida evoluzione. Le pale attuali in fibra di vetro composita sono difficili da riciclare. Vestas e NREL stanno sviluppando pale interamente riciclabili con nuovi materiali. WindEurope si è impegnata a non portare pale in discarica entro il 2025 nei paesi membri con legislazione adeguata — un impegno volontario che però orienta gli investimenti del settore.</td>
         </tr>
         <tr>
           <td>"L'intermittenza rende l'eolico inutile per il sistema elettrico"</td>
-          <td>
-            L'intermittenza è reale — il vento non soffia sempre. Ma il sistema elettrico italiano non dipende da una sola fonte: idroelettrico, geotermico e gas bilanciamo le variazioni. Con più storage (pompaggio idrico, batterie) e reti intelligenti il problema si riduce ulteriormente. Nel 2025 le rinnovabili hanno coperto il 48% del fabbisogno elettrico italiano — un sistema che "non funziona" non raggiunge questo risultato.
-          </td>
+          <td>L'intermittenza è reale — il vento non soffia sempre. Ma il sistema elettrico non dipende da una sola fonte: idroelettrico, geotermico e gas bilanciano le variazioni. Nel 2025 le rinnovabili hanno coperto il 48% del fabbisogno elettrico italiano. Germania (56%) e Spagna (55%) dimostrano che sistemi con quote rinnovabili ancora più alte funzionano stabilmente.</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- BLOCCO 4 — INNOVAZIONI -->
+  <!-- BLOCCO 4 -->
   <div class="blocco">
     <div class="blocco-num">Blocco 4</div>
     <h2 class="blocco-title">Innovazioni in arrivo</h2>
-
     <div class="innovazione-grid">
       <div class="innovazione-card">
-        <div class="inno-horizon">Oggi — 2027</div>
-        <div class="inno-title">Pale riciclabili (RecyclableBlade + NREL PECAN)</div>
-        <div class="inno-desc">Vestas e NREL stanno sviluppando pale interamente riciclabili con nuovi materiali termoindurenti. I primi impianti con pale riciclabili al 100% sono attesi entro il 2026-2027.</div>
+        <div class="inno-horizon">2026 — 2027</div>
+        <div class="inno-title">Pale riciclabili al 100%</div>
+        <div class="inno-desc">Vestas (RecyclableBlade) e NREL (progetto PECAN) stanno sviluppando pale con nuovi materiali termoindurenti interamente riciclabili. I primi impianti commerciali con pale riciclabili al 100% sono attesi entro il 2026–2027.</div>
       </div>
       <div class="innovazione-card">
-        <div class="inno-horizon">2025 — 2030</div>
-        <div class="inno-title">Repowering europeo</div>
-        <div class="inno-desc">Migliaia di turbine degli anni '90-2000 stanno raggiungendo fine vita. Sostituirle con turbine moderne sulla stessa area può triplicare la produzione senza nuovo consumo di suolo.</div>
+        <div class="inno-horizon">In corso</div>
+        <div class="inno-title">Repowering degli impianti anni '90</div>
+        <div class="inno-desc">Migliaia di turbine degli anni '90-2000 stanno raggiungendo fine vita. Sostituirle con turbine moderne sulla stessa area può triplicare la produzione senza nuovo consumo di suolo — è la forma di espansione più rapida e meno invasiva disponibile oggi.</div>
       </div>
       <div class="innovazione-card">
         <div class="inno-horizon">2025 — 2030</div>
         <div class="inno-title">Turbine di grande taglia onshore</div>
-        <div class="inno-desc"><span class="hl-y" onclick="toggleNote(this)">Turbine da 5-7 MW onshore con capacity factor del 35-45% nei siti del Sud Italia<span class="hl-note y">🟠 Dato industriale di settore — non confermato da fonte istituzionale (IRENA/JRC) per siti italiani specifici.</span></span> stanno entrando nel mercato europeo, aumentando la resa per unità di territorio.</div>
+        <div class="inno-desc"><span class="hl-y" onclick="toggleNote(this)">Turbine da 5–7 MW onshore con fattore di utilizzo del 35–45% nei siti più ventosi del Sud Italia<span class="hl-note y">🟡 Dato industriale di settore — non confermato da fonte istituzionale (IRENA/JRC) per siti italiani specifici.</span></span> stanno entrando nel mercato europeo, aumentando la resa per unità di territorio occupato.</div>
       </div>
       <div class="innovazione-card">
         <div class="inno-horizon">In corso</div>
-        <div class="inno-title">AI per previsione e manutenzione</div>
-        <div class="inno-desc">Algoritmi di intelligenza artificiale migliorano la previsione della produzione eolica e ottimizzano gli interventi di manutenzione predittiva, riducendo i fermi non programmati.</div>
+        <div class="inno-title">Sistemi radar anti-collisione</div>
+        <div class="inno-desc">Software di intelligenza artificiale e radar che rilevano in tempo reale il passaggio di stormi di uccelli e fermano automaticamente le turbine durante il transito. Riducono significativamente la mortalità aviaria senza ridurre la produzione annua in modo rilevante.</div>
       </div>
     </div>
   </div>
 
-  <!-- BOX FONTI -->
   <div class="fonti-box">
     <h3>Fonti principali di questa scheda</h3>
-    <div class="fonte-item">
-      <span class="fonte-dot"></span>
-      <span><a href="https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2025/Jul/IRENA_TEC_RPGC_in_2024_2025.pdf" target="_blank">IRENA — Renewable Power Generation Costs in 2024</a> (dati LCOE)</span>
-    </div>
-    <div class="fonte-item">
-      <span class="fonte-dot"></span>
-      <span><a href="https://www.gse.it/dati-e-scenari/rapporti" target="_blank">GSE — Rapporto Statistico FER in Italia 2023</a> (dati di produzione italiani)</span>
-    </div>
-    <div class="fonte-item">
-      <span class="fonte-dot"></span>
-      <span><a href="https://www.terna.it/it/sistema-elettrico/statistiche" target="_blank">Terna — Rapporto Statistico 2024</a> (capacità installata e produzione)</span>
-    </div>
-    <div class="fonte-item">
-      <span class="fonte-dot"></span>
-      <span><a href="https://unece.org/sed/documents/2021/10/reports/life-cycle-assessment-electricity-generation-options" target="_blank">UN-ECE — Life Cycle Assessment of Electricity Generation Options, 2021</a> (LCA)</span>
-    </div>
-    <div class="fonte-item">
-      <span class="fonte-dot"></span>
-      <span><a href="https://www.lazard.com/research-insights/levelized-cost-of-energyplus/" target="_blank">Lazard — LCOE+ v17, 2024</a> (confronto costi per tecnologia)</span>
-    </div>
-    <div class="fonte-item">
-      <span class="fonte-dot"></span>
-      <span><a href="https://windeurope.org" target="_blank">WindEurope — Wind Energy in Europe 2024 Statistics</a> (contesto europeo)</span>
-    </div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2025/Jul/IRENA_TEC_RPGC_in_2024_2025.pdf" target="_blank">IRENA — Renewable Power Generation Costs in 2024</a> (dati LCOE)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.gse.it/dati-e-scenari/rapporti" target="_blank">GSE — Rapporto Statistico FER in Italia 2023</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.terna.it/it/sistema-elettrico/statistiche" target="_blank">Terna — Rapporto Statistico 2024</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://unece.org/sed/documents/2021/10/reports/life-cycle-assessment-electricity-generation-options" target="_blank">UN-ECE — Life Cycle Assessment of Electricity Generation Options, 2021</a> (LCA)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.lazard.com/research-insights/levelized-cost-of-energyplus/" target="_blank">Lazard — LCOE+ v17, 2025</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://windeurope.org" target="_blank">WindEurope — Wind Energy in Europe 2024 Statistics</a></span></div>
   </div>
+</div>
 
-</div><!-- fine .page -->
-
-<script src="../assets/script.js"></script>
+<script>
+function toggleNote(el) {
+  const note = el.querySelector('.hl-note');
+  if (!note) return;
+  document.querySelectorAll('.hl-note.open').forEach(n => { if (n !== note) n.classList.remove('open'); });
+  note.classList.toggle('open');
+}
+</script>
 </body>
 </html>
