@@ -151,6 +151,8 @@
   .footer-tagline { font-size: 13px; max-width: 280px; line-height: 1.6; }
   .footer-fonti h4 { color: white; font-size: 13px; margin-bottom: 10px; }
   .footer-fonti-list { font-size: 12px; line-height: 2; }
+  .footer-fonti-list a { color: rgba(255,255,255,0.85); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(255,255,255,0.4); }
+  .footer-fonti-list a:hover { color: white; text-decoration-color: white; }
   .footer-note { font-size: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.15); text-align: center; width: 100%; }
 
   @media (max-width: 768px) {
