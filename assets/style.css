@@ -20,7 +20,7 @@ html { scroll-behavior: smooth; }
 body { font-family: var(--font-sans); background: var(--warm-white); color: var(--graphite); font-size: 16px; line-height: 1.6; }
 
 /* BANNER */
-.legend-banner { background: var(--teal-dark); color: white; font-size: 12px; padding: 8px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.legend-banner { background: var(--teal-dark); color: white; font-size: 12px; padding: 8px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; position: sticky; top: 0; z-index: 101; }
 .legend-banner strong { font-weight: 600; margin-right: 4px; }
 .legend-item { display: flex; align-items: center; gap: 6px; }
 .legend-swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; display: inline-block; }
