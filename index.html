@@ -211,21 +211,55 @@
 
     <div class="schede-grid">
 
+      <!-- 1. Gas naturale — 42% del mix, prima fonte -->
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#F97316;"></div>
+        <div class="scheda-header"><span class="scheda-icon">🔥</span><span class="scheda-name">Gas naturale</span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-amber">Costo volatile</span><span class="pill pill-green">Alta efficienza</span><span class="pill pill-red">Fossile</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">Quota nel mix 2024</div><div class="kpi-value">42,01%</div></div>
+            <div class="kpi"><div class="kpi-label">Produzione Italia</div><div class="kpi-value">96,01 TWh</div></div>
+            <div class="kpi"><div class="kpi-label">Emissioni combustione</div><div class="kpi-value">~490 gCO₂/kWh</div></div>
+          </div>
+          <p class="scheda-desc">La fonte dominante del mix elettrico italiano. Flessibile ed efficiente (CCGT 55–62%), ma fossile, volatile nei prezzi e responsabile della dipendenza energetica dall'estero.</p>
+          <a href="schede/gas-naturale.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <!-- 2. Idroelettrico — 18% del mix -->
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#6366F1;"></div>
+        <div class="scheda-header"><span class="scheda-icon">💧</span><span class="scheda-name">Idroelettrico</span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-green">Costo basso</span><span class="pill pill-green">Flessibile</span><span class="pill pill-amber">Espansione limitata</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">Produzione Italia</div><div class="kpi-value">~48 TWh</div></div>
+            <div class="kpi"><div class="kpi-label">Quota nel mix</div><div class="kpi-value">~18%</div></div>
+            <div class="kpi"><div class="kpi-label">Capacità pompaggio</div><div class="kpi-value">7.287 MW</div></div>
+          </div>
+          <p class="scheda-desc">Prima rinnovabile storica in Italia. Due famiglie: a flusso/serbatoio (fonte) e pompaggio (storage, non fonte primaria).</p>
+          <a href="schede/idroelettrico.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <!-- 3. Fotovoltaico — 14% del mix -->
       <div class="scheda-row" onclick="toggle(this)">
         <div style="height:3px;background:#F59E0B;"></div>
         <div class="scheda-header"><span class="scheda-icon">☀️</span><span class="scheda-name">Fotovoltaico</span><span class="scheda-arrow">▼</span></div>
         <div class="scheda-body">
-          <div class="pill-row"><span class="pill pill-green">Costo basso</span><span class="pill pill-green">Alta efficienza</span><span class="pill pill-green">Sostenibile</span></div>
+          <div class="pill-row"><span class="pill pill-green">Costo basso</span><span class="pill pill-amber">Efficienza variabile</span><span class="pill pill-green">Sostenibile</span></div>
           <div class="scheda-kpi">
             <div class="kpi"><div class="kpi-label">Costo di produzione 2024</div><div class="kpi-value">24–38 $/MWh</div></div>
             <div class="kpi"><div class="kpi-label">Produzione Italia</div><div class="kpi-value">36 TWh</div></div>
-            <div class="kpi"><div class="kpi-label">Quota nel mix</div><div class="kpi-value">14%</div></div>
+            <div class="kpi"><div class="kpi-label">Quota nel mix</div><div class="kpi-value">~14%</div></div>
           </div>
-          <p class="scheda-desc">Fattore di utilizzo Italia ~11–13%. LCA: 20–48 gCO₂eq/kWh. Il riciclo dei pannelli a fine vita è il nodo aperto principale. Include sottosezione agrivoltaico.</p>
+          <p class="scheda-desc">Fattore di utilizzo Italia ~11–13%. LCA: 20–48 gCO₂eq/kWh. Include sottosezione agrivoltaico con caso studio AKREN (Umbria).</p>
           <a href="schede/fotovoltaico.html" class="scheda-cta">Approfondisci →</a>
         </div>
       </div>
 
+      <!-- 4. Eolico onshore — 9% del mix -->
       <div class="scheda-row" onclick="toggle(this)">
         <div style="height:3px;background:#10B981;"></div>
         <div class="scheda-header"><span class="scheda-icon">💨</span><span class="scheda-name">Eolico onshore</span><span class="scheda-arrow">▼</span></div>
@@ -241,21 +275,7 @@
         </div>
       </div>
 
-      <div class="scheda-row" onclick="toggle(this)">
-        <div style="height:3px;background:#0F6E56;"></div>
-        <div class="scheda-header"><span class="scheda-icon">🌋</span><span class="scheda-name">Geotermico</span><span class="scheda-arrow">▼</span></div>
-        <div class="scheda-body">
-          <div class="pill-row"><span class="pill pill-green">Costo basso</span><span class="pill pill-green">Continuo 24/7</span><span class="pill pill-amber">EGS pre-commerciale</span></div>
-          <div class="scheda-kpi">
-            <div class="kpi"><div class="kpi-label">Produzione Italia</div><div class="kpi-value">~6 TWh</div></div>
-            <div class="kpi"><div class="kpi-label">Fattore di utilizzo</div><div class="kpi-value">77–88%</div></div>
-            <div class="kpi"><div class="kpi-label">Quota nel mix</div><div class="kpi-value">~2%</div></div>
-          </div>
-          <p class="scheda-desc">Due famiglie: tradizionale (alta entalpia, limitato alla Toscana) e EGS avanzato (potenzialmente ovunque ma ancora pre-commerciale).</p>
-          <a href="schede/geotermico.html" class="scheda-cta">Approfondisci →</a>
-        </div>
-      </div>
-
+      <!-- 5. Biometano — 6% del mix -->
       <div class="scheda-row" onclick="toggle(this)">
         <div style="height:3px;background:#84CC16;"></div>
         <div class="scheda-header"><span class="scheda-icon">🌿</span><span class="scheda-name">Biometano</span><span class="scheda-arrow">▼</span></div>
@@ -271,81 +291,23 @@
         </div>
       </div>
 
+      <!-- 6. Geotermico — 2% del mix -->
       <div class="scheda-row" onclick="toggle(this)">
-        <div style="height:3px;background:#3B82F6;"></div>
-        <div class="scheda-header"><span class="scheda-icon">⚗️</span><span class="scheda-name">Idrogeno verde</span><span class="scheda-arrow">▼</span></div>
+        <div style="height:3px;background:#0F6E56;"></div>
+        <div class="scheda-header"><span class="scheda-icon">🌋</span><span class="scheda-name">Geotermico</span><span class="scheda-arrow">▼</span></div>
         <div class="scheda-body">
-          <div class="pill-row"><span class="pill pill-red">Costo alto oggi</span><span class="pill pill-amber">Efficienza bassa</span><span class="pill pill-green">Strategico industria</span></div>
+          <div class="pill-row"><span class="pill pill-green">Costo basso</span><span class="pill pill-green">Continuo 24/7</span><span class="pill pill-amber">EGS pre-commerciale</span></div>
           <div class="scheda-kpi">
-            <div class="kpi"><div class="kpi-label">Costo oggi</div><div class="kpi-value">3–6 €/kg</div></div>
-            <div class="kpi"><div class="kpi-label">Obiettivo 2030</div><div class="kpi-value">&lt;2 €/kg</div></div>
-            <div class="kpi"><div class="kpi-label">Efficienza</div><div class="kpi-value">60–75%</div></div>
+            <div class="kpi"><div class="kpi-label">Produzione Italia</div><div class="kpi-value">~6 TWh</div></div>
+            <div class="kpi"><div class="kpi-label">Fattore di utilizzo</div><div class="kpi-value">77–90%</div></div>
+            <div class="kpi"><div class="kpi-label">Quota nel mix</div><div class="kpi-value">~2%</div></div>
           </div>
-          <p class="scheda-desc">Prodotto da elettrolisi con rinnovabili. Strategico per decarbonizzare industria pesante e trasporti a lungo raggio dove l'elettrico diretto non arriva.</p>
-          <a href="schede/idrogeno-verde.html" class="scheda-cta">Approfondisci →</a>
+          <p class="scheda-desc">Due famiglie: tradizionale (alta entalpia, Toscana — Larderello, il primo impianto del mondo 1904) e EGS avanzato (potenzialmente ovunque, pre-commerciale).</p>
+          <a href="schede/geotermico.html" class="scheda-cta">Approfondisci →</a>
         </div>
       </div>
 
-      <div class="scheda-row" onclick="toggle(this)">
-        <div style="height:3px;background:#6366F1;"></div>
-        <div class="scheda-header"><span class="scheda-icon">💧</span><span class="scheda-name">Idroelettrico</span><span class="scheda-arrow">▼</span></div>
-        <div class="scheda-body">
-          <div class="pill-row"><span class="pill pill-green">Costo basso</span><span class="pill pill-green">Flessibile</span><span class="pill pill-amber">Espansione limitata</span></div>
-          <div class="scheda-kpi">
-            <div class="kpi"><div class="kpi-label">Produzione Italia</div><div class="kpi-value">~48 TWh</div></div>
-            <div class="kpi"><div class="kpi-label">Quota nel mix</div><div class="kpi-value">18%</div></div>
-            <div class="kpi"><div class="kpi-label">Capacità pompaggio</div><div class="kpi-value">7,3 GW</div></div>
-          </div>
-          <p class="scheda-desc">Prima rinnovabile storica in Italia. Due famiglie: a flusso/serbatoio (fonte) e pompaggio (storage, non fonte primaria).</p>
-          <a href="schede/idroelettrico.html" class="scheda-cta">Approfondisci →</a>
-        </div>
-      </div>
-
-      <div class="scheda-row" onclick="toggle(this)">
-        <div style="height:3px;background:#06B6D4;"></div>
-        <div class="scheda-header"><span class="scheda-icon">🌊</span><span class="scheda-name">Eolico offshore</span><span class="scheda-arrow">▼</span></div>
-        <div class="scheda-body">
-          <div class="pill-row"><span class="pill pill-amber">Costo medio-alto</span><span class="pill pill-green">Fattore di utilizzo alto</span><span class="pill pill-amber">Galleggiante emergente</span></div>
-          <div class="scheda-kpi">
-            <div class="kpi"><div class="kpi-label">Costo di produzione — Fisso</div><div class="kpi-value">73–99 $/MWh</div></div>
-            <div class="kpi"><div class="kpi-label">Fattore di utilizzo</div><div class="kpi-value">35–50%</div></div>
-            <div class="kpi"><div class="kpi-label">Galleggiante in Italia</div><div class="kpi-value">0 MW</div></div>
-          </div>
-          <p class="scheda-desc">Fisso: limitato in Mediterraneo per fondali profondi. Galleggiante: strategico per Italia (Sicilia, Sardegna, Calabria) — 270 MW nel mondo al 2025.</p>
-          <a href="schede/eolico-offshore.html" class="scheda-cta">Approfondisci →</a>
-        </div>
-      </div>
-
-      <div class="scheda-row" onclick="toggle(this)">
-        <div style="height:3px;background:#6B7280;"></div>
-        <div class="scheda-header"><span class="scheda-icon">⚛️</span><span class="scheda-name">Nucleare a Fissione (SMR)<br><span style="font-size:12px;color:var(--gray);font-weight:400;">+ Fusione Nucleare</span></span><span class="scheda-arrow">▼</span></div>
-        <div class="scheda-body">
-          <div class="pill-row"><span class="pill pill-red">Costo molto alto</span><span class="pill pill-green">Alta affidabilità</span><span class="pill pill-gray">Fusione: 2040+</span></div>
-          <div class="scheda-kpi">
-            <div class="kpi"><div class="kpi-label">Costo di produzione — Fissione</div><div class="kpi-value">141–220 $/MWh</div></div>
-            <div class="kpi"><div class="kpi-label">Emissioni ciclo di vita</div><div class="kpi-value">~12 gCO₂/kWh</div></div>
-            <div class="kpi"><div class="kpi-label">Prima fusione sperimentale (ITER)</div><div class="kpi-value">2039</div></div>
-          </div>
-          <p class="scheda-desc">Fissione tradizionale e reattori modulari (SMR) in sviluppo; fusione nucleare con ITER come progetto sperimentale principale. Include box opinione personale e analisi Banca d'Italia (QEF n. 947/2025).</p>
-          <a href="schede/nucleare-smr-fusione.html" class="scheda-cta">Approfondisci →</a>
-        </div>
-      </div>
-
-      <div class="scheda-row" onclick="toggle(this)">
-        <div style="height:3px;background:#F97316;"></div>
-        <div class="scheda-header"><span class="scheda-icon">🔥</span><span class="scheda-name">Gas naturale</span><span class="scheda-arrow">▼</span></div>
-        <div class="scheda-body">
-          <div class="pill-row"><span class="pill pill-amber">Costo volatile</span><span class="pill pill-green">Alta efficienza</span><span class="pill pill-red">Fossile</span></div>
-          <div class="scheda-kpi">
-            <div class="kpi"><div class="kpi-label">Quota nel mix 2024</div><div class="kpi-value">42,01%</div></div>
-            <div class="kpi"><div class="kpi-label">Produzione Italia</div><div class="kpi-value">96,01 TWh</div></div>
-            <div class="kpi"><div class="kpi-label">Emissioni combustione</div><div class="kpi-value">~490 gCO₂/kWh</div></div>
-          </div>
-          <p class="scheda-desc">La fonte dominante del mix elettrico italiano. Flessibile ed efficiente come generatore (CCGT 55–62%), ma fossile, volatile nei prezzi e responsabile della dipendenza energetica dall'estero (&gt;90% importato).</p>
-          <a href="schede/gas-naturale.html" class="scheda-cta">Approfondisci →</a>
-        </div>
-      </div>
-
+      <!-- 7. Carbone — 1,52% del mix -->
       <div class="scheda-row" onclick="toggle(this)">
         <div style="height:3px;background:#374151;"></div>
         <div class="scheda-header"><span class="scheda-icon">⚫</span><span class="scheda-name">Carbone</span><span class="scheda-arrow">▼</span></div>
@@ -356,8 +318,71 @@
             <div class="kpi"><div class="kpi-label">Produzione 2025</div><div class="kpi-value">2,9 TWh</div></div>
             <div class="kpi"><div class="kpi-label">Emissioni combustione</div><div class="kpi-value">~820 gCO₂/kWh</div></div>
           </div>
-          <p class="scheda-desc">Il fossile più inquinante: quasi uscito dal sistema italiano. Impianti continentali fermi dal 2024–2026. Solo le due centrali sarde operative come servizio essenziale. Phase-out al 2038 per legge (Legge 49/2026).</p>
+          <p class="scheda-desc">Il fossile più inquinante. Impianti continentali fermi dal 2024–2026. Solo le due centrali sarde operative come servizio essenziale. Phase-out al 2038 per legge (Legge 49/2026).</p>
           <a href="schede/carbone.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <!-- 8. Eolico offshore -->
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#06B6D4;"></div>
+        <div class="scheda-header"><span class="scheda-icon">🌊</span><span class="scheda-name">Eolico offshore</span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-amber">Costo medio-alto</span><span class="pill pill-green">Fattore utilizzo alto</span><span class="pill pill-amber">Galleggiante emergente</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">Costo produzione — Fisso</div><div class="kpi-value">73–99 $/MWh</div></div>
+            <div class="kpi"><div class="kpi-label">Fattore di utilizzo</div><div class="kpi-value">35–50%</div></div>
+            <div class="kpi"><div class="kpi-label">Galleggiante in Italia</div><div class="kpi-value">0 MW</div></div>
+          </div>
+          <p class="scheda-desc">Fisso: limitato in Mediterraneo per fondali profondi. Galleggiante: strategico per Italia (Sicilia, Sardegna, Calabria) — ~330 MW nel mondo al 2025.</p>
+          <a href="schede/eolico-offshore.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <!-- 9. Idrogeno verde -->
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#3B82F6;"></div>
+        <div class="scheda-header"><span class="scheda-icon">⚗️</span><span class="scheda-name">Idrogeno verde</span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-red">Costo alto oggi</span><span class="pill pill-amber">Efficienza bassa</span><span class="pill pill-green">Strategico industria</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">Costo oggi</div><div class="kpi-value">3–6 €/kg</div></div>
+            <div class="kpi"><div class="kpi-label">Obiettivo 2030</div><div class="kpi-value">&lt;2 €/kg</div></div>
+            <div class="kpi"><div class="kpi-label">Efficienza elettrolisi</div><div class="kpi-value">60–75%</div></div>
+          </div>
+          <p class="scheda-desc">Prodotto da elettrolisi con rinnovabili. Strategico per decarbonizzare industria pesante e trasporti a lungo raggio dove l'elettrico diretto non arriva.</p>
+          <a href="schede/idrogeno-verde.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <!-- 10. Nucleare a Fissione / SMR / Fusione -->
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#6B7280;"></div>
+        <div class="scheda-header"><span class="scheda-icon">⚛️</span><span class="scheda-name">Nucleare a Fissione<br><span style="font-size:12px;color:var(--gray);font-weight:400;">include SMR — pre-commerciale</span></span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-red">Costo molto alto</span><span class="pill pill-green">Alta affidabilità</span><span class="pill pill-amber">SMR pre-commerciale</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">Costo di produzione (Lazard 2025)</div><div class="kpi-value">141–220 $/MWh</div></div>
+            <div class="kpi"><div class="kpi-label">Emissioni ciclo di vita</div><div class="kpi-value">~12 gCO₂/kWh</div></div>
+            <div class="kpi"><div class="kpi-label">Fattore di utilizzo</div><div class="kpi-value">80–93%</div></div>
+          </div>
+          <p class="scheda-desc">Fissione tradizionale matura ma costosa nei nuovi impianti. SMR pre-commerciali — nessuno ancora operativo in Occidente. Analisi Banca d'Italia (QEF n. 947/2025) e box opinione personale dell'editore.</p>
+          <a href="schede/nucleare-smr-fusione.html" class="scheda-cta">Approfondisci →</a>
+        </div>
+      </div>
+
+      <div class="scheda-row" onclick="toggle(this)">
+        <div style="height:3px;background:#818CF8;"></div>
+        <div class="scheda-header"><span class="scheda-icon">🌟</span><span class="scheda-name">Fusione Nucleare<br><span style="font-size:12px;color:var(--gray);font-weight:400;">orizzonte 2040–2050</span></span><span class="scheda-arrow">▼</span></div>
+        <div class="scheda-body">
+          <div class="pill-row"><span class="pill pill-gray">Non commerciale</span><span class="pill pill-green">Potenziale illimitato</span><span class="pill pill-gray">2040+</span></div>
+          <div class="scheda-kpi">
+            <div class="kpi"><div class="kpi-label">Primo plasma ITER</div><div class="kpi-value">2039</div></div>
+            <div class="kpi"><div class="kpi-label">Aziende private attive</div><div class="kpi-value">~77</div></div>
+            <div class="kpi"><div class="kpi-label">Investimenti privati</div><div class="kpi-value">~13 mld $</div></div>
+          </div>
+          <p class="scheda-desc">Tecnologia fisicamente diversa dalla fissione: fonde nuclei leggeri invece di scindere nuclei pesanti. Nessun rischio di fusione del nocciolo, rifiuti radioattivi molto meno problematici. Orizzonte commerciale realistico: non prima del 2040–2050.</p>
+          <a href="schede/nucleare-smr-fusione.html#fusione" class="scheda-cta">Approfondisci →</a>
         </div>
       </div>
 
