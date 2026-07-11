@@ -163,6 +163,29 @@
     .box-opinione { padding: 16px 18px; }
     .legend-banner { font-size: 11px; gap: 8px; padding: 6px 12px; }
   }
+
+  /* LEGENDA SEMPRE VISIBILE SU MOBILE */
+  @media (max-width: 600px) {
+    .legend-banner {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 6px !important;
+      padding: 10px 16px !important;
+      font-size: 11px !important;
+    }
+    .legend-item {
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      font-size: 11px !important;
+    }
+    .legend-swatch {
+      width: 14px !important;
+      height: 14px !important;
+      flex-shrink: 0 !important;
+    }
+  }
 </style>
 </head>
 <body>
