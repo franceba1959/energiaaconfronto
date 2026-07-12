@@ -770,6 +770,40 @@
     <div class="sezione-num">Sezione 07</div>
     <h2 class="sezione-title">Glossario dei termini usati in questa pagina</h2>
 
+    <h3>Le unità di misura dell'energia — dalla bolletta alla rete nazionale</h3>
+    <p>Prima di leggere i dati energetici è utile capire la scala delle unità di misura. Si parte dal Watt — l'unità base della potenza — e dal Wattora — l'unità base dell'energia.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 28px;">
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--teal);margin-bottom:10px;">Potenza (W) — quanto velocemente si produce o consuma energia</div>
+        <table style="width:100%;font-size:13px;border-collapse:collapse;">
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:5px 0;font-weight:600;">1 W</td><td style="padding:5px 0;color:var(--gray);">Watt — unità base</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:5px 0;font-weight:600;">1 kW</td><td style="padding:5px 0;color:var(--gray);">= 1.000 W (un forno elettrico)</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:5px 0;font-weight:600;">1 MW</td><td style="padding:5px 0;color:var(--gray);">= 1.000 kW (un piccolo impianto solare)</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:5px 0;font-weight:600;">1 GW</td><td style="padding:5px 0;color:var(--gray);">= 1.000 MW (una grande centrale)</td></tr>
+          <tr><td style="padding:5px 0;font-weight:600;">1 TW</td><td style="padding:5px 0;color:var(--gray);">= 1.000 GW (scala nazionale/globale)</td></tr>
+        </table>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--teal);margin-bottom:10px;">Energia (Wh) — quanta energia viene prodotta o consumata nel tempo</div>
+        <table style="width:100%;font-size:13px;border-collapse:collapse;">
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:5px 0;font-weight:600;">1 Wh</td><td style="padding:5px 0;color:var(--gray);">Wattora — unità base</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:5px 0;font-weight:600;">1 kWh</td><td style="padding:5px 0;color:var(--gray);">= 1.000 Wh (unità della bolletta)</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:5px 0;font-weight:600;">1 MWh</td><td style="padding:5px 0;color:var(--gray);">= 1.000 kWh (mercato all'ingrosso)</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:5px 0;font-weight:600;">1 GWh</td><td style="padding:5px 0;color:var(--gray);">= 1.000 MWh (grandi accumuli)</td></tr>
+          <tr><td style="padding:5px 0;font-weight:600;">1 TWh</td><td style="padding:5px 0;color:var(--gray);">= 1.000 GWh (produzione nazionale)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div style="background:var(--teal-light);border-radius:var(--radius);padding:16px 20px;margin-bottom:28px;font-size:14px;line-height:1.7;">
+      <strong>Esempi pratici per capire la scala:</strong><br>
+      🏠 <strong>kWh</strong> — è l'unità della bolletta. Una famiglia italiana media consuma circa 2.700 kWh in un anno.<br>
+      ⚡ <strong>MWh</strong> — è l'unità del mercato all'ingrosso. Il prezzo unico nazionale (PUN) di 115,9 €/MWh equivale a circa 0,116 € per kWh.<br>
+      🔋 <strong>GWh</strong> — è l'unità delle grandi batterie industriali (BESS). I 7,73 GW di BESS operativi in Italia corrispondono a circa 18,8 GWh di energia totale accumulabile.<br>
+      🌍 <strong>TWh</strong> — è l'unità della produzione nazionale. L'Italia produce circa 264 TWh di elettricità all'anno.
+    </div>
+
     <div class="glossario-grid">
       <div class="glossario-card">
         <div class="glossario-term">TWh (Terawattora)</div>
@@ -810,6 +844,42 @@
       <div class="glossario-item">
         <div class="glossario-term">SAF (Sustainable Aviation Fuel — carburante sostenibile per l'aviazione)</div>
         <div class="glossario-def">Carburante per aerei prodotto da fonti rinnovabili invece che da petrolio. Può essere ottenuto da biomasse, da rifiuti organici o sinteticamente dall'idrogeno verde e dalla CO₂ catturata dall'aria. Riduce le emissioni del ciclo di vita fino all'80% rispetto al cherosene tradizionale. Il regolamento europeo ReFuelEU Aviation impone quote crescenti di SAF sui voli in partenza dall'UE.</div>
+      </div>
+      <div class="glossario-item">
+        <div class="glossario-term">MGP (Mercato del Giorno Prima)</div>
+        <div class="glossario-def">Il principale mercato elettrico italiano, gestito dal GME (Gestore dei Mercati Energetici), dove produttori e acquirenti contrattano l'elettricità ora per ora il giorno prima della consegna. È qui che si forma il PUN.</div>
+      </div>
+      <div class="glossario-item">
+        <div class="glossario-term">CfD (Contratto per Differenza)</div>
+        <div class="glossario-def">Meccanismo di incentivo per le rinnovabili: il produttore riceve un prezzo garantito fisso (prezzo di esercizio). Se il prezzo di mercato è più basso, lo Stato integra la differenza; se è più alto, il produttore restituisce la differenza. Stabilizza i ricavi e riduce il rischio degli investitori.</div>
+      </div>
+      <div class="glossario-item">
+        <div class="glossario-term">LCA (Analisi del Ciclo di Vita — Life Cycle Assessment)</div>
+        <div class="glossario-def">Metodologia che misura l'impatto ambientale totale di un impianto dall'estrazione delle materie prime allo smaltimento finale. Per l'energia si misura in gCO₂eq/kWh — grammi di CO₂ equivalente per ogni kWh prodotto nell'intero ciclo di vita.</div>
+      </div>
+      <div class="glossario-item">
+        <div class="glossario-term">PNIEC (Piano Nazionale Integrato per l'Energia e il Clima)</div>
+        <div class="glossario-def">Il documento strategico con cui ogni Stato membro UE definisce i propri obiettivi energetici e climatici al 2030. L'Italia ha consegnato il PNIEC 2024 alla Commissione Europea il 1° luglio 2024: obiettivo 79% rinnovabili sulla produzione elettrica.</div>
+      </div>
+      <div class="glossario-item">
+        <div class="glossario-term">MACSE (Meccanismo di Approvvigionamento di Capacità di Stoccaggio Elettrico)</div>
+        <div class="glossario-def">Il meccanismo italiano per incentivare la costruzione di batterie di rete. Terna organizza aste competitive in cui gli operatori si aggiudicano contratti di lungo periodo in cambio dell'obbligo di mettere la capacità di accumulo a disposizione della rete.</div>
+      </div>
+      <div class="glossario-item">
+        <div class="glossario-term">Prezzo marginale (Merit Order)</div>
+        <div class="glossario-def">Il meccanismo con cui si forma il prezzo dell'elettricità nei mercati europei: le centrali vengono chiamate a produrre in ordine crescente di costo (prima le rinnovabili, poi il gas), e l'ultima centrale necessaria fissa il prezzo per tutte. Questo spiega perché il gas determina quasi sempre il prezzo finale in Italia.</div>
+      </div>
+      <div class="glossario-item">
+        <div class="glossario-term">Dipendenza energetica</div>
+        <div class="glossario-def">La percentuale del fabbisogno energetico totale coperta da importazioni. L'Italia dipende dall'estero per circa il 75% del proprio fabbisogno — principalmente gas naturale e petrolio.</div>
+      </div>
+      <div class="glossario-item">
+        <div class="glossario-term">SMR (Small Modular Reactor — reattore modulare di piccola taglia)</div>
+        <div class="glossario-def">Reattori nucleari di nuova generazione con potenza inferiore a 300 MW (contro i 1.000–1.600 MW dei reattori tradizionali). Progettati per essere costruiti in serie in fabbrica e assemblati sul sito. Nessuno è ancora operativo in Occidente — sono in fase di sviluppo e pre-commerciale.</div>
+      </div>
+      <div class="glossario-item">
+        <div class="glossario-term">EGS (Enhanced Geothermal System — sistema geotermico avanzato)</div>
+        <div class="glossario-def">Tecnologia geotermica che crea artificialmente serbatoi di calore in rocce calde ma secche, iniettando acqua in pressione. Potrebbe rendere la geotermia disponibile ovunque, non solo nelle zone vulcaniche. Ancora in fase di sviluppo commerciale.</div>
       </div>
     </div>
   </div>
