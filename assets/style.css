@@ -150,7 +150,7 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.7); padding: 40
 .footer-logo { font-family: var(--font-serif); font-size: 20px; color: white; margin-bottom: 8px; }
 .footer-tagline { font-size: 13px; max-width: 280px; line-height: 1.6; }
 .footer-fonti h4 { color: white; font-size: 13px; margin-bottom: 10px; }
-.footer-fonti-list { font-size: 12px; line-height: 2.2; max-width: 500px; }
+.footer-fonti-list { font-size: 12px; line-height: 2.2; max-width: 320px; }
 .footer-fonti-list a { color: rgba(255,255,255,0.85); text-decoration: none; }
 .footer-fonti-list a:hover { color: white; text-decoration: underline; }
 .footer-note { font-size: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.15); text-align: center; width: 100%; }
