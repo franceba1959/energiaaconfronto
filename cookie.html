@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie Policy — Energia a Confronto</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #1B6B72; --teal-dark: #0F4A50; --teal-light: #E8F4F5;
+    --graphite: #2D2D2D; --gray: #6B7280; --gray-light: #F3F4F6;
+    --warm-white: #FAFAF8; --border: #E5E7EB;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --radius: 8px; --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  body { font-family: var(--font-sans); background: var(--warm-white); color: var(--graphite); font-size: 16px; line-height: 1.75; }
+  .legend-banner { background: var(--teal-dark); color: white; font-size: 12px; padding: 7px 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; position: sticky; top: 0; z-index: 101; }
+  nav { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 33px; z-index: 100; box-shadow: var(--shadow); }
+  .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { font-family: var(--font-serif); font-size: 17px; color: var(--teal); text-decoration: none; }
+  .nav-logo em { font-style: italic; }
+  .nav-links { display: flex; align-items: center; gap: 4px; }
+  .nav-link { font-size: 13px; color: var(--gray); text-decoration: none; padding: 6px 12px; border-radius: 6px; }
+  .nav-link:hover { background: var(--teal-light); color: var(--teal); }
+  .page { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  .breadcrumb { font-size: 12px; color: var(--gray); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--teal); text-decoration: none; }
+  h1 { font-family: var(--font-serif); font-size: 36px; font-weight: normal; color: var(--graphite); margin-bottom: 8px; }
+  .data-aggiornamento { font-size: 13px; color: var(--gray); margin-bottom: 40px; }
+  h2 { font-family: var(--font-serif); font-size: 22px; font-weight: normal; color: var(--teal-dark); margin: 36px 0 12px; }
+  p { margin-bottom: 14px; font-size: 15px; }
+  ul { margin: 0 0 14px 20px; }
+  ul li { font-size: 15px; margin-bottom: 6px; }
+  .box-info { background: var(--teal-light); border-left: 3px solid var(--teal); border-radius: var(--radius); padding: 16px 20px; margin: 24px 0; font-size: 14px; }
+  .box-verde { background: #D1FAE5; border-left: 3px solid #065F46; border-radius: var(--radius); padding: 16px 20px; margin: 24px 0; font-size: 14px; color: #065F46; }
+  a { color: var(--teal); text-decoration: underline; text-underline-offset: 2px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 14px; }
+  th { background: var(--graphite); color: white; padding: 10px 14px; text-align: left; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  footer { background: var(--teal-dark); color: white; padding: 32px 24px; margin-top: 60px; text-align: center; font-size: 13px; }
+  footer a { color: rgba(255,255,255,0.85); }
+  @media (max-width: 600px) {
+    .page { padding: 32px 16px 60px; }
+    h1 { font-size: 26px; }
+    .nav-links { display: none; }
+    table, thead, tbody, th, td, tr { display: block; }
+    th { display: none; }
+    td { border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<div class="legend-banner" style="background:#0F4A50;color:white;font-size:12px;padding:7px 24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center;position:sticky;top:0;z-index:101;">
+  <strong style="margin-right:4px;">Affidabilità dati:</strong>
+  <div style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:2px;background:white;border:1px solid rgba(255,255,255,0.4);display:inline-block;"></span> Fonte primaria verificata</div>
+  <div style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:2px;background:#FEF3C7;border:1px solid #F59E0B;display:inline-block;"></span> Fonte secondaria — tocca per la nota</div>
+  <div style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:2px;background:#FFEDD5;border:1px solid #F97316;display:inline-block;"></span> Nessuna fonte istituzionale — tocca per la nota</div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Energia <em>a Confronto</em></a>
+    <div class="nav-links">
+      <a href="index.html#cifre" class="nav-link">Il sistema italiano</a>
+      <a href="contesto.html" class="nav-link">Contesto</a>
+      <a href="index.html#schede" class="nav-link">Le tecnologie</a>
+      <a href="dibattito.html" class="nav-link">Il dibattito</a>
+      <a href="index.html#fonti" class="nav-link">Fonti</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="breadcrumb"><a href="index.html">Home</a> / Cookie Policy</div>
+  <h1>Cookie Policy</h1>
+  <p class="data-aggiornamento">Ultimo aggiornamento: luglio 2026</p>
+
+  <div class="box-verde">
+    <strong>In breve:</strong> questo sito non usa cookie di profilazione, non installa tracker pubblicitari e non monitora il tuo comportamento di navigazione. Non ti chiediamo consenso perché non ci sono cookie che lo richiedano.
+  </div>
+
+  <h2>Cosa sono i cookie</h2>
+  <p>I cookie sono piccoli file di testo che i siti web salvano nel tuo browser quando li visiti. Possono essere usati per far funzionare il sito (cookie tecnici), ricordare le tue preferenze, o tracciarti a fini pubblicitari (cookie di profilazione).</p>
+
+  <h2>Cookie usati da questo sito</h2>
+  <p>Questo sito è un sito statico ospitato su GitHub Pages. Non installa alcun cookie proprio. L'unica eccezione possibile riguarda i cookie tecnici che GitHub Pages potrebbe impostare per il corretto funzionamento dell'infrastruttura:</p>
+
+  <table>
+    <thead>
+      <tr><th>Tipo</th><th>Fonte</th><th>Finalità</th><th>Durata</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cookie tecnici</td>
+        <td>GitHub Pages (GitHub Inc.)</td>
+        <td>Funzionamento dell'infrastruttura di hosting — non accessibili a noi</td>
+        <td>Sessione</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Non sono presenti:</p>
+  <ul>
+    <li>cookie di analisi (Google Analytics, Matomo o simili);</li>
+    <li>cookie pubblicitari o di remarketing;</li>
+    <li>cookie di social network (Facebook Pixel, LinkedIn Insight o simili);</li>
+    <li>cookie di profilazione di terze parti.</li>
+  </ul>
+
+  <h2>Perché non compare il banner cookie</h2>
+  <p>Il banner di consenso ai cookie è obbligatorio solo quando un sito installa cookie che richiedono il consenso dell'utente (cookie di profilazione o analisi non essenziali). Poiché questo sito non installa cookie di questo tipo, il banner non è necessario — in conformità con le linee guida del Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it/cookie" target="_blank">garanteprivacy.it/cookie</a>).</p>
+
+  <h2>Come gestire i cookie nel tuo browser</h2>
+  <p>Puoi comunque gestire o eliminare i cookie in qualsiasi momento dalle impostazioni del tuo browser:</p>
+  <ul>
+    <li><a href="https://support.google.com/chrome/answer/95647" target="_blank">Google Chrome</a></li>
+    <li><a href="https://support.mozilla.org/it/kb/protezione-antitracciamento-avanzata-firefox" target="_blank">Mozilla Firefox</a></li>
+    <li><a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank">Safari</a></li>
+    <li><a href="https://support.microsoft.com/it-it/microsoft-edge/eliminare-i-cookie-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank">Microsoft Edge</a></li>
+  </ul>
+
+  <h2>Modifiche a questa policy</h2>
+  <p>Se in futuro dovessimo introdurre strumenti che richiedono cookie (ad esempio analytics), aggiorneremo questa pagina e, se necessario, aggiungeremo il banner di consenso. La data di ultimo aggiornamento è indicata in cima alla pagina.</p>
+
+  <h2>Contatti</h2>
+  <p>Per qualsiasi domanda su questa Cookie Policy scrivi a <a href="mailto:info@energiaaconfronto.com">info@energiaaconfronto.com</a>.</p>
+</div>
+
+<footer>
+  <div>Energia <em>a Confronto</em> — Progetto informativo indipendente</div>
+  <div style="margin-top:8px;"><a href="privacy.html">Privacy Policy</a> · <a href="cookie.html">Cookie Policy</a> · <a href="mailto:info@energiaaconfronto.com">info@energiaaconfronto.com</a></div>
+</footer>
+
+</body>
+</html>
