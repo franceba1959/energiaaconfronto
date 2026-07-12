@@ -36,6 +36,11 @@
   .nav-logo em { font-style: italic; }
   .nav-back { font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; transition: background 0.15s; }
   .nav-back:hover { background: var(--teal-light); color: var(--teal); }
+  .nav-links { display: flex; align-items: center; gap: 4px; }
+  .nav-link { font-size: 13px; color: var(--gray); text-decoration: none; padding: 6px 12px; border-radius: 6px; white-space: nowrap; }
+  .nav-link:hover { background: var(--teal-light); color: var(--teal); }
+  .nav-link.active { color: var(--teal); font-weight: 600; }
+
 
   /* LAYOUT */
   .page { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
@@ -181,7 +186,13 @@
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">Energia <em>a Confronto</em></a>
-    <a href="index.html" class="nav-back">← <span>Torna alla homepage</span></a>
+    <div class="nav-links">
+      <a href="index.html#cifre" class="nav-link">Il sistema italiano</a>
+      <a href="contesto.html" class="nav-link active">Contesto</a>
+      <a href="index.html#schede" class="nav-link">Le tecnologie</a>
+      <a href="dibattito.html" class="nav-link">Il dibattito</a>
+      <a href="index.html#fonti" class="nav-link">Fonti</a>
+    </div>
   </div>
 </nav>
 
