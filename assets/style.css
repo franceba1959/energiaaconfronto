@@ -146,7 +146,7 @@ nav { background: white; border-bottom: 1px solid var(--border); position: stick
 
 /* FOOTER */
 footer { background: var(--teal-dark); color: rgba(255,255,255,0.7); padding: 40px 0; margin-top: 80px; }
-.footer-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap; }
+.footer-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: center; align-items: flex-start; gap: 72px; flex-wrap: wrap; }
 .footer-logo { font-family: var(--font-serif); font-size: 20px; color: white; margin-bottom: 8px; }
 .footer-tagline { font-size: 13px; max-width: 280px; line-height: 1.6; }
 .footer-fonti h4 { color: white; font-size: 13px; margin-bottom: 10px; }
