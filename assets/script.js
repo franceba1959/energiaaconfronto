@@ -1,5 +1,17 @@
 /* Energia a Confronto — Script globale */
 
+// Toggle menu di navigazione mobile
+function toggleMobileMenu() {
+  const links = document.querySelector('.nav-links');
+  const btn = document.querySelector('.nav-hamburger');
+  if (!links || !btn) return;
+  const isOpen = links.classList.toggle('open');
+  btn.innerHTML = isOpen
+    ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>'
+    : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+  btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+
 // Toggle schede espandibili (homepage)
 function toggle(row) {
   const isOpen = row.classList.contains('open');
