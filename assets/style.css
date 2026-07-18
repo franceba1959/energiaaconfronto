@@ -156,7 +156,7 @@ footer { background: var(--teal-dark); color: rgba(255,255,255,0.7); padding: 40
 .footer-fonti-list { font-size: 12px; line-height: 2.2; max-width: 320px; }
 .footer-fonti-list a { color: rgba(255,255,255,0.85); text-decoration: none; }
 .footer-fonti-list a:hover { color: white; text-decoration: underline; }
-.footer-note { font-size: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.15); text-align: center; width: 100%; }
+.footer-note { grid-column: 1 / -1; font-size: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.15); text-align: center; width: 100%; }
 
 @media (max-width: 768px) {
   .cifre-grid { grid-template-columns: 1fr; }
