@@ -1,5 +1,18 @@
 /* Energia a Confronto — Script globale */
 
+// Il banner "Affidabilità dati" può andare su più righe su schermi stretti.
+// Questa funzione misura la sua altezza reale e sposta il menu di conseguenza,
+// così il menu resta sempre visibile sotto il banner e non viene coperto.
+function syncNavOffset() {
+  const banner = document.querySelector('.legend-banner');
+  const nav = document.querySelector('nav');
+  if (!banner || !nav) return;
+  nav.style.top = banner.offsetHeight + 'px';
+}
+window.addEventListener('load', syncNavOffset);
+window.addEventListener('resize', syncNavOffset);
+document.addEventListener('DOMContentLoaded', syncNavOffset);
+
 // Toggle menu di navigazione mobile
 function toggleMobileMenu() {
   const links = document.querySelector('.nav-links');
