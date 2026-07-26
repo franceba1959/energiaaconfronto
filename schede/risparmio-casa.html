@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risparmio energetico — Casa — Energia a Confronto</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --nav-max-width: 900px;
+    --teal: #1B6B72; --teal-dark: #0F4A50; --teal-light: #E8F4F5;
+    --graphite: #2D2D2D; --gray: #6B7280; --gray-light: #F3F4F6;
+    --warm-white: #FAFAF8; --border: #E5E7EB;
+    --yellow: #FEF3C7; --yellow-border: #F59E0B; --yellow-text: #78350F;
+    --orange: #FFEDD5; --orange-border: #F97316; --orange-text: #7C2D12;
+    --green-ok: #D1FAE5; --green-text: #065F46;
+    --amber-ok: #FEF3C7; --amber-text: #92400E;
+    --red-ok: #FEE2E2; --red-text: #991B1B;
+    --accent: #F59E0B;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--warm-white); color: var(--graphite); font-size: 16px; line-height: 1.7; }
+
+  .legend-banner { background: var(--teal-dark); color: white; font-size: 12px; padding: 7px 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; position: sticky; top: 0; z-index: 101; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+  .sw-none { background: white; border: 1px solid rgba(255,255,255,0.4); }
+  .sw-yellow { background: #FEF3C7; border: 1px solid #F59E0B; }
+  .sw-orange { background: #FFEDD5; border: 1px solid #F97316; }
+
+  nav { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 33px; z-index: 100; box-shadow: var(--shadow); }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-size: 17px; color: var(--teal); text-decoration: none; }
+  .nav-logo em { font-style: italic; }
+  .nav-back { font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; transition: background 0.15s; }
+  .nav-back:hover { background: var(--teal-light); color: var(--teal); }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+  .scheda-hero { padding: 48px 0 32px; border-bottom: 1px solid var(--border); }
+  .breadcrumb { font-size: 12px; color: var(--gray); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .breadcrumb a { color: var(--teal); text-decoration: none; }
+  .scheda-icon-title { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .scheda-big-icon { font-size: 44px; }
+  .scheda-title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 40px); font-weight: normal; color: var(--graphite); line-height: 1.2; }
+  .scheda-subtitle { font-size: 16px; color: var(--gray); margin-bottom: 20px; }
+  .scheda-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+  .pill-green { background: var(--green-ok); color: var(--green-text); }
+  .pill-amber { background: var(--amber-ok); color: var(--amber-text); }
+  .pill-red { background: var(--red-ok); color: var(--red-text); }
+  .pill-gray { background: var(--gray-light); color: var(--gray); border: 1px solid var(--border); }
+  .scheda-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--gray); }
+  .scheda-meta-item::before { content: "·"; color: var(--accent); font-size: 16px; margin-right: 5px; }
+
+  .blocco { padding: 40px 0; border-bottom: 1px solid var(--border); }
+  .blocco:last-child { border-bottom: none; }
+  .blocco-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .blocco-title { font-family: var(--font-serif); font-size: 24px; font-weight: normal; color: var(--graphite); margin-bottom: 20px; }
+
+  .blocco-1 { background: var(--teal-light); border-radius: var(--radius); padding: 32px; margin: 0 -8px; }
+  .blocco-1 .blocco-num { color: var(--teal-dark); }
+  .blocco-1 .blocco-title { color: var(--teal-dark); }
+
+  .kpi-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 24px 0; }
+  .kpi-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; flex: 1; min-width: 140px; box-shadow: var(--shadow); }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); font-weight: 600; margin-bottom: 6px; }
+  .kpi-value { font-family: var(--font-serif); font-size: 28px; color: var(--teal-dark); line-height: 1; margin-bottom: 2px; }
+  .kpi-sub { font-size: 12px; color: var(--gray); }
+
+  .hl-y { background: var(--yellow); border-bottom: 1.5px solid var(--yellow-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-o { background: var(--orange); border-bottom: 1.5px solid var(--orange-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-note { display: none; margin: 6px 0 8px; padding: 8px 12px; border-radius: 6px; font-size: 13px; line-height: 1.55; }
+  .hl-note.y { background: #FFFBEB; border-left: 3px solid var(--yellow-border); color: var(--yellow-text); }
+  .hl-note.o { background: #FFF7ED; border-left: 3px solid var(--orange-border); color: var(--orange-text); }
+  .hl-note.open { display: block; }
+
+  .blocco p { margin-bottom: 14px; font-size: 15px; line-height: 1.75; color: var(--graphite); }
+  .blocco ul { margin: 0 0 16px 22px; }
+  .blocco li { margin-bottom: 6px; font-size: 15px; line-height: 1.65; color: var(--graphite); }
+  .blocco h3 { font-size: 18px; font-weight: 600; color: var(--graphite); margin: 28px 0 10px; }
+  .blocco h4 { font-size: 15px; font-weight: 600; color: var(--teal); margin: 20px 0 8px; }
+
+  .sidice-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .sidice-table th { background: var(--graphite); color: white; font-size: 13px; font-weight: 600; padding: 10px 16px; text-align: left; }
+  .sidice-table th:first-child { border-radius: 6px 0 0 0; }
+  .sidice-table th:last-child { border-radius: 0 6px 0 0; }
+  .sidice-table td { padding: 14px 16px; font-size: 14px; vertical-align: top; line-height: 1.6; border-bottom: 1px solid var(--border); }
+  .sidice-table tr:last-child td { border-bottom: none; }
+  .sidice-table td:first-child { background: #FFF9F0; color: var(--amber-text); font-style: italic; width: 40%; border-right: 1px solid var(--border); }
+  .sidice-table td:last-child { background: white; }
+
+  .fonte-link { font-size: 12px; color: var(--teal); text-decoration: underline; text-underline-offset: 2px; }
+  .fonte-link:hover { text-decoration-color: var(--teal); opacity: 0.8; }
+
+  .innovazione-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 8px; }
+  .innovazione-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .inno-horizon { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--teal); margin-bottom: 6px; }
+  .inno-title { font-size: 15px; font-weight: 600; color: var(--graphite); margin-bottom: 8px; line-height: 1.3; }
+  .inno-desc { font-size: 13px; color: var(--gray); line-height: 1.55; }
+
+  .fonti-box { background: var(--gray-light); border-radius: var(--radius); padding: 20px; margin-top: 40px; }
+  .fonti-box h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); margin-bottom: 12px; }
+  .fonte-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+  .fonte-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 6px; }
+  .fonte-item a { color: var(--teal); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .kpi-row { flex-direction: column; }
+    .innovazione-grid { grid-template-columns: 1fr; }
+    .sidice-table, .sidice-table tbody, .sidice-table tr, .sidice-table td { display: block; }
+    .sidice-table td:first-child { width: 100%; border-right: none; border-bottom: 1px solid var(--yellow-border); }
+  }
+  @media (max-width: 600px) {
+    .page { padding: 0 14px 60px; }
+    .scheda-title { font-size: 24px !important; }
+    .kpi-row { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .kpi-card { min-width: 0 !important; padding: 12px 14px; }
+    .kpi-value { font-size: 20px !important; }
+    .kpi-label { font-size: 10px; }
+    .kpi-sub { font-size: 10px; }
+    .blocco-1 { padding: 20px 14px; margin: 0; }
+    .blocco-title { font-size: 20px; }
+    .sidice-table td { font-size: 13px; padding: 10px 10px; }
+    .sidice-table td:first-child { width: 100%; display: block; border-right: none; border-bottom: 1px solid #F59E0B; }
+    .sidice-table td:last-child { display: block; }
+    .sidice-table tr { display: block; margin-bottom: 12px; border: 1px solid #E5E7EB; border-radius: 6px; overflow: hidden; }
+    .sidice-table thead { display: none; }
+    .innovazione-grid { grid-template-columns: 1fr !important; }
+    .blocco h3 { font-size: 16px; }
+    .blocco p { font-size: 14px; }
+    .fonti-box { padding: 16px; }
+    .legend-banner { font-size: 11px; gap: 8px; padding: 6px 12px; }
+  }
+  @media (max-width: 600px) {
+    .legend-banner { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; padding: 10px 16px !important; font-size: 11px !important; }
+    .legend-item { display: flex !important; align-items: center !important; gap: 6px !important; font-size: 11px !important; }
+    .legend-swatch { width: 14px !important; height: 14px !important; flex-shrink: 0 !important; }
+  }
+</style>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div class="legend-banner">
+  <strong style="margin-right:4px;">Affidabilità dati:</strong>
+  <div class="legend-item"><span class="legend-swatch sw-none"></span> Fonte primaria verificata</div>
+  <div class="legend-item"><span class="legend-swatch sw-yellow"></span> Fonte secondaria — tocca per la nota</div>
+  <div class="legend-item"><span class="legend-swatch sw-orange"></span> Nessuna fonte istituzionale — tocca per la nota</div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><svg class="nav-logo-icon" width="24" height="24" viewBox="0 0 40 40" aria-hidden="true" style="flex-shrink:0;"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2.2"/><rect x="11" y="22" width="3.4" height="7" rx="1" fill="currentColor"/><rect x="16.3" y="16" width="3.4" height="13" rx="1" fill="currentColor"/><rect x="21.6" y="11" width="3.4" height="18" rx="1" fill="currentColor"/><rect x="26.9" y="18" width="3.4" height="11" rx="1" fill="currentColor"/></svg><span>Energia <em>a Confronto</em></span></a>
+    <a href="../index.html#risparmio" class="nav-back">← <span>Risparmio energetico</span></a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="scheda-hero">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a> <span>/</span>
+      <a href="../index.html#risparmio">Risparmio energetico</a> <span>/</span>
+      Casa
+    </div>
+    <div class="scheda-icon-title">
+      <span class="scheda-big-icon">🏠</span>
+      <h1 class="scheda-title">Risparmio energetico — Casa</h1>
+    </div>
+    <p class="scheda-subtitle">Cosa puoi fare in ambito domestico per ridurre i consumi: isolamento, infissi, elettrodomestici, comportamenti quotidiani, incentivi e quadro normativo europeo e italiano.</p>
+    <div class="scheda-pills">
+      <span class="pill pill-green">Interventi pratici</span>
+      <span class="pill pill-gray">Incentivo attivo: Conto Termico 3.0</span>
+      <span class="pill pill-gray">Normativa: EED + EPBD</span>
+    </div>
+    <div class="scheda-meta">
+      <span class="scheda-meta-item">Aggiornato: luglio 2026</span>
+      <span class="scheda-meta-item">Fonti: ENEA · GSE · MASE · Commissione Europea · Eurostat</span>
+    </div>
+  </div>
+
+  <!-- BLOCCO 1 -->
+  <div class="blocco">
+    <div class="blocco-1">
+      <div class="blocco-num">Blocco 1</div>
+      <h2 class="blocco-title">Cosa puoi fare subito</h2>
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Isolamento pareti (cappotto)</div>
+          <div class="kpi-value">−40%</div>
+          <div class="kpi-sub">consumo di combustibile — ENEA</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Stand-by elettrodomestici</div>
+          <div class="kpi-value">10%</div>
+          <div class="kpi-sub">dei consumi di un apparecchio — ENEA</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Ecobonus 2024</div>
+          <div class="kpi-value">28+</div>
+          <div class="kpi-sub">miliardi di € investiti — ENEA</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Riscaldamento in bolletta</div>
+          <div class="kpi-value">64,1%</div>
+          <div class="kpi-sub">dei consumi finali famiglie — Eurostat 2024</div>
+        </div>
+      </div>
+
+      <h3>Isolamento dell'involucro (pareti, tetto, sottotetto)</h3>
+      <p>L'isolamento delle pareti esterne (il "cappotto termico") è tra le misure più efficaci in ambito residenziale: secondo l'ENEA può ridurre fino al 40% il consumo di combustibile. Per orientarsi tra i materiali isolanti disponibili, l'ENEA ha messo a punto l'Indice di Sostenibilità Economica e Ambientale (ISEA), che confronta costo, prestazione energetica e impatto ambientale in funzione di edificio e zona climatica. Anche tetto e sottotetto sono superfici disperdenti rilevanti: la loro coibentazione riduce sia le dispersioni invernali sia il surriscaldamento estivo.</p>
+      <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.efficienzaenergetica.enea.it/servizi-per/cittadini/interventi-di-efficienza-e-risparmio-energetico-nelle-abitazioni/solai-e-pareti/sistemi-di-isolamento-termico.html" target="_blank" class="fonte-link">ENEA — Sistemi di isolamento termico →</a> · <a href="https://www.media.enea.it/comunicati-e-news/archivio-anni/anno-2023/energia-cappotto-termico-arriva-l-indicatore-isea-per-confrontare-costi-e-impatti-dei-materiali-isolanti.html" target="_blank" class="fonte-link">ENEA — Indicatore ISEA →</a></p>
+
+      <h3>Infissi</h3>
+      <p>La sostituzione di finestre e porte con infissi a doppio o triplo vetro e una buona tenuta all'aria riduce le dispersioni di calore attraverso una delle superfici più critiche dell'involucro edilizio, soprattutto negli edifici costruiti prima degli anni '90.</p>
+
+      <h3>Elettrodomestici</h3>
+      <p>L'etichetta energetica europea, definita dal regolamento UE sull'energy labelling, classifica gli elettrodomestici su una scala dalla A (più efficiente) alla G (meno efficiente), aggiornata periodicamente per riflettere i miglioramenti tecnologici. Scegliere apparecchi nelle classi più efficienti riduce in modo strutturale il consumo elettrico nel tempo, soprattutto per gli apparecchi a funzionamento continuo come frigoriferi e congelatori.</p>
+
+      <h3>Riscaldamento e raffrescamento</h3>
+      <p>Alcuni comportamenti raccomandati dall'ENEA:</p>
+      <ul>
+        <li>mantenere la temperatura interna intorno ai 19–20°C in inverno: ogni grado in più aumenta i consumi in modo significativo;</li>
+        <li>effettuare la manutenzione periodica della caldaia e degli impianti, per mantenerne l'efficienza nel tempo;</li>
+        <li>schermare le superfici vetrate esposte al sole in estate (tende, persiane, tapparelle) per ridurre il carico di raffrescamento;</li>
+        <li>valutare soluzioni di raffrescamento passivo (ventilazione naturale, ombreggiamento) prima di ricorrere alla climatizzazione attiva.</li>
+      </ul>
+      <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.efficienzaenergetica.enea.it/vi-segnaliamo/riscaldamento-10-consigli-per-risparmiare-e-rispettare-l-ambiente.html" target="_blank" class="fonte-link">ENEA — Riscaldamento: 10 consigli →</a> · <a href="https://www.media.enea.it/comunicati-e-news/archivio-anni/anno-2025/energia-climatizzazione-i-consigli-enea-per-una-casa-green-e-risparmiare-sui-costi.html" target="_blank" class="fonte-link">ENEA — Climatizzazione estiva →</a></p>
+
+      <h3>Comportamenti quotidiani</h3>
+      <p>Il "Decalogo del Consumo Energetico" dell'ENEA suggerisce, tra le altre cose:</p>
+      <ul>
+        <li>spegnere le luci e gli apparecchi non in uso invece di lasciarli in stand-by (fino al 10% dei consumi di un apparecchio);</li>
+        <li>utilizzare lavatrice e lavastoviglie a pieno carico e nelle fasce orarie più convenienti;</li>
+        <li>arieggiare gli ambienti in modo rapido e mirato, evitando di lasciare le finestre aperte a lungo con il riscaldamento acceso;</li>
+        <li>regolare il termostato in modo differenziato tra ambienti abitati e non abitati.</li>
+      </ul>
+      <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.efficienzaenergetica.enea.it/vi-segnaliamo/caro-energia-decalogo-enea-su-risparmio-energetico-intervista-a-nicola-andrea-calabrese-enea.html" target="_blank" class="fonte-link">ENEA — Decalogo del Consumo Energetico →</a></p>
+    </div>
+  </div>
+
+  <!-- BLOCCO 2 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 2</div>
+    <h2 class="blocco-title">Quadro tecnico-normativo europeo e italiano</h2>
+    <p>Il risparmio energetico in ambito domestico si inserisce in un quadro normativo articolato su più livelli: europeo, nazionale e degli strumenti di incentivazione. Sintesi aggiornata a luglio 2026.</p>
+
+    <h3>Direttiva europea sull'efficienza energetica (EED)</h3>
+    <p>La Direttiva sull'efficienza energetica, rifusa con la Direttiva (UE) 2023/1791, fissa l'obiettivo vincolante per l'Unione Europea di ridurre il consumo di energia dell'11,7% entro il 2030 rispetto alle proiezioni del 2020. In Italia il termine per il recepimento nazionale era fissato all'11 ottobre 2025; <span class="hl-o" onclick="toggleNote(this)">al momento della redazione il decreto di recepimento definitivo non risultava ancora pubblicato<span class="hl-note o">🟠 Verificato al 26/07/2026: nessun testo definitivo in Gazzetta Ufficiale reperito. Da ricontrollare su normattiva.it o mase.gov.it prima di dare per acquisita la data di entrata in vigore.</span></span>.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://eur-lex.europa.eu/legal-content/it/ALL/?uri=CELEX:32023L1791" target="_blank" class="fonte-link">Direttiva (UE) 2023/1791 — EUR-Lex →</a></p>
+
+    <h3>Direttiva sulla prestazione energetica nell'edilizia (EPBD)</h3>
+    <p>La Direttiva EPBD, rifusa con la Direttiva (UE) 2024/1275, è entrata in vigore il 28 maggio 2024 e deve essere recepita dagli Stati membri entro il 29 maggio 2026. Per il patrimonio edilizio residenziale, ogni Paese dovrà ridurre il consumo medio di energia primaria del 16% entro il 2030 e del 20–22% entro il 2035, concentrando almeno il 55% della riduzione sugli edifici a peggiore prestazione energetica.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://energy.ec.europa.eu/topics/energy-efficiency/energy-performance-buildings/energy-performance-buildings-directive_en" target="_blank" class="fonte-link">Commissione Europea, DG Energia — pagina EPBD →</a></p>
+
+    <h3>PNIEC — obiettivo di riqualificazione residenziale</h3>
+    <p>Il PNIEC, aggiornato dal MASE nel 2024, individua per il settore residenziale un tasso di riqualificazione energetica obiettivo dell'1,9% annuo nel decennio 2020–2030, da incrementare al 2,7% nei decenni successivi.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.mase.gov.it/portale/documents/d/guest/pniec_2024_revfin_01072024-pdf" target="_blank" class="fonte-link">MASE — Testo integrale PNIEC 2024 →</a></p>
+
+    <h3>Conto Termico (GSE)</h3>
+    <p>Il Conto Termico è l'incentivo statale gestito dal GSE per interventi di efficienza energetica e produzione di energia termica da fonti rinnovabili. Con il Decreto Ministeriale del 7 agosto 2025 è stato approvato il Conto Termico 3.0, con regole operative disponibili dal 19 dicembre 2025 e una dotazione annua di 900 milioni di euro. Il portale PortalTermico è stato attivato il 2 febbraio 2026 alle ore 12:00; per l'elevato numero di richieste il GSE ne ha disposto la sospensione temporanea dal 3 marzo 2026, riaprendolo il 13 aprile 2026 alle ore 12:00, con proroga dei termini per le domande sospese nel frattempo.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.gse.it/servizi-per-te/news/conto-termico-3-0-pubblicate-le-regole-applicative" target="_blank" class="fonte-link">GSE — Regole Conto Termico 3.0 →</a> · <a href="https://www.gse.it/servizi-per-te/news/conto-termico-3-0-riapre-il-portale" target="_blank" class="fonte-link">GSE — Riapertura portale →</a></p>
+
+    <h3>Attestato di Prestazione Energetica (APE)</h3>
+    <p>L'APE descrive le prestazioni energetiche di un edificio, dalla classe A alla G. Il Decreto MASE del 28 ottobre 2025 ("Decreto Requisiti Minimi"), in vigore dal 3 giugno 2026, aggiorna i criteri tecnici di riferimento.</p>
+
+    <h3>Incentivi fiscali in vigore</h3>
+    <p>Il principale strumento resta la detrazione fiscale (Ecobonus). Secondo il Rapporto Annuale ENEA sulle detrazioni fiscali, nel 2024 sono stati investiti oltre 28 miliardi di euro per l'efficienza energetica degli edifici. Le aliquote e i massimali sono definiti annualmente dalla legge di bilancio: verificare lo stato aggiornato al momento della lettura.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.pubblicazioni.enea.it/le-pubblicazioni-enea/edizioni-enea/anno-2025/le-detrazioni-fiscali-per-lefficienza-energetica-e-lutilizzo-delle-fonti-rinnovabili-di-energia-negli-edifici-esistenti-rapporto-annuale-2025-dati-2024.html" target="_blank" class="fonte-link">ENEA — Rapporto Annuale Detrazioni Fiscali 2025 →</a></p>
+  </div>
+
+  <!-- BLOCCO 3 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 3</div>
+    <h2 class="blocco-title">Si dice / I dati dicono</h2>
+    <table class="sidice-table">
+      <thead><tr><th>Si dice...</th><th>I dati dicono...</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>"Isolare casa non si ripaga mai"</td>
+          <td>I dati ENEA raccolti tramite l'indicatore ISEA mostrano tempi di ritorno dell'investimento variabili in funzione del tipo di intervento, della zona climatica e degli incentivi applicati, ma comunque contenuti nell'arco della vita utile dell'edificio.</td>
+        </tr>
+        <tr>
+          <td>"Il cappotto termico serve solo al Nord"</td>
+          <td>Secondo Eurostat, nel 2024 in Italia il riscaldamento degli ambienti ha rappresentato il 64,1% del consumo finale di energia delle famiglie, contro una media UE del 61,5%. L'isolamento termico non agisce solo sul riscaldamento invernale: contribuisce anche a contenere il surriscaldamento estivo — il progetto ENEA sui tetti e pareti verdi ha misurato riduzioni della temperatura interna fino a 3°C in condizioni estive.</td>
+        </tr>
+        <tr>
+          <td>"Gli elettrodomestici di classe energetica alta non fanno reale differenza in bolletta"</td>
+          <td>Il sistema di etichettatura energetica europea è costruito proprio per rendere confrontabile la differenza di consumo elettrico annuo tra apparecchi di classe diversa a parità di funzione. Per gli apparecchi a funzionamento continuo, come frigoriferi e congelatori, la differenza si accumula nel tempo su base annua.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BLOCCO 4 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 4</div>
+    <h2 class="blocco-title">Innovazioni in arrivo</h2>
+    <div class="innovazione-grid">
+      <div class="innovazione-card">
+        <div class="inno-horizon">In sviluppo — TRL4</div>
+        <div class="inno-title">Materiali isolanti di nuova generazione</div>
+        <div class="inno-desc">Tra i materiali super isolanti (SIM) studiati in ambito tecnico-scientifico figurano l'aerogel e i pannelli isolanti sottovuoto (VIP), indicati per edifici con vincoli architettonici. ENEA ha brevettato nel 2022 il BIOAERMAC, materiale ad alto isolamento termico e acustico sviluppato nel progetto INNCED con l'azienda Fluorsid, ancora a uno stadio di maturità tecnologica iniziale (TRL4).</div>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">Disponibile ora</div>
+        <div class="inno-title">Gestione intelligente dei consumi</div>
+        <div class="inno-desc">L'ENEA promuove l'adozione di smart meter per il monitoraggio in tempo reale. Tra i brevetti ENEA figura l'Idro Smart Meter, che integra elettricità, gas e consumo idrico in un unico sistema.</div>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">Entro fine 2026</div>
+        <div class="inno-title">Evoluzioni normative europee (EPBD)</div>
+        <div class="inno-desc">Con il recepimento della Direttiva EPBD entro il 29 maggio 2026, ogni Stato membro dovrà presentare entro fine 2026 il proprio piano nazionale di ristrutturazione degli edifici. La direttiva introduce anche il passaporto di ristrutturazione degli edifici e sportelli unici (one-stop shop) di assistenza tecnica.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fonti-box">
+    <h3>Fonti principali di questa scheda</h3>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.efficienzaenergetica.enea.it" target="_blank">ENEA — Efficienza Energetica</a> (interventi, decalogo, ISEA)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.gse.it/servizi-per-te/efficienza-energetica" target="_blank">GSE — Conto Termico</a> (incentivi)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.mase.gov.it/portale/documents/d/guest/pniec_2024_revfin_01072024-pdf" target="_blank">MASE — PNIEC 2024</a> (obiettivi settore residenziale)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://energy.ec.europa.eu/topics/energy-efficiency/energy-performance-buildings/energy-performance-buildings-directive_en" target="_blank">Commissione Europea — Direttiva EPBD</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Energy_consumption_in_households" target="_blank">Eurostat — Energy consumption in households</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://eur-lex.europa.eu/legal-content/it/ALL/?uri=CELEX:32023L1791" target="_blank">EUR-Lex — Direttiva (UE) 2023/1791 (EED)</a></span></div>
+  </div>
+</div>
+
+<script>
+function toggleNote(el) {
+  const note = el.querySelector('.hl-note');
+  if (!note) return;
+  document.querySelectorAll('.hl-note.open').forEach(n => { if (n !== note) n.classList.remove('open'); });
+  note.classList.toggle('open');
+}
+</script>
+<script src="../assets/script.js" defer></script>
+</body>
+</html>

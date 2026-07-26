@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risparmio energetico — Trasporti — Energia a Confronto</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --nav-max-width: 900px;
+    --teal: #1B6B72; --teal-dark: #0F4A50; --teal-light: #E8F4F5;
+    --graphite: #2D2D2D; --gray: #6B7280; --gray-light: #F3F4F6;
+    --warm-white: #FAFAF8; --border: #E5E7EB;
+    --yellow: #FEF3C7; --yellow-border: #F59E0B; --yellow-text: #78350F;
+    --orange: #FFEDD5; --orange-border: #F97316; --orange-text: #7C2D12;
+    --green-ok: #D1FAE5; --green-text: #065F46;
+    --amber-ok: #FEF3C7; --amber-text: #92400E;
+    --red-ok: #FEE2E2; --red-text: #991B1B;
+    --accent: #F59E0B;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--warm-white); color: var(--graphite); font-size: 16px; line-height: 1.7; }
+
+  .legend-banner { background: var(--teal-dark); color: white; font-size: 12px; padding: 7px 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; position: sticky; top: 0; z-index: 101; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+  .sw-none { background: white; border: 1px solid rgba(255,255,255,0.4); }
+  .sw-yellow { background: #FEF3C7; border: 1px solid #F59E0B; }
+  .sw-orange { background: #FFEDD5; border: 1px solid #F97316; }
+
+  nav { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 33px; z-index: 100; box-shadow: var(--shadow); }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-size: 17px; color: var(--teal); text-decoration: none; }
+  .nav-logo em { font-style: italic; }
+  .nav-back { font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; transition: background 0.15s; }
+  .nav-back:hover { background: var(--teal-light); color: var(--teal); }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+  .scheda-hero { padding: 48px 0 32px; border-bottom: 1px solid var(--border); }
+  .breadcrumb { font-size: 12px; color: var(--gray); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .breadcrumb a { color: var(--teal); text-decoration: none; }
+  .scheda-icon-title { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .scheda-big-icon { font-size: 44px; }
+  .scheda-title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 40px); font-weight: normal; color: var(--graphite); line-height: 1.2; }
+  .scheda-subtitle { font-size: 16px; color: var(--gray); margin-bottom: 20px; }
+  .scheda-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+  .pill-green { background: var(--green-ok); color: var(--green-text); }
+  .pill-amber { background: var(--amber-ok); color: var(--amber-text); }
+  .pill-red { background: var(--red-ok); color: var(--red-text); }
+  .pill-gray { background: var(--gray-light); color: var(--gray); border: 1px solid var(--border); }
+  .scheda-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--gray); }
+  .scheda-meta-item::before { content: "·"; color: var(--accent); font-size: 16px; margin-right: 5px; }
+
+  .blocco { padding: 40px 0; border-bottom: 1px solid var(--border); }
+  .blocco:last-child { border-bottom: none; }
+  .blocco-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .blocco-title { font-family: var(--font-serif); font-size: 24px; font-weight: normal; color: var(--graphite); margin-bottom: 20px; }
+
+  .blocco-1 { background: var(--teal-light); border-radius: var(--radius); padding: 32px; margin: 0 -8px; }
+  .blocco-1 .blocco-num { color: var(--teal-dark); }
+  .blocco-1 .blocco-title { color: var(--teal-dark); }
+
+  .kpi-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 24px 0; }
+  .kpi-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; flex: 1; min-width: 140px; box-shadow: var(--shadow); }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); font-weight: 600; margin-bottom: 6px; }
+  .kpi-value { font-family: var(--font-serif); font-size: 28px; color: var(--teal-dark); line-height: 1; margin-bottom: 2px; }
+  .kpi-sub { font-size: 12px; color: var(--gray); }
+
+  .hl-y { background: var(--yellow); border-bottom: 1.5px solid var(--yellow-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-o { background: var(--orange); border-bottom: 1.5px solid var(--orange-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-note { display: none; margin: 6px 0 8px; padding: 8px 12px; border-radius: 6px; font-size: 13px; line-height: 1.55; }
+  .hl-note.y { background: #FFFBEB; border-left: 3px solid var(--yellow-border); color: var(--yellow-text); }
+  .hl-note.o { background: #FFF7ED; border-left: 3px solid var(--orange-border); color: var(--orange-text); }
+  .hl-note.open { display: block; }
+
+  .blocco p { margin-bottom: 14px; font-size: 15px; line-height: 1.75; color: var(--graphite); }
+  .blocco ul { margin: 0 0 16px 22px; }
+  .blocco li { margin-bottom: 6px; font-size: 15px; line-height: 1.65; color: var(--graphite); }
+  .blocco h3 { font-size: 18px; font-weight: 600; color: var(--graphite); margin: 28px 0 10px; }
+  .blocco h4 { font-size: 15px; font-weight: 600; color: var(--teal); margin: 20px 0 8px; }
+
+  .sidice-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .sidice-table th { background: var(--graphite); color: white; font-size: 13px; font-weight: 600; padding: 10px 16px; text-align: left; }
+  .sidice-table th:first-child { border-radius: 6px 0 0 0; }
+  .sidice-table th:last-child { border-radius: 0 6px 0 0; }
+  .sidice-table td { padding: 14px 16px; font-size: 14px; vertical-align: top; line-height: 1.6; border-bottom: 1px solid var(--border); }
+  .sidice-table tr:last-child td { border-bottom: none; }
+  .sidice-table td:first-child { background: #FFF9F0; color: var(--amber-text); font-style: italic; width: 40%; border-right: 1px solid var(--border); }
+  .sidice-table td:last-child { background: white; }
+
+  .fonte-link { font-size: 12px; color: var(--teal); text-decoration: underline; text-underline-offset: 2px; }
+  .fonte-link:hover { text-decoration-color: var(--teal); opacity: 0.8; }
+
+  .innovazione-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 8px; }
+  .innovazione-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .inno-horizon { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--teal); margin-bottom: 6px; }
+  .inno-title { font-size: 15px; font-weight: 600; color: var(--graphite); margin-bottom: 8px; line-height: 1.3; }
+  .inno-desc { font-size: 13px; color: var(--gray); line-height: 1.55; }
+
+  .fonti-box { background: var(--gray-light); border-radius: var(--radius); padding: 20px; margin-top: 40px; }
+  .fonti-box h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); margin-bottom: 12px; }
+  .fonte-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+  .fonte-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 6px; }
+  .fonte-item a { color: var(--teal); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .kpi-row { flex-direction: column; }
+    .innovazione-grid { grid-template-columns: 1fr; }
+    .sidice-table, .sidice-table tbody, .sidice-table tr, .sidice-table td { display: block; }
+    .sidice-table td:first-child { width: 100%; border-right: none; border-bottom: 1px solid var(--yellow-border); }
+  }
+  @media (max-width: 600px) {
+    .page { padding: 0 14px 60px; }
+    .scheda-title { font-size: 24px !important; }
+    .kpi-row { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .kpi-card { min-width: 0 !important; padding: 12px 14px; }
+    .kpi-value { font-size: 20px !important; }
+    .kpi-label { font-size: 10px; }
+    .kpi-sub { font-size: 10px; }
+    .blocco-1 { padding: 20px 14px; margin: 0; }
+    .blocco-title { font-size: 20px; }
+    .sidice-table td { font-size: 13px; padding: 10px 10px; }
+    .sidice-table td:first-child { width: 100%; display: block; border-right: none; border-bottom: 1px solid #F59E0B; }
+    .sidice-table td:last-child { display: block; }
+    .sidice-table tr { display: block; margin-bottom: 12px; border: 1px solid #E5E7EB; border-radius: 6px; overflow: hidden; }
+    .sidice-table thead { display: none; }
+    .innovazione-grid { grid-template-columns: 1fr !important; }
+    .blocco h3 { font-size: 16px; }
+    .blocco p { font-size: 14px; }
+    .fonti-box { padding: 16px; }
+    .legend-banner { font-size: 11px; gap: 8px; padding: 6px 12px; }
+  }
+  @media (max-width: 600px) {
+    .legend-banner { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; padding: 10px 16px !important; font-size: 11px !important; }
+    .legend-item { display: flex !important; align-items: center !important; gap: 6px !important; font-size: 11px !important; }
+    .legend-swatch { width: 14px !important; height: 14px !important; flex-shrink: 0 !important; }
+  }
+</style>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div class="legend-banner">
+  <strong style="margin-right:4px;">Affidabilità dati:</strong>
+  <div class="legend-item"><span class="legend-swatch sw-none"></span> Fonte primaria verificata</div>
+  <div class="legend-item"><span class="legend-swatch sw-yellow"></span> Fonte secondaria — tocca per la nota</div>
+  <div class="legend-item"><span class="legend-swatch sw-orange"></span> Nessuna fonte istituzionale — tocca per la nota</div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><svg class="nav-logo-icon" width="24" height="24" viewBox="0 0 40 40" aria-hidden="true" style="flex-shrink:0;"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2.2"/><rect x="11" y="22" width="3.4" height="7" rx="1" fill="currentColor"/><rect x="16.3" y="16" width="3.4" height="13" rx="1" fill="currentColor"/><rect x="21.6" y="11" width="3.4" height="18" rx="1" fill="currentColor"/><rect x="26.9" y="18" width="3.4" height="11" rx="1" fill="currentColor"/></svg><span>Energia <em>a Confronto</em></span></a>
+    <a href="../index.html#risparmio" class="nav-back">← <span>Risparmio energetico</span></a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="scheda-hero">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a> <span>/</span>
+      <a href="../index.html#risparmio">Risparmio energetico</a> <span>/</span>
+      Trasporti
+    </div>
+    <div class="scheda-icon-title">
+      <span class="scheda-big-icon">🚗</span>
+      <h1 class="scheda-title">Risparmio energetico — Trasporti</h1>
+    </div>
+    <p class="scheda-subtitle">Guida efficiente, manutenzione, ricarica ottimale dei veicoli elettrici, standard UE sulle emissioni, Euro 7, incentivi e infrastrutture di ricarica.</p>
+    <div class="scheda-pills">
+      <span class="pill pill-green">Eco-driving</span>
+      <span class="pill pill-gray">Normativa: Reg. 2019/631 + Euro 7</span>
+      <span class="pill pill-amber">Alcuni dati in aggiornamento</span>
+    </div>
+    <div class="scheda-meta">
+      <span class="scheda-meta-item">Aggiornato: luglio 2026</span>
+      <span class="scheda-meta-item">Fonti: ENEA · MASE · ISPRA · Eurostat · ISFORT · EASA · ICCT</span>
+    </div>
+  </div>
+
+  <!-- BLOCCO 1 -->
+  <div class="blocco">
+    <div class="blocco-1">
+      <div class="blocco-num">Blocco 1</div>
+      <h2 class="blocco-title">Cosa puoi fare subito</h2>
+      <p>Chi si sposta ogni giorno per lavoro, studio o necessità personali può ridurre i consumi energetici e le emissioni senza cambiare veicolo, spesso con interventi immediati e a costo zero.</p>
+
+      <h3>Guida efficiente (eco-driving)</h3>
+      <p>Lo stile di guida incide direttamente sul consumo di carburante. Le indicazioni più diffuse includono:</p>
+      <ul>
+        <li>mantenere una velocità costante, evitando accelerazioni e frenate brusche;</li>
+        <li>cambiare marcia il prima possibile (cambio manuale), mantenendo il motore a basso regime;</li>
+        <li>anticipare il traffico e i semafori per ridurre le frenate;</li>
+        <li>moderare la velocità in autostrada: la resistenza aerodinamica cresce in modo non lineare con la velocità;</li>
+        <li>spegnere il motore durante le soste prolungate.</li>
+      </ul>
+      <p><span class="hl-o" onclick="toggleNote(this)">L'ACI indica sul proprio sito un risparmio di carburante nel lungo periodo del 5–15% grazie alla guida ecologica<span class="hl-note o">🟠 Cifra ACI (ente pubblico non economico, fonte approvata) non confermata da un fetch diretto della pagina in questa ricerca — da rileggere su aci.gov.it prima di considerarla definitiva. È comunque un intervallo più cauto delle cifre fino al 20–25% che circolano su comparatori commerciali. Manca una quantificazione ENEA o MASE specifica per il contesto italiano.</span></span>.</p>
+      <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://energia.enea.it/mobilita-sostenibile/" target="_blank" class="fonte-link">ENEA — Mobilità sostenibile →</a></p>
+
+      <h3>Manutenzione del veicolo e pressione degli pneumatici</h3>
+      <p>Una manutenzione regolare (filtri, olio, allineamento, stato dei pneumatici) mantiene l'efficienza del motore vicina ai valori di progetto. Pneumatici sottogonfiati aumentano la resistenza al rotolamento e quindi il consumo di carburante: <span class="hl-o" onclick="toggleNote(this)">secondo l'ETRTO una pressione inferiore di 0,5 bar rispetto al valore corretto aumenterebbe il consumo del 5–8%<span class="hl-note o">🟠 L'ETRTO è un organismo tecnico di normazione del settore pneumatici, non un ente statistico governativo. Altre fonti secondarie non istituzionali riportano un intervallo più ampio (3–15%). Nessuna delle due cifre proviene da ENEA, MASE, ISPRA o Commissione Europea/JRC.</span></span>.</p>
+
+      <h3>Scelta del mezzo in base al tragitto</h3>
+      <p>Per i tragitti brevi in ambito urbano (fino a circa 3–5 km) camminare o usare la bicicletta elimina il consumo energetico del veicolo a motore; per i tragitti medi, il trasporto pubblico o la mobilità condivisa riducono il numero di veicoli in circolazione a parità di persone trasportate.</p>
+
+      <h3>Mobilità condivisa e trasporto pubblico</h3>
+      <p>Il car pooling e il ricorso al trasporto pubblico locale riducono le emissioni per passeggero trasportato, perché lo stesso veicolo o mezzo collettivo copre più spostamenti individuali. ISPRA mette a disposizione un metodo di calcolo per stimare le emissioni di CO2 evitate quando uno spostamento non viene effettuato in auto privata.</p>
+      <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.isprambiente.gov.it/it/servizi/mobilita-sostenibile/strumenti-e-indicatori/metodo-di-calcolo-delle-emissioni-evitate-utilizzando-modalita-di-trasporto-alternative-all2019auto-privata" target="_blank" class="fonte-link">ISPRA — Metodo di calcolo delle emissioni evitate →</a></p>
+
+      <h3>Carico del veicolo</h3>
+      <p>Rimuovere dal veicolo carichi non necessari (bagagliaio, portapacchi non in uso) riduce la massa da muovere e, di conseguenza, il consumo energetico per ogni chilometro percorso — un principio fisico generalmente accettato nella letteratura tecnica sui trasporti.</p>
+
+      <h3>Ricarica ottimale per i veicoli elettrici</h3>
+      <p>Le pratiche di ricarica incidono sulla velocità di degrado della batteria e quindi sui costi di sostituzione o sulla perdita di autonomia nel tempo, non sulla quantità di energia consumata per chilometro:</p>
+      <ul>
+        <li>mantenere lo stato di carica tendenzialmente tra il 10% e l'80% per l'uso quotidiano riduce lo stress sulla batteria rispetto a cicli che toccano ripetutamente 0% o 100%; le batterie LFP tollerano meglio la carica piena rispetto a quelle NMC;</li>
+        <li>la ricarica rapida (DC) frequente accelera il degrado rispetto alla ricarica lenta (AC), soprattutto per l'aumento di temperatura; la ricarica lenta resta la modalità più indicata per l'uso quotidiano;</li>
+        <li>temperature elevate (o molto basse) durante la ricarica accelerano il degrado; i sistemi BMS riducono automaticamente la potenza in condizioni sfavorevoli;</li>
+        <li>la ricarica lenta in AC comporta in genere perdite di conversione inferiori rispetto alla ricarica rapida in DC.</li>
+      </ul>
+      <p><span class="hl-o" onclick="toggleNote(this)">I dati sopra sintetizzano risultati di ricerca tecnica (NREL, IEA, JRC) convergenti nella direzione generale<span class="hl-note o">🟠 Le percentuali esatte di degrado variano da studio a studio in base a chimica della batteria, modello di veicolo e condizioni di utilizzo. Non esiste un valore unico e ufficiale valido in generale.</span></span>.</p>
+      <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://docs.nrel.gov/docs/fy16osti/67002.pdf" target="_blank" class="fonte-link">NREL — Impact of Fast Charging on EV Batteries →</a> · <a href="https://www.iea.org/reports/global-ev-outlook-2025/electric-vehicle-batteries" target="_blank" class="fonte-link">IEA — Global EV Outlook 2025 →</a> · <a href="https://publications.jrc.ec.europa.eu/repository/bitstream/JRC136381/JRC136381_01.pdf" target="_blank" class="fonte-link">JRC — Batteries Regulation Durability →</a></p>
+    </div>
+  </div>
+
+  <!-- BLOCCO 2 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 2</div>
+    <h2 class="blocco-title">Quadro tecnico-normativo (Unione Europea e Italia)</h2>
+    <p>Il settore dei trasporti è regolato da un insieme di norme europee e italiane che fissano obiettivi di riduzione delle emissioni, standard tecnici sui veicoli e incentivi per l'acquisto di mezzi a basse emissioni.</p>
+
+    <h3>Standard UE sulle emissioni di CO2 — Regolamento (UE) 2019/631</h3>
+    <p>Il Regolamento (UE) 2019/631 fissa i livelli di emissioni di CO2 per le auto e i veicoli commerciali leggeri nuovi immatricolati nell'Unione: dal 2021 l'obiettivo WLTP è di 115,1 g CO2/km per le auto nel periodo 2020–2024, con ulteriori target di −15% dal 2025 e, rispetto al 2021, −37,5% per le auto e −31% per i furgoni dal 2030. Il pacchetto "Fit for 55" ha innalzato gli obiettivi al 2030 (−55% auto, −50% furgoni) e al 2035 (−100%, equivalente alla fine delle immatricolazioni di veicoli a combustione tradizionale).</p>
+    <p>La Commissione Europea ha pubblicato il 16 dicembre 2025 la proposta formale di revisione (COM(2025) 995 final): tra le modifiche proposte, riduzione dell'obiettivo 2035 dal 100% al 90%, un meccanismo di conformità media 2030-32 e riduzione dell'obiettivo 2030 per i furgoni dal 50% al 40%. <span class="hl-o" onclick="toggleNote(this)">La proposta è all'esame di Parlamento europeo e Consiglio UE: non è ancora un testo consolidato definitivo<span class="hl-note o">🟠 Stato del processo legislativo aggiornato al 26/07/2026 (proposta COM(2025) 995 final del 16/12/2025). Verificare l'esito dell'iter legislativo su EUR-Lex prima di considerare le nuove soglie definitive.</span></span>.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.europarl.europa.eu/legislative-train/package-automotive-package/file-co2-emission-standards-for-new-light-duty-vehicles-and-labelling" target="_blank" class="fonte-link">Commissione Europea — Proposta COM(2025) 995 final →</a> · <a href="https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=LEGISSUM:4396542" target="_blank" class="fonte-link">EUR-Lex — Regolamento (UE) 2019/631 →</a></p>
+
+    <h3>Normativa Euro 7 — Regolamento (UE) 2024/1257</h3>
+    <p>Il Regolamento (UE) 2024/1257, entrato in vigore il 28 maggio 2024, disciplina l'omologazione dei veicoli riguardo alle emissioni (Euro 7) e alla durabilità delle batterie — la prima normativa europea a introdurre limiti anche per le emissioni non di scarico (particelle da usura di freni e pneumatici), sull'intero parco veicoli. Si applica dal 29 novembre 2026 alle nuove omologazioni di auto e furgoni leggeri e dal 29 novembre 2027 a tutte le nuove immatricolazioni.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://eur-lex.europa.eu/eli/reg/2024/1257/oj" target="_blank" class="fonte-link">EUR-Lex — Regolamento (UE) 2024/1257 (Euro 7) →</a></p>
+
+    <h3>PNIEC — capitolo trasporti</h3>
+    <p>Il PNIEC dedica un capitolo alla decarbonizzazione dei trasporti, tra i settori a maggiore criticità per gli obiettivi 2030 insieme al residenziale. Dal testo integrale (Tabella 1, pag. 16): la quota di energia da FER nei consumi finali lordi dei trasporti nello scenario di policy 2030 è 34%, a fronte di un obiettivo Fit for 55/RePowerEU del 29% e di un dato rilevato 2022 dell'8%. Sul parco veicoli elettrici (pag. 108 e 216): l'obiettivo cumulato di veicoli elettrici puri (BEV) al 2030 è di circa 4,3 milioni; sommando le ibride plug-in (PHEV) si arriva a circa 6,5–6,6 milioni di veicoli elettrificati circolanti.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.mase.gov.it/portale/documents/d/guest/pniec_2024_revfin_01072024-pdf" target="_blank" class="fonte-link">MASE — Testo integrale PNIEC 2024 →</a></p>
+
+    <h3>Incentivi statali per veicoli a basse emissioni</h3>
+    <p>In Italia sono attivi, in parallelo, l'Ecobonus del MIMIT e un bonus collegato a risorse PNRR gestito con il MASE, entrambi rivolti all'acquisto di veicoli nuovi a basse o zero emissioni, con importi differenziati per fascia di emissioni, rottamazione ed eventuale ISEE. Il portale ufficiale è ecobonus.mimit.gov.it, che pubblica avvisi periodici sull'apertura degli sportelli per le diverse categorie di veicolo.</p>
+    <p><span class="hl-o" onclick="toggleNote(this)">Gli importi indicativi circolanti (fino a 11.000€ per un'elettrica con rottamazione e ISEE fino a 30.000€, fino a circa 13.750€ combinando Ecobonus e bonus PNRR)<span class="hl-note o">🟠 Importi orientativi da fonti secondarie che riassumono il decreto in vigore, non verificati direttamente sull'avviso ufficiale in questa ricerca. Cambiano con i decreti attuativi annuali: consultare sempre l'avviso ufficiale in vigore sul portale MIMIT.</span></span> vanno sempre verificati sul portale ufficiale al momento della lettura.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://ecobonus.mimit.gov.it/avvisi-notizie/avvisi/ecobonus-da-mercoledi-18-marzo-2026-riaprono-le-prenotazioni-ciclomotori-e" target="_blank" class="fonte-link">MIMIT — Portale Ecobonus, avvisi →</a></p>
+
+    <h3>Infrastrutture di ricarica — Regolamento AFIR (UE) 2023/1804</h3>
+    <p>Il Regolamento AFIR, in vigore dal 13 aprile 2024, fissa obiettivi vincolanti per la diffusione di punti di ricarica elettrica, idrogeno e altri vettori lungo la rete stradale transeuropea (TEN-T). L'Italia ha trasmesso a Bruxelles il proprio Quadro Strategico Nazionale (previsto dall'art. 14 del Regolamento) a novembre 2025, in ritardo rispetto alla scadenza del 31 dicembre 2024; il MASE lo ha poi messo in consultazione pubblica dall'11 febbraio al 20 marzo 2026.</p>
+    <p><span class="hl-o" onclick="toggleNote(this)">Sulla copertura numerica dell'obiettivo AFIR per le colonnine rapide sulla rete TEN-T core, le fonti secondarie non concordano (circa 90% secondo alcune, 79% a giugno 2026 secondo T&E Italia)<span class="hl-note o">🟠 T&E Italia è un'associazione ambientalista, non un ente statistico ufficiale. Nessuna delle due cifre è confermata su una comunicazione ufficiale MASE/MIMIT aggiornata: il numero preciso va verificato sul Quadro Strategico Nazionale definitivo o sulla piattaforma PNIRE.</span></span>.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://eur-lex.europa.eu/eli/reg/2023/1804/oj?locale=it" target="_blank" class="fonte-link">EUR-Lex — Regolamento (UE) 2023/1804 (AFIR) →</a></p>
+
+    <h3>Carburanti sostenibili per l'aviazione (SAF) — Regolamento ReFuelEU Aviation</h3>
+    <p>Il Regolamento (UE) 2023/2405 impone ai fornitori di carburante quote minime crescenti di carburanti sostenibili per l'aviazione (SAF) presso i principali aeroporti UE: almeno il 2% dal 1° gennaio 2025, fino al 70% entro il 2050. Secondo l'EASA (autorità di monitoraggio del regolamento), nel suo European Aviation Environmental Report 2025, nel 2024 la produzione di SAF rappresentava solo lo 0,53% del consumo mondiale di carburante per aviazione — ben al di sotto del mandato del 2% appena entrato in vigore.</p>
+    <p><span class="hl-o" onclick="toggleNote(this)">Questo è un dato globale/europeo ufficiale, non specifico per l'Italia<span class="hl-note o">🟠 Una cifra disaggregata sull'uso di SAF negli aeroporti italiani non è stata reperita su fonte ENAC in questa ricerca: la raccolta dati nazionale sistematica risulta avviata da ENAC solo dal 2024, nell'ambito del suo Osservatorio Nazionale SAF.</span></span>.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.easa.europa.eu/en/light/topics/european-aviation-environmental-report-2025" target="_blank" class="fonte-link">EASA — European Aviation Environmental Report 2025 →</a> · <a href="https://www.enac.gov.it/ambiente/lenac-per-lambiente/lenac-saf/" target="_blank" class="fonte-link">ENAC — Roadmap SAF →</a></p>
+  </div>
+
+  <!-- BLOCCO 3 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 3</div>
+    <h2 class="blocco-title">Si dice / I dati dicono</h2>
+    <table class="sidice-table">
+      <thead><tr><th>Si dice...</th><th>I dati dicono...</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>"Le auto elettriche inquinano di più a produrle di quanto risparmino nell'uso"</td>
+          <td>È vero che produrre un'auto elettrica genera, a parità di modello, più emissioni di un'auto termica equivalente — soprattutto per la batteria. Ma sull'intero ciclo di vita l'ICCT (luglio 2025) stima che un'elettrica di segmento medio, ricaricata con il mix elettrico medio UE 2025-2044, genera 63 g CO2eq/km, il 73% in meno di un'auto a benzina equivalente (235 g CO2eq/km); con sola elettricità rinnovabile il vantaggio sale al 78%. Le maggiori emissioni di produzione della batteria vengono compensate, in media, dopo circa 17.000 km di utilizzo.</td>
+        </tr>
+        <tr>
+          <td>"I mezzi pubblici in Italia non fanno risparmiare abbastanza CO2 rispetto all'auto privata"</td>
+          <td>I dati ISPRA mostrano che nel 2022 il fattore medio di emissione su strada delle auto circolanti in Italia era di circa 161,7 g CO2/km, superiore sia al target UE per le nuove immatricolazioni (115,1 g CO2/km WLTP) sia al valore medio delle sole auto nuove (119,3 g CO2/km WLTP), per la persistenza nel parco circolante di veicoli più vecchi. Un mezzo collettivo trasporta più persone a parità di percorso, il che rende plausibile un vantaggio del trasporto pubblico per passeggero trasportato — <span class="hl-o" onclick="toggleNote(this)">ma un confronto numerico ufficiale gCO2/passeggero-km per singola modalità italiana non è stato reperito in forma aggregata<span class="hl-note o">🟠 Nessun confronto puntuale, ufficiale e aggregato è stato reperito su ISPRA, Eurostat o MASE per questa ricerca. Per un dato puntuale occorre elaborare i fattori di emissione ISPRA (FE-TRASP) insieme ai dati di occupazione media dei mezzi pubblici.</span></span>.</td>
+        </tr>
+        <tr>
+          <td>"In Italia ci si sposta quasi solo in auto privata"</td>
+          <td>Il 22° Rapporto Audimob di ISFORT (dati 2024, pubblicato gennaio 2026) rileva una quota modale dell'auto privata sugli spostamenti pari al 61,1% nel 2024 (in calo di 1,5 punti sul 2019); poiché gli spostamenti in auto sono mediamente più lunghi di quelli a piedi o in bici, la quota sale a circa l'80% se calcolata sui passeggeri-km, coerente con la stima Eurostat. La quota modale della moto è del 4,5% (I sem. 2025); il tasso di mobilità sostenibile (piedi, bici, TPL) è al 34,7% (I sem. 2025).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BLOCCO 4 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 4</div>
+    <h2 class="blocco-title">Innovazioni in arrivo</h2>
+    <div class="innovazione-grid">
+      <div class="innovazione-card">
+        <div class="inno-horizon">In sviluppo</div>
+        <div class="inno-title">Batterie a stato solido</div>
+        <div class="inno-desc">Ancora in fase di sviluppo industriale, promettono densità energetiche superiori, tempi di ricarica più rapidi e maggiore sicurezza rispetto alle batterie agli ioni di litio con elettrolita liquido. <span class="hl-o" onclick="toggleNote(this)">Non esiste una tempistica ufficiale di commercializzazione da fonte istituzionale<span class="hl-note o">🟠 Le informazioni disponibili provengono principalmente da comunicati di settore: da trattare come prospettiva tecnologica, non come previsione confermata.</span></span>.</div>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">Segmenti hard-to-abate</div>
+        <div class="inno-title">Carburanti sintetici (e-fuel) e idrogeno</div>
+        <div class="inno-desc">Ottenuti combinando idrogeno da elettrolisi con CO2 catturata, sono considerati una possibile opzione per aviazione e trasporto marittimo. L'idrogeno "verde" viene indicato come opzione per il trasporto pesante su lunga percorrenza, grazie a tempi di rifornimento comparabili a quelli tradizionali.</div>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">Attuazione in corso</div>
+        <div class="inno-title">Rete di ricarica pubblica (AFIR)</div>
+        <div class="inno-desc">L'attuazione del Regolamento AFIR comporterà, nei prossimi anni, un ampliamento della rete di ricarica pubblica lungo la rete stradale europea, con requisiti di potenza minima garantita e interoperabilità tra operatori diversi.</div>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">Trasporto pesante</div>
+        <div class="inno-title">Veicoli a idrogeno (fuel cell)</div>
+        <div class="inno-desc">Accanto ai veicoli a batteria, prosegue lo sviluppo di veicoli a celle a combustibile alimentati a idrogeno, con efficienza energetica complessiva generalmente inferiore ai veicoli a batteria ma vantaggi in autonomia e tempi di rifornimento per il trasporto pesante e pubblico su lunga percorrenza.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fonti-box">
+    <h3>Fonti principali di questa scheda</h3>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://energia.enea.it/mobilita-sostenibile/" target="_blank">ENEA — Mobilità sostenibile</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.mase.gov.it/portale/documents/d/guest/pniec_2024_revfin_01072024-pdf" target="_blank">MASE — PNIEC 2024, capitolo trasporti</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.isprambiente.gov.it" target="_blank">ISPRA — Emissioni CO2 trasporto stradale</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.isfort.it/wp-content/uploads/2025/11/22-RapportoMobilita_Sintesi.pdf" target="_blank">ISFORT — 22° Rapporto Audimob (2026)</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.easa.europa.eu/en/light/topics/european-aviation-environmental-report-2025" target="_blank">EASA — European Aviation Environmental Report 2025</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://theicct.org/publication/electric-cars-life-cycle-analysis-emissions-europe-jul25/" target="_blank">ICCT — Life-cycle emissions passenger cars, 2025 update</a> (ricerca indipendente internazionale)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://eur-lex.europa.eu" target="_blank">EUR-Lex</a> — Regolamenti (UE) 2019/631, 2024/1257 (Euro 7), 2023/1804 (AFIR), 2023/2405 (ReFuelEU Aviation)</span></div>
+  </div>
+</div>
+
+<script>
+function toggleNote(el) {
+  const note = el.querySelector('.hl-note');
+  if (!note) return;
+  document.querySelectorAll('.hl-note.open').forEach(n => { if (n !== note) n.classList.remove('open'); });
+  note.classList.toggle('open');
+}
+</script>
+<script src="../assets/script.js" defer></script>
+</body>
+</html>

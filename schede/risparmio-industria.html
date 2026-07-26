@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risparmio energetico — Industria — Energia a Confronto</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --nav-max-width: 900px;
+    --teal: #1B6B72; --teal-dark: #0F4A50; --teal-light: #E8F4F5;
+    --graphite: #2D2D2D; --gray: #6B7280; --gray-light: #F3F4F6;
+    --warm-white: #FAFAF8; --border: #E5E7EB;
+    --yellow: #FEF3C7; --yellow-border: #F59E0B; --yellow-text: #78350F;
+    --orange: #FFEDD5; --orange-border: #F97316; --orange-text: #7C2D12;
+    --green-ok: #D1FAE5; --green-text: #065F46;
+    --amber-ok: #FEF3C7; --amber-text: #92400E;
+    --red-ok: #FEE2E2; --red-text: #991B1B;
+    --accent: #F59E0B;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--warm-white); color: var(--graphite); font-size: 16px; line-height: 1.7; }
+
+  .legend-banner { background: var(--teal-dark); color: white; font-size: 12px; padding: 7px 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; position: sticky; top: 0; z-index: 101; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+  .sw-none { background: white; border: 1px solid rgba(255,255,255,0.4); }
+  .sw-yellow { background: #FEF3C7; border: 1px solid #F59E0B; }
+  .sw-orange { background: #FFEDD5; border: 1px solid #F97316; }
+
+  nav { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 33px; z-index: 100; box-shadow: var(--shadow); }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-size: 17px; color: var(--teal); text-decoration: none; }
+  .nav-logo em { font-style: italic; }
+  .nav-back { font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; transition: background 0.15s; }
+  .nav-back:hover { background: var(--teal-light); color: var(--teal); }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+  .scheda-hero { padding: 48px 0 32px; border-bottom: 1px solid var(--border); }
+  .breadcrumb { font-size: 12px; color: var(--gray); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .breadcrumb a { color: var(--teal); text-decoration: none; }
+  .scheda-icon-title { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .scheda-big-icon { font-size: 44px; }
+  .scheda-title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 40px); font-weight: normal; color: var(--graphite); line-height: 1.2; }
+  .scheda-subtitle { font-size: 16px; color: var(--gray); margin-bottom: 20px; }
+  .scheda-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+  .pill-green { background: var(--green-ok); color: var(--green-text); }
+  .pill-amber { background: var(--amber-ok); color: var(--amber-text); }
+  .pill-red { background: var(--red-ok); color: var(--red-text); }
+  .pill-gray { background: var(--gray-light); color: var(--gray); border: 1px solid var(--border); }
+  .scheda-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--gray); }
+  .scheda-meta-item::before { content: "·"; color: var(--accent); font-size: 16px; margin-right: 5px; }
+
+  .blocco { padding: 40px 0; border-bottom: 1px solid var(--border); }
+  .blocco:last-child { border-bottom: none; }
+  .blocco-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .blocco-title { font-family: var(--font-serif); font-size: 24px; font-weight: normal; color: var(--graphite); margin-bottom: 20px; }
+
+  .blocco-1 { background: var(--teal-light); border-radius: var(--radius); padding: 32px; margin: 0 -8px; }
+  .blocco-1 .blocco-num { color: var(--teal-dark); }
+  .blocco-1 .blocco-title { color: var(--teal-dark); }
+
+  .kpi-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 24px 0; }
+  .kpi-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; flex: 1; min-width: 140px; box-shadow: var(--shadow); }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); font-weight: 600; margin-bottom: 6px; }
+  .kpi-value { font-family: var(--font-serif); font-size: 28px; color: var(--teal-dark); line-height: 1; margin-bottom: 2px; }
+  .kpi-sub { font-size: 12px; color: var(--gray); }
+
+  .hl-y { background: var(--yellow); border-bottom: 1.5px solid var(--yellow-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-o { background: var(--orange); border-bottom: 1.5px solid var(--orange-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-note { display: none; margin: 6px 0 8px; padding: 8px 12px; border-radius: 6px; font-size: 13px; line-height: 1.55; }
+  .hl-note.y { background: #FFFBEB; border-left: 3px solid var(--yellow-border); color: var(--yellow-text); }
+  .hl-note.o { background: #FFF7ED; border-left: 3px solid var(--orange-border); color: var(--orange-text); }
+  .hl-note.open { display: block; }
+
+  .blocco p { margin-bottom: 14px; font-size: 15px; line-height: 1.75; color: var(--graphite); }
+  .blocco ul { margin: 0 0 16px 22px; }
+  .blocco li { margin-bottom: 6px; font-size: 15px; line-height: 1.65; color: var(--graphite); }
+  .blocco h3 { font-size: 18px; font-weight: 600; color: var(--graphite); margin: 28px 0 10px; }
+  .blocco h4 { font-size: 15px; font-weight: 600; color: var(--teal); margin: 20px 0 8px; }
+
+  .sidice-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .sidice-table th { background: var(--graphite); color: white; font-size: 13px; font-weight: 600; padding: 10px 16px; text-align: left; }
+  .sidice-table th:first-child { border-radius: 6px 0 0 0; }
+  .sidice-table th:last-child { border-radius: 0 6px 0 0; }
+  .sidice-table td { padding: 14px 16px; font-size: 14px; vertical-align: top; line-height: 1.6; border-bottom: 1px solid var(--border); }
+  .sidice-table tr:last-child td { border-bottom: none; }
+  .sidice-table td:first-child { background: #FFF9F0; color: var(--amber-text); font-style: italic; width: 40%; border-right: 1px solid var(--border); }
+  .sidice-table td:last-child { background: white; }
+
+  .fonte-link { font-size: 12px; color: var(--teal); text-decoration: underline; text-underline-offset: 2px; }
+  .fonte-link:hover { text-decoration-color: var(--teal); opacity: 0.8; }
+
+  .innovazione-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 8px; }
+  .innovazione-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .inno-horizon { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--teal); margin-bottom: 6px; }
+  .inno-title { font-size: 15px; font-weight: 600; color: var(--graphite); margin-bottom: 8px; line-height: 1.3; }
+  .inno-desc { font-size: 13px; color: var(--gray); line-height: 1.55; }
+
+  .fonti-box { background: var(--gray-light); border-radius: var(--radius); padding: 20px; margin-top: 40px; }
+  .fonti-box h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); margin-bottom: 12px; }
+  .fonte-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+  .fonte-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 6px; }
+  .fonte-item a { color: var(--teal); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .kpi-row { flex-direction: column; }
+    .innovazione-grid { grid-template-columns: 1fr; }
+    .sidice-table, .sidice-table tbody, .sidice-table tr, .sidice-table td { display: block; }
+    .sidice-table td:first-child { width: 100%; border-right: none; border-bottom: 1px solid var(--yellow-border); }
+  }
+  @media (max-width: 600px) {
+    .page { padding: 0 14px 60px; }
+    .scheda-title { font-size: 24px !important; }
+    .kpi-row { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .kpi-card { min-width: 0 !important; padding: 12px 14px; }
+    .kpi-value { font-size: 20px !important; }
+    .kpi-label { font-size: 10px; }
+    .kpi-sub { font-size: 10px; }
+    .blocco-1 { padding: 20px 14px; margin: 0; }
+    .blocco-title { font-size: 20px; }
+    .sidice-table td { font-size: 13px; padding: 10px 10px; }
+    .sidice-table td:first-child { width: 100%; display: block; border-right: none; border-bottom: 1px solid #F59E0B; }
+    .sidice-table td:last-child { display: block; }
+    .sidice-table tr { display: block; margin-bottom: 12px; border: 1px solid #E5E7EB; border-radius: 6px; overflow: hidden; }
+    .sidice-table thead { display: none; }
+    .innovazione-grid { grid-template-columns: 1fr !important; }
+    .blocco h3 { font-size: 16px; }
+    .blocco p { font-size: 14px; }
+    .fonti-box { padding: 16px; }
+    .legend-banner { font-size: 11px; gap: 8px; padding: 6px 12px; }
+  }
+  @media (max-width: 600px) {
+    .legend-banner { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; padding: 10px 16px !important; font-size: 11px !important; }
+    .legend-item { display: flex !important; align-items: center !important; gap: 6px !important; font-size: 11px !important; }
+    .legend-swatch { width: 14px !important; height: 14px !important; flex-shrink: 0 !important; }
+  }
+</style>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div class="legend-banner">
+  <strong style="margin-right:4px;">Affidabilità dati:</strong>
+  <div class="legend-item"><span class="legend-swatch sw-none"></span> Fonte primaria verificata</div>
+  <div class="legend-item"><span class="legend-swatch sw-yellow"></span> Fonte secondaria — tocca per la nota</div>
+  <div class="legend-item"><span class="legend-swatch sw-orange"></span> Nessuna fonte istituzionale — tocca per la nota</div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><svg class="nav-logo-icon" width="24" height="24" viewBox="0 0 40 40" aria-hidden="true" style="flex-shrink:0;"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2.2"/><rect x="11" y="22" width="3.4" height="7" rx="1" fill="currentColor"/><rect x="16.3" y="16" width="3.4" height="13" rx="1" fill="currentColor"/><rect x="21.6" y="11" width="3.4" height="18" rx="1" fill="currentColor"/><rect x="26.9" y="18" width="3.4" height="11" rx="1" fill="currentColor"/></svg><span>Energia <em>a Confronto</em></span></a>
+    <a href="../index.html#risparmio" class="nav-back">← <span>Risparmio energetico</span></a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="scheda-hero">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a> <span>/</span>
+      <a href="../index.html#risparmio">Risparmio energetico</a> <span>/</span>
+      Industria
+    </div>
+    <div class="scheda-icon-title">
+      <span class="scheda-big-icon">🏭</span>
+      <h1 class="scheda-title">Risparmio energetico — Industria</h1>
+    </div>
+    <p class="scheda-subtitle">Diagnosi energetica, recupero di calore, Certificati Bianchi, EU ETS ed ETS2, PNIEC industria, Transizione 5.0 e le tecnologie per i settori "hard-to-abate".</p>
+    <div class="scheda-pills">
+      <span class="pill pill-green">Interventi tecnici</span>
+      <span class="pill pill-gray">Normativa: EU ETS + ETS2 (2028)</span>
+      <span class="pill pill-amber">EED in recepimento</span>
+    </div>
+    <div class="scheda-meta">
+      <span class="scheda-meta-item">Aggiornato: luglio 2026</span>
+      <span class="scheda-meta-item">Fonti: ENEA · MASE · GSE · ISPRA · Commissione Europea</span>
+    </div>
+  </div>
+
+  <!-- BLOCCO 1 -->
+  <div class="blocco">
+    <div class="blocco-1">
+      <div class="blocco-num">Blocco 1</div>
+      <h2 class="blocco-title">Cosa puoi fare subito</h2>
+      <p>Le imprese, comprese le piccole e medie, possono ridurre i consumi energetici e i relativi costi con interventi organizzativi e tecnici, molti dei quali non richiedono investimenti importanti.</p>
+
+      <h3>Diagnosi energetica, anche volontaria</h3>
+      <p>La diagnosi energetica (o audit energetico) è un'analisi sistematica dei consumi di un'azienda, che individua dove e come si spreca energia e quali interventi hanno il miglior rapporto tra costo e risparmio. È obbligatoria per legge per le grandi imprese e le imprese energivore, ma è utile anche per le PMI su base volontaria.</p>
+      <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.efficienzaenergetica.enea.it/servizi-per/imprese/diagnosi-energetiche/indicazioni-operative.html" target="_blank" class="fonte-link">ENEA — Diagnosi energetiche →</a></p>
+
+      <h3>Recupero del calore di scarto e cogenerazione</h3>
+      <p>Molti processi industriali generano calore che, senza un sistema di recupero, viene disperso nell'ambiente. Gli scambiatori di calore permettono di riutilizzarlo per altri usi interni. La cogenerazione ad alto rendimento presenta il potenziale tecnico più alto tra tutti i settori per il recupero di calore.</p>
+      <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.gse.it/servizi-per-te/efficienza-energetica/cogenerazione-ad-alto-rendimento" target="_blank" class="fonte-link">GSE — Cogenerazione ad Alto Rendimento →</a></p>
+
+      <h3>Motori elettrici, inverter e aria compressa</h3>
+      <p>I motori elettrici e i sistemi di aria compressa sono tra i maggiori consumatori di energia elettrica in ambito industriale. La sostituzione con motori ad alta efficienza, l'installazione di inverter e la manutenzione periodica dei sistemi ad aria compressa sono interventi tecnicamente maturi e spesso ammissibili ai Certificati Bianchi.</p>
+
+      <h3>Monitoraggio e gestione dei consumi</h3>
+      <p>Sistemi di monitoraggio energetico in tempo reale consentono di individuare sprechi altrimenti invisibili. L'adozione di un sistema di gestione dell'energia certificato ISO 50001 struttura questo monitoraggio in un processo continuo, e diventerà obbligo per un numero crescente di imprese con il recepimento della Direttiva EED.</p>
+
+      <h3>Illuminazione e coibentazione</h3>
+      <p>La sostituzione dell'illuminazione tradizionale con tecnologia LED (relamping) e la coibentazione di tubazioni, serbatoi e forni industriali riducono le dispersioni con interventi relativamente semplici, spesso finanziabili tramite i Certificati Bianchi.</p>
+
+      <h3>Formazione del personale</h3>
+      <p>I comportamenti del personale (spegnimento di macchinari non in uso, segnalazione tempestiva di anomalie, uso corretto degli impianti) incidono sui consumi energetici quanto e a volte più degli interventi tecnici. <span class="hl-o" onclick="toggleNote(this)">Programmi di formazione interna sono un intervento a basso costo e rapido da attuare<span class="hl-note o">🟠 Non è stata reperita una quantificazione ufficiale dell'impatto dei soli comportamenti del personale sui consumi energetici industriali: l'affermazione è un principio generale, non un dato misurato.</span></span>.</p>
+    </div>
+  </div>
+
+  <!-- BLOCCO 2 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 2</div>
+    <h2 class="blocco-title">Quadro tecnico-normativo (Unione Europea e Italia)</h2>
+    <p>Il settore industriale italiano è regolato da un insieme di norme e meccanismi di incentivazione specifici, distinti da quelli residenziali.</p>
+
+    <h3>Obbligo di diagnosi energetica — D.Lgs. 102/2014 e Direttiva (UE) 2023/1791</h3>
+    <p>Il D.Lgs. 102/2014 impone alle grandi imprese e alle imprese energivore l'obbligo di eseguire una diagnosi energetica ogni quattro anni e di trasmetterne i risultati a ENEA. Le sanzioni per la mancata esecuzione vanno da 4.000 a 40.000 euro, quelle per una diagnosi non conforme da 2.000 a 20.000 euro. Nel ciclo di obblighi chiuso a dicembre 2024 sono state trasmesse 853 diagnosi energetiche da 569 soggetti obbligati, con un risparmio di energia primaria stimato in 76,9 ktep/anno.</p>
+    <p>Il quadro è in fase di aggiornamento per effetto della Direttiva (UE) 2023/1791 (EED), che sostituisce la Direttiva 2012/27/UE e introduce l'obbligo di un Piano d'Azione per l'Efficienza Energetica (PAEE) dopo la diagnosi e, per le imprese con maggiori consumi, un sistema di gestione dell'energia certificato ISO 50001. <span class="hl-o" onclick="toggleNote(this)">L'Italia non ha ancora recepito la Direttiva, la cui scadenza era l'11 ottobre 2025: risulta una bozza di decreto legislativo ancora in consultazione, non un testo definitivo in Gazzetta Ufficiale<span class="hl-note o">🟠 Verificato al 26/07/2026. Le scadenze applicative circolanti in fonti giornalistiche di settore (prima diagnosi entro 11/10/2026, ISO 50001 entro 11/10/2027) sono coerenti tra loro ma vanno confermate sul testo definitivo del decreto, non ancora reperibile su fonte MASE o Gazzetta Ufficiale.</span></span>.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.efficienzaenergetica.enea.it/vi-segnaliamo/diagnosi-energetiche-online-il-rapporto-enea-sui-risultati-al-2025.html" target="_blank" class="fonte-link">ENEA — Rapporto diagnosi energetiche al 2025 →</a> · <a href="https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32023L1791" target="_blank" class="fonte-link">EUR-Lex — Direttiva (UE) 2023/1791 →</a></p>
+
+    <h3>Certificati Bianchi (Titoli di Efficienza Energetica)</h3>
+    <p>I Certificati Bianchi, o Titoli di Efficienza Energetica (TEE), sono il principale meccanismo italiano di incentivazione dell'efficienza energetica nei settori industriale, dei servizi, delle infrastrutture a rete e dei trasporti. Il meccanismo, gestito dal GSE con l'emissione dei titoli affidata al GME, riconosce un certificato per ogni tonnellata equivalente di petrolio (TEP) di risparmio conseguito. Un decreto di aggiornamento pubblicato nel luglio 2025 ha ampliato le tecnologie ammissibili e introdotto i progetti aggregati.</p>
+    <p>Il meccanismo di riconoscimento è confermato su fonte GSE — un titolo per ogni TEP di risparmio certificato — ma <span class="hl-o" onclick="toggleNote(this)">il GSE non fissa un valore economico unico dei titoli: il valore si forma nelle sessioni di scambio sulla piattaforma GME o in contrattazioni bilaterali, quindi è per sua natura variabile nel tempo<span class="hl-note o">🟠 Un valore fisso non è pubblicabile in modo permanente. Il GME pubblica gli esiti di ogni sessione (prezzo e volumi) nella sezione ufficiale "Esiti › Ambiente › TEE › Mercato TEE" del proprio sito, oltre allo storico completo in "Statistiche › Dati Storici": il valore aggiornato va preso da lì, indicando la data della sessione.</span></span>.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.gse.it/servizi-per-te/efficienza-energetica/certificati-bianchi" target="_blank" class="fonte-link">GSE — Certificati Bianchi →</a> · <a href="https://www.mercatoelettrico.org/it-it/Home/Esiti/Ambiente/TEE/Esiti/MercatoTEE" target="_blank" class="fonte-link">GME — Esiti Mercato TEE (dati aggiornati) →</a></p>
+
+    <h3>Sistema europeo di scambio delle quote di emissione (EU ETS)</h3>
+    <p>Gli impianti industriali di maggiori dimensioni (centrali termoelettriche, raffinerie, cementifici, acciaierie e altri impianti energivori) non rientrano negli obiettivi nazionali di riduzione gestiti dal singolo Stato membro, ma nel sistema europeo di scambio di quote di emissione (EU ETS), un sistema "cap and trade" che fissa un tetto massimo di emissioni consentite, ridotto progressivamente nel tempo. Il quadro italiano è stato aggiornato con il decreto-legge 10 settembre 2024, n. 147, in recepimento della Direttiva (UE) 2023/959.</p>
+    <h4>Come funziona in pratica</h4>
+    <p>Ogni anno la Commissione Europea fissa un tetto massimo di emissioni (in tonnellate di CO2 equivalente) per l'insieme degli impianti coperti, e il tetto si riduce nel tempo. Un'impresa deve possedere, a fine anno, tante quote quante sono le tonnellate di CO2 effettivamente emesse. Le quote si ottengono prevalentemente tramite aste, con una parte assegnata gratuitamente alle imprese più esposte alla concorrenza internazionale (per limitare il "carbon leakage", cioè la delocalizzazione della produzione fuori dall'UE); le imprese possono anche scambiarsele tra loro. Esempio: se un'acciaieria investe in efficientamento e riduce le proprie emissioni, può rivendere sul mercato le quote non utilizzate; se una cementeria non riesce a ridurre altrettanto, deve acquistare quote aggiuntive per coprire la differenza. Chi non consegna a fine anno quote sufficienti è soggetto a sanzioni. Questo meccanismo crea un prezzo di mercato della CO2 che rende conveniente investire in riduzione delle emissioni piuttosto che continuare ad acquistare quote. Dal 2005 al 2023 il sistema ha contribuito a ridurre le emissioni di energia elettrica e industria di circa il 47% rispetto al 2005; con la revisione del 2023 l'obiettivo per il 2030 è stato portato al −62% rispetto al 2005.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://climate.ec.europa.eu/eu-action/carbon-markets/about-eu-ets_en" target="_blank" class="fonte-link">Commissione Europea (DG Climate Action) — About the EU ETS →</a></p>
+    <h4>ETS1 vs ETS2 — non vanno confusi</h4>
+    <p>Il sistema originario (talvolta chiamato "ETS1") riguarda i grandi impianti industriali. Dal 2028 entrerà in vigore un secondo sistema, l'ETS2, esteso alle emissioni legate ai combustibili per il riscaldamento degli edifici, al trasporto stradale e a una parte della piccola industria non coperta dal sistema originario. A differenza dell'ETS1, che si applica direttamente ai grandi impianti, l'ETS2 è un sistema "a monte" (upstream): l'obbligo di monitorare le emissioni e consegnare le quote ricade sui fornitori di combustibili — chi immette in commercio benzina, gasolio, gas metano per il riscaldamento — non sui singoli cittadini o automobilisti direttamente. È verosimile che i fornitori trasferiscano in tutto o in parte questo costo sui prezzi finali; per attenuare l'impatto sulle famiglie più vulnerabili è stato istituito il Fondo Sociale per il Clima, finanziato con i proventi delle aste ETS2 e con una quota di quote dell'ETS originario, che dovrebbe mobilitare almeno 86,7 miliardi di euro nel periodo 2026-2032.</p>
+    <p>L'avvio operativo dell'ETS2 è stato posticipato di un anno, dal 2027 al 2028: accordo politico tra Consiglio UE e Parlamento europeo il 9-10 dicembre 2025 nell'ambito della revisione della Legge europea sul clima, formalmente adottato dal Consiglio dell'Unione Europea il 5 marzo 2026.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://climate.ec.europa.eu/eu-action/carbon-markets/ets2-buildings-road-transport-and-additional-sectors_en" target="_blank" class="fonte-link">Commissione Europea — ETS2: buildings, road transport and additional sectors →</a> · <a href="https://www.consilium.europa.eu/en/press/press-releases/2026/03/05/2040-climate-target-council-gives-final-green-light/" target="_blank" class="fonte-link">Consiglio UE — comunicato 5 marzo 2026 →</a></p>
+
+    <h3>PNIEC — capitolo industria</h3>
+    <p>Il PNIEC colloca gli impianti industriali soggetti al sistema ETS in un percorso di riduzione più ambizioso dell'obiettivo generale Fit for 55/RePowerEU. Dal testo integrale (Tabella 1, pag. 16): la riduzione dei gas serra prevista al 2030 per tutti gli impianti vincolati dalla normativa ETS è del 66% rispetto al 2005 nello scenario di policy (contro il 58% dello scenario di riferimento a politiche correnti e il 45% già raggiunto nel 2022), a fronte di un obiettivo generale UE del 62%. La piccola industria non energivora rientra invece, insieme a trasporti, civile, agricoltura e rifiuti, nel Regolamento sulla condivisione degli sforzi (ESR).</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.mase.gov.it/portale/documents/d/guest/pniec_2024_revfin_01072024-pdf" target="_blank" class="fonte-link">MASE — Testo integrale PNIEC 2024 →</a></p>
+
+    <h3>Incentivi per l'efficienza — Piano Transizione 5.0</h3>
+    <p>Il Piano Transizione 5.0, gestito dal MIMIT con il GSE per le verifiche tecniche, riconosceva un credito d'imposta alle imprese che realizzano investimenti in beni strumentali collegati a progetti di riduzione dei consumi energetici. Il credito d'imposta non è più attivo per i nuovi investimenti: la Legge di Bilancio 2026 lo ha sostituito, dal 1° gennaio 2026, con un meccanismo di iperammortamento (maggiorazione del costo fiscale dei beni ai fini dell'ammortamento, non più un credito compensabile in F24), applicabile agli investimenti tra il 1° gennaio 2026 e il 30 settembre 2028. Il credito d'imposta originario resta valido solo per gli investimenti effettuati entro il 31 dicembre 2025. MIMIT e GSE mantengono la stessa denominazione "Transizione 5.0" anche per il nuovo meccanismo.</p>
+    <p class="fonte-link" style="display:block;margin-top:-8px;">Fonte: <a href="https://www.mimit.gov.it/it/incentivi/nuovo-piano-transizione-5-0-iperammortamento" target="_blank" class="fonte-link">MIMIT — Nuovo Piano Transizione 5.0 (iperammortamento) →</a></p>
+  </div>
+
+  <!-- BLOCCO 3 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 3</div>
+    <h2 class="blocco-title">Si dice / I dati dicono</h2>
+    <table class="sidice-table">
+      <thead><tr><th>Si dice...</th><th>I dati dicono...</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>"L'efficientamento energetico industriale costa più di quanto fa risparmiare"</td>
+          <td>I dati raccolti da ENEA attraverso le diagnosi energetiche obbligatorie mostrano risparmi energetici misurabili (76,9 ktep/anno di energia primaria risparmiata nel solo ciclo chiuso a dicembre 2024): se gli interventi venissero sistematicamente realizzati in perdita, le imprese non avrebbero incentivo a farli. I Certificati Bianchi, inoltre, sono costruiti proprio per abbattere il tempo di ritorno degli investimenti. <span class="hl-o" onclick="toggleNote(this)">Un dato aggregato e ufficiale sul tempo medio di ritorno economico non è stato reperito<span class="hl-note o">🟠 Nessun dato aggregato di payback medio è stato reperito su ENEA, MASE o GSE. L'affermazione è supportata dal fatto che gli interventi vengono effettivamente realizzati e generano risparmi misurati, non da un dato di redditività media verificato su fonte primaria.</span></span>.</td>
+        </tr>
+        <tr>
+          <td>"L'industria italiana è indietro sull'efficienza energetica rispetto alla media UE"</td>
+          <td>I dati ISPRA mostrano il contrario: l'industria italiana è tra i settori più efficienti in Europa. Nel 2022 il consumo di energia finale e le emissioni di gas serra per unità di ricchezza prodotta dall'industria italiana erano tra i più bassi dei 27 Stati membri (213,5 tCO2/M€ contro una media UE27 di 234,9 tCO2/M€). Dal 2005 al 2022 le emissioni per unità di energia consumata nel settore industriale si sono ridotte del 10,4%. L'intensità energetica dell'economia italiana è tra le più basse dei principali Paesi europei (83,5 tep contro 98,3 della media UE27 nel 2022). Il quadro è diverso per trasporti e residenziale, dove l'Italia mostra valori superiori alla media europea.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BLOCCO 4 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 4</div>
+    <h2 class="blocco-title">Innovazioni in arrivo</h2>
+    <p>Diverse tecnologie e normative in fase di sviluppo o di prima applicazione potranno incidere sull'efficienza energetica industriale, in particolare per i settori "hard-to-abate": siderurgia, cemento, vetro, ceramica, carta, chimica.</p>
+    <div class="innovazione-grid">
+      <div class="innovazione-card">
+        <div class="inno-horizon">In corso</div>
+        <div class="inno-title">Elettrificazione dei processi industriali</div>
+        <div class="inno-desc">La sostituzione di processi di riscaldamento a combustibili fossili con tecnologie elettriche (forni elettrici, pompe di calore industriali ad alta temperatura) è una delle direzioni principali di decarbonizzazione. ISPRA segnala che l'elettrificazione dei consumi finali nell'industria italiana è già tra le più elevate in Europa.</div>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">Al 2030</div>
+        <div class="inno-title">Idrogeno per i processi ad alta temperatura</div>
+        <div class="inno-desc">Per i processi che richiedono temperature molto elevate (siderurgia, vetro, ceramica, chimica), l'idrogeno "verde" è indicato come vettore alternativo. Uno studio congiunto Confindustria-ENEA (marzo 2025) stima che, includendo anche l'uso come feedstock, il target di domanda di idrogeno al 2030 potrebbe essere coperto per quasi l'87% nei settori a maggior potenziale, con un risparmio stimato di 2-41 milioni di euro/anno per settore in quote ETS non dovute. <span class="hl-o" onclick="toggleNote(this)">Confindustria è un'associazione di categoria<span class="hl-note o">🟠 Studio realizzato con il supporto scientifico di ENEA, il che ne rafforza l'attendibilità metodologica, ma va letto come stima di settore, non come dato ufficiale di pianificazione statale.</span></span>.</div>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">Maturità differenziata</div>
+        <div class="inno-title">Cattura, utilizzo e stoccaggio della CO2 (CCUS)</div>
+        <div class="inno-desc">Per i settori più difficili da decarbonizzare tramite elettrificazione o idrogeno, le tecnologie CCUS sono considerate un'opzione complementare per ridurre le emissioni residue, con un livello di maturità tecnologica e commerciale differenziato a seconda del settore.</div>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">In estensione</div>
+        <div class="inno-title">Digitalizzazione e sistemi di gestione dell'energia</div>
+        <div class="inno-desc">L'estensione dell'obbligo di sistemi di gestione dell'energia certificati (ISO 50001), prevista dalla Direttiva EED in fase di recepimento in Italia, spingerà un numero crescente di imprese ad adottare il monitoraggio digitale dei consumi in tempo reale.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fonti-box">
+    <h3>Fonti principali di questa scheda</h3>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.efficienzaenergetica.enea.it/servizi-per/imprese/diagnosi-energetiche/indicazioni-operative.html" target="_blank">ENEA — Diagnosi energetiche e risultati 2025</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.gse.it/servizi-per-te/efficienza-energetica/certificati-bianchi" target="_blank">GSE — Certificati Bianchi e Cogenerazione</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.mercatoelettrico.org/it-it/Home/Esiti/Ambiente/TEE/Esiti/MercatoTEE" target="_blank">GME — Esiti Mercato TEE</a> (dati aggiornati periodicamente)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://climate.ec.europa.eu/eu-action/carbon-markets/about-eu-ets_en" target="_blank">Commissione Europea (DG Climate Action) — EU ETS ed ETS2</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.mase.gov.it/portale/documents/d/guest/pniec_2024_revfin_01072024-pdf" target="_blank">MASE — PNIEC 2024, capitolo industria</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.isprambiente.gov.it/it/istituto-informa/comunicati-stampa/anno-2024/efficienza-energetica-e-decarbonizzazione-in-italia" target="_blank">ISPRA — Efficienza energetica e decarbonizzazione industria</a></span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.mimit.gov.it/it/incentivi/nuovo-piano-transizione-5-0-iperammortamento" target="_blank">MIMIT — Piano Transizione 5.0</a></span></div>
+  </div>
+</div>
+
+<script>
+function toggleNote(el) {
+  const note = el.querySelector('.hl-note');
+  if (!note) return;
+  document.querySelectorAll('.hl-note.open').forEach(n => { if (n !== note) n.classList.remove('open'); });
+  note.classList.toggle('open');
+}
+</script>
+<script src="../assets/script.js" defer></script>
+</body>
+</html>
