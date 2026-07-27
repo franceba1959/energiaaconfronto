@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Innovazioni future — Energia a Confronto</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --nav-max-width: 900px;
+    --teal: #1B6B72; --teal-dark: #0F4A50; --teal-light: #E8F4F5;
+    --graphite: #2D2D2D; --gray: #6B7280; --gray-light: #F3F4F6;
+    --warm-white: #FAFAF8; --border: #E5E7EB;
+    --yellow: #FEF3C7; --yellow-border: #F59E0B; --yellow-text: #78350F;
+    --orange: #FFEDD5; --orange-border: #F97316; --orange-text: #7C2D12;
+    --green-ok: #D1FAE5; --green-text: #065F46;
+    --amber-ok: #FEF3C7; --amber-text: #92400E;
+    --red-ok: #FEE2E2; --red-text: #991B1B;
+    --accent: #F59E0B;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--warm-white); color: var(--graphite); font-size: 16px; line-height: 1.7; }
+
+  .legend-banner { background: var(--teal-dark); color: white; font-size: 12px; padding: 7px 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; position: sticky; top: 0; z-index: 101; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+  .sw-none { background: white; border: 1px solid rgba(255,255,255,0.4); }
+  .sw-yellow { background: #FEF3C7; border: 1px solid #F59E0B; }
+  .sw-orange { background: #FFEDD5; border: 1px solid #F97316; }
+
+  nav { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 33px; z-index: 100; box-shadow: var(--shadow); }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-size: 17px; color: var(--teal); text-decoration: none; }
+  .nav-logo em { font-style: italic; }
+  .nav-back { font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; transition: background 0.15s; }
+  .nav-back:hover { background: var(--teal-light); color: var(--teal); }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+  .scheda-hero { padding: 48px 0 32px; border-bottom: 1px solid var(--border); }
+  .breadcrumb { font-size: 12px; color: var(--gray); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .breadcrumb a { color: var(--teal); text-decoration: none; }
+  .scheda-icon-title { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .scheda-big-icon { font-size: 44px; }
+  .scheda-title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 40px); font-weight: normal; color: var(--graphite); line-height: 1.2; }
+  .scheda-subtitle { font-size: 16px; color: var(--gray); margin-bottom: 20px; }
+  .scheda-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+  .pill-green { background: var(--green-ok); color: var(--green-text); }
+  .pill-amber { background: var(--amber-ok); color: var(--amber-text); }
+  .pill-red { background: var(--red-ok); color: var(--red-text); }
+  .pill-gray { background: var(--gray-light); color: var(--gray); border: 1px solid var(--border); }
+  .scheda-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--gray); }
+  .scheda-meta-item::before { content: "·"; color: var(--accent); font-size: 16px; margin-right: 5px; }
+
+  .blocco { padding: 40px 0; border-bottom: 1px solid var(--border); }
+  .blocco:last-child { border-bottom: none; }
+  .blocco-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .blocco-title { font-family: var(--font-serif); font-size: 24px; font-weight: normal; color: var(--graphite); margin-bottom: 20px; }
+  .blocco-intro { font-size: 15px; color: var(--gray); margin-bottom: 24px; line-height: 1.7; }
+
+  .blocco-1 { background: var(--teal-light); border-radius: var(--radius); padding: 32px; margin: 0 -8px; }
+  .blocco-1 .blocco-num { color: var(--teal-dark); }
+  .blocco-1 .blocco-title { color: var(--teal-dark); }
+
+  .kpi-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 24px 0; }
+  .kpi-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; flex: 1; min-width: 140px; box-shadow: var(--shadow); }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); font-weight: 600; margin-bottom: 6px; }
+  .kpi-value { font-family: var(--font-serif); font-size: 28px; color: var(--teal-dark); line-height: 1; margin-bottom: 2px; }
+  .kpi-sub { font-size: 12px; color: var(--gray); }
+
+  .hl-y { background: var(--yellow); border-bottom: 1.5px solid var(--yellow-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-o { background: var(--orange); border-bottom: 1.5px solid var(--orange-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-note { display: none; margin: 6px 0 8px; padding: 8px 12px; border-radius: 6px; font-size: 13px; line-height: 1.55; }
+  .hl-note.y { background: #FFFBEB; border-left: 3px solid var(--yellow-border); color: var(--yellow-text); }
+  .hl-note.o { background: #FFF7ED; border-left: 3px solid var(--orange-border); color: var(--orange-text); }
+  .hl-note.open { display: block; }
+
+  .blocco p { margin-bottom: 14px; font-size: 15px; line-height: 1.75; color: var(--graphite); }
+  .blocco ul { margin: 0 0 16px 22px; }
+  .blocco li { margin-bottom: 6px; font-size: 15px; line-height: 1.65; color: var(--graphite); }
+  .blocco h3 { font-size: 18px; font-weight: 600; color: var(--graphite); margin: 28px 0 10px; }
+  .blocco h4 { font-size: 15px; font-weight: 600; color: var(--teal); margin: 20px 0 8px; }
+
+  .fonte-link { font-size: 12px; color: var(--teal); text-decoration: underline; text-underline-offset: 2px; }
+  .fonte-link:hover { text-decoration-color: var(--teal); opacity: 0.8; }
+
+  .innovazione-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin-top: 8px; }
+  .innovazione-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .inno-horizon { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--teal); margin-bottom: 6px; }
+  .inno-title { font-size: 15px; font-weight: 600; color: var(--graphite); margin-bottom: 8px; line-height: 1.3; }
+  .inno-desc { font-size: 13px; color: var(--gray); line-height: 1.55; margin-bottom: 8px; }
+  .inno-link { font-size: 12px; color: var(--teal); text-decoration: none; font-weight: 600; }
+  .inno-link:hover { text-decoration: underline; }
+
+  .timeline-box { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin: 20px 0; box-shadow: var(--shadow); }
+  .timeline-box h4 { color: var(--teal-dark); font-size: 14px; margin: 0 0 6px; }
+
+  .fonti-box { background: var(--gray-light); border-radius: var(--radius); padding: 20px; margin-top: 40px; }
+  .fonti-box h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); margin-bottom: 12px; }
+  .fonte-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+  .fonte-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 6px; }
+  .fonte-item a { color: var(--teal); text-decoration: none; }
+
+  .sys-kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin: 20px 0; }
+  .sys-kpi { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); }
+  .sys-kpi-value { font-family: var(--font-serif); font-size: 24px; color: var(--teal-dark); line-height: 1.1; margin-bottom: 4px; }
+  .sys-kpi-label { font-size: 12px; color: var(--gray); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .kpi-row { flex-direction: column; }
+    .innovazione-grid { grid-template-columns: 1fr; }
+    .sys-kpi-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .page { padding: 0 14px 60px; }
+    .scheda-title { font-size: 24px !important; }
+    .kpi-row { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .kpi-card { min-width: 0 !important; padding: 12px 14px; }
+    .kpi-value { font-size: 20px !important; }
+    .kpi-label { font-size: 10px; }
+    .kpi-sub { font-size: 10px; }
+    .blocco-1 { padding: 20px 14px; margin: 0; }
+    .blocco-title { font-size: 20px; }
+    .innovazione-grid { grid-template-columns: 1fr !important; }
+    .blocco h3 { font-size: 16px; }
+    .blocco p { font-size: 14px; }
+    .fonti-box { padding: 16px; }
+    .legend-banner { font-size: 11px; gap: 8px; padding: 6px 12px; }
+  }
+  @media (max-width: 600px) {
+    .legend-banner { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; padding: 10px 16px !important; font-size: 11px !important; }
+    .legend-item { display: flex !important; align-items: center !important; gap: 6px !important; font-size: 11px !important; }
+    .legend-swatch { width: 14px !important; height: 14px !important; flex-shrink: 0 !important; }
+  }
+</style>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div class="legend-banner">
+  <strong style="margin-right:4px;">Affidabilità dati:</strong>
+  <div class="legend-item"><span class="legend-swatch sw-none"></span> Fonte primaria verificata</div>
+  <div class="legend-item"><span class="legend-swatch sw-yellow"></span> Fonte secondaria — tocca per la nota</div>
+  <div class="legend-item"><span class="legend-swatch sw-orange"></span> Nessuna fonte istituzionale — tocca per la nota</div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><svg class="nav-logo-icon" width="24" height="24" viewBox="0 0 40 40" aria-hidden="true" style="flex-shrink:0;"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2.2"/><rect x="11" y="22" width="3.4" height="7" rx="1" fill="currentColor"/><rect x="16.3" y="16" width="3.4" height="13" rx="1" fill="currentColor"/><rect x="21.6" y="11" width="3.4" height="18" rx="1" fill="currentColor"/><rect x="26.9" y="18" width="3.4" height="11" rx="1" fill="currentColor"/></svg><span>Energia <em>a Confronto</em></span></a>
+    <a href="../index.html#schede" class="nav-back">← <span>Le tecnologie</span></a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="scheda-hero">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a> <span>/</span>
+      <a href="../index.html#schede">Le tecnologie</a> <span>/</span>
+      Innovazioni future
+    </div>
+    <div class="scheda-icon-title">
+      <span class="scheda-big-icon">🔭</span>
+      <h1 class="scheda-title">Innovazioni future</h1>
+    </div>
+    <p class="scheda-subtitle">Una lettura trasversale di ciò che sta arrivando nel sistema elettrico italiano tra oggi e il 2035 — riorganizzata per orizzonte temporale invece che per tecnologia — più uno sguardo a fissione, fusione e a cosa serve alle reti per reggere tutto questo. Non ripete le schede tecnologiche: le collega.</p>
+    <div class="scheda-pills">
+      <span class="pill pill-gray">Orizzonte 2026–2035</span>
+      <span class="pill pill-gray">+ ITER 2039 come riferimento</span>
+      <span class="pill pill-gray">Nucleare a fissione e fusione incluso</span>
+    </div>
+    <div class="scheda-meta">
+      <span class="scheda-meta-item">Aggiornato: luglio 2026</span>
+      <span class="scheda-meta-item">Fonti: Terna · GSE · MASE · Commissione Europea · schede tecnologiche del sito</span>
+    </div>
+  </div>
+
+  <!-- BLOCCO 1 -->
+  <div class="blocco">
+    <div class="blocco-1">
+      <div class="blocco-num">Blocco 1</div>
+      <h2 class="blocco-title">Già in corso — 2026/2027</h2>
+      <p class="blocco-intro">Interventi già in atto o attesi entro i prossimi due anni: non sono scenari, sono cantieri aperti o tecnologie già disponibili che si stanno diffondendo.</p>
+      <div class="innovazione-grid">
+        <div class="innovazione-card">
+          <div class="inno-horizon">2026 — 2027</div>
+          <div class="inno-title">Pale eoliche riciclabili al 100%</div>
+          <div class="inno-desc">Vestas (RecyclableBlade) e NREL (progetto PECAN) portano sul mercato i primi impianti commerciali con pale in materiali termoindurenti interamente riciclabili, risolvendo uno dei punti più critici dell'eolico onshore.</div>
+          <a href="eolico-onshore.html" class="inno-link">Scheda Eolico onshore →</a>
+        </div>
+        <div class="innovazione-card">
+          <div class="inno-horizon">In corso</div>
+          <div class="inno-title">Repowering degli impianti eolici anni '90</div>
+          <div class="inno-desc">Sostituire le turbine di fine vita con modelli moderni sulla stessa area può triplicare la produzione senza nuovo consumo di suolo — la forma di espansione eolica più rapida oggi disponibile.</div>
+          <a href="eolico-onshore.html" class="inno-link">Scheda Eolico onshore →</a>
+        </div>
+        <div class="innovazione-card">
+          <div class="inno-horizon">Oggi — 2027</div>
+          <div class="inno-title">Fotovoltaico a perovskite</div>
+          <div class="inno-desc">Materiale che promette efficienze oltre il 30% (contro il 20–22% del silicio attuale). Primi impianti commerciali attesi entro il 2026–2027; la sfida principale resta la durabilità nel tempo.</div>
+          <a href="fotovoltaico.html" class="inno-link">Scheda Fotovoltaico →</a>
+        </div>
+        <div class="innovazione-card">
+          <div class="inno-horizon">In corso</div>
+          <div class="inno-title">Revamping dell'idroelettrico esistente</div>
+          <div class="inno-desc">Ammodernare turbine e sistemi di controllo degli impianti storici aumenta la produzione del 10–20% senza nuove dighe — il modo più rapido e meno invasivo per crescere sull'idroelettrico italiano.</div>
+          <a href="idroelettrico.html" class="inno-link">Scheda Idroelettrico →</a>
+        </div>
+        <div class="innovazione-card">
+          <div class="inno-horizon">2026 — 2028</div>
+          <div class="inno-title">Primi eolici offshore galleggianti in Italia</div>
+          <div class="inno-desc"><span class="hl-y" onclick="toggleNote(this)">Diversi progetti al largo di Sicilia, Sardegna e Puglia sono in fase avanzata di iter autorizzativo<span class="hl-note y">🟡 Stato degli iter aggiornato a luglio 2026 su fonti giornalistiche di settore (Staffetta Quotidiana, QualEnergia) — tempistiche di approvazione incerte, nessuna fonte istituzionale con calendario ufficiale.</span></span>, con costruzione ipotizzata nel 2028–2030.</div>
+          <a href="eolico-offshore.html" class="inno-link">Scheda Eolico offshore →</a>
+        </div>
+        <div class="innovazione-card">
+          <div class="inno-horizon">In crescita</div>
+          <div class="inno-title">Biometano per il trasporto pesante</div>
+          <div class="inno-desc">Biometano compresso (CBG) o liquefatto (LBG) già usato come carburante per camion e autobus — con le norme Euro 7, una delle poche alternative disponibili oggi per il trasporto pesante a lungo raggio.</div>
+          <a href="biometano.html" class="inno-link">Scheda Biometano →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCCO 2 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 2</div>
+    <h2 class="blocco-title">Entro il 2030</h2>
+    <p class="blocco-intro">Tecnologie in fase di scala industriale, con obiettivi europei o nazionali che scadono entro il 2030.</p>
+    <div class="innovazione-grid">
+      <div class="innovazione-card">
+        <div class="inno-horizon">2025 — 2030</div>
+        <div class="inno-title">Riciclo industriale del fotovoltaico</div>
+        <div class="inno-desc">Con l'aumento del prezzo dell'argento e i primi pannelli degli anni 2000-2010 a fine vita, il riciclo diventa economicamente conveniente — una delle transizioni di filiera più rapide del settore.</div>
+        <a href="fotovoltaico.html" class="inno-link">Scheda Fotovoltaico →</a>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">2025 — 2030</div>
+        <div class="inno-title">Turbine eoliche di grande taglia</div>
+        <div class="inno-desc">Turbine onshore da 15–20 MW offshore e modelli di grande taglia a terra aumentano la resa per unità di territorio occupato e per fondazione installata, riducendo i costi fissi per MW.</div>
+        <a href="eolico-onshore.html" class="inno-link">Scheda Eolico onshore →</a> · <a href="eolico-offshore.html" class="inno-link">Eolico offshore →</a>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">2025 — 2030</div>
+        <div class="inno-title">Espansione del pompaggio idroelettrico</div>
+        <div class="inno-desc">Il MACSE di Terna (si veda il Blocco 4) mette all'asta capacità di accumulo, incluso il pompaggio idroelettrico. Con la crescita delle rinnovabili il suo valore come servizio di bilanciamento aumenta, incentivando nuovi investimenti.</div>
+        <a href="idroelettrico.html" class="inno-link">Scheda Idroelettrico →</a>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">2025 — 2030</div>
+        <div class="inno-title">Geotermico per il teleriscaldamento urbano</div>
+        <div class="inno-desc">Il calore geotermico a media entalpia è molto adatto al teleriscaldamento urbano senza bisogno di convertirlo in elettricità. Diverse città europee stanno esplorando reti dedicate per decarbonizzare il riscaldamento.</div>
+        <a href="geotermico.html" class="inno-link">Scheda Geotermico →</a>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">2025 — 2030</div>
+        <div class="inno-title">Power-to-gas e stoccaggio stagionale</div>
+        <div class="inno-desc">La rete gas italiana (Snam), già predisposta per il biometano, può funzionare come stoccaggio stagionale: si accumula d'estate, si consuma d'inverno per il riscaldamento — un vantaggio infrastrutturale che l'Italia ha già.</div>
+        <a href="biometano.html" class="inno-link">Scheda Biometano →</a>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">2025 — 2030</div>
+        <div class="inno-title">Elettrolizzatori PEM di grande scala</div>
+        <div class="inno-desc">I costi degli elettrolizzatori scendono rapidamente con l'aumento di scala. L'obiettivo UE, nell'ambito di REPowerEU, è raggiungere 40 GW di capacità di elettrolisi installata in Europa entro il 2030.</div>
+        <a href="idrogeno-verde.html" class="inno-link">Scheda Idrogeno verde →</a>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">2025 — 2035</div>
+        <div class="inno-title">Idrogeno miscelato nella rete del gas</div>
+        <div class="inno-desc">La rete gas italiana gestita da Snam potrebbe trasportare miscele di gas naturale e idrogeno verde fino al 10–20% senza modifiche significative, riducendo le emissioni proporzionalmente. Sperimentazioni già avviate su alcuni tratti.</div>
+        <a href="gas-naturale.html" class="inno-link">Scheda Gas naturale →</a>
+      </div>
+      <div class="innovazione-card">
+        <div class="inno-horizon">Al 2030</div>
+        <div class="inno-title">Idrogeno per l'industria pesante</div>
+        <div class="inno-desc">Per i processi ad alta temperatura (siderurgia, vetro, ceramica, chimica) uno studio Confindustria-ENEA stima che l'87% della domanda di idrogeno nei settori a maggior potenziale potrebbe essere coperta entro il 2030, con risparmi in quote ETS non dovute.</div>
+        <a href="risparmio-industria.html" class="inno-link">Scheda Efficienza — Industria →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCCO 3 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 3</div>
+    <h2 class="blocco-title">L'orizzonte 2030–2035 — e perché ITER (2039) conta comunque</h2>
+    <p class="blocco-intro">Qui entra il nucleare: fissione di nuova generazione e fusione. Sono le tecnologie con l'orizzonte temporale più lungo di questa pagina, e la fusione in particolare merita una premessa.</p>
+
+    <h3>SMR — piccoli reattori modulari</h3>
+    <p>Rolls-Royce (Regno Unito), NuScale (versione rivista) e diversi produttori asiatici stanno sviluppando SMR commerciali. Il primo impianto europeo non è atteso prima del 2030–2035, e il costo reale sarà noto solo dopo la costruzione del primo esemplare — oggi si tratta di stime, non di prezzi verificati sul campo.</p>
+
+    <h3>Perché ITER (2039) è nel blocco 2030–2035, non fuori</h3>
+    <p>ITER, il reattore sperimentale internazionale in costruzione a Cadarache, in Francia, punta al primo plasma nel 2039 — quindi tecnicamente oltre l'orizzonte 2030-2035 di questa pagina. Lo teniamo comunque, per un motivo preciso: ITER non produrrà elettricità, ma è il progetto che deve dimostrare la fattibilità fisica della fusione a scala industriale. È il punto di riferimento scientifico su cui si misurano tutte le startup private che promettono tempistiche più brevi (si veda sotto) — senza ITER come termine di paragone, quelle promesse non avrebbero un metro con cui essere valutate. Il successore di ITER, DEMO, sarà il primo reattore a produrre effettivamente elettricità da fusione, ma non ha ancora una data.</p>
+
+    <h3>La fusione privata — la corsa delle startup</h3>
+    <p>Commonwealth Fusion Systems (MIT), Helion Energy e TAE Technologies puntano a dimostrare la fattibilità commerciale entro il 2030–2035, con approcci alternativi a quello di ITER. <span class="hl-o" onclick="toggleNote(this)">Helion ha un accordo con Microsoft per fornire elettricità da fusione entro il 2028<span class="hl-note o">🟠 Obiettivo dichiarato dall'azienda, molto ambizioso e contestato da diversi fisici del settore — nessuna fonte istituzionale indipendente lo conferma come realistico. Va letto come obiettivo commerciale, non come previsione verificata.</span></span> — un obiettivo che vale la pena confrontare proprio con il 2039 di ITER per farsi un'idea della distanza tra comunicazione aziendale e consenso scientifico.</p>
+
+    <h3>Un nodo aperto, non solo un'innovazione: i rifiuti di lunga durata</h3>
+    <p>La Finlandia ha aperto Onkalo, il primo deposito geologico profondo al mondo per i rifiuti radioattivi ad alta attività. In Italia la questione resta aperta: non esiste ancora un deposito nazionale.</p>
+
+    <p class="fonte-link" style="display:block;margin-top:8px;">Approfondimento completo, giudizi sintetici e fonti: <a href="nucleare-smr-fusione.html" class="fonte-link">Scheda Nucleare a Fissione (SMR) e Fusione Nucleare →</a></p>
+  </div>
+
+  <!-- BLOCCO 4 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 4</div>
+    <h2 class="blocco-title">Il nodo di sistema: cosa serve per reggere tutto questo</h2>
+    <p class="blocco-intro">Aggiungere produzione rinnovabile non basta se la rete non riesce a trasportarla e il sistema non riesce ad accumularla. Questo blocco non è tratto dalle schede tecnologiche: viene dal Piano di Sviluppo 2025–2034 di Terna, il gestore della rete di trasmissione nazionale — il documento con cui Terna programma gli investimenti sulla rete per i prossimi dieci anni.</p>
+
+    <div class="sys-kpi-grid">
+      <div class="sys-kpi">
+        <div class="sys-kpi-value">oltre 23 mld €</div>
+        <div class="sys-kpi-label">investimenti Terna nel decennio 2025–2034 (fino a ~40 mld includendo l'orizzonte oltre il 2034)</div>
+      </div>
+      <div class="sys-kpi">
+        <div class="sys-kpi-value">+65 GW</div>
+        <div class="sys-kpi-label">nuova capacità rinnovabile che la rete dovrà accogliere entro il 2030 (rispetto al 2023), +20 GW ulteriori entro il 2034</div>
+      </div>
+      <div class="sys-kpi">
+        <div class="sys-kpi-value">71,5 GWh</div>
+        <div class="sys-kpi-label">nuova capacità di accumulo prevista in rete nel decennio (esclusi i pompaggi idroelettrici già esistenti), tramite le aste MACSE</div>
+      </div>
+      <div class="sys-kpi">
+        <div class="sys-kpi-value">16 → oltre 35 GW</div>
+        <div class="sys-kpi-label">capacità di scambio interzonale: più che raddoppia entro il 2040 (+6,8 GW già entro il 2030) — è ciò che permette di spostare energia da dove si produce a dove si consuma</div>
+      </div>
+    </div>
+
+    <h3>MACSE: le aste per l'accumulo</h3>
+    <p>Il MACSE (Meccanismo di Approvvigionamento di Capacità di Stoccaggio Elettrico) è lo strumento con cui Terna mette all'asta capacità di accumulo — batterie e pompaggio — per bilanciare una rete con sempre più produzione intermittente. La prima asta, con consegna 2025-2028, ha aggiudicato 10 GWh nel settembre 2025. <span class="hl-o" onclick="toggleNote(this)">La seconda asta, con consegna 2029 e contingente di 16 GWh, si terrà il 24 novembre 2026<span class="hl-note o">🟠 Dato riportato da QualEnergia (29 maggio 2026), che cita una comunicazione ufficiale di Terna — non abbiamo reperito il comunicato Terna originale con lo stesso dettaglio. Le richieste di ammissione erano previste dal 7 al 27 luglio 2026.</span></span>.</p>
+
+    <h3>Le grandi opere in costruzione per il 2030</h3>
+    <p>Tra i progetti infrastrutturali principali del Piano: il Tyrrhenian Link (collegamento sottomarino Sicilia-Sardegna-Campania), l'Adriatic Link (Abruzzo-Marche), il SA.CO.I.3 (Sardegna-Corsica-Toscana) e l'ELMED (interconnessione Italia-Tunisia) — opere pensate per aumentare la capacità di scambio interzonale descritta sopra.</p>
+
+    <h3>Un fattore di domanda nuovo: i data center</h3>
+    <p><span class="hl-y" onclick="toggleNote(this)">Al dicembre 2024 risultavano richieste di connessione alla rete per data center per un totale di 30 GW<span class="hl-note y">🟡 Dato dal Piano di Sviluppo 2025 di Terna. Rappresenta le richieste di connessione pervenute, non la capacità effettivamente realizzata o confermata — un forte segnale di domanda futura, non una previsione di consumo certo.</span></span> — una domanda che non esisteva in questa scala nei piani di sviluppo precedenti, e che la rete deve integrare insieme alla crescita delle rinnovabili.</p>
+
+    <h3>L'effetto atteso sulle emissioni</h3>
+    <p>Terna stima che gli interventi del Piano possano contribuire a una riduzione delle emissioni di CO2 di quasi 2.000 kt/anno al 2030 e di circa 12.100 kt/anno al 2040, oltre a interventi di digitalizzazione della rete (Programmazione Territoriale Efficiente e il nuovo portale TE.R.R.A. per le richieste di connessione).</p>
+
+    <p class="fonte-link" style="display:block;margin-top:8px;">Fonte: <a href="https://download.terna.it/terna/Terna_Piano_Sviluppo_2025_Overview_8dd62ebfc87edf6.pdf" target="_blank" class="fonte-link">Terna — Piano di Sviluppo 2025-2034, Overview →</a></p>
+  </div>
+
+  <div class="fonti-box">
+    <h3>Fonti principali di questa scheda</h3>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://download.terna.it/terna/Terna_Piano_Sviluppo_2025_Overview_8dd62ebfc87edf6.pdf" target="_blank">Terna — Piano di Sviluppo 2025-2034</a> (investimenti, reti, accumuli, data center)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span>Le 9 schede tecnologiche del sito (Gas naturale, Fotovoltaico, Idroelettrico, Eolico onshore e offshore, Biometano, Geotermico, Idrogeno verde, Nucleare — sezione "Innovazioni in arrivo" di ciascuna)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.qualenergia.it" target="_blank">QualEnergia</a> (seconda asta MACSE)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://energiaaconfronto.com/schede/nucleare-smr-fusione.html" target="_blank">Scheda Nucleare a Fissione (SMR) e Fusione Nucleare</a> (approfondimento completo su ITER, DEMO e startup private)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://energiaaconfronto.com/schede/risparmio-industria.html" target="_blank">Scheda Efficienza energetica — Industria</a> (idrogeno per processi ad alta temperatura)</span></div>
+  </div>
+</div>
+
+<script>
+function toggleNote(el) {
+  const note = el.querySelector('.hl-note');
+  if (!note) return;
+  document.querySelectorAll('.hl-note.open').forEach(n => { if (n !== note) n.classList.remove('open'); });
+  note.classList.toggle('open');
+}
+</script>
+<script src="../assets/script.js" defer></script>
+</body>
+</html>
