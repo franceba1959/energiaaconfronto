@@ -90,7 +90,6 @@
         <div class="mix-col-label mix-col-bar"></div>
         <div class="mix-col-label mix-col-pct">Quota</div>
         <div class="mix-col-label mix-col-twh">TWh</div>
-        <div class="mix-col-label mix-col-lcoe"><a href="https://www.lazard.com/research-insights/levelized-cost-of-energyplus/" target="_blank" style="color:var(--teal);text-decoration:underline;text-underline-offset:2px;">Costo prod.* ($/MWh)</a></div>
       </div>
       <div class="mix-bars" id="mixBars">
         <div class="mix-row">
@@ -98,63 +97,54 @@
           <div class="mix-bar-wrap"><div class="mix-bar bar-gas" data-pct="44.57"></div></div>
           <div class="mix-pct">44,57%</div>
           <div class="mix-twh">103,9 TWh</div>
-          <div class="mix-lcoe expensive">141–220</div>
         </div>
         <div class="mix-row">
           <div class="mix-source">☀️ Fotovoltaico</div>
           <div class="mix-bar-wrap"><div class="mix-bar bar-fv" data-pct="17.09"></div></div>
           <div class="mix-pct">~17,09%</div>
           <div class="mix-twh">~39,8 TWh</div>
-          <div class="mix-lcoe cheap">29–92</div>
         </div>
         <div class="mix-row">
           <div class="mix-source">💧 Idroelettrico</div>
           <div class="mix-bar-wrap"><div class="mix-bar bar-idro" data-pct="15.96"></div></div>
           <div class="mix-pct">~15,96%</div>
           <div class="mix-twh">~37,2 TWh</div>
-          <div class="mix-lcoe cheap">20–77</div>
         </div>
         <div class="mix-row">
           <div class="mix-source">💨 Eolico</div>
           <div class="mix-bar-wrap"><div class="mix-bar bar-eolico" data-pct="8.24"></div></div>
           <div class="mix-pct">~8,24%</div>
           <div class="mix-twh">~19,2 TWh</div>
-          <div class="mix-lcoe cheap">27–73</div>
         </div>
         <div class="mix-row">
           <div class="mix-source">🌿 Biomasse e rifiuti</div>
           <div class="mix-bar-wrap"><div class="mix-bar bar-biomasse" data-pct="6.06"></div></div>
           <div class="mix-pct">~6,06%</div>
           <div class="mix-twh">~14,1 TWh</div>
-          <div class="mix-lcoe mid">50–120</div>
         </div>
         <div class="mix-row">
           <div class="mix-source">🔌 Import netto</div>
           <div class="mix-bar-wrap"><div class="mix-bar bar-import" data-pct="4.4"></div></div>
           <div class="mix-pct">~4,40%</div>
           <div class="mix-twh">~10,2 TWh</div>
-          <div class="mix-lcoe na">—</div>
         </div>
         <div class="mix-row">
           <div class="mix-source">🌋 Geotermico</div>
           <div class="mix-bar-wrap"><div class="mix-bar bar-geo" data-pct="2.03"></div></div>
           <div class="mix-pct">~2,03%</div>
           <div class="mix-twh">~4,7 TWh</div>
-          <div class="mix-lcoe cheap">40–100</div>
         </div>
         <div class="mix-row">
           <div class="mix-source">⚫ Carbone</div>
           <div class="mix-bar-wrap"><div class="mix-bar bar-carbone" data-pct="1.25"></div></div>
           <div class="mix-pct">1,25%</div>
           <div class="mix-twh">2,9 TWh</div>
-          <div class="mix-lcoe expensive">65–166</div>
         </div>
         <div class="mix-row">
           <div class="mix-source">🛢️ Prodotti petroliferi</div>
           <div class="mix-bar-wrap"><div class="mix-bar bar-altro" data-pct="0.40"></div></div>
           <div class="mix-pct">0,40%</div>
           <div class="mix-twh">0,9 TWh</div>
-          <div class="mix-lcoe expensive">&gt;150</div>
         </div>
       </div>
       <!-- Riga totale -->
@@ -163,7 +153,6 @@
         <div class="mix-bar-wrap"></div>
         <div class="mix-pct" style="font-weight:700;">100%</div>
         <div class="mix-twh" style="font-weight:700;color:var(--graphite);">~233 TWh</div>
-        <div class="mix-lcoe na">—</div>
       </div>
       <div style="margin-top:16px;padding:14px 18px;background:var(--gray-light);border-radius:var(--radius);font-size:12px;color:var(--gray);line-height:1.7;">
         <p style="margin-bottom:10px;"><strong style="color:var(--graphite);">Perché il mix mostra 233 TWh ma il consumo nazionale è 311 TWh?</strong></p>
@@ -198,15 +187,6 @@
         <p style="margin-bottom:6px;"><strong style="color:var(--graphite);">Perché nel mix l'import netto è ~10 TWh e non 46,9 TWh?</strong> Il GSE nel Fuel Mix distribuisce una parte dell'import tra le fonti di origine (es. idroelettrico svizzero viene contabilizzato come "rinnovabile", non come "import"). <span class="hl-y" onclick="toggleNote(this)">Il dato ~10,2 TWh (voce "Altre fonti" nel report GSE) è la quota di energia immessa in rete non attribuibile a una fonte primaria specifica.<span class="hl-note y">🟡 "Altre fonti" è la voce residuale del Fuel Mix GSE 2025, che comprende import non tracciato per origine e piccole quote non classificate altrove. Non coincide con il concetto di "import" nel senso comune. <a href="https://www.gse.it/servizi-per-te/news/fuel-mix-pubblicata-la-composizione-del-mix-energetico-relativo-all-anno-2025" target="_blank">Fonte GSE →</a></span></span> Il dato 46,9 TWh è il saldo import/export fisico totale misurato da Terna.</p>
         <p style="margin-top:8px;font-style:italic;">Gas naturale, carbone e prodotti petroliferi: dati esatti GSE Fuel Mix 2025. Rinnovabili totali verificate: 49,38% / 115,1 TWh (GSE) — la scomposizione per singola fonte rinnovabile (idro, FV, eolico, biomasse, geotermico) <span class="hl-y" onclick="toggleNote(this)">è stimata applicando a questo totale le quote percentuali reciproche pubblicate da Terna per il 2025<span class="hl-note y">🟡 Il GSE Fuel Mix non pubblica la ripartizione delle rinnovabili per singola fonte. Questo valore applica al totale ufficiale GSE (49,38% / 115,1 TWh) le proporzioni interne che Terna calcola per la propria categoria FER: fotovoltaico 34,61%, idroelettrico 32,32%, eolico 16,69%, biomasse 12,27%, geotermico 4,11% (Terna, Rapporto Mensile Dicembre 2025). È una stima trasparente, non un dato GSE diretto. <a href="https://download.terna.it/terna/Rapporto_mensile_dicembre_25_8de58e4159b881a.pdf" target="_blank">Fonte Terna →</a></span></span>.</p>
       </div>
-      <div style="margin-top:12px;padding:10px 14px;background:#F0FDF4;border-radius:6px;border-left:3px solid #10B981;">
-        <p style="font-size:11px;color:#065F46;line-height:1.7;">
-          <strong>* Costo di produzione (LCOE — Levelized Cost of Energy):</strong>
-          indica quanto costa produrre 1 MWh con quella tecnologia, considerando investimento, manutenzione e combustibile nell'arco della vita dell'impianto.
-          <strong>Non è il prezzo che paghi in bolletta</strong> — il prezzo finale è determinato dal mercato all'ingrosso (PUN), dove prevale il costo della fonte più cara attiva in quel momento (quasi sempre il gas).
-          Risponde alla domanda: "quanto costerebbe produrre la stessa energia con fonti diverse?"
-          Fonte: Lazard LCOE+ 2025 (dati USA). Colori: 🟢 economico · 🟡 medio · 🔴 costoso.
-        </p>
-      </div>
       <div class="mix-note" style="margin-top:12px;">
         <span>⚠️</span>
         <span class="mix-note-text"><strong>Carbone — situazione normativa in evoluzione:</strong> nel 2025 il carbone ha coperto l'1,25% del mix GSE (2,9 TWh), con Brindisi ferma dal 2024 e Civitavecchia senza autorizzazione ambientale dal 1° gennaio 2026. Con il DL Bollette (aprile 2026) il phase-out è stato prorogato dal 2025 al 2038, ma gli impianti continentali non sono oggi operabili senza nuove autorizzazioni. Le uniche centrali attive sono le due sarde (servizio essenziale per la Sardegna). <a href="dibattito.html#carbone-2038" class="section-link">Leggi l'approfondimento →</a></span>
@@ -240,7 +220,7 @@
       <a href="contesto.html#pniec" class="dibattito-card">
         <div class="dibattito-num">04</div>
         <div class="dibattito-title">PNIEC e MACSE: obiettivi vs realizzato</div>
-        <div class="dibattito-desc">79% rinnovabili al 2030, 107 GW solare+eolico. Prima asta MACSE: 10 GWh BESS aggiudicati.</div>
+        <div class="dibattito-desc">79% rinnovabili al 2030, 107 GW solare+eolico. Prima asta MACSE (Meccanismo di Approvvigionamento di Capacità di Stoccaggio Elettrico): 10 GWh di accumuli a batteria (BESS) aggiudicati.</div>
       </a>
       <a href="contesto.html#prezzo" class="dibattito-card">
         <div class="dibattito-num">05</div>
@@ -259,7 +239,7 @@
       </a>
     </div>
     <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-      <p style="font-size:13px;color:var(--gray);">7 sezioni — dati verificati su fonti ARERA, GSE, Terna, GME</p>
+      <p style="font-size:13px;color:var(--gray);">7 sezioni — dati verificati su fonti ARERA, GSE, Terna, GME (Gestore dei Mercati Energetici)</p>
       <a href="contesto.html" style="display:inline-block;background:var(--teal);color:white;font-size:13px;font-weight:600;padding:10px 20px;border-radius:6px;text-decoration:none;">Apri la scheda di contesto completa →</a>
     </div>
   </div>
@@ -285,7 +265,7 @@
             <div class="kpi"><div class="kpi-label">Emissioni combustione</div><div class="kpi-value">~490 gCO₂/kWh</div></div>
             <div class="kpi"><div class="kpi-label">Variazione produzione vs 2024</div><div class="kpi-value">+8,2%</div></div>
           </div>
-          <p class="scheda-desc">La fonte dominante del mix elettrico italiano. Flessibile ed efficiente (CCGT 55–62%), ma fossile, volatile nei prezzi e responsabile della dipendenza energetica dall'estero.</p>
+          <p class="scheda-desc">La fonte dominante del mix elettrico italiano. Flessibile ed efficiente (ciclo combinato, CCGT: 55–62%), ma fossile, volatile nei prezzi e responsabile della dipendenza energetica dall'estero.</p>
           <a href="schede/gas-naturale.html" class="scheda-cta">Approfondisci →</a>
         </div>
       </div>
@@ -352,7 +332,7 @@
             <div class="kpi"><div class="kpi-label">Potenza</div><div class="kpi-value">1.465 MW</div></div>
             <div class="kpi"><div class="kpi-label">Produzione</div><div class="kpi-value">7.484 GWh</div></div>
           </div>
-          <p class="scheda-desc">Da FORSU e effluenti zootecnici: profilo molto virtuoso. Da colture dedicate: più discusso. Include sottosezione biodigestori.</p>
+          <p class="scheda-desc">Da frazione organica dei rifiuti urbani (FORSU) ed effluenti zootecnici: profilo molto virtuoso. Da colture dedicate: più discusso. Include sottosezione biodigestori.</p>
           <a href="schede/biometano.html" class="scheda-cta">Approfondisci →</a>
         </div>
       </div>
@@ -369,7 +349,7 @@
             <div class="kpi"><div class="kpi-label">Quota nel mix</div><div class="kpi-value">~2%</div></div>
             <div class="kpi"><div class="kpi-label">Variazione produzione vs 2024</div><div class="kpi-value">−0,3%</div></div>
           </div>
-          <p class="scheda-desc">Due famiglie: tradizionale (alta entalpia, Toscana — Larderello, il primo impianto del mondo 1904) e EGS avanzato (potenzialmente ovunque, pre-commerciale).</p>
+          <p class="scheda-desc">Due famiglie: tradizionale (alta entalpia, Toscana — Larderello, il primo impianto del mondo 1904) e sistemi geotermici avanzati (EGS) avanzato (potenzialmente ovunque, pre-commerciale).</p>
           <a href="schede/geotermico.html" class="scheda-cta">Approfondisci →</a>
         </div>
       </div>
@@ -434,7 +414,7 @@
             <div class="kpi"><div class="kpi-label">Emissioni ciclo di vita</div><div class="kpi-value">~12 gCO₂/kWh</div></div>
             <div class="kpi"><div class="kpi-label">Fattore di utilizzo</div><div class="kpi-value">80–93%</div></div>
           </div>
-          <p class="scheda-desc">Fissione tradizionale matura ma costosa nei nuovi impianti. SMR pre-commerciali — nessuno ancora operativo in Occidente. Analisi Banca d'Italia (QEF n. 947/2025) e box opinione personale dell'editore.</p>
+          <p class="scheda-desc">Fissione tradizionale matura ma costosa nei nuovi impianti. SMR pre-commerciali — nessuno ancora operativo in Occidente. Analisi Banca d'Italia (Questioni di Economia e Finanza, QEF, n. 947/2025) e box opinione personale dell'editore.</p>
           <a href="schede/nucleare-smr-fusione.html" class="scheda-cta">Approfondisci →</a>
         </div>
       </div>
@@ -453,6 +433,12 @@
           <a href="schede/nucleare-smr-fusione.html#fusione" class="scheda-cta">Approfondisci →</a>
         </div>
       </div>
+
+      <a href="schede/innovazioni-future.html" style="display:block;margin-top:18px;padding:16px 18px;background:#F5F3FF;border:1px solid #DDD6FE;border-left:3px solid #818CF8;border-radius:8px;text-decoration:none;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#6D28D9;margin-bottom:6px;">Trasversale alle schede</div>
+        <div style="font-size:16px;font-weight:700;color:var(--graphite);margin-bottom:6px;">🔭 Innovazioni future →</div>
+        <div style="font-size:13px;color:var(--gray);line-height:1.6;">Cosa cambia da qui al 2035 e cosa resta oltre: pale riciclabili, perovskite, turbine di grande taglia, accumuli, idrogeno, reti. Non ripete le schede tecnologiche — le collega.</div>
+      </a>
 
     </div>
   </div>
@@ -492,7 +478,7 @@
       </a>
       <a href="dibattito.html#ddl-nucleare" class="dibattito-card">
         <div class="dibattito-num">06</div>
-        <div class="dibattito-title">Il DDL nucleare: cosa ha detto chi sa di cosa parla</div>
+        <div class="dibattito-title">Il disegno di legge (DDL) nucleare: cosa ha detto chi sa di cosa parla</div>
         <div class="dibattito-desc">Le audizioni parlamentari di luglio 2026: Parisi, Cabiddu, Banca d'Italia.</div>
       </a>
       <a href="dibattito.html#carbone-2038" class="dibattito-card">
@@ -530,7 +516,7 @@
             <div class="kpi"><div class="kpi-label">Isolamento pareti</div><div class="kpi-value">−40% combustibile</div></div>
             <div class="kpi"><div class="kpi-label">Ecobonus 2024</div><div class="kpi-value">28+ mld €</div></div>
           </div>
-          <p class="scheda-desc">Isolamento, infissi, elettrodomestici, comportamenti quotidiani, Conto Termico 3.0, EED ed EPBD.</p>
+          <p class="scheda-desc">Isolamento, infissi, elettrodomestici, comportamenti quotidiani, Conto Termico 3.0, direttiva sull'efficienza energetica (EED) e direttiva sulla prestazione energetica nell'edilizia (EPBD).</p>
           <a href="schede/risparmio-casa.html" class="scheda-cta">Approfondisci →</a>
         </div>
       </div>
@@ -542,7 +528,7 @@
           <div class="pill-row"><span class="pill pill-green">Eco-driving</span><span class="pill pill-gray">Reg. 2019/631 + Euro 7</span></div>
           <div class="scheda-kpi">
             <div class="kpi"><div class="kpi-label">FER trasporti 2030 (PNIEC)</div><div class="kpi-value">34%</div></div>
-            <div class="kpi"><div class="kpi-label">BEV+PHEV al 2030 (PNIEC)</div><div class="kpi-value">~6,5 mln</div></div>
+            <div class="kpi"><div class="kpi-label">Elettriche e ibride plug-in (BEV+PHEV) al 2030 (PNIEC)</div><div class="kpi-value">~6,5 mln</div></div>
           </div>
           <p class="scheda-desc">Guida efficiente, ricarica ottimale EV, standard UE sulle emissioni, Euro 7, incentivi e infrastrutture di ricarica.</p>
           <a href="schede/risparmio-trasporti.html" class="scheda-cta">Approfondisci →</a>
@@ -555,7 +541,7 @@
         <div class="scheda-body">
           <div class="pill-row"><span class="pill pill-green">Interventi tecnici</span><span class="pill pill-gray">EU ETS + ETS2 (2028)</span></div>
           <div class="scheda-kpi">
-            <div class="kpi"><div class="kpi-label">Riduzione GHG settori ETS 2030 (PNIEC)</div><div class="kpi-value">−66%</div></div>
+            <div class="kpi"><div class="kpi-label">Riduzione gas serra settori ETS 2030 (PNIEC)</div><div class="kpi-value">−66%</div></div>
             <div class="kpi"><div class="kpi-label">Diagnosi trasmesse (ciclo 2024)</div><div class="kpi-value">853</div></div>
           </div>
           <p class="scheda-desc">Diagnosi energetica, Certificati Bianchi, EU ETS ed ETS2, PNIEC industria, Transizione 5.0 e tecnologie per i settori hard-to-abate.</p>
