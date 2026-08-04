@@ -218,9 +218,9 @@
     </div>
     <p class="scheda-subtitle">Energia solare fotovoltaica: costi, efficienza, ciclo di vita e agrivoltaico nel contesto italiano.</p>
     <div class="scheda-pills">
-      <span class="pill pill-green">Costo basso</span>
-      <span class="pill pill-amber">Efficienza variabile</span>
-      <span class="pill pill-green">Sostenibile</span>
+      <span class="pill pill-gray">Circa 960 ore equivalenti su 8.760</span>
+      <span class="pill pill-gray">11,4–37,2 gCO₂eq/kWh sul ciclo di vita</span>
+      <span class="pill pill-gray">39,8 TWh in Italia, 17,09% del mix</span>
     </div>
     <div class="scheda-meta">
       <span class="scheda-meta-item">Aggiornato: luglio 2026</span>
@@ -255,21 +255,25 @@
           <div class="kpi-sub">TWh immessi in rete, quota ~17,09% (<a href="https://www.gse.it/servizi-per-te/news/fuel-mix-pubblicata-la-composizione-del-mix-energetico-relativo-all-anno-2025" target="_blank" style="color:var(--teal);text-decoration:underline;text-underline-offset:2px;">GSE Fuel Mix 2025</a>) · +25,1% sul 2024, misurato da <a href="https://www.terna.it/it/sistema-elettrico/statistiche/pubblicazioni-statistiche" target="_blank" style="color:var(--teal);text-decoration:underline;text-underline-offset:2px;">Terna</a> sulla produzione totale, autoconsumo compreso</div>
         </div>
       </div>
-      <table class="giudizio-table">
+      <div style="background:#fff;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:6px;padding:14px 18px;margin-bottom:18px;font-size:14px;line-height:1.65;">
+          <div style="font-weight:600;color:var(--teal-dark);margin-bottom:6px;">Come leggere questa tabella</div>
+          Ogni riga riporta un dato misurato, non un giudizio, e accanto il riferimento con cui confrontarlo. Il riferimento cambia a seconda di ciò che si misura: le emissioni si confrontano con la media della produzione elettrica italiana, il costo con il prezzo all'ingrosso dell'energia, il funzionamento con le ore dell'anno. Tecnologie diverse si misurano con grandezze diverse, e per questo le righe non sono le stesse su tutte le schede: un impianto a combustione si descrive con il suo rendimento, uno rinnovabile con quante ore lavora. <strong>Non troverai una classifica fra le fonti, perché non esiste un metro unico che le renda confrontabili.</strong>
+        </div>
+        <table class="giudizio-table">
         <tr>
           <td>💰 Costo</td>
-          <td><span class="badge-giudizio badge-basso">BASSO</span></td>
-          <td>Tra le fonti più economiche disponibili oggi. Il costo dei pannelli è sceso del 90% negli ultimi 15 anni. Una volta installato, il sole non ha costo — l'ammortamento dell'investimento avviene tipicamente in 5–8 anni.</td>
+          <td><strong>24–38 $/MWh</strong></td>
+          <td>media mondiale ponderata in dollari per impianti di grande taglia (IRENA 2024): non è il costo di un impianto italiano, perché comprende paesi con irraggiamento, costo del lavoro e costo del capitale molto diversi. Il costo dei moduli è sceso di circa il 90% negli ultimi quindici anni; una volta installato l'impianto, il sole non ha costo.</td>
         </tr>
         <tr>
-          <td>⚡ Efficienza</td>
-          <td><span class="badge-giudizio badge-variabile">VARIABILE</span></td>
-          <td>Produce solo quando il sole splende — di giorno, in estate, nelle ore centrali. Il fattore di utilizzo italiano (~11%) è tra i più alti d'Europa grazie all'irraggiamento solare, ma richiede sistemi di accumulo per coprire la notte e i giorni nuvolosi.</td>
+          <td>⚡ Fattore di utilizzo</td>
+          <td><strong>circa 11%</strong></td>
+          <td>delle 8.760 ore di un anno, cioè <span class="hl-y" onclick="toggleNote(this)">fattore di utilizzo<span class="hl-note y">🟡 Il fattore di utilizzo confronta l'energia prodotta in un anno con quella che l'impianto produrrebbe funzionando sempre alla sua potenza massima, per tutte le 8.760 ore dell'anno. Un impianto all'11% non produce per 960 ore e resta fermo il resto del tempo: produce in tutte le ore di luce, circa quattromila l'anno, ma quasi sempre al di sotto della potenza massima. Le 960 ore sono l'equivalente a piena potenza.</span></span> pari a circa 960 ore equivalenti a piena potenza. L'impianto produce in tutte le ore di luce, ma la potenza varia con l'ora del giorno, la stagione e la nuvolosità: per coprire la notte e i giorni coperti servono sistemi di accumulo. [DA VERIFICARE: l'affermazione che il fattore di utilizzo italiano sia fra i più alti d'Europa era priva di fonte; riscontrarla su Eurostat o JRC prima di ripubblicarla.]</td>
         </tr>
         <tr>
           <td>🌿 Sostenibilità</td>
-          <td><span class="badge-giudizio badge-alta">ALTA</span></td>
-          <td>Emissioni sull'intero ciclo di vita comprese fra 11,4 e 37,2 gCO₂eq/kWh secondo la tecnologia del pannello e il tipo di installazione (UN-ECE 2021). Il punto aperto principale è il riciclo dei pannelli a fine vita — un problema reale ma in evoluzione rapida.</td>
+          <td><strong>11,4–37,2 gCO₂eq/kWh</strong></td>
+          <td>Emissioni sull'<span class="hl-y" onclick="toggleNote(this)">intero ciclo di vita<span class="hl-note y">🟡 Il ciclo di vita comprende tutto ciò che l'impianto comporta dall'inizio alla fine: estrazione dei materiali, produzione dei moduli, trasporto, installazione, funzionamento e smaltimento, spalmati sull'elettricità prodotta in tutti i suoi anni di esercizio. È una misura diversa dal fattore di emissione da combustione, che conta soltanto ciò che esce dal camino mentre l'impianto funziona.</span></span>, misurate in <span class="hl-y" onclick="toggleNote(this)">grammi di anidride carbonica equivalente<span class="hl-note y">🟡 «Equivalente» significa che i diversi gas serra — anidride carbonica, metano, protossido di azoto — sono convertiti in un'unica misura, calcolando quanta anidride carbonica produrrebbe lo stesso effetto sul clima. <a href="https://www.ipcc.ch/site/assets/uploads/2018/02/ipcc_wg3_ar5_annex-iii.pdf#page=7" target="_blank">Fonte →</a></span></span> per kilowattora, secondo la tecnologia del pannello e il tipo di installazione (<a href="https://unece.org/sed/documents/2021/10/reports/life-cycle-assessment-electricity-generation-options" target="_blank" class="fonte-link">UN-ECE 2021</a>). Non c'è combustione, quindi il numero non è confrontabile con i fattori di emissione da combustione delle centrali termiche. Il punto aperto principale resta il riciclo dei moduli a fine vita.</td>
         </tr>
       </table>
     </div>
