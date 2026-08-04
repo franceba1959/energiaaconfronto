@@ -225,13 +225,13 @@
     </div>
     <p class="scheda-subtitle">Energia dal calore della Terra: tradizionale (Toscana) e sistemi avanzati EGS — due tecnologie molto diverse.</p>
     <div class="scheda-pills">
-      <span class="pill pill-green">Costo basso</span>
-      <span class="pill pill-green">Continuo 24/7</span>
-      <span class="pill pill-amber">EGS pre-commerciale</span>
+      <span class="pill pill-gray">Lavora 6.700–7.900 ore su 8.760</span>
+      <span class="pill pill-gray">38 gCO₂eq/kWh sul ciclo di vita</span>
+      <span class="pill pill-gray">4,7 TWh in Italia, tutti in Toscana</span>
     </div>
     <div class="scheda-meta">
       <span class="scheda-meta-item">Aggiornato: luglio 2026</span>
-      <span class="scheda-meta-item">Fonti: IRENA · IEA · NREL · GSE · IPCC AR6</span>
+      <span class="scheda-meta-item">Fonti: IRENA · IEA · NREL · GSE · IPCC AR5</span>
     </div>
     <div class="nav-interna">
       <a href="#tradizionale">Geotermico tradizionale</a>
@@ -249,7 +249,7 @@
         <div class="famiglia-card tradizionale" id="tradizionale">
           <div class="famiglia-label">Geotermico tradizionale</div>
           <div class="famiglia-title">🌡️ Alta entalpia — dove il calore è in superficie</div>
-          <div class="famiglia-desc">Tecnologia matura, economica, continua. Limitata geograficamente alle zone vulcaniche attive. In Italia: Toscana (Larderello — il primo impianto geotermico del mondo, 1904). Fattore di utilizzo tra i più alti di qualsiasi fonte.</div>
+          <div class="famiglia-desc">Tecnologia matura, economica, continua. Limitata geograficamente alle zone vulcaniche attive. In Italia: Toscana (Larderello — il primo impianto geotermico del mondo, 1904). Fattore di utilizzo fra il 77% e il 90% delle ore dell'anno.</div>
         </div>
         <div class="famiglia-card egs" id="egs">
           <div class="famiglia-label">EGS — sistemi avanzati</div>
@@ -267,7 +267,7 @@
         <div class="kpi-card">
           <div class="kpi-label">Fattore di utilizzo</div>
           <div class="kpi-value">77–90%</div>
-          <div class="kpi-sub">tra i più alti di qualsiasi fonte (<a href="https://www.iea.org" target="_blank" style="color:var(--teal);text-decoration:underline;text-underline-offset:2px;">IEA</a>)</div>
+          <div class="kpi-sub">delle 8.760 ore di un anno, cioè fra 6.700 e 7.900 ore di funzionamento</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Produzione Italia 2025</div>
@@ -276,31 +276,35 @@
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Emissioni ciclo di vita</div>
-          <div class="kpi-value">15–55</div>
-          <div class="kpi-sub">gCO₂eq/kWh (varia per tipo di impianto)</div>
+          <div class="kpi-value">38</div>
+          <div class="kpi-sub"><span class="hl-y" onclick="toggleNote(this)">gCO₂eq/kWh<span class="hl-note y">🟡 Grammi di anidride carbonica equivalente per kilowattora. «Equivalente» perché i diversi gas serra sono convertiti in un'unica misura, in base all'effetto che ciascuno ha sul clima rispetto all'anidride carbonica. <a href="https://www.ipcc.ch/site/assets/uploads/2018/02/ipcc_wg3_ar5_annex-iii.pdf#page=7" target="_blank">Fonte →</a></span></span>, valore mediano; da 6,0 a 79 secondo il tipo di impianto (<a href="https://www.ipcc.ch/site/assets/uploads/2018/02/ipcc_wg3_ar5_annex-iii.pdf#page=7" target="_blank" style="color:var(--teal);text-decoration:underline;text-underline-offset:2px;">IPCC AR5, Annex III, Tab. A.III.2</a>)</div>
         </div>
       </div>
 
-      <table class="giudizio-table">
+      <div style="background:#fff;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:6px;padding:14px 18px;margin-bottom:18px;font-size:14px;line-height:1.65;">
+          <div style="font-weight:600;color:var(--teal-dark);margin-bottom:6px;">Come leggere questa tabella</div>
+          Ogni riga riporta un dato misurato, non un giudizio, e accanto il riferimento con cui confrontarlo. Il riferimento cambia a seconda di ciò che si misura: le emissioni si confrontano con la media della produzione elettrica italiana, il costo con il prezzo all'ingrosso dell'energia, il funzionamento con le ore dell'anno. Tecnologie diverse si misurano con grandezze diverse, e per questo le righe non sono le stesse su tutte le schede: un impianto a combustione si descrive con il suo rendimento, uno rinnovabile con quante ore lavora. <strong>Non troverai una classifica fra le fonti, perché non esiste un metro unico che le renda confrontabili.</strong>
+        </div>
+        <table class="giudizio-table">
         <tr>
           <td>💰 Costo — Tradizionale</td>
-          <td><span class="badge-giudizio badge-basso">BASSO</span></td>
-          <td>Una volta costruito l'impianto, il calore della terra non ha costo. I costi di manutenzione sono bassi. Il costo di produzione (40–60 $/MWh per impianti in zone attive) è competitivo con molte altre fonti.</td>
+          <td><strong>40–60 $/MWh</strong></td>
+          <td>media mondiale ponderata in dollari (IRENA 2024): comprende impianti in Kenya, Indonesia, Turchia e Stati Uniti, con costi del lavoro e condizioni geologiche diversi da quelli italiani. Una volta costruito l'impianto il calore della terra non ha costo, e la manutenzione resta la voce principale.</td>
         </tr>
         <tr>
-          <td>⚡ Efficienza — Tradizionale</td>
-          <td><span class="badge-giudizio badge-alta">CONTINUA 24/7</span></td>
-          <td>Il calore della Terra non dipende dal sole o dal vento — produce elettricità continuamente, 24 ore su 24, 365 giorni l'anno. Fattore di utilizzo tra 77% e 90% — eccezionale rispetto a qualsiasi fonte intermittente.</td>
+          <td>⚡ Fattore di utilizzo — Tradizionale</td>
+          <td><strong>77–90%</strong></td>
+          <td>delle 8.760 ore di un anno, cioè fra 6.700 e 7.900 ore di funzionamento. Il calore della Terra non dipende dal sole né dal vento: la produzione non si interrompe di notte né in assenza di vento.</td>
         </tr>
         <tr>
           <td>🌿 Sostenibilità</td>
-          <td><span class="badge-giudizio badge-alta">BUONA</span></td>
-          <td>Le emissioni di CO₂ variano molto tra gli impianti: da quasi zero per gli impianti a ciclo binario a valori più alti per gli impianti a vapore aperto (che rilasciano gas disciolti nel fluido geotermico). In media molto migliore dei fossili.</td>
+          <td><strong>38 gCO₂eq/kWh</strong></td>
+          <td><span class="hl-y" onclick="toggleNote(this)">38 grammi di anidride carbonica equivalente per kilowattora<span class="hl-note y">🟡 Il fattore di emissione dice quanti grammi di gas serra vengono liberati per ogni kilowattora di elettricità prodotto. Un kilowattora (kWh) è l'energia che consuma un apparecchio da 1.000 watt acceso per un'ora. «Equivalente» significa che i diversi gas serra — anidride carbonica, metano, protossido di azoto — sono stati convertiti in un'unica misura, calcolando quanta anidride carbonica produrrebbe lo stesso effetto sul clima. <a href="https://www.ipcc.ch/site/assets/uploads/2018/02/ipcc_wg3_ar5_annex-iii.pdf#page=7" target="_blank">Fonte →</a></span></span>, sull'<span class="hl-y" onclick="toggleNote(this)">intero ciclo di vita<span class="hl-note y">🟡 Il ciclo di vita comprende tutto ciò che l'impianto comporta dall'inizio alla fine: perforazione dei pozzi, costruzione, materiali, funzionamento, manutenzione e smantellamento finale, spalmati sull'elettricità prodotta in tutti i suoi anni di esercizio. È una misura diversa dal fattore di emissione da combustione, che conta soltanto ciò che esce dal camino mentre l'impianto funziona.</span></span> dell'impianto. Non c'è combustione di combustibili, quindi questo numero non è confrontabile con i fattori di emissione da combustione delle centrali termiche. La variabilità è ampia — da 6,0 a 79 — perché gli impianti a ciclo binario trattengono il fluido geotermico, mentre quelli a vapore aperto rilasciano i gas in esso disciolti.</td>
         </tr>
         <tr>
           <td>💰 Costo — EGS</td>
-          <td><span class="badge-giudizio badge-emergente">IN SVILUPPO</span></td>
-          <td>I costi degli EGS sono ancora molto alti per la perforazione in profondità (fino a 5–10 km). Con lo sviluppo della tecnologia, le stime proiettano costi potenzialmente competitivi entro il 2030–2035 per le prime applicazioni commerciali.</td>
+          <td><strong>non ancora commerciale</strong></td>
+          <td>La perforazione profonda, fino a 5–10 km, è la voce che pesa di più sul costo. Gli scenari sulle prime applicazioni commerciali vanno riportati attribuendoli a chi li ha formulati.</td>
         </tr>
       </table>
     </div>
