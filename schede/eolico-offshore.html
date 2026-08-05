@@ -203,9 +203,9 @@
     </div>
     <p class="scheda-subtitle">Turbine eoliche in mare: fisso (fondali bassi) e galleggiante (acque profonde) — due tecnologie con prospettive molto diverse per l'Italia.</p>
     <div class="scheda-pills">
-      <span class="pill pill-amber">Costo medio-alto</span>
-      <span class="pill pill-green">Fattore di utilizzo alto</span>
-      <span class="pill pill-amber">Galleggiante emergente</span>
+      <span class="pill pill-gray">73–99 $/MWh fisso · 100–180 galleggiante</span>
+      <span class="pill pill-gray">3.100–4.400 ore equivalenti su 8.760</span>
+      <span class="pill pill-gray">13,3–14,2 gCO₂eq/kWh sul ciclo di vita</span>
     </div>
     <div class="scheda-meta">
       <span class="scheda-meta-item">Aggiornato: luglio 2026</span>
@@ -247,7 +247,7 @@
         <div class="kpi-card">
           <div class="kpi-label">Fattore di utilizzo</div>
           <div class="kpi-value">35–50%</div>
-          <div class="kpi-sub">in mare il vento soffia più forte e più costante</div>
+          <div class="kpi-sub">delle 8.760 ore dell'anno, cioè 3.100–4.400 ore equivalenti a piena potenza</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Galleggiante in Italia</div>
@@ -255,25 +255,34 @@
           <div class="kpi-sub">installati al 2025 — iter autorizzativi in corso</div>
         </div>
       </div>
-      <table class="giudizio-table">
+      <div style="background:#fff;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:6px;padding:14px 18px;margin-bottom:18px;font-size:14px;line-height:1.65;">
+          <div style="font-weight:600;color:var(--teal-dark);margin-bottom:6px;">Come leggere questa tabella</div>
+          Ogni riga riporta un dato misurato, non un giudizio, e accanto il riferimento con cui confrontarlo. Il riferimento cambia a seconda di ciò che si misura: le emissioni si confrontano con la media della produzione elettrica italiana, il costo con il prezzo all'ingrosso dell'energia, il funzionamento con le ore dell'anno. Tecnologie diverse si misurano con grandezze diverse, e per questo le righe non sono le stesse su tutte le schede: un impianto a combustione si descrive con il suo rendimento, uno rinnovabile con quante ore lavora. <strong>Non troverai una classifica fra le fonti, perché non esiste un metro unico che le renda confrontabili.</strong>
+        </div>
+        <table class="giudizio-table">
         <tr>
           <td>💰 Costo — Fisso</td>
-          <td><span class="badge-giudizio badge-medio">MEDIO-ALTO</span></td>
-          <td>Più costoso dell'eolico onshore per la complessità dell'installazione e manutenzione in mare. Ma il fattore di utilizzo elevato (35–50%) compensa in parte il maggior costo iniziale.</td>
+          <td><strong>73–99 $/MWh</strong></td>
+          <td>in dollari e su modello statunitense (Lazard 2025): non è il costo di un impianto italiano. L'installazione e la manutenzione in mare aggiungono complessità rispetto alla terraferma, mentre le più ore equivalenti di funzionamento distribuiscono l'investimento su più energia prodotta.</td>
         </tr>
         <tr>
           <td>💰 Costo — Galleggiante</td>
-          <td><span class="badge-giudizio badge-alto">ALTO OGGI</span></td>
-          <td>Ancora costoso per la maturità tecnologica limitata. IRENA prevede una discesa significativa dei costi con la scala — simile a quanto avvenuto per fotovoltaico e eolico onshore negli ultimi 15 anni.</td>
+          <td><strong>100–180 $/MWh</strong></td>
+          <td>media mondiale in dollari (IRENA 2024). La tecnologia è ancora in fase iniziale di diffusione commerciale; gli scenari di riduzione dei costi con l'aumento della scala vanno riportati attribuendoli a chi li ha formulati.</td>
         </tr>
         <tr>
           <td>⚡ Fattore di utilizzo</td>
-          <td><span class="badge-giudizio badge-alta">ALTO</span></td>
-          <td>In mare il vento soffia più forte e più costantemente che sulla terraferma. Il fattore di utilizzo medio dell'offshore fisso nel Mare del Nord supera il 40%.</td>
+          <td><strong>35–50%</strong></td>
+          <td>delle 8.760 ore di un anno: il <span class="hl-y" onclick="toggleNote(this)">fattore di utilizzo<span class="hl-note y">🟡 Il fattore di utilizzo confronta l'energia prodotta in un anno con quella che l'impianto produrrebbe funzionando sempre alla sua potenza massima, per tutte le 8.760 ore dell'anno. Le ore indicate sono quindi ore equivalenti a piena potenza, non ore di funzionamento effettivo.</span></span> corrisponde a un valore fra 3.100 e 4.400 ore equivalenti a piena potenza. In mare il vento soffia più forte e più costantemente che sulla terraferma; nel Mare del Nord la media dell'offshore fisso supera il 40%.</td>
+        </tr>
+        <tr>
+          <td>🌿 Sostenibilità</td>
+          <td><strong>13,3–14,2 gCO₂eq/kWh</strong></td>
+          <td>sull'<span class="hl-y" onclick="toggleNote(this)">intero ciclo di vita<span class="hl-note y">🟡 Il ciclo di vita comprende tutto ciò che l'impianto comporta dall'inizio alla fine: estrazione dei materiali, costruzione delle fondazioni, trasporto, installazione in mare, funzionamento e smantellamento, spalmati sull'elettricità prodotta in tutti i suoi anni di esercizio. È una misura diversa dal fattore di emissione da combustione, che conta soltanto ciò che esce dal camino mentre l'impianto funziona.</span></span>, misurati in <span class="hl-y" onclick="toggleNote(this)">grammi di anidride carbonica equivalente<span class="hl-note y">🟡 «Equivalente» significa che i diversi gas serra sono convertiti in un'unica misura, calcolando quanta anidride carbonica produrrebbe lo stesso effetto sul clima. <a href="https://www.ipcc.ch/site/assets/uploads/2018/02/ipcc_wg3_ar5_annex-iii.pdf#page=7" target="_blank">Fonte →</a></span></span> per kilowattora: 13,3 con fondazioni in acciaio e 14,2 con fondazioni in cemento (<a href="https://unece.org/sed/documents/2021/10/reports/life-cycle-assessment-electricity-generation-options" target="_blank" class="fonte-link">UN-ECE 2021</a>). Non c'è combustione, quindi il numero non è confrontabile con i fattori di emissione da combustione delle centrali termiche.</td>
         </tr>
         <tr>
           <td>🇮🇹 Rilevanza per Italia</td>
-          <td><span class="badge-giudizio badge-emergente">GALLEGGIANTE</span></td>
+          <td><strong>0 MW installati al 2025</strong></td>
           <td>I fondali del Mediterraneo superano rapidamente i 200 metri — l'offshore fisso ha poco spazio. Il galleggiante è la tecnologia strategica per Italia, in particolare Sicilia, Sardegna e Calabria dove il vento è forte e i fondali profondi.</td>
         </tr>
       </table>
