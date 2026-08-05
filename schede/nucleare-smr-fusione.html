@@ -230,8 +230,8 @@
     </div>
     <p class="scheda-subtitle">Tre tecnologie distinte: fissione tradizionale, reattori modulari (SMR) e fusione nucleare. Dati, prospettive e analisi economica della Banca d'Italia.</p>
     <div class="scheda-pills">
-      <span class="pill pill-red">Costo molto alto — Fissione</span>
-      <span class="pill pill-green">Alta affidabilità</span>
+      <span class="pill pill-gray">141–220 $/MWh per nuovi impianti (Lazard, USA)</span>
+      <span class="pill pill-gray">7.000–8.150 ore equivalenti su 8.760</span>
       <span class="pill pill-amber">SMR pre-commerciale</span>
       <span class="pill pill-gray">Fusione: 2040+</span>
     </div>
@@ -263,7 +263,7 @@
         <div class="kpi-card">
           <div class="kpi-label">Fattore di utilizzo</div>
           <div class="kpi-value">80–93%</div>
-          <div class="kpi-sub">tra le fonti più affidabili (<a href="https://www.iea.org" target="_blank" style="color:var(--teal);text-decoration:underline;text-underline-offset:2px;">IEA</a>)</div>
+          <div class="kpi-sub">delle 8.760 ore di un anno, cioè fra 7.000 e 8.150 ore equivalenti a piena potenza</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Emissioni ciclo di vita</div>
@@ -277,30 +277,34 @@
         </div>
       </div>
 
-      <table class="giudizio-table">
+      <div style="background:#fff;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:6px;padding:14px 18px;margin-bottom:18px;font-size:14px;line-height:1.65;">
+          <div style="font-weight:600;color:var(--teal-dark);margin-bottom:6px;">Come leggere questa tabella</div>
+          Ogni riga riporta un dato misurato, non un giudizio, e accanto il riferimento con cui confrontarlo. Il riferimento cambia a seconda di ciò che si misura: le emissioni si confrontano con la media della produzione elettrica italiana, il costo con il prezzo all'ingrosso dell'energia, il funzionamento con le ore dell'anno. Tecnologie diverse si misurano con grandezze diverse, e per questo le righe non sono le stesse su tutte le schede: un impianto a combustione si descrive con il suo rendimento, uno rinnovabile con quante ore lavora. <strong>Non troverai una classifica fra le fonti, perché non esiste un metro unico che le renda confrontabili.</strong>
+        </div>
+        <table class="giudizio-table">
         <tr>
           <td>💰 Costo — Fissione</td>
-          <td><span class="badge-giudizio badge-molto-alto">MOLTO ALTO</span></td>
-          <td>I nuovi impianti a fissione sono tra le fonti più costose disponibili. Flamanville 3 (Francia) è costato ~13 miliardi invece dei 3,3 previsti. Vogtle 3&4 (USA) ha superato i 35 miliardi. Gli interessi sul capitale immobilizzato durante la costruzione possono pesare dal 17% al 49% del costo totale (<a href="https://www.bancaditalia.it/pubblicazioni/qef/2025-0947/index.html" target="_blank" class="fonte-link">Banca d'Italia, 2025</a>).</td>
+          <td><strong>141–220 $/MWh</strong></td>
+          <td>per nuovi impianti, in dollari e su modello statunitense (Lazard 2025): non è il costo di un impianto italiano. Flamanville 3 (Francia) è costato ~13 miliardi invece dei 3,3 previsti. Vogtle 3&4 (USA) ha superato i 35 miliardi. Gli interessi sul capitale immobilizzato durante la costruzione possono pesare dal 17% al 49% del costo totale (<a href="https://www.bancaditalia.it/pubblicazioni/qef/2025-0947/index.html" target="_blank" class="fonte-link">Banca d'Italia, 2025</a>).</td>
         </tr>
         <tr>
-          <td>⚡ Affidabilità</td>
-          <td><span class="badge-giudizio badge-alta">ALTA</span></td>
-          <td>Il nucleare produce elettricità in modo continuo, indipendente dal sole o dal vento, con fattori di utilizzo fra l'80 e il 93%. È particolarmente utile per coprire i picchi di domanda invernale.</td>
+          <td>⚡ Fattore di utilizzo</td>
+          <td><strong>80–93%</strong></td>
+          <td>delle 8.760 ore di un anno: il <span class="hl-y" onclick="toggleNote(this)">fattore di utilizzo<span class="hl-note y">🟡 Il fattore di utilizzo confronta l'energia prodotta in un anno con quella che l'impianto produrrebbe funzionando sempre alla sua potenza massima, per tutte le 8.760 ore dell'anno. Le ore indicate sono quindi ore equivalenti a piena potenza, non ore di funzionamento effettivo.</span></span> corrisponde a un valore fra 7.000 e 8.150 ore equivalenti a piena potenza. La produzione non dipende dal sole né dal vento, ed è utile per coprire i picchi di domanda invernale.</td>
         </tr>
         <tr>
           <td>🌿 Emissioni CO₂</td>
-          <td><span class="badge-giudizio badge-molto-basse">MOLTO BASSE</span></td>
-          <td>5,1 gCO₂eq/kWh sul ciclo di vita completo per il reattore ad acqua pressurizzata (UN-ECE 2021). Il punto aperto non è l'anidride carbonica ma i rifiuti radioattivi e i costi di smantellamento (decommissioning).</td>
+          <td><strong>5,1 gCO₂eq/kWh</strong></td>
+          <td>sull'<span class="hl-y" onclick="toggleNote(this)">intero ciclo di vita<span class="hl-note y">🟡 Il ciclo di vita comprende tutto ciò che l'impianto comporta dall'inizio alla fine: estrazione dei materiali, costruzione, trasporto, installazione, funzionamento e smantellamento, spalmati sull'elettricità prodotta in tutti i suoi anni di esercizio. È una misura diversa dal fattore di emissione da combustione, che conta soltanto ciò che esce dal camino mentre l'impianto funziona.</span></span> per il reattore ad acqua pressurizzata, misurati in <span class="hl-y" onclick="toggleNote(this)">grammi di anidride carbonica equivalente<span class="hl-note y">🟡 «Equivalente» significa che i diversi gas serra — anidride carbonica, metano, protossido di azoto — sono convertiti in un'unica misura, calcolando quanta anidride carbonica produrrebbe lo stesso effetto sul clima. <a href="https://www.ipcc.ch/site/assets/uploads/2018/02/ipcc_wg3_ar5_annex-iii.pdf#page=7" target="_blank">Fonte →</a></span></span> per kilowattora (UN-ECE 2021). Non c'è combustione di combustibili fossili, quindi il numero non è confrontabile con i fattori di emissione da combustione delle centrali termiche. Il punto aperto non è l'anidride carbonica ma i rifiuti radioattivi e i costi di smantellamento (decommissioning).</td>
         </tr>
         <tr>
           <td>⚛️ SMR — Stato</td>
-          <td><span class="badge-giudizio badge-emergente">PRE-COMMERCIALE</span></td>
+          <td><strong>nessuno in esercizio in Occidente</strong></td>
           <td>I reattori modulari di piccola taglia (Small Modular Reactor) promettono costruzione in fabbrica, tempi più brevi e costi ridotti. Ma nessun SMR commerciale è ancora in funzione in Occidente. Il caso NuScale (USA) è stato abbandonato dopo che i costi sono passati da 3,6 a 9,3 miliardi.</td>
         </tr>
         <tr>
           <td>🔮 Fusione — Stato</td>
-          <td><span class="badge-giudizio badge-2040">DOPO IL 2040</span></td>
+          <td><strong>primo plasma ITER atteso nel 2039</strong></td>
           <td>La fusione nucleare — l'energia delle stelle — è in sviluppo da decenni. Il reattore sperimentale ITER dovrebbe raggiungere il primo plasma nel 2039. I primi impianti commerciali non sono attesi prima del 2040–2050.</td>
         </tr>
       </table>
