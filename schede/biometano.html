@@ -208,9 +208,9 @@
     </div>
     <p class="scheda-subtitle">Gas rinnovabile prodotto da scarti organici: la filiera conta più della tecnologia. Include sottosezione sui biodigestori.</p>
     <div class="scheda-pills">
-      <span class="pill pill-amber">Costo variabile</span>
-      <span class="pill pill-green">Flessibile</span>
-      <span class="pill pill-amber">La filiera conta</span>
+      <span class="pill pill-gray">2.378 impianti, 7.484 GWh/anno (dati 2023)</span>
+      <span class="pill pill-gray">Immesso nella rete del gas esistente</span>
+      <span class="pill pill-gray">Obiettivo PNIEC 2030: 5,3 miliardi di m³</span>
     </div>
     <div class="scheda-meta">
       <span class="scheda-meta-item">Aggiornato: luglio 2026</span>
@@ -256,7 +256,7 @@
         <div class="kpi-card">
           <div class="kpi-label">Impianti in Italia</div>
           <div class="kpi-value">2.378</div>
-          <div class="kpi-sub">impianti a biogas/biometano (<a href="https://www.gse.it/dati-e-scenari/rapporti" target="_blank" style="color:var(--teal);text-decoration:underline;text-underline-offset:2px;">GSE 2023</a>)</div>
+          <div class="kpi-sub">impianti a biogas e biometano, dati fermi al 2023 (<a href="https://www.gse.it/dati-e-scenari/rapporti" target="_blank" style="color:var(--teal);text-decoration:underline;text-underline-offset:2px;">GSE 2023</a>)</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Potenza installata</div>
@@ -275,21 +275,25 @@
         </div>
       </div>
 
-      <table class="giudizio-table">
+      <div style="background:#fff;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:6px;padding:14px 18px;margin-bottom:18px;font-size:14px;line-height:1.65;">
+          <div style="font-weight:600;color:var(--teal-dark);margin-bottom:6px;">Come leggere questa tabella</div>
+          Ogni riga riporta un dato misurato, non un giudizio, e accanto il riferimento con cui confrontarlo. Il riferimento cambia a seconda di ciò che si misura: le emissioni si confrontano con la media della produzione elettrica italiana, il costo con il prezzo all'ingrosso dell'energia, il funzionamento con le ore dell'anno. Tecnologie diverse si misurano con grandezze diverse, e per questo le righe non sono le stesse su tutte le schede: un impianto a combustione si descrive con il suo rendimento, uno rinnovabile con quante ore lavora. <strong>Non troverai una classifica fra le fonti, perché non esiste un metro unico che le renda confrontabili.</strong>
+        </div>
+        <table class="giudizio-table">
         <tr>
           <td>💰 Costo</td>
-          <td><span class="badge-giudizio badge-variabile">VARIABILE</span></td>
-          <td>Dipende moltissimo dalla materia prima: da quasi nullo (letame di allevamento, che altrimenti si disperde) a medio-alto (colture dedicate che richiedono terreno, sementi, fertilizzanti). Gli incentivi del decreto 2022 puntano a favorire le filiere più economiche e sostenibili.</td>
+          <td><strong>dipende dalla materia prima</strong></td>
+          <td>Il costo va da quasi nullo, quando si parte da letame di allevamento che altrimenti si disperderebbe, a valori più alti per le colture dedicate, che richiedono terreno, sementi e fertilizzanti. Gli incentivi del decreto 2022 favoriscono le filiere meno costose. Il riferimento di mercato non è il prezzo dell'elettricità ma quello del gas, perché il biometano viene immesso nella rete del gas. [DA VERIFICARE: manca un costo di produzione italiano da fonte primaria, in €/MWh o €/m³, da confrontare con il prezzo del gas al punto di scambio virtuale.]</td>
         </tr>
         <tr>
-          <td>⚡ Flessibilità</td>
-          <td><span class="badge-giudizio badge-alta">ALTA</span></td>
-          <td>Il biometano è chimicamente identico al gas naturale — può essere immesso nella rete del gas esistente, usato per riscaldamento, carburante per mezzi pesanti o per produrre elettricità. Non dipende dal sole o dal vento: produce quando serve.</td>
+          <td>⚡ Impiego</td>
+          <td><strong>identico al gas naturale</strong></td>
+          <td>Chimicamente il biometano è lo stesso composto del gas naturale, quindi entra nella rete del gas esistente senza modifiche e serve per riscaldamento, come carburante per mezzi pesanti o per produrre elettricità. La produzione non dipende dal sole né dal vento: si programma. Per questo non si misura con il fattore di utilizzo delle centrali elettriche, ma con i volumi immessi in rete.</td>
         </tr>
         <tr>
           <td>🌿 Sostenibilità</td>
-          <td><span class="badge-giudizio badge-dipende">DIPENDE DALLA FILIERA</span></td>
-          <td>Dal letame: bilancio molto positivo (cattura metano che si disperderebbe). Dalla FORSU: ottimo. Dai sottoprodotti agricoli: buono. Dalle colture dedicate: più discusso — dipende dall'uso del suolo e dai fertilizzanti usati.</td>
+          <td><strong>varia con la filiera</strong></td>
+          <td>Bruciando biometano si libera <span class="hl-y" onclick="toggleNote(this)">anidride carbonica biogenica<span class="hl-note y">🟡 L'anidride carbonica liberata bruciando biometano proviene da materia organica recente — letame, scarti agricoli, rifiuti umidi — che l'aveva assorbita dall'atmosfera poco tempo prima. Nei bilanci delle emissioni si contabilizza in modo diverso da quella dei combustibili fossili, che rimette in circolo carbonio rimasto sepolto per milioni di anni. Non significa che sia a zero emissioni: contano la filiera, i trasporti e le eventuali perdite di metano.</span></span>. Il bilancio cambia con la materia prima: dal letame la digestione cattura metano che si disperderebbe comunque in atmosfera; dalla frazione organica dei rifiuti urbani e dai sottoprodotti agricoli il bilancio resta favorevole; dalle colture dedicate entrano in gioco l'uso del suolo e i fertilizzanti. [DA VERIFICARE: manca un valore di ciclo di vita per il biometano italiano da fonte primaria. Il rapporto UN-ECE non copre questa tecnologia.]</td>
         </tr>
       </table>
     </div>
