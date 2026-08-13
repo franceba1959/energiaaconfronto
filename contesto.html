@@ -226,6 +226,7 @@
         <li><span class="indice-num">06</span><a href="#prezzo">Come si costruisce il prezzo finale del kWh</a></li>
         <li><span class="indice-num">06b</span><a href="#tasse-oneri">Cosa paghi davvero in bolletta — voce per voce</a></li>
         <li><span class="indice-num">07</span><a href="#emissioni-paesi">Le emissioni dei Paesi</a>
+      <a href="#stabilita">Come sta in piedi la rete</a>
       <a href="#glossario">Glossario dei termini</a></li>
       </ul>
     </div>
@@ -799,9 +800,63 @@
     <p>Restano fuori da questa fotografia due elementi che nel dibattito internazionale pesano molto: le <strong>emissioni storiche accumulate</strong> dal 1850 in poi, rilevanti perché l'anidride carbonica resta in atmosfera per secoli, e le <strong>emissioni incorporate nei beni importati</strong>, che nella contabilità territoriale vengono attribuite al Paese che produce e non a quello che consuma. [DA VERIFICARE: entrambe le grandezze richiedono una fonte dedicata, non ancora individuata fra quelle utilizzate dal sito]</p>
   </div>
 
-  <!-- SEZIONE 8 — GLOSSARIO -->
-  <div class="sezione" id="glossario">
+  <!-- SEZIONE 08 — STABILITA DI RETE -->
+  <div class="sezione" id="stabilita">
     <div class="sezione-num">Sezione 08</div>
+    <h2 class="sezione-title">Come sta in piedi la rete: frequenza, inerzia, tensione</h2>
+
+    <p>Quasi tutte le discussioni pubbliche sul mix elettrico prima o poi arrivano qui, di solito con formule sbrigative in un senso o nell'altro. Questa sezione non prende posizione: riporta che cosa prescrive il <a href="https://download.terna.it/terna/Allegato%20A.12_8d7c12206bf176c.pdf" target="_blank" class="fonte-link">Codice di Rete di Terna, Allegato A.12 →</a>, il documento tecnico che regola il comportamento del sistema elettrico italiano quando la frequenza si muove.</p>
+
+    <p>La rete europea continentale funziona a <strong>50 hertz</strong>. Quel valore non è una convenzione grafica: è la misura istantanea dell'equilibrio fra energia prodotta e consumata. Se il consumo supera la produzione la frequenza scende, se accade il contrario sale. I gruppi di generazione devono garantire un funzionamento stabile fra <strong>47,5 e 51,5 hertz</strong>; sotto i 47,5 il funzionamento continuativo non è più assicurato.</p>
+
+    <h3>L'inerzia: i secondi che la rete si compra</h3>
+    <p>Nei primissimi istanti dopo uno squilibrio, prima che qualunque regolazione possa intervenire, sono le macchine rotanti a reagire da sole: <span class="hl-y" onclick="toggleNote(this)">cedono parte della propria energia cinetica<span class="hl-note y">🟡 Un alternatore di centrale è un rotore di decine di tonnellate che gira in sincronia con la rete. Quando la frequenza scende, rallenta anche lui, e nel rallentare restituisce energia al sistema. È un effetto automatico e gratuito, che non dipende da alcun comando. La grandezza che lo misura si chiama costante di inerzia e si esprime in secondi.</span></span>. Terna scrive che la velocità con cui la frequenza varia è <strong>inversamente proporzionale all'inerzia delle masse rotanti</strong>, costituite dai generatori sincroni e dai carichi rotanti.</p>
+
+    <p>Il documento è esplicito su che cosa sta cambiando: la generazione da fonte rinnovabile collegata tramite <span class="hl-y" onclick="toggleNote(this)">inverter<span class="hl-note y">🟡 Dispositivo elettronico che converte la corrente continua prodotta da un pannello fotovoltaico, o quella a frequenza variabile di una turbina eolica, nella corrente alternata a 50 hertz della rete. Fra la macchina e la rete non c'è collegamento meccanico diretto: per questo l'eventuale massa rotante non fa da volano.</span></span> si sostituisce alla generazione convenzionale «causando una diminuzione della inerzia del sistema», e lo stesso vale per molti carichi industriali e diffusi, anch'essi controllati tramite inverter. La conseguenza dichiarata è «una maggiore velocità e criticità dei transitori di frequenza», misurata da un indicatore chiamato <span class="hl-y" onclick="toggleNote(this)">ROCOF<span class="hl-note y">🟡 Rate Of Change Of Frequency, cioè velocità di variazione della frequenza, espressa in hertz al secondo. Più bassa è l'inerzia del sistema, più rapidamente la frequenza si allontana dai 50 hertz dopo un guasto, e meno tempo hanno le protezioni e le regolazioni per intervenire.</span></span>.</p>
+
+    <p>Terna precisa anche da che cosa dipende l'inerzia disponibile in un dato momento: dal livello del fabbisogno, dal rapporto fra generazione statica basata su inverter e generazione rotante, e dal tipo di gruppi rotanti in servizio. Non è quindi una caratteristica fissa del sistema, ma cambia di ora in ora.</p>
+
+    <h3>Regolazione di frequenza e di tensione</h3>
+    <p>Sulla regolazione della frequenza il Codice distingue fra ciò che gli impianti fanno e ciò che potrebbero fare. Gli impianti collegati tramite inverter «per propria natura massimizzano lo sfruttamento della fonte rinnovabile primaria», cioè lavorano sempre alla massima producibilità: per erogare più potenza in caso di bisogno dovrebbero tenerne una quota di riserva, e quindi rinunciare a produrre. Per questo, scrive Terna, «le modalità di esercizio attuali sono tali da non consentire un contributo alla regolazione primaria». Nello stesso paragrafo il documento aggiunge però che gli allegati tecnici su centrali eoliche e fotovoltaiche prevedono che il sistema di controllo d'impianto <em>possa</em> gestire la regolazione primaria: è una scelta di esercizio, non un limite fisico della tecnologia.</p>
+
+    <p>Sulla tensione il quadro è analogo. I gruppi convenzionali assorbono o erogano <span class="hl-y" onclick="toggleNote(this)">potenza reattiva<span class="hl-note y">🟡 Nelle reti in corrente alternata circola, oltre alla potenza attiva che compie lavoro, una componente che oscilla avanti e indietro fra generatori e carichi senza produrre lavoro utile. Serve a mantenere la tensione al valore corretto: senza, la tensione crolla. Si misura in volt-ampere reattivi.</span></span> per regolare la tensione. La generazione collegata tramite inverter, si legge, «non esegue una regolazione automatica di tensione al punto di connessione», permettendo solo l'impostazione statica del fattore di potenza in locale, e quindi la sua crescita «diminuisce i margini di regolazione di tensione e reattivo sul sistema». Anche qui il documento aggiunge che le nuove installazioni eoliche e fotovoltaiche, e le connessioni in corrente continua di tipo VSC, sono predisposte per la regolazione di tensione e potenza reattiva.</p>
+
+    <h3>Che cosa succede se la frequenza scende davvero</h3>
+    <p>Il sistema italiano ha un dispositivo automatico di ultima istanza chiamato Piano di Alleggerimento: se la frequenza continua a scendere, apparati installati presso i distributori staccano progressivamente carico fino a ristabilire l'equilibrio. I numeri sono nel Codice.</p>
+
+    <table class="giudizio-table">
+      <tr>
+        <td>⚡ Frequenza nominale</td>
+        <td><strong>50 Hz</strong></td>
+        <td>i gruppi devono restare stabili fra 47,5 e 51,5 Hz. Le protezioni di minima frequenza intervengono a 47,5 Hz con 4 secondi di ritardo e a 46,5 Hz istantaneamente.</td>
+      </tr>
+      <tr>
+        <td>🔻 Soglie di distacco</td>
+        <td><strong>8 soglie, ultima a 48 Hz</strong></td>
+        <td>il distacco deve concludersi prima dei 47,5 Hz. La prima soglia stacca una percentuale maggiore delle successive, per fermare il transitorio il prima possibile.</td>
+      </tr>
+      <tr>
+        <td>📉 Carico distaccabile</td>
+        <td><strong>45% ±7% del fabbisogno</strong></td>
+        <td>valore riferito al fabbisogno nazionale di ciascun gestore di rete europeo. Staccarne di più rischierebbe di far perdere il controllo delle tensioni, con instabilità a catena.</td>
+      </tr>
+      <tr>
+        <td>⏱️ Gradiente di intervento</td>
+        <td><strong>da −0,3 a −1,2 Hz/s</strong></td>
+        <td>oltre alle soglie in frequenza, le prime fasi usano la velocità di caduta. Terna dichiara che questa azione anticipata è resa necessaria «a causa della struttura elettrica peninsulare dell'Italia» rispetto alla rete continentale europea.</td>
+      </tr>
+    </table>
+
+    <p>Il Piano di Alleggerimento, avverte lo stesso documento, «rappresenta pur sempre una estrema ratio, il cui successo non è assicurato deterministicamente». È il dispositivo che si attiva quando tutto il resto non è bastato.</p>
+
+    <p>Un ultimo elemento riguarda l'Europa e non solo l'Italia: nell'intervallo fra 47,5 e 51,5 Hz si verifica, secondo un rapporto ENTSO-E citato da Terna, il distacco incontrollato di generazione distribuita a valori di frequenza diversi fra loro, e la generazione distribuita europea a rischio «supera abbondantemente» i 3 GW che il regolamento europeo assume come incidente di riferimento. In Italia l'adeguamento degli impianti esistenti previsto da una delibera dell'Autorità del 2012 non risulta interamente completato.</p>
+
+    <p>[DA VERIFICARE: l'Allegato A.12 qui utilizzato è nella revisione del marzo 2020. Dal gennaio 2025 il dispacciamento è disciplinato dal Testo Integrato del Dispacciamento Elettrico (TIDE), che riorganizza i servizi ancillari: le prescrizioni tecniche sopra riportate vanno riscontrate sulla versione vigente del Codice di Rete e sulla delibera ARERA che approva il TIDE.]</p>
+  </div>
+
+  <!-- SEZIONE 09 — GLOSSARIO -->
+  <div class="sezione" id="glossario">
+    <div class="sezione-num">Sezione 09</div>
     <h2 class="sezione-title">Glossario dei termini usati in questa pagina</h2>
 
     <h3>Le unità di misura dell'energia — dalla bolletta alla rete nazionale</h3>
