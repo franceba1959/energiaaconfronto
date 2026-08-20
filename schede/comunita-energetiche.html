@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunità energetiche rinnovabili — Energia a Confronto</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --nav-max-width: 900px;
+    --teal: #1B6B72; --teal-dark: #0F4A50; --teal-light: #E8F4F5;
+    --graphite: #2D2D2D; --gray: #6B7280; --gray-light: #F3F4F6;
+    --warm-white: #FAFAF8; --border: #E5E7EB;
+    --yellow: #FEF3C7; --yellow-border: #F59E0B; --yellow-text: #78350F;
+    --orange: #FFEDD5; --orange-border: #F97316; --orange-text: #7C2D12;
+    --green-ok: #D1FAE5; --green-text: #065F46;
+    --amber-ok: #FEF3C7; --amber-text: #92400E;
+    --red-ok: #FEE2E2; --red-text: #991B1B;
+    --accent: #14B8A6;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--warm-white); color: var(--graphite); font-size: 16px; line-height: 1.7; }
+
+  .legend-banner { background: var(--teal-dark); color: white; font-size: 12px; padding: 7px 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; position: sticky; top: 0; z-index: 101; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+  .sw-none { background: white; border: 1px solid rgba(255,255,255,0.4); }
+  .sw-yellow { background: #FEF3C7; border: 1px solid #F59E0B; }
+  .sw-orange { background: #FFEDD5; border: 1px solid #F97316; }
+
+  nav { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 33px; z-index: 100; box-shadow: var(--shadow); }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-size: 17px; color: var(--teal); text-decoration: none; }
+  .nav-logo em { font-style: italic; }
+  .nav-back { font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; transition: background 0.15s; }
+  .nav-back:hover { background: var(--teal-light); color: var(--teal); }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+  .scheda-hero { padding: 48px 0 32px; border-bottom: 1px solid var(--border); }
+  .breadcrumb { font-size: 12px; color: var(--gray); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .breadcrumb a { color: var(--teal); text-decoration: none; }
+  .scheda-icon-title { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .scheda-big-icon { font-size: 44px; }
+  .scheda-title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 40px); font-weight: normal; color: var(--graphite); line-height: 1.2; }
+  .scheda-subtitle { font-size: 16px; color: var(--gray); margin-bottom: 20px; }
+  .scheda-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+  .pill-green { background: var(--green-ok); color: var(--green-text); }
+  .pill-amber { background: var(--amber-ok); color: var(--amber-text); }
+  .scheda-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--gray); }
+  .scheda-meta-item::before { content: "·"; color: var(--accent); font-size: 16px; margin-right: 5px; }
+
+  .nav-interna { background: var(--gray-light); border-radius: var(--radius); padding: 16px 20px; margin: 24px 0; display: flex; gap: 12px; flex-wrap: wrap; }
+  .nav-interna a { font-size: 13px; color: var(--teal); text-decoration: none; padding: 4px 12px; border: 1px solid var(--teal-light); border-radius: 20px; transition: background 0.15s; }
+  .nav-interna a:hover { background: var(--teal-light); }
+
+  .blocco { padding: 40px 0; border-bottom: 1px solid var(--border); }
+  .blocco:last-child { border-bottom: none; }
+  .blocco-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .blocco-title { font-family: var(--font-serif); font-size: 24px; font-weight: normal; color: var(--graphite); margin-bottom: 20px; }
+
+  .blocco-1 { background: var(--teal-light); border-radius: var(--radius); padding: 32px; margin: 0 -8px; }
+  .blocco-1 .blocco-num { color: var(--teal-dark); }
+  .blocco-1 .blocco-title { color: var(--teal-dark); }
+
+  .kpi-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 20px 0; }
+  .kpi-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; flex: 1; min-width: 140px; box-shadow: var(--shadow); }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); font-weight: 600; margin-bottom: 6px; }
+  .kpi-value { font-family: var(--font-serif); font-size: 28px; color: var(--teal-dark); line-height: 1; margin-bottom: 2px; }
+  .kpi-sub { font-size: 11px; color: var(--gray); line-height: 1.4; }
+
+  .famiglia-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .famiglia-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+  .famiglia-card.tradizionale { border-top: 3px solid #14B8A6; }
+  .famiglia-card.egs { border-top: 3px solid #F59E0B; }
+  .famiglia-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+  .famiglia-card.tradizionale .famiglia-label { color: #0F766E; }
+  .famiglia-card.egs .famiglia-label { color: #92400E; }
+  .famiglia-title { font-size: 15px; font-weight: 700; color: var(--graphite); margin-bottom: 8px; }
+  .famiglia-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+  .giudizio-table { width: 100%; border-collapse: collapse; }
+  .giudizio-table tr { border-bottom: 1px solid rgba(27,107,114,0.15); }
+  .giudizio-table tr:last-child { border-bottom: none; }
+  .giudizio-table td { padding: 12px 10px; font-size: 14px; vertical-align: top; }
+  .giudizio-table td:first-child { width: 160px; font-weight: 600; color: var(--teal-dark); font-size: 13px; }
+  .giudizio-table td:nth-child(2) { width: 110px; }
+  .badge-giudizio { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 12px; }
+  .badge-basso { background: var(--green-ok); color: var(--green-text); }
+  .badge-alta { background: var(--green-ok); color: var(--green-text); }
+  .badge-limitata { background: var(--amber-ok); color: var(--amber-text); }
+  .badge-emergente { background: var(--amber-ok); color: var(--amber-text); }
+
+  .hl-y { background: var(--yellow); border-bottom: 1.5px solid var(--yellow-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-o { background: var(--orange); border-bottom: 1.5px solid var(--orange-border); border-radius: 2px; padding: 1px 3px; cursor: pointer; position: relative; display: inline; }
+  .hl-note { display: none; margin: 6px 0 8px; padding: 8px 12px; border-radius: 6px; font-size: 13px; line-height: 1.55; }
+  .hl-note.y { background: #FFFBEB; border-left: 3px solid var(--yellow-border); color: var(--yellow-text); }
+  .hl-note.o { background: #FFF7ED; border-left: 3px solid var(--orange-border); color: var(--orange-text); }
+  .hl-note.open { display: block; }
+
+  .blocco p { margin-bottom: 14px; font-size: 15px; line-height: 1.75; }
+  .blocco h3 { font-size: 18px; font-weight: 600; color: var(--graphite); margin: 28px 0 10px; }
+  .blocco h4 { font-size: 15px; font-weight: 600; color: var(--teal); margin: 20px 0 8px; }
+
+  .sidice-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .sidice-table th { background: var(--graphite); color: white; font-size: 13px; font-weight: 600; padding: 10px 16px; text-align: left; }
+  .sidice-table th:first-child { border-radius: 6px 0 0 0; }
+  .sidice-table th:last-child { border-radius: 0 6px 0 0; }
+  .sidice-table td { padding: 14px 16px; font-size: 14px; vertical-align: top; line-height: 1.6; border-bottom: 1px solid var(--border); }
+  .sidice-table tr:last-child td { border-bottom: none; }
+  .sidice-table td:first-child { background: #FFF9F0; color: var(--amber-text); font-style: italic; width: 40%; border-right: 1px solid var(--border); }
+  .sidice-table td:last-child { background: white; }
+
+  .fonte-link { font-size: 12px; color: var(--teal); text-decoration: underline; text-underline-offset: 2px; }
+  .fonte-link:hover { text-decoration-color: var(--teal); opacity: 0.8; }
+
+  .innovazione-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; margin-top: 8px; }
+  .innovazione-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .inno-horizon { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--teal); margin-bottom: 6px; }
+  .inno-title { font-size: 15px; font-weight: 600; color: var(--graphite); margin-bottom: 8px; line-height: 1.3; }
+  .inno-desc { font-size: 13px; color: var(--gray); line-height: 1.55; }
+
+  .fonti-box { background: var(--gray-light); border-radius: var(--radius); padding: 20px; margin-top: 40px; }
+  .fonti-box h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray); margin-bottom: 12px; }
+  .fonte-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+  .fonte-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 6px; }
+  .fonte-item a { color: var(--teal); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .famiglia-grid { grid-template-columns: 1fr; }
+    .kpi-row { flex-direction: column; }
+    .innovazione-grid { grid-template-columns: 1fr; }
+    .sidice-table, .sidice-table tbody, .sidice-table tr, .sidice-table td { display: block; }
+    .sidice-table td:first-child { width: 100%; border-right: none; border-bottom: 1px solid var(--yellow-border); }
+  }
+
+  /* === RESPONSIVE MOBILE === */
+  @media (max-width: 600px) {
+    .page { padding: 0 14px 60px; }
+    .scheda-title { font-size: 24px !important; }
+    .kpi-row { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .kpi-card { min-width: 0 !important; padding: 12px 14px; }
+    .kpi-value { font-size: 20px !important; }
+    .kpi-label { font-size: 10px; }
+    .kpi-sub { font-size: 10px; }
+    .blocco-1 { padding: 20px 14px; margin: 0; }
+    .blocco-title { font-size: 20px; }
+    .giudizio-table td:first-child { width: 80px !important; white-space: normal !important; font-size: 12px; }
+    .giudizio-table td:nth-child(2) { width: 70px !important; }
+    .giudizio-table td:last-child { font-size: 13px; }
+    .giudizio-table td { padding: 10px 6px; }
+    .badge-giudizio { font-size: 10px; padding: 2px 6px; }
+    .sidice-table td { font-size: 13px; padding: 10px 10px; }
+    .sidice-table td:first-child { width: 100%; display: block; border-right: none; border-bottom: 1px solid #F59E0B; }
+    .sidice-table td:last-child { display: block; }
+    .sidice-table tr { display: block; margin-bottom: 12px; border: 1px solid #E5E7EB; border-radius: 6px; overflow: hidden; }
+    .sidice-table thead { display: none; }
+    .innovazione-grid { grid-template-columns: 1fr !important; }
+    .famiglia-grid { grid-template-columns: 1fr !important; }
+    .posizioni-grid { grid-template-columns: 1fr !important; }
+    .nav-interna { gap: 8px; padding: 12px; }
+    .nav-interna a { font-size: 12px; padding: 4px 10px; }
+    .blocco h3 { font-size: 16px; }
+    .blocco p { font-size: 14px; }
+    .fonti-box { padding: 16px; }
+    .box-agrivoltaico { padding: 16px; }
+    .box-opinione { padding: 16px 18px; }
+    .legend-banner { font-size: 11px; gap: 8px; padding: 6px 12px; }
+  }
+
+  /* LEGENDA SEMPRE VISIBILE SU MOBILE */
+  @media (max-width: 600px) {
+    .legend-banner {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 6px !important;
+      padding: 10px 16px !important;
+      font-size: 11px !important;
+    }
+    .legend-item {
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      font-size: 11px !important;
+    }
+    .legend-swatch {
+      width: 14px !important;
+      height: 14px !important;
+      flex-shrink: 0 !important;
+    }
+  }
+</style>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div class="legend-banner">
+  <strong style="margin-right:4px;">Affidabilità dati:</strong>
+  <div class="legend-item"><span class="legend-swatch sw-none"></span> Fonte primaria verificata</div>
+  <div class="legend-item"><span class="legend-swatch sw-yellow"></span> Fonte secondaria — tocca per la nota</div>
+  <div class="legend-item"><span class="legend-swatch sw-orange"></span> Nessuna fonte istituzionale — tocca per la nota</div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><svg class="nav-logo-icon" width="24" height="24" viewBox="0 0 40 40" aria-hidden="true" style="flex-shrink:0;"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2.2"/><rect x="11" y="22" width="3.4" height="7" rx="1" fill="currentColor"/><rect x="16.3" y="16" width="3.4" height="13" rx="1" fill="currentColor"/><rect x="21.6" y="11" width="3.4" height="18" rx="1" fill="currentColor"/><rect x="26.9" y="18" width="3.4" height="11" rx="1" fill="currentColor"/></svg><span>Energia <em>a Confronto</em></span></a>
+    <a href="../index.html#schede" class="nav-back">← <span>Tutte le tecnologie</span></a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="scheda-hero">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a> <span>/</span>
+      <a href="../index.html#schede">Le tecnologie</a> <span>/</span>
+      Comunità energetiche rinnovabili
+    </div>
+    <div class="scheda-icon-title">
+      <span class="scheda-big-icon">🏘️</span>
+      <h1 class="scheda-title">Comunità energetiche rinnovabili</h1>
+    </div>
+    <p class="scheda-subtitle">Non è una tecnologia ma una configurazione: un gruppo di persone, imprese o enti che condividono l'energia prodotta da impianti rinnovabili sul proprio territorio. Fra i membri non passa un cavo — passa un calcolo.</p>
+    <div class="scheda-pills">
+      <span class="pill pill-gray">Incentivo per 20 anni sull'energia condivisa</span>
+      <span class="pill pill-gray">Perimetro: la cabina primaria</span>
+      <span class="pill pill-gray">Contributo PNRR chiuso il 30 novembre 2025</span>
+    </div>
+    <div class="scheda-meta">
+      <span class="scheda-meta-item">Aggiornato: agosto 2026</span>
+      <span class="scheda-meta-item">Fonti: GSE · MASE · ARERA · Normattiva</span>
+    </div>
+    <div class="nav-interna">
+      <a href="#funziona">Come funziona</a>
+      <a href="#numeri">I numeri</a>
+      <a href="#norme">Il quadro normativo</a>
+      <a href="#avviare">Come si avvia una CER</a>
+    </div>
+  </div>
+
+  <!-- BLOCCO 1 -->
+  <div class="blocco" id="funziona">
+    <div class="blocco-1">
+      <div class="blocco-num">Blocco 1 — In parole semplici</div>
+      <h2 class="blocco-title">Che cosa si condivide davvero</h2>
+
+      <p>La formula che circola — «l'energia del vicino arriva a casa tua» — è comoda ma sbagliata. L'elettricità continua a viaggiare nella rete di distribuzione come sempre, e nessuno sa da quale impianto arrivino gli elettroni che accendono una lampadina. Quello che cambia è la <strong>contabilità</strong>.</p>
+
+      <p>Il GSE distingue due forme di autoconsumo: è <strong>fisico</strong> quando gli impianti di produzione sono collegati direttamente alle utenze di consumo; è <strong>virtuale</strong> quando utilizza la rete di distribuzione per bilanciare consumi e produzione all'interno di una stessa porzione di rete, senza coincidenza fra il punto in cui l'energia entra e quello da cui viene prelevata. L'autoconsumo virtuale è la base delle configurazioni di <span class="hl-y" onclick="toggleNote(this)">autoconsumo diffuso<span class="hl-note y">🟡 È la famiglia a cui appartengono le comunità energetiche rinnovabili, i gruppi di autoconsumatori che agiscono collettivamente (per esempio un condominio) e gli autoconsumatori a distanza. Cambiano i soggetti e la forma giuridica, non il meccanismo di calcolo. <a href="https://www.gse.it/servizi-per-te/autoconsumo" target="_blank">Fonte: GSE →</a></span></span>, di cui le comunità energetiche sono la forma più nota.</p>
+
+      <p>In pratica: se in una certa ora un impianto della comunità immette in rete 10 kWh e in quella stessa ora i membri ne prelevano 6, il GSE considera <strong>6 kWh di energia condivisa</strong> e su quelli riconosce l'incentivo. I 4 kWh restanti vengono venduti come qualunque altra energia immessa, senza premio. Il conteggio si fa ora per ora, sui dati dei contatori.</p>
+
+      <p>Ne discendono due conseguenze pratiche che spiegano quasi tutti i fallimenti: <strong>conta la contemporaneità</strong>, quindi una comunità fatta solo di case abitate la sera e impianti che producono a mezzogiorno condivide poco; e <strong>conta il perimetro</strong>, perché produttori e consumatori devono stare sotto la stessa <span class="hl-y" onclick="toggleNote(this)">cabina primaria<span class="hl-note y">🟡 È la stazione che trasforma l'alta tensione in media tensione e serve un'area che può coincidere con un Comune piccolo o con un quartiere di città. Non ha nulla a che vedere con i confini amministrativi: due case vicine possono stare sotto cabine diverse. Il GSE pubblica una mappa interattiva per verificarlo. <a href="https://www.gse.it/servizi-per-te/autoconsumo/mappa-interattiva-delle-cabine-primarie" target="_blank">Fonte: GSE →</a></span></span>.</p>
+    </div>
+  </div>
+
+  <!-- BLOCCO 2 -->
+  <div class="blocco" id="numeri">
+    <div class="blocco-num">Blocco 2</div>
+    <h2 class="blocco-title">I numeri, e i tre modi di contarli</h2>
+
+    <p>Sulle comunità energetiche circolano cifre molto diverse fra loro, e non è disinformazione: si contano cose diverse. Una configurazione può essere <em>costituita</em> senza aver ottenuto la qualifica dal GSE; una configurazione <em>qualificata</em> può non aver ancora un contratto attivo per l'incentivo; e le <em>domande di contributo</em> presentate sono un'altra cosa ancora rispetto agli impianti realmente in funzione. Qui sotto le grandezze sono tenute separate.</p>
+
+    <div style="background:#fff;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:6px;padding:14px 18px;margin-bottom:18px;font-size:14px;line-height:1.65;">
+          <div style="font-weight:600;color:var(--teal-dark);margin-bottom:6px;">Come leggere questa tabella</div>
+          Ogni riga riporta un dato misurato, non un giudizio, e accanto il riferimento con cui confrontarlo. Il riferimento cambia a seconda di ciò che si misura: le emissioni si confrontano con la media della produzione elettrica italiana, il costo con il prezzo all'ingrosso dell'energia, il funzionamento con le ore dell'anno. Tecnologie diverse si misurano con grandezze diverse, e per questo le righe non sono le stesse su tutte le schede: un impianto a combustione si descrive con il suo rendimento, uno rinnovabile con quante ore lavora. <strong>Non troverai una classifica fra le fonti, perché non esiste un metro unico che le renda confrontabili.</strong>
+        </div>
+       <table class="giudizio-table">
+      <tr>
+        <td>📄 Domande di contributo PNRR</td>
+        <td><strong>48.750 presentate, 30.299 ammesse</strong></td>
+        <td>presentate fra l'8 aprile 2024 e il 30 novembre 2025, data di chiusura dello sportello. Le esclusioni e rinunce sono 2.887. Una domanda ammessa è un impianto finanziato, non una comunità in funzione (GSE).</td>
+      </tr>
+      <tr>
+        <td>💶 Contributi concessi</td>
+        <td><strong>779,0 milioni di euro</strong></td>
+        <td>distribuiti in sei atti di concessione fra il 12 maggio e il 30 luglio 2026, per impianti che sommano 1.763,6 MW. Il contributo copre fino al 40% della spesa ammissibile (GSE).</td>
+      </tr>
+      <tr>
+        <td>⏳ Domande non finanziabili</td>
+        <td><strong>15.465, per 572,8 milioni</strong></td>
+        <td>corrispondenti a 1,33 GW di impianti. L'ultima richiesta attualmente finanziabile è stata presentata alle 11:21:30 del 24 novembre 2025: oltre quell'istante le domande entrano solo per scorrimento, se altri rinunciano o se arrivano risorse nuove (GSE).</td>
+      </tr>
+      <tr>
+        <td>🏘️ Comunità in esercizio</td>
+        <td><strong>3.630 configurazioni, 302,9 MW</strong></td>
+        <td>al 30 giugno 2026, con 37.821 punti di prelievo associati. Sono le configurazioni realmente attive, comprese quelle nate senza contributo PNRR. [DA VERIFICARE: il GSE pubblica questi dati in forma di immagine sulla propria pagina e li dichiara «in costante evoluzione» e con «funzione prettamente divulgativa»; da riscontrare sulla piattaforma di monitoraggio PNIEC]</td>
+      </tr>
+    </table>
+
+    <p>Un elemento che la sola cifra dei contributi non mostra: il GSE spiega che la valutazione positiva dell'ammissibilità tecnica <strong>non determina automaticamente la concessione</strong>. Dopo l'istruttoria arrivano i controlli del Comitato Investimenti, le verifiche antimafia, l'accertamento dell'assenza di doppio finanziamento e di conflitti di interesse, e la registrazione nel Registro Nazionale degli Aiuti di Stato. Per questo l'ordine di arrivo delle domande non coincide con l'ordine di ammissione. (<a href="https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile/dati-e-informazioni-sulle-cer" target="_blank" class="fonte-link">GSE, Dati e informazioni sulle CER →</a>)</p>
+  </div>
+
+  <!-- BLOCCO 3 -->
+  <div class="blocco" id="norme">
+    <div class="blocco-num">Blocco 3</div>
+    <h2 class="blocco-title">Il quadro normativo, in ordine</h2>
+
+    <p>È una materia che si è mossa cinque volte in tre anni, e chi legge un articolo di un anno fa rischia di trovare regole superate. Questa la sequenza degli atti che contano, con lo stato al giorno di pubblicazione di questa pagina.</p>
+
+    <table class="giudizio-table">
+      <tr>
+        <td>🇪🇺 2018 — Direttiva RED II</td>
+        <td><strong>l'origine europea</strong></td>
+        <td>la direttiva 2018/2001 introduce nell'ordinamento europeo la figura della comunità di energia rinnovabile, fondata su partecipazione aperta e volontaria e su finalità che non siano prevalentemente il profitto.</td>
+      </tr>
+      <tr>
+        <td>🇮🇹 2021 — D.Lgs. 199/2021</td>
+        <td><strong>il recepimento italiano</strong></td>
+        <td>l'articolo 31 disciplina le comunità energetiche rinnovabili e fissa i requisiti dei soggetti che vi partecipano e degli impianti. (<a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-11-08;199" target="_blank" class="fonte-link">Normattiva →</a>)</td>
+      </tr>
+      <tr>
+        <td>📜 2023 — Decreto CACER</td>
+        <td><strong>DM MASE 414 del 7 dicembre 2023</strong></td>
+        <td>in vigore dal 24 gennaio 2024, definisce la tariffa incentivante sull'energia condivisa e i criteri del contributo in conto capitale finanziato dal PNRR. È il decreto che ha reso operativo il meccanismo.</td>
+      </tr>
+      <tr>
+        <td>🔁 2025 — Ampliamento della platea</td>
+        <td><strong>da 5.000 a 50.000 abitanti</strong></td>
+        <td>il decreto direttoriale del 16 luglio 2025 estende il contributo in conto capitale agli impianti situati in Comuni fino a 50.000 abitanti, moltiplicando i Comuni ammissibili. Lo sportello per le domande chiude il 30 novembre 2025.</td>
+      </tr>
+      <tr>
+        <td>⚖️ 2026 — Decreto PNRR</td>
+        <td><strong>art. 27 del D.L. 19/2026</strong></td>
+        <td>la gestione del regime di sovvenzione passa dal MASE al GSE, con una dotazione di 795,5 milioni. Il termine del 30 giugno 2026 diventa la data entro cui il GSE deve stipulare gli accordi di concessione, non più la fine lavori. (<a href="https://temi.camera.it/leg19/temi/le-configurazioni-per-l-autoconsumo-diffuso.html" target="_blank" class="fonte-link">Camera dei deputati →</a>)</td>
+      </tr>
+    </table>
+
+    <p><strong>Le due date che contano adesso.</strong> Il GSE dichiara che la concessione di tutte le risorse, comprese eventuali risorse aggiuntive, deve concludersi <strong>entro il 31 agosto 2026</strong>, come previsto dalla normativa europea. Il termine di fine lavori, inizialmente fissato al 30 giugno 2026, è stato spostato al <strong>31 dicembre 2027</strong>: chi ha ottenuto la concessione ha 24 mesi dalla comunicazione dell'accordo per mettere l'impianto in esercizio, con quel limite invalicabile. (<a href="https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile/dati-e-informazioni-sulle-cer" target="_blank" class="fonte-link">GSE →</a>)</p>
+  </div>
+
+  <!-- BLOCCO 4 -->
+  <div class="blocco" id="avviare">
+    <div class="blocco-num">Blocco 4</div>
+    <h2 class="blocco-title">Come si avvia una comunità energetica</h2>
+
+    <p><strong>Prima di tutto, che cosa è ancora possibile oggi.</strong> Le due agevolazioni vanno tenute distinte, perché una è chiusa e l'altra no. Il <strong>contributo in conto capitale del PNRR</strong>, fino al 40% della spesa, aveva uno sportello che si è chiuso il 30 novembre 2025: chi non ha presentato domanda allora non può più farlo, e le domande già presentate ma non finanziabili entrano solo per scorrimento. La <strong>tariffa incentivante sull'energia condivisa</strong>, riconosciuta per vent'anni, <em>non ha uno sportello a scadenza</em> legato al PNRR: si richiede al GSE dopo che l'impianto è entrato in esercizio. Chi parte oggi, quindi, può ancora costituire una comunità e accedere all'incentivo ventennale, ma senza il contributo a fondo perduto nazionale — restando aperta la strada dei bandi regionali, che il GSE elenca in una <a href="https://www.gse.it/servizi-per-te/autoconsumo/bandi-regionali-di-co-finanziamento-attivi" target="_blank" class="fonte-link">pagina dedicata →</a>.</p>
+
+    <h3>Si può fare in qualsiasi Comune?</h3>
+    <p>Per <strong>costituire una comunità</strong> sì: la legge non pone limiti di popolazione. Il vincolo territoriale non è il Comune ma la <strong>cabina primaria</strong>: tutti i punti di immissione e di prelievo devono ricadere nell'area sottesa alla stessa cabina. È il primo controllo da fare, prima ancora di parlare con un notaio, e si fa sulla <a href="https://www.gse.it/servizi-per-te/autoconsumo/mappa-interattiva-delle-cabine-primarie" target="_blank" class="fonte-link">mappa interattiva delle cabine primarie del GSE →</a>. Due edifici che si vedono dalla finestra possono appartenere a cabine diverse.</p>
+    <p>Il limite dei <strong>50.000 abitanti</strong> non riguardava la costituzione della comunità ma solo l'accesso al contributo in conto capitale del PNRR, ed è fra i motivi di esclusione più ricorrenti registrati dal GSE.</p>
+
+    <h3>Chi può parteciparvi</h3>
+    <p>Persone fisiche, piccole e medie imprese, enti territoriali e autorità locali, enti di ricerca e formazione, enti religiosi, del terzo settore e di protezione ambientale. Per i privati la partecipazione non può essere l'attività commerciale o industriale principale. Restano <strong>escluse le imprese la cui attività principale è la produzione o il commercio di energia elettrica</strong>: il GSE segnala fra i primi motivi di esclusione la domanda presentata da un soggetto con codice ATECO 35.11 o 35.12.</p>
+
+    <h3>I passaggi, in ordine</h3>
+    <table class="giudizio-table">
+      <tr>
+        <td>1️⃣ Verificare la cabina primaria</td>
+        <td><strong>gratuito, subito</strong></td>
+        <td>si controlla che i partecipanti previsti stiano tutti sotto la stessa cabina. Se non è così, la configurazione non è ammissibile e non c'è modo di aggirarlo.</td>
+      </tr>
+      <tr>
+        <td>2️⃣ Stimare l'energia condivisibile</td>
+        <td><strong>è il conto che decide tutto</strong></td>
+        <td>si confrontano le curve di consumo dei membri con la produzione attesa. Un impianto grande dentro una comunità che consuma di sera produce molta energia immessa e poca condivisa. Il GSE mette a disposizione un <a href="https://autoconsumo.gse.it" target="_blank">simulatore</a> per stime tecnico-economiche.</td>
+      </tr>
+      <tr>
+        <td>3️⃣ Scegliere la forma giuridica</td>
+        <td><strong>associazione, cooperativa, consorzio</strong></td>
+        <td>la comunità deve essere un soggetto di diritto autonomo, perché firma il contratto con il GSE e ripartisce gli incentivi fra i membri. La legge non impone una forma unica; il GSE pubblica <a href="https://www.gse.it/servizi-per-te/autoconsumo/suggerimenti-sulle-possibili-forme-giuridiche-per-la-realizzazione-di-una-cer" target="_blank">indicazioni sulle forme possibili</a>. Serve atto costitutivo e statuto.</td>
+      </tr>
+      <tr>
+        <td>4️⃣ Ottenere titolo e connessione</td>
+        <td><strong>prima della domanda, non dopo</strong></td>
+        <td>fra i motivi di esclusione più frequenti il GSE indica il mancato possesso del preventivo di connessione accettato e del titolo per realizzare l'impianto. Va inoltre evitato di avviare i lavori prima di presentare la domanda di contributo, altro motivo di esclusione ricorrente.</td>
+      </tr>
+      <tr>
+        <td>5️⃣ Qualificare la configurazione</td>
+        <td><strong>portale SPC del GSE</strong></td>
+        <td>la richiesta si presenta per via telematica sul portale «Sistemi di Produzione e Consumo». Il GSE verifica requisiti soggettivi, perimetro e impianti.</td>
+      </tr>
+      <tr>
+        <td>6️⃣ Chiedere la tariffa</td>
+        <td><strong>entro 120 giorni dall'esercizio</strong></td>
+        <td>la domanda di accesso alla tariffa incentivante va presentata entro i 120 giorni successivi all'entrata in esercizio dell'impianto. Superata la finestra, il diritto decade.</td>
+      </tr>
+    </table>
+
+    <p>Il GSE ha pubblicato anche un <a href="https://www.gse.it/servizi-per-te/autoconsumo/crea-o-partecipa-a-una-cer" target="_blank" class="fonte-link">percorso guidato in otto passaggi rivolto ai Comuni →</a>, con documenti scaricabili, e un <a href="https://www.gse.it/servizi-per-te/autoconsumo/elenco-delle-configurazioni" target="_blank" class="fonte-link">elenco delle configurazioni già qualificate →</a> utile a chi voglia aderire a una comunità esistente invece di fondarne una.</p>
+
+    <h3>Quanto vale l'incentivo</h3>
+    <p>La tariffa premio si applica alla sola energia condivisa, è riconosciuta per <strong>vent'anni</strong> dall'entrata in esercizio commerciale e resta ferma per l'intero periodo. È composta da una parte fissa e da una variabile che cresce quando il prezzo di mercato scende, così da attenuare le oscillazioni.</p>
+
+    <table class="giudizio-table">
+      <tr>
+        <td>☀️ Impianti fino a 200 kW</td>
+        <td><strong>80 + max(0; 180 − Pz) €/MWh</strong></td>
+        <td>con un tetto di 120 €/MWh. Pz è il prezzo zonale orario. Il riferimento per leggere l'ordine di grandezza è il PUN medio 2025, 115,9 €/MWh.</td>
+      </tr>
+      <tr>
+        <td>🏭 Da 200 a 600 kW</td>
+        <td><strong>70 + max(0; 180 − Pz) €/MWh</strong></td>
+        <td>tetto 110 €/MWh.</td>
+      </tr>
+      <tr>
+        <td>🏗️ Oltre 600 kW</td>
+        <td><strong>60 + max(0; 180 − Pz) €/MWh</strong></td>
+        <td>tetto 100 €/MWh. Il singolo impianto non può comunque superare 1 MW.</td>
+      </tr>
+    </table>
+
+    <p>Per gli impianti fotovoltaici è prevista una <strong>maggiorazione territoriale</strong> a favore delle Regioni del Centro e del Nord, che compensa il minore irraggiamento. Alla tariffa premio si aggiunge il <strong>corrispettivo di valorizzazione</strong> stabilito da ARERA, che restituisce le componenti di rete non impiegate quando l'energia resta locale. La tariffa premio è cumulabile con un contributo in conto capitale fino al 40%, ma in quel caso viene ridotta; non è cumulabile con lo scambio sul posto né con il Superbonus. (<a href="https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile/corrispettivi-e-tariffa" target="_blank" class="fonte-link">GSE, Corrispettivi e tariffa →</a>)</p>
+  </div>
+
+  <!-- BLOCCO 5 -->
+  <div class="blocco">
+    <div class="blocco-num">Blocco 5</div>
+    <h2 class="blocco-title">Si dice / I dati dicono</h2>
+    <table class="sidice-table">
+      <thead>
+        <tr><th>Si dice...</th><th>I dati dicono...</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>"Entrando in una comunità energetica consumi l'energia prodotta dai tuoi vicini"</td>
+          <td>l'elettricità continua a circolare nella rete di distribuzione come prima e non è tracciabile fino alla singola utenza. Ciò che viene condiviso è un conteggio orario fra energia immessa e prelevata all'interno dello stesso perimetro, su cui il GSE riconosce un incentivo.</td>
+        </tr>
+        <tr>
+          <td>"Serve avere i pannelli sul tetto per partecipare"</td>
+          <td>una configurazione comprende sia produttori sia consumatori: si può aderire come solo consumatore. Il beneficio economico dipende però da quanta energia si preleva nelle ore in cui la comunità produce.</td>
+        </tr>
+        <tr>
+          <td>"Il PNRR finanzia le comunità energetiche"</td>
+          <td>lo sportello per il contributo in conto capitale si è chiuso il 30 novembre 2025 e la concessione delle risorse deve concludersi entro il 31 agosto 2026. Restano 15.465 domande non finanziabili con le risorse attuali. La tariffa incentivante ventennale è invece un meccanismo distinto e non legato a quello sportello.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="fonti-box">
+    <h3>Fonti principali di questa scheda</h3>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile/dati-e-informazioni-sulle-cer" target="_blank">GSE — Dati e informazioni sulle CER</a> (domande, contributi, atti di concessione, scadenze)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile/corrispettivi-e-tariffa" target="_blank">GSE — Corrispettivi e tariffa</a> (tariffa premio, cumulabilità)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.gse.it/servizi-per-te/autoconsumo/crea-o-partecipa-a-una-cer" target="_blank">GSE — Crea o partecipa a una CER</a> (percorso per i Comuni)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-11-08;199" target="_blank">Normattiva — D.Lgs. 199/2021</a> (art. 31, comunità energetiche rinnovabili)</span></div>
+    <div class="fonte-item"><span class="fonte-dot"></span><span><a href="https://temi.camera.it/leg19/temi/le-configurazioni-per-l-autoconsumo-diffuso.html" target="_blank">Camera dei deputati — Le configurazioni per l'autoconsumo diffuso</a> (quadro normativo)</span></div>
+  </div>
+
+</div>
+
+<script>
+function toggleNote(el) {
+  const note = el.querySelector('.hl-note');
+  if (!note) return;
+  document.querySelectorAll('.hl-note.open').forEach(n => { if (n !== note) n.classList.remove('open'); });
+  note.classList.toggle('open');
+}
+</script>
+<script src="../assets/script.js" defer></script>
+</body>
+</html>
