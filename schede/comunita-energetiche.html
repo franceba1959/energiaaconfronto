@@ -238,6 +238,7 @@
       <a href="#numeri">I numeri</a>
       <a href="#norme">Il quadro normativo</a>
       <a href="#avviare">Come si avvia una CER</a>
+      <a href="#percorso">Percorso a domande</a>
     </div>
   </div>
 
@@ -406,9 +407,186 @@
     <p>Per gli impianti fotovoltaici è prevista una <strong>maggiorazione territoriale</strong> a favore delle Regioni del Centro e del Nord, che compensa il minore irraggiamento. Alla tariffa premio si aggiunge il <strong>corrispettivo di valorizzazione</strong> stabilito da ARERA, che restituisce le componenti di rete non impiegate quando l'energia resta locale. La tariffa premio è cumulabile con un contributo in conto capitale fino al 40%, ma in quel caso viene ridotta; non è cumulabile con lo scambio sul posto né con il Superbonus. (<a href="https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile/corrispettivi-e-tariffa" target="_blank" class="fonte-link">GSE, Corrispettivi e tariffa →</a>)</p>
   </div>
 
+  <!-- BLOCCO 5 — PERCORSO -->
+  <div class="blocco" id="percorso">
+    <div class="blocco-num">Blocco 5</div>
+    <h2 class="blocco-title">Un percorso a domande: da dove parti?</h2>
+
+    <div style="background:#FFF7ED;border:1px solid #FDBA74;border-left:3px solid #EA580C;border-radius:6px;padding:14px 18px;margin-bottom:22px;font-size:14px;line-height:1.65;">
+      <div style="font-weight:600;color:#9A3412;margin-bottom:6px;">Prima di cominciare</div>
+      Questo percorso è materiale divulgativo, costruito leggendo le Regole Operative del Decreto CACER e le pagine del GSE. <strong>Non siamo il GSE e non abbiamo alcun ruolo nel procedimento.</strong> Le risposte qui sotto servono a orientarsi e a capire quali domande porre, non sostituiscono la verifica presso il GSE, un professionista abilitato o il proprio distributore. Le regole cambiano spesso: prima di prendere decisioni che costano denaro, il riscontro va fatto sulle fonti ufficiali, che trovi collegate in ogni risposta.
+    </div>
+
+    <div class="percorso-wrap">
+      <div class="pq" id="q1">
+        <div class="pq-num">Domanda 1</div>
+        <div class="pq-text">Hai già un impianto a fonti rinnovabili?</div>
+        <div class="pq-opts">
+          <button class="pq-btn" onclick="pqGo('q2')">Sì, ce l'ho già</button>
+          <button class="pq-btn" onclick="pqGo('r-nuovo')">No, vorrei realizzarlo</button>
+          <button class="pq-btn" onclick="pqGo('r-consumatore')">No, vorrei solo partecipare come consumatore</button>
+        </div>
+      </div>
+
+      <div class="pq" id="q2" style="display:none;">
+        <div class="pq-num">Domanda 2</div>
+        <div class="pq-text">Quando è entrato in esercizio? È la data che decide quasi tutto.</div>
+        <div class="pq-opts">
+          <button class="pq-btn" onclick="pqGo('r-esistente')">Entro il 15 dicembre 2021</button>
+          <button class="pq-btn" onclick="pqGo('r-transizione')">Fra il 16 dicembre 2021 e il 23 gennaio 2024</button>
+          <button class="pq-btn" onclick="pqGo('r-pieno')">Dal 24 gennaio 2024 in poi</button>
+        </div>
+        <div class="pq-back"><a href="#" onclick="pqGo('q1');return false;">← torna indietro</a></div>
+      </div>
+
+      <div class="pq pq-res" id="r-esistente" style="display:none;">
+        <div class="pq-num">Il tuo caso</div>
+        <div class="pq-text">Impianto "esistente": entra nella comunità, ma non prende la tariffa</div>
+        <p>Le Regole Operative definiscono "esistenti" gli impianti entrati in esercizio fino al 15 dicembre 2021, data di entrata in vigore del D.Lgs. 199/2021. Possono far parte di una comunità, con due conseguenze:</p>
+        <ul>
+          <li><strong>Non accedono agli incentivi</strong>, cioè alla tariffa premio.</li>
+          <li>L'energia che immettono <strong>conta comunque nel calcolo dell'energia condivisa</strong>, e su quella spetta il corrispettivo di valorizzazione stabilito da ARERA — un importo molto minore della tariffa premio.</li>
+          <li>Nelle comunità energetiche la potenza degli impianti esistenti <strong>non può superare il 30%</strong> della potenza complessiva della configurazione: se il tuo è l'unico impianto, la comunità non regge senza impianti nuovi.</li>
+        </ul>
+        <p><strong>Che cosa ha senso fare.</strong> Usare l'impianto come base di partenza e costruire la comunità attorno a impianti nuovi, che prendono la tariffa piena per vent'anni. Il vantaggio economico che resta intero è il tuo autoconsumo fisico.</p>
+        <div class="pq-src"><a href="https://www.mase.gov.it/portale/documents/d/guest/allegato-1-regole-operative-cacer-def-pdf" target="_blank" class="fonte-link">Regole Operative CACER, Allegato 1 →</a></div>
+        <div class="pq-back"><a href="#" onclick="pqGo('q3');return false;">Vai alla domanda successiva →</a> · <a href="#" onclick="pqGo('q2');return false;">torna indietro</a></div>
+      </div>
+
+      <div class="pq pq-res" id="r-transizione" style="display:none;">
+        <div class="pq-num">Il tuo caso</div>
+        <div class="pq-text">La fascia di transizione: verifica indispensabile presso il GSE</div>
+        <p>Per gli impianti entrati in esercizio in questo intervallo — dopo il D.Lgs. 199/2021 ma prima del Decreto CACER — l'accesso alla tariffa richiede due condizioni insieme:</p>
+        <ul>
+          <li>documentazione da cui risulti che l'impianto è stato realizzato <strong>per essere inserito in una configurazione di comunità energetica</strong>, con atti sottoscritti in data anteriore all'entrata in esercizio e firma tracciabile;</li>
+          <li>richiesta di accesso alla tariffa presentata <strong>entro 120 giorni dall'apertura del portale del GSE</strong>, avvenuta l'8 aprile 2024.</li>
+        </ul>
+        <p>Chi ha installato l'impianto per uso proprio, senza un progetto di comunità già messo per iscritto allora, difficilmente può produrre quella documentazione a posteriori. <strong>Questo è il caso su cui è più necessario chiedere conferma direttamente al GSE</strong> prima di impostare qualsiasi progetto: eventuali proroghe o chiarimenti successivi non sono stati verificati in questa pagina.</p>
+        <p>Anche in caso di risposta negativa la comunità resta possibile: l'impianto vi partecipa e la sua energia entra nel conteggio condiviso, mentre la tariffa piena va agli impianti nuovi.</p>
+        <div class="pq-src"><a href="https://assistenza.clienti.gse.it/csm" target="_blank" class="fonte-link">Assistenza GSE →</a> · <a href="https://www.mase.gov.it/portale/documents/d/guest/allegato-1-regole-operative-cacer-def-pdf" target="_blank" class="fonte-link">Regole Operative CACER →</a></div>
+        <div class="pq-back"><a href="#" onclick="pqGo('q3');return false;">Vai alla domanda successiva →</a> · <a href="#" onclick="pqGo('q2');return false;">torna indietro</a></div>
+      </div>
+
+      <div class="pq pq-res" id="r-pieno" style="display:none;">
+        <div class="pq-num">Il tuo caso</div>
+        <div class="pq-text">Accesso pieno alla tariffa premio</div>
+        <p>Gli impianti entrati in esercizio dopo l'entrata in vigore del Decreto CACER accedono alla tariffa premio sull'energia condivisa, riconosciuta per vent'anni dall'entrata in esercizio commerciale e ferma per tutto il periodo.</p>
+        <p>Due termini da non mancare: la domanda va presentata <strong>entro 120 giorni dall'entrata in esercizio</strong> dell'impianto, e il singolo impianto non può superare <strong>1 MW</strong> di potenza.</p>
+        <div class="pq-src"><a href="https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile/corrispettivi-e-tariffa" target="_blank" class="fonte-link">GSE, Corrispettivi e tariffa →</a></div>
+        <div class="pq-back"><a href="#" onclick="pqGo('q3');return false;">Vai alla domanda successiva →</a> · <a href="#" onclick="pqGo('q2');return false;">torna indietro</a></div>
+      </div>
+
+      <div class="pq pq-res" id="r-nuovo" style="display:none;">
+        <div class="pq-num">Il tuo caso</div>
+        <div class="pq-text">Impianto da realizzare: è la posizione migliore</div>
+        <p>Un impianto nuovo accede alla tariffa premio piena per vent'anni. L'ordine dei passaggi però conta, e invertirlo è uno dei motivi di esclusione più frequenti registrati dal GSE:</p>
+        <ul>
+          <li>il <strong>preventivo di connessione accettato</strong> e il <strong>titolo per realizzare l'impianto</strong> vanno ottenuti prima della domanda;</li>
+          <li>i <strong>lavori non vanno avviati prima</strong> di presentare l'eventuale domanda di contributo;</li>
+          <li>attenzione al <strong>frazionamento</strong>: più impianti della stessa fonte, su particelle catastali contigue e riconducibili allo stesso produttore, sono considerati un unico impianto ai fini della soglia di 1 MW e degli scaglioni tariffari.</li>
+        </ul>
+        <p>Il contributo in conto capitale del PNRR non è più richiedibile: lo sportello si è chiuso il 30 novembre 2025. Restano i bandi regionali.</p>
+        <div class="pq-back"><a href="#" onclick="pqGo('q3');return false;">Vai alla domanda successiva →</a> · <a href="#" onclick="pqGo('q1');return false;">torna indietro</a></div>
+      </div>
+
+      <div class="pq pq-res" id="r-consumatore" style="display:none;">
+        <div class="pq-num">Il tuo caso</div>
+        <div class="pq-text">Partecipare come consumatore</div>
+        <p>Non serve possedere un impianto: una configurazione comprende sia produttori sia consumatori, e si può aderire portando soltanto il proprio punto di prelievo. Il beneficio dipende però da <strong>quanta energia prelevi nelle ore in cui la comunità produce</strong>: chi consuma di notte porta poco alla condivisione.</p>
+        <p>Il modo più rapido è verificare se sotto la propria cabina primaria esiste già una comunità attiva, e chiedere di aderire.</p>
+        <div class="pq-src"><a href="https://www.gse.it/servizi-per-te/autoconsumo/elenco-delle-configurazioni" target="_blank" class="fonte-link">GSE, elenco delle configurazioni qualificate →</a></div>
+        <div class="pq-back"><a href="#" onclick="pqGo('q3');return false;">Vai alla domanda successiva →</a> · <a href="#" onclick="pqGo('q1');return false;">torna indietro</a></div>
+      </div>
+
+      <div class="pq" id="q3" style="display:none;">
+        <div class="pq-num">Domanda 3</div>
+        <div class="pq-text">Il tuo impianto è in scambio sul posto?</div>
+        <div class="pq-opts">
+          <button class="pq-btn" onclick="pqGo('r-ssp')">Sì</button>
+          <button class="pq-btn" onclick="pqGo('q4')">No, oppure non ho un impianto</button>
+        </div>
+      </div>
+
+      <div class="pq pq-res" id="r-ssp" style="display:none;">
+        <div class="pq-num">Attenzione</div>
+        <div class="pq-text">Scambio sul posto e incentivi CER sono alternativi</div>
+        <p>Il GSE lo dichiara esplicitamente: i contributi spettanti all'energia condivisa nelle configurazioni ammesse <strong>sono alternativi al meccanismo dello scambio sul posto</strong>. Per entrare nel meccanismo dell'autoconsumo diffuso occorre quindi uscire dallo scambio sul posto, e conviene fare prima il conto di quanto si perde e quanto si guadagna nei due scenari.</p>
+        <p>La tariffa premio non è cumulabile nemmeno con il Superbonus, e la cumulabilità con un contributo in conto capitale è ammessa fino al 40% ma comporta una riduzione della tariffa.</p>
+        <div class="pq-src"><a href="https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile/corrispettivi-e-tariffa" target="_blank" class="fonte-link">GSE, Corrispettivi e tariffa →</a></div>
+        <div class="pq-back"><a href="#" onclick="pqGo('q4');return false;">Vai alla domanda successiva →</a></div>
+      </div>
+
+      <div class="pq" id="q4" style="display:none;">
+        <div class="pq-num">Domanda 4</div>
+        <div class="pq-text">Chi vorresti coinvolgere?</div>
+        <div class="pq-opts">
+          <button class="pq-btn" onclick="pqGo('r-chi')">Famiglie e cittadini</button>
+          <button class="pq-btn" onclick="pqGo('r-chi')">Imprese</button>
+          <button class="pq-btn" onclick="pqGo('r-chi')">Il Comune o un ente</button>
+        </div>
+      </div>
+
+      <div class="pq pq-res" id="r-chi" style="display:none;">
+        <div class="pq-num">Chi può partecipare</div>
+        <div class="pq-text">Le condizioni valgono per tutti, con un'eccezione secca</div>
+        <p>Possono essere membri persone fisiche, piccole e medie imprese, enti territoriali e autorità locali, enti di ricerca e formazione, enti religiosi, del terzo settore e di protezione ambientale. Per i privati la partecipazione non può costituire l'attività commerciale o industriale principale.</p>
+        <p><strong>Sono escluse le imprese la cui attività principale è produrre o vendere energia elettrica.</strong> Fra i primi motivi di esclusione delle domande il GSE indica proprio la richiesta presentata da un soggetto con codice ATECO 35.11 o 35.12.</p>
+        <p>Nel caso di imprese, la partecipazione come soci o membri è consentita alle sole PMI, anche partecipate da enti locali.</p>
+        <p><strong>Il criterio che conta davvero nella scelta dei membri non è chi sono, ma quando consumano.</strong> Uffici, scuole, negozi, artigiani e attività diurne portano molta energia condivisa; le abitazioni ne portano meno, perché il consumo domestico si concentra la sera.</p>
+        <div class="pq-back"><a href="#" onclick="pqGo('q5');return false;">Ultimo passaggio →</a></div>
+      </div>
+
+      <div class="pq" id="q5" style="display:none;">
+        <div class="pq-num">Domanda 5</div>
+        <div class="pq-text">Hai già verificato la cabina primaria?</div>
+        <div class="pq-opts">
+          <button class="pq-btn" onclick="pqGo('r-fine')">Sì</button>
+          <button class="pq-btn" onclick="pqGo('r-fine')">Non ancora</button>
+        </div>
+      </div>
+
+      <div class="pq pq-res" id="r-fine" style="display:none;">
+        <div class="pq-num">Da qui in avanti</div>
+        <div class="pq-text">I passaggi che restano, in ordine</div>
+        <p>È il controllo da fare per primo, perché non ha alternative: tutti i punti di immissione e di prelievo devono ricadere <strong>nell'area sottesa alla stessa cabina primaria</strong>. Non coincide con i confini comunali. Si verifica sulla <a href="https://www.gse.it/servizi-per-te/autoconsumo/mappa-interattiva-delle-cabine-primarie" target="_blank" class="fonte-link">mappa interattiva del GSE →</a>.</p>
+        <p>Poi, nell'ordine: stimare l'energia effettivamente condivisibile confrontando i profili di consumo con la produzione attesa; scegliere la forma giuridica e redigere atto costitutivo e statuto, che deve contenere la clausola sulla destinazione della quota eccedente della tariffa; individuare il <strong>soggetto referente</strong>, che tiene i rapporti con il GSE, incassa e ripartisce; qualificare la configurazione sul portale del GSE; richiedere la tariffa entro i termini.</p>
+        <p>Il GSE mette a disposizione un <a href="https://www.gse.it/servizi-per-te/autoconsumo/crea-o-partecipa-a-una-cer" target="_blank" class="fonte-link">percorso guidato in otto passaggi rivolto ai Comuni →</a>, con modelli scaricabili, e uno sportello virtuale con appuntamento per parlare con un tecnico.</p>
+        <p style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:13px;color:var(--gray);">Ricorda: questa pagina è divulgazione. Le decisioni che comportano spese vanno prese dopo un riscontro con il GSE e con un professionista abilitato.</p>
+        <div class="pq-back"><a href="#" onclick="pqGo('q1');return false;">↺ ricomincia il percorso</a></div>
+      </div>
+    </div>
+  </div>
+
+<style>
+  .percorso-wrap { margin-top:8px; }
+  .pq { background:#fff; border:1px solid var(--border); border-radius:8px; padding:20px 22px; }
+  .pq-res { border-left:3px solid var(--teal); }
+  .pq-num { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--gray); font-weight:700; margin-bottom:6px; }
+  .pq-text { font-size:17px; font-weight:600; color:var(--graphite); margin-bottom:14px; line-height:1.4; }
+  .pq p { font-size:14px; line-height:1.7; margin-bottom:10px; }
+  .pq ul { margin:0 0 10px 18px; }
+  .pq li { font-size:14px; line-height:1.7; margin-bottom:6px; }
+  .pq-opts { display:flex; flex-direction:column; gap:8px; }
+  .pq-btn { text-align:left; font:inherit; font-size:14px; color:var(--teal-dark); background:var(--teal-light);
+    border:1px solid #CFE6E8; border-radius:6px; padding:11px 14px; cursor:pointer; transition:background .15s; }
+  .pq-btn:hover { background:#D8ECEE; }
+  .pq-src { font-size:13px; margin-top:10px; }
+  .pq-back { margin-top:14px; font-size:13px; }
+  .pq-back a { color:var(--teal); text-decoration:none; }
+  .pq-back a:hover { text-decoration:underline; }
+</style>
+<script>
+function pqGo(id){
+  var w=document.querySelectorAll('.percorso-wrap .pq');
+  for(var i=0;i<w.length;i++){ w[i].style.display='none'; }
+  var t=document.getElementById(id);
+  if(t){ t.style.display='block'; t.scrollIntoView({behavior:'smooth',block:'center'}); }
+}
+</script>
+
   <!-- BLOCCO 5 -->
   <div class="blocco">
-    <div class="blocco-num">Blocco 5</div>
+    <div class="blocco-num">Blocco 6</div>
     <h2 class="blocco-title">Si dice / I dati dicono</h2>
     <table class="sidice-table">
       <thead>
