@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# La pagina di reindirizzamento non va indicizzata: il contenuto sta all'indirizzo canonico.
+Disallow: /schede/nucleare-smr-fusione.html
+
+Sitemap: https://energiaaconfronto.com/sitemap.xml
