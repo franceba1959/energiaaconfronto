@@ -412,7 +412,7 @@
         <tr>
           <td><strong>Materia energia</strong></td>
           <td>53,5%</td>
-          <td>Il costo reale dell'elettricità consumata, legato al PUN</td>
+          <td>L'acquisto dell'energia e il servizio che tiene la rete in equilibrio. In tutela lo fissa ARERA, sul mercato libero è il prezzo scritto nel contratto</td>
         </tr>
         <tr>
           <td><strong>Servizi di rete</strong></td>
@@ -706,10 +706,10 @@
         </thead>
         <tbody>
           <tr style="background:white;">
-            <td style="padding:12px 16px;font-weight:600;">Materia energia (PUN)</td>
+            <td style="padding:12px 16px;font-weight:600;">Materia energia (approvvigionamento e dispacciamento)</td>
             <td style="padding:12px 16px;text-align:right;font-family:Georgia,serif;font-size:16px;">16,92</td>
             <td style="padding:12px 16px;text-align:right;color:var(--teal);font-weight:700;">53,5%</td>
-            <td style="padding:12px 16px;color:var(--gray);">Mercato (<a href="https://www.mercatoelettrico.org/it-it/Home/Esiti/Elettricita/MGP" target="_blank" style="color:var(--teal);text-decoration:underline;text-underline-offset:2px;">GME</a>)</td>
+            <td style="padding:12px 16px;color:var(--gray);">ARERA, sui prezzi all'ingrosso (<a href="https://www.mercatoelettrico.org/it-it/Home/Esiti/Elettricita/MGP" target="_blank" style="color:var(--teal);text-decoration:underline;text-underline-offset:2px;">GME</a>)</td>
           </tr>
           <tr style="background:var(--gray-light);">
             <td style="padding:12px 16px;font-weight:600;">Commercializzazione al dettaglio</td>
@@ -746,6 +746,14 @@
     </div>
     <p style="font-size:11px;color:var(--gray);font-style:italic;">Cliente tipo vulnerabile in Maggior Tutela, consumi 2.000 kWh/anno, potenza 3 kW. Fonte: <a href="https://www.arera.it/comunicati-stampa/dettaglio/elettricita-maggior-tutela-46-nel-iii-trimestre-2026-per-i-clienti-vulnerabili" target="_blank" class="fonte-link">ARERA, aggiornamento III trimestre 2026 →</a></p>
 
+    <h3>Cosa c'è dentro la "materia energia"</h3>
+    <p>Non è un prezzo solo. Per il cliente in maggior tutela l'ARERA la compone di cinque elementi, che in bolletta compaiono sommati.</p>
+    <p>Il <strong>prezzo dell'energia (PE)</strong> copre l'acquisto di quello che consumi, e comprende le perdite di rete: l'energia che si disperde lungo il percorso e che qualcuno paga comunque.</p>
+    <p>Il <strong>prezzo del dispacciamento (PD)</strong> copre il servizio che garantisce, in ogni momento della giornata, <span class="hl-y" onclick="toggleNote(this)">l'equilibrio fra l'energia immessa nelle reti e quella prelevata dai clienti<span class="hl-note y">🟡 L'elettricità non si immagazzina in quantità apprezzabili: quanto entra e quanto esce dalla rete devono coincidere istante per istante, altrimenti la frequenza si allontana dai 50 Hz. Mantenere quell'equilibrio richiede impianti pagati per stare pronti a salire o scendere di potenza su richiesta. Come funziona il sistema e che cosa succede quando la frequenza scende è spiegato nella <a href="#stabilita" class="fonte-link">sezione 08 di questa pagina &rarr;</a>.</span></span>. È il costo di tenere in piedi il sistema, non di produrre energia.</p>
+    <p>La <strong>perequazione (PPE)</strong> riallinea a consuntivo quanto è stato pagato con quanto è costato davvero: può avere segno positivo o negativo, quindi tornare indietro al cliente quando i costi effettivi risultano inferiori a quelli previsti.</p>
+    <p>La <strong>commercializzazione (PCV)</strong> e la componente <strong>DispBT</strong> coprono la gestione commerciale del cliente. La prima è parametrata ai costi medi delle imprese che operano sul mercato libero, la seconda compensa la differenza fra quel parametro e i costi riconosciuti in regime di tutela. (<a href="https://www.arera.it/fileadmin/bolletta/allegati/guidaele.pdf" target="_blank" class="fonte-link">Fonte: ARERA, Guida alla lettura delle voci di spesa &rarr;</a>)</p>
+    <p style="font-size:12px;color:var(--gray);font-style:italic;">I valori unitari delle singole componenti cambiano ogni trimestre e non sono riportati qui: in pagina compare solo il totale, con la data a cui si riferisce.</p>
+
     <h3>Cosa puoi e non puoi cambiare</h3>
     <p>La tabella qui sopra descrive un caso preciso: il cliente vulnerabile nel servizio di Maggior Tutela, dove il prezzo dell'energia lo fissa l'ARERA ogni tre mesi. In quel regime solo una voce dipende dal fornitore, la <strong>commercializzazione al dettaglio</strong> (6,7%): tutto il resto — l'approvvigionamento, la rete, gli oneri, le imposte — è uguale per tutti gli operatori.</p>
 
@@ -756,7 +764,8 @@
     <h3>Gli oneri di sistema — cosa finanziano davvero</h3>
     <p>Gli oneri di sistema (10% della bolletta) sono divisi in due componenti da ARERA:</p>
     <p><strong>ASOS</strong> (94,59% degli oneri totali): finanzia principalmente gli incentivi alle fonti rinnovabili. Di questa quota: il 69,34% va agli incentivi FER (ex componente A3), il 25,25% alle agevolazioni per le imprese energivore. La componente ASOS pesava molto di più negli anni scorsi — gli incentivi del primo Conto Energia (2005-2007) stanno terminando e ARERA stima un risparmio di circa 1–1,5 miliardi di euro all'anno a partire dal 2027.</p>
-    <p><strong>ARIM</strong> (5,41% degli oneri totali): copre i rimanenti oneri generali — tariffe speciali per il servizio ferroviario (4,75%), promozione dell'efficienza energetica (0,66%). Dal 1° gennaio 2023 gli oneri nucleari (smantellamento centrali e gestione rifiuti radioattivi) sono stati <strong>fiscalizzati</strong> — rimossi dalla bolletta e trasferiti alla fiscalità generale. Non sono spariti: li paghi ancora, ma attraverso le tasse invece che in bolletta.</p>
+    <p><strong>ARIM</strong> (5,41% degli oneri totali): copre i rimanenti oneri generali — tariffe speciali per il servizio ferroviario (4,75%), promozione dell'efficienza energetica (0,66%). Dal 1° gennaio 2023 gli oneri nucleari (smantellamento centrali e gestione rifiuti radioattivi) sono stati <strong>fiscalizzati</strong> — rimossi dalla bolletta e trasferiti alla fiscalità generale. Non sono spariti: li paghi ancora, ma attraverso le tasse invece che in bolletta. Dal 1° gennaio 2024 è uscito dalla componente anche l'elemento che finanziava gli impianti alimentati a rifiuti non biodegradabili, perché non si prevedono più costi da coprire. In due anni ARIM ha quindi perso tre elementi su sette. (<a href="https://www.arera.it/area-operatori/prezzi-e-tariffe/oneri-generali-di-sistema-e-ulteriori-componenti" target="_blank" class="fonte-link">Fonte: ARERA, Oneri generali di sistema e ulteriori componenti &rarr;</a>)</p>
+    <p style="font-size:12px;color:var(--gray);font-style:italic;">[DA VERIFICARE: le percentuali di ripartizione interna di ASOS e ARIM riportate qui sopra non hanno un documento di riferimento collegato. Vanno riscontrate nei provvedimenti tariffari ARERA o rimosse.]</p>
 
     <h3>Le accise — l'imposta invisibile</h3>
     <p>Le accise sull'elettricità sono imposte indirette definite dal Testo Unico delle Accise (<a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1995-10-26;504" target="_blank" class="fonte-link">D.Lgs. 504/1995</a>) e incassate dai fornitori per conto dell'erario. Per le utenze domestiche residenti:</p>
