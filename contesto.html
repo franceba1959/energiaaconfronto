@@ -235,6 +235,7 @@
       <div class="indice-title">In questa pagina</div>
       <ul class="indice-list">
         <li><span class="indice-num">01</span><a href="#consumi">Quanta energia consuma l'Italia</a></li>
+        <li><span class="indice-num">01b</span><a href="#perdite">Quanta energia arriva davvero a destinazione</a></li>
         <li><span class="indice-num">02</span><a href="#mix">Da dove viene l'elettricità italiana</a></li>
         <li><span class="indice-num">03</span><a href="#costi">Quanto ci costa l'energia oggi</a></li>
         <li><span class="indice-num">04</span><a href="#scenari">Quanto potrebbe costare domani</a></li>
@@ -289,6 +290,34 @@
     </div>
 
     <p>Fonti: <a href="https://download.terna.it/terna/Rapporto_mensile_dicembre_25_8de58e4159b881a.pdf" class="fonte-link" target="_blank">Terna, Rapporto Mensile Dicembre 2025 →</a> · <a href="https://www.mase.gov.it/energia/bilancio-energetico-nazionale" class="fonte-link" target="_blank">MASE, Bilancio Energetico Nazionale 2023 →</a> · <a href="https://www.iea.org/countries/italy" class="fonte-link" target="_blank">IEA, Italy Energy Profile →</a></p>
+  </div>
+
+  <!-- SEZIONE 01b — PERDITE -->
+  <div class="sezione" id="perdite">
+    <div class="sezione-num">Sezione 01b</div>
+    <h2 class="sezione-title">Quanta energia arriva davvero a destinazione</h2>
+
+    <p>L'energia non arriva mai tutta dove serve. Fra la fonte e l'uso finale passa per una serie di trasformazioni, e a ogni passaggio una parte si perde, quasi sempre come calore. Per questo la stessa quantità di energia, misurata in punti diversi del percorso, dà numeri diversi: è il motivo per cui la <a href="#consumi" class="fonte-link">sezione 01</a> riporta tre valori per il consumo energetico italiano.</p>
+    <p>Questa sezione segue il percorso in tre passaggi e riporta, per ciascuno, che cosa pubblicano le fonti istituzionali. I tre passaggi non si sommano fra loro: le fonti li misurano in modi diversi e su anni diversi.</p>
+
+    <h3>1. Dalla fonte alla centrale</h3>
+    <p>Quando l'elettricità si produce bruciando un combustibile, solo una parte dell'energia contenuta nel combustibile diventa elettricità; il resto esce dalla centrale come calore. Nel 2025 le centrali termoelettriche italiane hanno consumato in media <strong>6.788 kJ di combustibile per ogni kilowattora</strong> prodotto, quelle a gas naturale 6.229 kJ: più basso è questo valore, meno combustibile serve per ogni kilowattora (<a href="https://download.terna.it/terna/05_PRODUZIONE_8df127663b30d60.pdf" target="_blank" class="fonte-link">Terna, Dati statistici 2025, Produzione, Tabella 31, p. 15</a>). L'ISPRA collega la riduzione delle emissioni per kilowattora del gas naturale «all'aumento dell'efficienza elettrica degli impianti» (<a href="https://www.isprambiente.gov.it/files2025/pubblicazioni/rapporti/r413-2025_def.pdf" target="_blank" class="fonte-link">ISPRA, Rapporti 413/2025</a>).</p>
+    <p>Lo stesso fenomeno si vede nel bilancio energetico nazionale, che conta tutte le trasformazioni: centrali elettriche, raffinerie, cokerie. Nel 2025 sono entrate negli impianti di trasformazione 117.060 migliaia di tonnellate equivalenti di petrolio (ktep) e ne sono uscite 103.064; nel 2024 i valori erano 119.941 e 107.048. Nel 2025 il settore energetico ha consumato inoltre 5.995 ktep per il proprio funzionamento, e le perdite di distribuzione sono state 2.599 ktep, di cui 1.652 per l'energia elettrica (<a href="https://www.arera.it/fileadmin/allegati/relaz_ann/26/RA26_Volume_1.pdf" target="_blank" class="fonte-link">ARERA, Relazione annuale 2026, Volume 1, Tavola 1.17, pp. 75-76, su dati provvisori del Ministero dell'ambiente</a>).</p>
+
+    <h3>2. Dalla centrale alla presa: le perdite di rete</h3>
+    <p>Una parte dell'elettricità si perde lungo le linee e nei trasformatori prima di arrivare ai clienti. Le perdite di rete sono state 19.155,0 GWh nel 2022 (6,1% della richiesta di energia elettrica) e 18.244,2 GWh nel 2023 (6,0%) (<a href="https://download.terna.it/terna/Terna_annuario_statistico_energia_elettrica_Italia_2023_8dd211b3585b028.pdf" target="_blank" class="fonte-link">Terna, Dati statistici 2023, Tabella 2, p. 21</a>); <span class="hl-y" onclick="toggleNote(this)">19.201 GWh nel 2024 e 19.207 GWh nel 2025<span class="hl-note y">🟡 Il dato 2025 è provvisorio. Per il 2024 e il 2025 l'ARERA pubblica le perdite in GWh ma non la loro percentuale sulla richiesta, che quindi qui non compare. I valori in ktep del bilancio energetico (passaggio 1) e quelli in GWh di Terna sono misurati con unità e metodi diversi: non vanno confrontati né sommati.</span></span> (<a href="https://www.arera.it/fileadmin/allegati/relaz_ann/26/RA26_Volume_1.pdf" target="_blank" class="fonte-link">ARERA su dati Terna, Relazione annuale 2026, Volume 1, Tavola 2.1, p. 108</a>). Le perdite di rete si pagano in bolletta: sono comprese nel prezzo dell'energia (<a href="#tasse-oneri" class="fonte-link">sezione 06b</a>). [DA VERIFICARE: la divisione delle perdite fra rete di trasmissione e reti di distribuzione non risulta reperita in un documento istituzionale aggiornato.]</p>
+
+    <h4>Perché la corrente alternata conta</h4>
+    <p>La rete funziona in corrente alternata a 50 hertz, e questo ha un effetto sulle perdite. Il Centro comune di ricerca della Commissione europea (JRC) spiega che la corrente continua scorre in tutta la sezione del cavo, mentre quella alternata tende a scorrere verso la superficie: è l'«effetto pelle», che riduce la sezione utile e aumenta resistenza e perdite. Nei cavi lunghi c'è un secondo limite: la capacità elettrica fra il conduttore e il terreno o l'acqua circostante limita la lunghezza dei cavi in corrente alternata, perché oltre una certa lunghezza la corrente serve solo a caricare il cavo e non resta energia utile da trasportare (<a href="https://publications.jrc.ec.europa.eu/repository/bitstream/JRC97720/ld-na-27527-en-n.pdf" target="_blank" class="fonte-link">JRC, HVDC Submarine Power Cables in the World, 2015, paragrafo 2.3.1</a>).</p>
+    <p>Per questo i collegamenti molto lunghi e quelli sottomarini si fanno in corrente continua: secondo Terna permette di trasportare grandi quantità di energia su lunghe distanze «con minori perdite rispetto alla corrente alternata». È la tecnologia del Tyrrhenian Link, il collegamento di circa 970 km fra Sicilia, Sardegna e Campania (<a href="https://lightbox.terna.it/it/insight/hvdc-tecnologia-corrente-continua" target="_blank" class="fonte-link">Terna</a>). La corrente continua serve anche a collegare reti che funzionano a frequenze diverse o non sincronizzate (JRC). <span class="hl-y" onclick="toggleNote(this)">Le piccole oscillazioni della frequenza intorno ai 50 hertz sono un'altra cosa<span class="hl-note y">🟡 Misurano l'equilibrio istante per istante fra produzione e consumo: sono spiegate nella <a href="#stabilita" class="fonte-link">sezione 08</a>. Non abbiamo trovato una fonte istituzionale che ne misuri l'effetto sulle perdite.</span></span>.</p>
+
+    <h3>3. Dal serbatoio o dalla presa alle ruote</h3>
+    <p>Nel veicolo l'energia subisce l'ultima trasformazione. Secondo il Dipartimento dell'Energia degli Stati Uniti, le auto a benzina convertono in movimento alle ruote «circa il 12–30%» dell'energia contenuta nel carburante, le auto elettriche «oltre il 77%» dell'energia elettrica prelevata dalla rete. Il confronto è della fonte (<a href="https://fueleconomy.gov/Feg/evtech.shtml" target="_blank" class="fonte-link">U.S. Department of Energy ed EPA, fueleconomy.gov</a>). <span class="hl-y" onclick="toggleNote(this)">Che cosa questi valori non dicono<span class="hl-note y">🟡 Si riferiscono ai veicoli statunitensi e misurano solo l'ultimo passaggio, dal serbatoio o dalla presa alle ruote: non comprendono l'energia persa per produrre il carburante o l'elettricità (passaggi 1 e 2). Per il percorso completo, dalla fonte alle ruote, il riferimento europeo è lo studio JEC del Centro comune di ricerca della Commissione europea, che riporteremo quando sarà letto.</span></span>. [DA VERIFICARE: confronto europeo dalla fonte alle ruote (JRC, JEC Well-to-Wheels v5, 2020): il documento non si è potuto aprire il 9 novembre 2026.]</p>
+
+    <h3>Perché conta per l'Italia</h3>
+    <p>L'Italia importa gran parte dell'energia che consuma. Il Ministero dell'ambiente misura la dipendenza dall'estero come quota delle importazioni nette sulla disponibilità energetica lorda: era il 74,8% nel 2023, il 73,5% nel 2024 ed è risalita al 75,2% nel 2025 (<a href="https://sisen.mase.gov.it/dgsaie/situazione-energetica-nazionale" target="_blank" class="fonte-link">MASE, La situazione energetica nazionale nel 2025, paragrafo 2.2, p. 36, e nel 2024, paragrafo 2.2, p. 29</a>). Nel 2025 il saldo commerciale dei prodotti energetici è stato negativo per 46.939 milioni di euro, contro 54.290 milioni nel 2024 (<a href="https://www.istat.it/wp-content/uploads/2026/02/Commercio-con-lestero-e-prezzi-allimport_122025-2.pdf" target="_blank" class="fonte-link">ISTAT, Commercio con l'estero, dicembre 2025, p. 1</a>). Le rinnovabili hanno coperto nel 2025 il 41,1% del fabbisogno di energia elettrica (<a href="https://download.terna.it/terna/Rapporto_mensile_dicembre_25_8de58e4159b881a.pdf" target="_blank" class="fonte-link">Terna</a>): una quota dell'elettricità, non di tutta l'energia consumata, che comprende anche calore e trasporti.</p>
+
+    <p><strong>Cercato e non trovato.</strong> La divisione delle perdite di rete fra trasmissione e distribuzione; un confronto europeo dalla fonte alle ruote letto nel documento.</p>
   </div>
 
   <!-- SEZIONE 2 — MIX -->
@@ -415,8 +444,8 @@
       </div>
       <div class="kpi-big">
         <div class="kpi-big-label">Dipendenza energetica dall'estero</div>
-        <div class="kpi-big-value">~75%</div>
-        <div class="kpi-big-unit">del fabbisogno energetico totale</div>
+        <div class="kpi-big-value">75,2%</div>
+        <div class="kpi-big-unit">della disponibilità energetica lorda, 2025 (<a href="https://sisen.mase.gov.it/dgsaie/situazione-energetica-nazionale" target="_blank" class="fonte-link">MASE, p. 36</a>)</div>
         <div class="kpi-big-note">L'Italia importa la maggior parte dell'energia che consuma — principalmente gas e petrolio.</div>
       </div>
     </div>
@@ -1250,7 +1279,7 @@
       </div>
       <div class="glossario-item">
         <div class="glossario-term">Dipendenza energetica</div>
-        <div class="glossario-def">La percentuale del fabbisogno energetico totale coperta da importazioni. L'Italia dipende dall'estero per circa il 75% del proprio fabbisogno — principalmente gas naturale e petrolio.</div>
+        <div class="glossario-def">La quota delle importazioni nette sulla disponibilità energetica lorda. Secondo il Ministero dell'ambiente, nel 2025 le importazioni nette hanno coperto il 75,2% della disponibilità energetica lorda — principalmente gas naturale e petrolio (vedi <a href="#perdite" class="fonte-link">sezione 01b</a>).</div>
       </div>
       <div class="glossario-item">
         <div class="glossario-term">SMR (Small Modular Reactor — reattore modulare di piccola taglia)</div>
